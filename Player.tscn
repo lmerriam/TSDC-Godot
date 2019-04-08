@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.307, 11.8914 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 101.01
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 326.693, 221.891 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+rotation = -1.5708
+emitting = false
+lifetime = 0.25
+explosiveness = 1.0
+randomness = 0.5
+local_coords = false
+process_material = SubResource( 3 )
+
