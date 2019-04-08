@@ -5,8 +5,8 @@ export var period = 20.0
 export var persistence = 0.8
 export var grass_threshold = 0.20
 export var water_threshold = 0.00
-export var map_width = 400
-export var map_height = 400
+export var map_width = 300
+export var map_height = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +14,7 @@ func _ready():
 
 func _on_BtnGenMap_button_up():
 	generate_map(octaves,period,persistence,grass_threshold,water_threshold)
-	
+
 func generate_map(octaves,period,persistence,grass_threshold,water_threshold):
 	clear()
 	

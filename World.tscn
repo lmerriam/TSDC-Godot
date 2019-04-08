@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://Entities.gd" type="Script" id=3]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera2D.gd" type="Script" id=5]
 
 [node name="World" type="Node2D"]
 
@@ -17,11 +18,17 @@ period = 140.0
 grass_threshold = 0.0
 water_threshold = -0.125
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 360.893, 241.841 )
-speed = 2
+[node name="Entities" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 3 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Player" parent="Entities" instance=ExtResource( 4 )]
+position = Vector2( 360.893, 241.841 )
+speed = 3
+
+[node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 current = true
 smoothing_enabled = true
 smoothing_speed = 8.0
@@ -29,7 +36,7 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
