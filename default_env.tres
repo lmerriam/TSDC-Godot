@@ -3,13 +3,16 @@
 [sub_resource type="ProceduralSky" id=1]
 
 [resource]
-background_mode = 2
 background_sky = SubResource( 1 )
 background_color = Color( 0.505882, 0.501961, 0.156863, 1 )
-dof_blur_near_distance = 1.52
-glow_intensity = 0.16
-glow_strength = 0.89
-glow_bloom = 0.05
-glow_blend_mode = 0
-glow_hdr_threshold = 0.6
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.0
+fog_depth_begin = 0.0
+tonemap_exposure = 0.4
+dof_blur_far_enabled = true
+dof_blur_far_distance = 0.05
+dof_blur_far_transition = 4.5
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.85
+adjustment_saturation = 2.35
 
