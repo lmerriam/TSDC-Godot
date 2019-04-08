@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://outdoors_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://default_env.tres" type="Environment" id=4]
 
 [node name="World" type="Node2D"]
 
@@ -17,16 +18,32 @@ grass_threshold = 0.1
 water_threshold = -0.1
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-speed = 2
+position = Vector2( 360.893, 241.841 )
+speed = 1
 
-[node name="Control" type="Control" parent="."]
-editor/display_folded = true
-margin_right = 200.0
-margin_bottom = 50.0
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 
-[node name="BtnGenMap" type="Button" parent="Control"]
-margin_right = 79.0
-margin_bottom = 20.0
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 710.0
+margin_bottom = 470.0
+
+[node name="BtnGenMap" type="Button" parent="CanvasLayer/Control"]
+margin_right = 110.0
+margin_bottom = 40.0
 text = "Generate"
 
-[connection signal="button_up" from="Control/BtnGenMap" to="TileMap" method="_on_BtnGenMap_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="TileMap" method="_on_BtnGenMap_button_up"]
