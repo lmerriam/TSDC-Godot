@@ -61,8 +61,18 @@ ui_down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
+zoom_in={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":61,"unicode":0,"echo":false,"script":null)
+ ]
+}
+zoom_out={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":45,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 
-environment/default_clear_color=Color( 0.94902, 0.937255, 0.592157, 1 )
+environment/default_clear_color=Color( 0.882353, 0.847059, 0.556863, 1 )
 environment/default_environment="res://default_env.tres"

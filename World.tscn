@@ -3,7 +3,7 @@
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://default_env.tres" type="Environment" id=4]
+[ext_resource path="res://Camera2D.gd" type="Script" id=4]
 
 [node name="World" type="Node2D"]
 
@@ -13,13 +13,13 @@ cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 2 )
 octaves = 3
-period = 40.0
-grass_threshold = 0.1
-water_threshold = -0.1
+period = 140.0
+grass_threshold = 0.0
+water_threshold = -0.125
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 360.893, 241.841 )
-speed = 1
+speed = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -29,9 +29,7 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 4 )
+script = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
