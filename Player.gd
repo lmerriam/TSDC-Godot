@@ -1,11 +1,10 @@
 extends KinematicBody2D
 
-export var speed = 5
-var screen_size
+export var speed = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
+	$AnimatedSprite.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -13,8 +12,10 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
+		$AnimatedSprite.flip_h = false;
 	if Input.is_action_pressed("ui_left"):
 		velocity.x -= 1
+		$AnimatedSprite.flip_h = true;
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
@@ -22,8 +23,9 @@ func _physics_process(delta):
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
+		$AnimatedSprite.animation = "run"
+		
 	else:
-		$AnimatedSprite.stop()
+		$AnimatedSprite.animation = "idle"
 	
-	move_and_collide(velocity)
+	move_and_slide(velocity)

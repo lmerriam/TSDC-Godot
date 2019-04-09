@@ -6,17 +6,31 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera2D.gd" type="Script" id=5]
 
-[node name="World" type="Node2D"]
+[node name="Game" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -7.10699
+margin_top = -7.159
+margin_right = 9991.89
+margin_bottom = 9991.84
+color = Color( 0.937255, 0.803922, 0.678431, 1 )
+
+[node name="Terrain" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 2 )
 octaves = 3
-period = 140.0
+period = 100.0
 grass_threshold = 0.0
 water_threshold = -0.125
+map_width = 400
+map_height = 400
+
+[node name="Props" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
 
 [node name="Entities" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -26,7 +40,7 @@ script = ExtResource( 3 )
 
 [node name="Player" parent="Entities" instance=ExtResource( 4 )]
 position = Vector2( 360.893, 241.841 )
-speed = 3
+speed = 50
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 current = true
@@ -51,4 +65,4 @@ margin_right = 110.0
 margin_bottom = 40.0
 text = "Generate"
 
-[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="TileMap" method="_on_BtnGenMap_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="Terrain" method="_on_BtnGenMap_button_up"]

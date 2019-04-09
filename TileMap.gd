@@ -10,6 +10,7 @@ export var map_height = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	generate_map(octaves,period,persistence,grass_threshold,water_threshold)
 
 func _on_BtnGenMap_button_up():

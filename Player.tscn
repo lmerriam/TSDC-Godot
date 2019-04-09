@@ -1,19 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ba3022ee-7a8e-47d3-811c-8f4427acb0bf.png" type="Texture" id=3]
+[ext_resource path="res://sprites/cbff11a2-1f9e-46a3-9031-2c4d65ca6aa2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/74025e4f-4c6f-4cf7-b74e-122f06dc69a5.png" type="Texture" id=5]
+[ext_resource path="res://sprites/75b554c1-6834-464b-adca-5f154479a644.png" type="Texture" id=6]
+[ext_resource path="res://sprites/768a1ab6-a4c4-40d8-b416-c0c7b8a9d06d.png" type="Texture" id=7]
+[ext_resource path="res://sprites/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
 
-
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.307, 11.8914 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8.01086, 2.04037 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
@@ -24,18 +34,19 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 326.693, 221.891 )
+position = Vector2( 326.693, 222.129 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
+animation = "idle"
+offset = Vector2( -1, -11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 rotation = -1.5708
