@@ -19,10 +19,6 @@ config/name="TSDC-Godot"
 run/main_scene="res://Game.tscn"
 config/icon="res://sprites/icon.png"
 
-[autoload]
-
-viewport_sizing="res://viewport_sizing.gd"
-
 [display]
 
 window/size/width=720
