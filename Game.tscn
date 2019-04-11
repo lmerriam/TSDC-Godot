@@ -1,21 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
-[ext_resource path="res://Entities.gd" type="Script" id=3]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://Props.gd" type="Script" id=3]
+[ext_resource path="res://Entities.gd" type="Script" id=4]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Camera2D.gd" type="Script" id=6]
 
 [node name="Game" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="World" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="World"]
 margin_left = -7.10699
 margin_top = -7.159
 margin_right = 9991.89
 margin_bottom = 9991.84
 color = Color( 0.937255, 0.803922, 0.678431, 1 )
 
-[node name="Terrain" type="TileMap" parent="."]
+[node name="Terrain" type="TileMap" parent="World"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -24,25 +27,25 @@ octaves = 3
 period = 100.0
 grass_threshold = 0.0
 water_threshold = -0.125
-map_width = 400
-map_height = 400
 
-[node name="Props" type="TileMap" parent="."]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-format = 1
-
-[node name="Entities" type="TileMap" parent="."]
+[node name="Props" type="TileMap" parent="World"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 3 )
 
-[node name="Player" parent="Entities" instance=ExtResource( 4 )]
+[node name="Entities" type="TileMap" parent="World"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+format = 1
+script = ExtResource( 4 )
+
+[node name="Player" parent="World/Entities" instance=ExtResource( 5 )]
 position = Vector2( 360.893, 241.841 )
 speed = 50
 
-[node name="Camera2D" type="Camera2D" parent="Entities/Player"]
+[node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true
 smoothing_enabled = true
 smoothing_speed = 8.0
@@ -50,7 +53,7 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -65,4 +68,4 @@ margin_right = 110.0
 margin_bottom = 40.0
 text = "Generate"
 
-[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="Terrain" method="_on_BtnGenMap_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="World/Terrain" method="_on_BtnGenMap_button_up"]
