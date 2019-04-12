@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://TileMap.gd" type="Script" id=2]
+[ext_resource path="res://World.gd" type="Script" id=2]
 [ext_resource path="res://Props.gd" type="Script" id=3]
 [ext_resource path="res://Entities.gd" type="Script" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
@@ -9,24 +9,22 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="World" type="Node" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="World"]
-margin_left = -7.10699
-margin_top = -7.159
-margin_right = 9991.89
-margin_bottom = 9991.84
-color = Color( 0.937255, 0.803922, 0.678431, 1 )
-
-[node name="Terrain" type="TileMap" parent="World"]
+[node name="World" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 2 )
-octaves = 3
-period = 100.0
-grass_threshold = 0.0
-water_threshold = -0.125
+lacunarity = 1
+octaves = 6
+period = 40.0
+grass_threshold = 0.25
+water_threshold = -0.2
+
+[node name="Background" type="ColorRect" parent="World"]
+show_behind_parent = true
+margin_right = 9999.0
+margin_bottom = 9999.0
+color = Color( 0.937255, 0.803922, 0.678431, 1 )
 
 [node name="Props" type="TileMap" parent="World"]
 tile_set = ExtResource( 1 )
@@ -68,4 +66,4 @@ margin_right = 110.0
 margin_bottom = 40.0
 text = "Generate"
 
-[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="World/Terrain" method="_on_BtnGenMap_button_up"]
+[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
