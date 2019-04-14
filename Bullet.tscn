@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/icon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.19863, 6.36516 )
+extents = Vector2( 2.71916, 2.53775 )
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource( 1 )
@@ -13,6 +13,8 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 2 )
 
+[connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

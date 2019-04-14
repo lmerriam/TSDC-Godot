@@ -6,8 +6,8 @@ extends TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	generate_map()
-	pass
+	generate_map()
+#	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -20,5 +20,6 @@ func generate_map():
 	for i in 1000:
 		var x = rand_range(0,300)
 		var y = rand_range(0,300)
-		
-		set_cell(x,y,tile)
+		var noise = get_node("/root/Game/World").noise
+		if noise.get_noise_2d(x,y) > 0:
+			set_cell(x,y,tile)
