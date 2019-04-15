@@ -17,6 +17,7 @@ var node_edges = []
 func _ready():
 	generate_map(noise,map_width,map_height)
 	_gen_nodes()
+	_place_player()
 
 func _draw():
 	for node in nodes:
@@ -47,6 +48,7 @@ func _on_BtnGenMap_button_up():
 	noise = _gen_noise()
 	generate_map(noise,map_width,map_height)
 	_gen_nodes()
+	_place_player()
 
 func _gen_noise():
 	randomize()
@@ -95,3 +97,7 @@ func _connect_nodes():
 		node_new.neighbors.append(node_existing)
 		connected_nodes.append(node_new)
 		unconnected_nodes.erase(node_new)
+
+func _place_player():
+	var origin = nodes[0].origin
+	$Entities/Player.global_position = origin * cell_size
