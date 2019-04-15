@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://World.gd" type="Script" id=3]
 [ext_resource path="res://Props.gd" type="Script" id=4]
 [ext_resource path="res://Entities.gd" type="Script" id=5]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Camera2D.gd" type="Script" id=7]
-[ext_resource path="res://Weapon.gd" type="Script" id=8]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Camera2D.gd" type="Script" id=8]
+[ext_resource path="res://Weapon.gd" type="Script" id=9]
+[ext_resource path="res://sprites/rpg-pack/props n decorations/generic-rpg-loot01.png" type="Texture" id=10]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,6 +19,10 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 3 )
+map_width = 200
+map_height = 200
+octaves = 3
+period = 60.0
 grass_threshold = -0.1
 water_threshold = -0.1
 
@@ -27,7 +32,7 @@ margin_right = 24.0
 margin_bottom = 26.0
 color = Color( 0.937255, 0.803922, 0.678431, 1 )
 
-[node name="Props" type="TileMap" parent="World"]
+[node name="Environment" type="TileMap" parent="World"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -40,7 +45,10 @@ cell_y_sort = true
 format = 1
 script = ExtResource( 5 )
 
-[node name="Player" parent="World/Entities" instance=ExtResource( 6 )]
+[node name="Stronghold" parent="World/Entities" instance=ExtResource( 6 )]
+position = Vector2( 528.262, 248.913 )
+
+[node name="Player" parent="World/Entities" instance=ExtResource( 7 )]
 position = Vector2( 360.893, 241.841 )
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
@@ -51,10 +59,14 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="Weapon" type="Node2D" parent="World/Entities/Player"]
-script = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="World/Entities/Player/Weapon"]
+position = Vector2( 0, -4 )
+texture = ExtResource( 10 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -63,25 +75,13 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 710.0
 margin_bottom = 470.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BtnGenMap" type="Button" parent="CanvasLayer/Control"]
 margin_right = 110.0
 margin_bottom = 40.0
 text = "Generate"
-
-[node name="Enemy" parent="." instance=ExtResource( 9 )]
-position = Vector2( 509.813, 260.265 )
-
-[node name="Enemy2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 501.511, 342.151 )
-
-[node name="Enemy3" parent="." instance=ExtResource( 9 )]
-position = Vector2( 405.166, 372.957 )
-
-[node name="Enemy4" parent="." instance=ExtResource( 9 )]
-position = Vector2( 321.388, 369.892 )
-
-[node name="Enemy5" parent="." instance=ExtResource( 9 )]
-position = Vector2( 510.4, 189.395 )
 
 [connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]

@@ -17,7 +17,7 @@ var node_edges = []
 func _ready():
 	generate_map(noise,map_width,map_height)
 	_gen_nodes()
-	_place_player()
+#	_place_player()
 
 func _draw():
 	for node in nodes:
@@ -48,7 +48,7 @@ func _on_BtnGenMap_button_up():
 	noise = _gen_noise()
 	generate_map(noise,map_width,map_height)
 	_gen_nodes()
-	_place_player()
+#	_place_player()
 
 func _gen_noise():
 	randomize()

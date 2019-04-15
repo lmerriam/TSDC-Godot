@@ -1,13 +1,14 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
-[ext_resource path="res://sprites/ba3022ee-7a8e-47d3-811c-8f4427acb0bf.png" type="Texture" id=3]
-[ext_resource path="res://sprites/cbff11a2-1f9e-46a3-9031-2c4d65ca6aa2.png" type="Texture" id=4]
-[ext_resource path="res://sprites/74025e4f-4c6f-4cf7-b74e-122f06dc69a5.png" type="Texture" id=5]
-[ext_resource path="res://sprites/75b554c1-6834-464b-adca-5f154479a644.png" type="Texture" id=6]
-[ext_resource path="res://sprites/768a1ab6-a4c4-40d8-b416-c0c7b8a9d06d.png" type="Texture" id=7]
-[ext_resource path="res://sprites/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
+[ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
+[ext_resource path="res://sprites/player/ba3022ee-7a8e-47d3-811c-8f4427acb0bf.png" type="Texture" id=3]
+[ext_resource path="res://sprites/player/cbff11a2-1f9e-46a3-9031-2c4d65ca6aa2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/player/74025e4f-4c6f-4cf7-b74e-122f06dc69a5.png" type="Texture" id=5]
+[ext_resource path="res://sprites/player/75b554c1-6834-464b-adca-5f154479a644.png" type="Texture" id=6]
+[ext_resource path="res://sprites/player/768a1ab6-a4c4-40d8-b416-c0c7b8a9d06d.png" type="Texture" id=7]
+[ext_resource path="res://sprites/player/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

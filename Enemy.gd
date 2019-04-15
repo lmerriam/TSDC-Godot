@@ -18,11 +18,11 @@ func _process(delta):
 		queue_free()
 	
 	# Move toward player
-	var player = get_tree().get_nodes_in_group("player")[0]
-	if player != null:
+	var player = GameState.player_id
+	if player:
 		var player_pos = player.global_position
 		var velocity = (player_pos - global_position).normalized()
-		move_and_collide(velocity * speed)
+		move_and_slide(velocity * speed)
 
 func take_damage(damage):
 	health -= damage
