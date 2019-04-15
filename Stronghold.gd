@@ -11,19 +11,30 @@ var enemies_spawned = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var player = GameState.player_id
-	if player:
-		var dis_to_player = global_position.distance_to(player.global_position)
-	
-		if !spawned and dis_to_player < aggro_radius:
-			for i in 8:
-				var inst = enemy.instance()
-				enemies_spawned.append(inst)
-				var offset = Vector2(rand_range(-50,50),rand_range(-50,50))
-				inst.global_position = global_position + offset
-				get_node("/root/Game/World/Entities").add_child(inst)
-			spawned = true
+	if defeated:
+		pass
+	else:
+		if spawned and enemies_spawned.size() <= 0:
+			defeated = true
+			print("Stronghold defeated")
+		
+		var player = GameState.player
+		if player:
+			var dis_to_player = global_position.distance_to(player.global_position)
+		
+			if !spawned and dis_to_player < aggro_radius:
+				for i in 8:
+					var inst = enemy.instance()
+					enemies_spawned.append(inst)
+					var offset = Vector2(rand_range(-50,50),rand_range(-50,50))
+					inst.global_position = global_position + offset
+					GameState.entities.add_child(inst)
+					inst.connect("killed",self,"_on_SpawnKilled")
+				spawned = true
+
+func _on_SpawnKilled(id):
+	enemies_spawned.erase(id)

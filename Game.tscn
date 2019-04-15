@@ -49,6 +49,7 @@ script = ExtResource( 5 )
 position = Vector2( 528.262, 248.913 )
 
 [node name="Player" parent="World/Entities" instance=ExtResource( 7 )]
+editor/display_folded = true
 position = Vector2( 360.893, 241.841 )
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
@@ -69,6 +70,7 @@ position = Vector2( 0, -4 )
 texture = ExtResource( 10 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 margin_left = 10.0

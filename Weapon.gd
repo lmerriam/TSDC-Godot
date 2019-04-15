@@ -14,4 +14,4 @@ func _process(delta):
 		var angle = global_position.angle_to_point(mouse_pos)
 		b.angle = angle
 		b.global_position = global_position
-		get_node("/root/Game/World").add_child(b)
+		GameState.entities.add_child(b)
