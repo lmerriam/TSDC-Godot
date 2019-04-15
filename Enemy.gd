@@ -5,9 +5,12 @@ extends KinematicBody2D
 # var b = "text"
 export var health = 10
 export var speed = .8
-export var aggro_radius = 128
 onready var origin = global_position
+
+enum {HOME, CHASE}
+
 var spawner = false
+var state = HOME
 
 signal killed(id)
 
@@ -23,17 +26,23 @@ func _process(delta):
 		emit_signal("killed",self)
 		queue_free()
 	
-	# Move toward player
-	var player = GameState.player
-	if player:
-		var dis_to_player = global_position.distance_to(player.global_position)
-		if dis_to_player < aggro_radius:
-			var player_pos = player.global_position
+	match state:
+		HOME:
+			if global_position.distance_to(origin) > 4:
+				var velocity = (origin - global_position).normalized()
+				move_and_slide(velocity * speed)
+		CHASE:
+			var player_pos = GameState.player.global_position
 			var velocity = (player_pos - global_position).normalized()
-			move_and_slide(velocity * speed)
-		else:
-			var velocity = (origin - global_position).normalized()
 			move_and_slide(velocity * speed)
 
 func take_damage(damage):
 	health -= damage
+
+func _on_AggroRadius_body_entered(body):
+	if body == GameState.player:
+		state = CHASE
+
+func _on_ChaseRadius_body_exited(body):
+	if body == GameState.player:
+		state = HOME
