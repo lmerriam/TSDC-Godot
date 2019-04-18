@@ -7,14 +7,13 @@ export var health = 10
 export var speed = .8
 onready var origin = global_position
 
-enum {HOME, CHASE}
+enum {HOME, CHASE, IDLE}
 
-var spawner = false
 var state = HOME
+var state_prev
 
 signal killed(id)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
@@ -31,18 +30,22 @@ func _process(delta):
 			if global_position.distance_to(origin) > 4:
 				var velocity = (origin - global_position).normalized()
 				move_and_slide(velocity * speed)
+			else:
+				state = IDLE
 		CHASE:
 			var player_pos = GameState.player.global_position
 			var velocity = (player_pos - global_position).normalized()
 			move_and_slide(velocity * speed)
+		IDLE:
+			continue
 
 func take_damage(damage):
 	health -= damage
 
 func _on_AggroRadius_body_entered(body):
 	if body == GameState.player:
-		state = CHASE
+		self.state = CHASE
 
 func _on_ChaseRadius_body_exited(body):
 	if body == GameState.player:
-		state = HOME
+		self.state = HOME

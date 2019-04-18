@@ -6,9 +6,10 @@ var spawned = false
 var enemy = preload("res://Enemy.tscn")
 var enemies_spawned = []
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	pass
+func _ready():
+	var tilemap = get_parent()
+	var tile = tilemap.tile_set.find_tile_by_name("rock")
+	Generators.gen_building(global_position / 16, 13, 13, tilemap, tile)
 
 func _on_SpawnKilled(id):
 	

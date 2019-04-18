@@ -100,4 +100,14 @@ func _connect_nodes():
 
 func _place_player():
 	var origin = nodes[0].origin
-	$Entities/Player.global_position = origin * cell_size
+	GameState.player.global_position = origin * cell_size
+
+func _gen_building(width, height):
+	var bsp = []
+	var axes = ["h","v"]
+	var axis = axes[randi() % 2]
+	
+	if axis == "h":
+		pass
+	elif axis == "v":
+		pass

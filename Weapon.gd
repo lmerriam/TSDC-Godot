@@ -1,17 +1,11 @@
 extends Node2D
 
-var bullet = preload("res://Bullet.tscn")
+var weapon_current = preload("res://items/weapons/staff.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	var weapon = weapon_current.instance()
+	add_child(weapon)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("attack"):
-		var b = bullet.instance()
-		var mouse_pos = get_global_mouse_position()
-		var angle = global_position.angle_to_point(mouse_pos)
-		b.angle = angle
-		b.global_position = global_position
-		GameState.entities.add_child(b)
+func set_weapon(weapon_name):
+	var weapon_current = load("res://items/weapons/" + weapon_name + ".tscn")

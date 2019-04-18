@@ -42,5 +42,8 @@ shape = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRadius"]
 shape = SubResource( 4 )
 
+[node name="IdleTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="AggroRadius" to="." method="_on_AggroRadius_body_entered"]
 [connection signal="body_exited" from="ChaseRadius" to="." method="_on_ChaseRadius_body_exited"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]
