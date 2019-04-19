@@ -24,12 +24,12 @@ func _on_SpawnKilled(id):
 func _on_AggroRadius_body_entered(body):
 	
 	# Spawn the 
-	if !spawned and body == GameState.player:
+	if !spawned and body == Global.player:
 		for i in 8:
 			var spawn = enemy.instance()
 			enemies_spawned.append(spawn)
 			var offset = Vector2(rand_range(-50,50),rand_range(-50,50))
 			spawn.global_position = global_position + offset
-			GameState.entities.add_child(spawn)
+			Global.entities.add_child(spawn)
 			spawn.connect("killed",self,"_on_SpawnKilled")
 		spawned = true

@@ -1,11 +1,31 @@
-extends Node2D
+extends Position2D
 
-var weapon_current = preload("res://items/weapons/staff.tscn")
+var weapon_start = Global.weapons.staff
 
-# Called when the node enters the scene tree for the first time.
+var components = {
+	base: weapon_start,
+	gem: null,
+	mat: null
+}
+
 func _ready():
-	var weapon = weapon_current.instance()
-	add_child(weapon)
+	set_weapon(weapon_start)
 
-func set_weapon(weapon_name):
-	var weapon_current = load("res://items/weapons/" + weapon_name + ".tscn")
+func set_weapon(path):
+	
+	var new_weapon = load(path)
+	var prev_weapon = weapon_equipped
+	if new_weapon:
+		
+		if prev_weapon:
+			remove_child(prev_weapon)
+			prev_weapon.queue_free()
+		
+		weapon_equipped = add_child(new_weapon)
+		return weapon_equipped
+
+func set_gem(gem_name):
+	pass
+
+func set_material(material_name):
+	pass

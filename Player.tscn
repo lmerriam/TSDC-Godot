@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://sprites/player/75b554c1-6834-464b-adca-5f154479a644.png" type="Texture" id=6]
 [ext_resource path="res://sprites/player/768a1ab6-a4c4-40d8-b416-c0c7b8a9d06d.png" type="Texture" id=7]
 [ext_resource path="res://sprites/player/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
+[ext_resource path="res://items/weapons/Staff.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,6 +31,7 @@ flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 101.01
 initial_velocity_random = 0.5
+angular_velocity = 1.05
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
@@ -56,4 +58,10 @@ explosiveness = 1.0
 randomness = 0.5
 local_coords = false
 process_material = SubResource( 3 )
+
+[node name="WeaponSlot" type="Node2D" parent="."]
+
+[node name="Staff" parent="WeaponSlot" instance=ExtResource( 9 )]
+
+[node name="ArmorSlot" type="Node" parent="."]
 

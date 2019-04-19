@@ -33,7 +33,7 @@ func _process(delta):
 			else:
 				state = IDLE
 		CHASE:
-			var player_pos = GameState.player.global_position
+			var player_pos = Global.player.global_position
 			var velocity = (player_pos - global_position).normalized()
 			move_and_slide(velocity * speed)
 		IDLE:
@@ -43,9 +43,9 @@ func take_damage(damage):
 	health -= damage
 
 func _on_AggroRadius_body_entered(body):
-	if body == GameState.player:
+	if body == Global.player:
 		self.state = CHASE
 
 func _on_ChaseRadius_body_exited(body):
-	if body == GameState.player:
+	if body == Global.player:
 		self.state = HOME

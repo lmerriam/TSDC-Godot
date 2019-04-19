@@ -2,13 +2,16 @@ extends KinematicBody2D
 
 export var speed = 100
 
-# Called when the node enters the scene tree for the first time.
+var equipment_slots = {
+	"weapon": $WeaponSlot,
+	"armor": $ArmorSlot
+}
+
 func _ready():
 	add_to_group("player")
-	GameState.player = self
+	Global.player = self
 	$AnimatedSprite.play()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var velocity = Vector2()
 	
@@ -31,3 +34,16 @@ func _physics_process(delta):
 		$AnimatedSprite.animation = "idle"
 	
 	move_and_slide(velocity)
+
+func set_equipped(new_equipment):
+	var type = new_equipment.get_type()
+	var slot = equipment_slots[type]
+	var old_equipment = get_equipped(type)
+	
+	slot.remove_child()
+	slot.add_child(new_equipment)
+	
+	old_equipment.queue_free()
+
+func get_equipped(type):
+	return get_child(equipment_slots[type])

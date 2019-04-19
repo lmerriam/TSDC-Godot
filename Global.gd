@@ -2,7 +2,11 @@ extends Node
 
 export var player = false
 export var entities = false
-export var entities_path = "/root/Game/World/Entities"
+
+var weapons = {
+	"staff": "res://items/weapons/Staff.tscn",
+	"blade": null
+}
 
 func _ready():
 	pass

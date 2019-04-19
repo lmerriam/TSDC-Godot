@@ -2,7 +2,7 @@ extends TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GameState.entities = self
+	Global.entities = self
 #	generate_props()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

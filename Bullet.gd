@@ -6,7 +6,7 @@ var angle = Vector2(0,0)
 var time_left = 1
 
 func _ready():
-	pass
+	set_as_toplevel(true)
 
 func _process(delta):
 	global_position += -Vector2((cos(angle) * speed * delta), (sin(angle) * speed * delta))
