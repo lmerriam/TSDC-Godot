@@ -17,6 +17,7 @@ func _process(delta):
 		_attack()
 
 func _attack():
+	
 	# Swing the sword
 	var s = attack.instance()
 	add_child(s)
@@ -24,8 +25,8 @@ func _attack():
 	# Point the projectile in the right direction
 	var mouse_pos = get_global_mouse_position()
 	var angle = global_position.angle_to_point(mouse_pos)
-	s.angle = angle
-	s.global_position = global_position
+	s.set_angle(angle)
+	s.set_global_position(global_position)
 	s.damage = damage
 	
 	# Reset cooldown timer

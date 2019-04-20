@@ -7,10 +7,9 @@ onready var equipment_slots = {
 	"armor": $ArmorSlot
 }
 
-onready var start_weapon = preload("res://items/weapons/Sword.tscn")
+var start_weapon = Equipment.load_item("weapon","staff")
 
 func _ready():
-	add_to_group("player")
 	Global.player = self
 	$AnimatedSprite.play()
 	set_equipped(start_weapon.instance())

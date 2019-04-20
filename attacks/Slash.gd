@@ -2,10 +2,8 @@ extends Area2D
 
 var time_left = .1
 var damage
-var angle
 
 func _ready():
-#	rotation = -angle
 	pass
 
 func _process(delta):
@@ -17,3 +15,6 @@ func _process(delta):
 func _on_Slash_body_entered(body):
 	if damage and body.has_method("take_damage"):
 		body.take_damage(damage)
+
+func set_angle(angle):
+	rotation_degrees = rad2deg(angle) - 180

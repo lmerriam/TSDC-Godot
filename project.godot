@@ -34,6 +34,7 @@ config/icon="res://sprites/icon.png"
 
 Global="*res://Global.gd"
 Generators="*res://Generators.gd"
+Equipment="*res://Equipment.gd"
 
 [display]
 

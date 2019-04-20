@@ -4,6 +4,7 @@ export var speed = 400
 export var damage = 6
 var angle = Vector2(0,0)
 var time_left = 1
+var creator
 
 func _ready():
 	set_as_toplevel(true)
@@ -23,3 +24,7 @@ func _on_Bullet_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		queue_free()
+
+func set_creator(group):
+	creator = group
+	return creator
