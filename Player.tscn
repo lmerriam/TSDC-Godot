@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -26,15 +26,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.01086, 2.04037 )
 
-[sub_resource type="ParticlesMaterial" id=3]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 101.01
-initial_velocity_random = 0.5
-angular_velocity = 1.05
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 326.693, 222.129 )
 script = ExtResource( 1 )
@@ -49,15 +40,6 @@ offset = Vector2( -1, -11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
-[node name="Particles2D" type="Particles2D" parent="."]
-rotation = -1.5708
-emitting = false
-lifetime = 0.25
-explosiveness = 1.0
-randomness = 0.5
-local_coords = false
-process_material = SubResource( 3 )
 
 [node name="WeaponSlot" type="Node2D" parent="."]
 

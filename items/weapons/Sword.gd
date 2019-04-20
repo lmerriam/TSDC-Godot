@@ -1,11 +1,12 @@
 extends Weapon
 
-export var damage = 1
-export var attack_speed = 5
+export var damage = 20
+export var attack_speed = 2
 
+var attack = preload("res://Slash.tscn")
+
+var angle = Vector2(0,0)
 var cooldown = 0.0
-
-var attack = preload("res://Bullet.tscn")
 
 func _ready():
 	pass
@@ -16,15 +17,16 @@ func _process(delta):
 		_attack()
 
 func _attack():
-	#Instance projectile
-	var b = attack.instance()
-	add_child(b)
+	# Swing the sword
+	var s = attack.instance()
+	add_child(s)
 	
 	# Point the projectile in the right direction
 	var mouse_pos = get_global_mouse_position()
 	var angle = global_position.angle_to_point(mouse_pos)
-	b.angle = angle
-	b.global_position = global_position
+	s.angle = angle
+	s.global_position = global_position
+	s.damage = damage
 	
 	# Reset cooldown timer
 	cooldown = 1.0 / attack_speed

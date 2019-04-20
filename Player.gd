@@ -2,15 +2,18 @@ extends KinematicBody2D
 
 export var speed = 100
 
-var equipment_slots = {
+onready var equipment_slots = {
 	"weapon": $WeaponSlot,
 	"armor": $ArmorSlot
 }
+
+onready var start_weapon = preload("res://items/weapons/Sword.tscn")
 
 func _ready():
 	add_to_group("player")
 	Global.player = self
 	$AnimatedSprite.play()
+	set_equipped(start_weapon.instance())
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -37,13 +40,17 @@ func _physics_process(delta):
 
 func set_equipped(new_equipment):
 	var type = new_equipment.get_type()
-	var slot = equipment_slots[type]
+	var slot = get_equipment_slot(type)
 	var old_equipment = get_equipped(type)
 	
-	slot.remove_child()
+	slot.remove_child(old_equipment)
 	slot.add_child(new_equipment)
 	
 	old_equipment.queue_free()
 
 func get_equipped(type):
-	return get_child(equipment_slots[type])
+	var slot = get_equipment_slot(type)
+	return slot.get_children()[0]
+
+func get_equipment_slot(type):
+	return equipment_slots.get(type)
