@@ -43,6 +43,10 @@ window/size/height=480
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "equipment_watcher" )
+
 [input]
 
 ui_left={

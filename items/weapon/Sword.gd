@@ -3,7 +3,7 @@ extends Weapon
 export var damage = 20
 export var attack_speed = 2
 
-var attack = preload("res://Slash.tscn")
+var attack = preload("res://attacks/Slash.tscn")
 
 var angle = Vector2(0,0)
 var cooldown = 0.0

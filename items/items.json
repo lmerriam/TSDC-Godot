@@ -1,0 +1,7 @@
+{
+  "weapon": {
+    "bow": "res://items/weapon/Bow.tscn",
+    "staff": "res://items/weapon/Staff.tscn",
+    "sword": "res://items/weapon/Sword.tscn"
+  }
+}

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://items/weapons/Staff.gd" type="Script" id=1]
+[ext_resource path="res://items/weapon/Staff.gd" type="Script" id=1]
 [ext_resource path="res://sprites/rpg-pack/props n decorations/generic-rpg-loot01.png" type="Texture" id=2]
 
 [node name="Staff" type="Node2D"]
