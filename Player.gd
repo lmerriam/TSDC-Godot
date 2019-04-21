@@ -7,12 +7,10 @@ onready var equipment_slots = {
 	"armor": $ArmorSlot
 }
 
-#var start_weapon = Equipment.load_item("weapon","staff")
-
 func _ready():
 	Global.player = self
 	$AnimatedSprite.play()
-	set_equipped(Equipment.load_item("weapon","sword").instance())
+	set_equipped(Equipment.instance_item("sword"))
 
 func _physics_process(delta):
 	var velocity = Vector2()

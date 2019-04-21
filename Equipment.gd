@@ -1,18 +1,18 @@
 extends Node
 
-var equipment = {
-	"weapon": {
-		"sword": "res://items/weapons/Sword.tscn",
-		"staff": "res://items/weapons/Staff.tscn"
-	}
-}
+const ITEM_FOLDER = "res://items"
+const ITEM_JSON = "res://items/items.json"
+var equipment
 
 func _ready():
 	var file = File.new()
-	file.open("res://items/items.json", file.READ)
+	file.open(ITEM_JSON, file.READ)
 	var json = file.get_as_text()
 	equipment = JSON.parse(json).result
 	file.close()
 
-func load_item(item_type, item_name):
-	return load(equipment[item_type][item_name])
+func instance_item(item_name):
+	return load_item(item_name).instance()
+
+func load_item(item_name):
+	return load(equipment[item_name])
