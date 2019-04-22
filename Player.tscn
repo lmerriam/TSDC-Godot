@@ -10,7 +10,6 @@
 [ext_resource path="res://sprites/player/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
 [ext_resource path="res://items/weapon/Staff.tscn" type="PackedScene" id=9]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],

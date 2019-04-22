@@ -8,6 +8,7 @@ func _enter_tree():
 	fs.connect("filesystem_changed", self, "_on_update_libraries")
 
 func _exit_tree():
+	fs.queue_free()
 	pass
 
 func _on_update_libraries():
