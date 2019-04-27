@@ -13,8 +13,8 @@ func _init():
 	set_stat_base("attack_speed", attack_speed)
 
 func _ready():
-	set_component(Items.instance_item("gemfire"))
-	set_component(Items.instance_item("triggerfast"))
+	set_component(ItemLibrary.instance_item("gemfire"))
+	set_component(ItemLibrary.instance_item("triggerfast"))
 
 func _process(delta):
 	cooldown -= delta

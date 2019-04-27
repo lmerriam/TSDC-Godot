@@ -6,13 +6,17 @@ var type
 var stats_base = {}
 var stats = {}
 var buffs = {}
-var components = {}
-
-#func _ready():
-#	pass
+const components = {
+	base = null,
+	gem = null,
+	inscription = null
+}
 
 func get_type():
 	return type
+
+func can_equip_type(item_type):
+	return components.has(item_type)
 
 func set_type(item_type):
 	type = item_type
@@ -29,11 +33,15 @@ func get_stat_base(stat):
 		return stats_base[stat]
 
 func update_stats():
+	# @REFACTOR probably, too much nesting
 	stats = stats_base.duplicate()
-	for comp in components:
-		var comp_stats = get_component(comp).get_stats()
-		for s in comp_stats:
-			stats[s] += comp_stats[s]
+	for slot in components:
+		var comp = get_component(slot)
+		if comp:
+			var comp_stats = comp.get_stats()
+			for s in comp_stats:
+				if !stats.get(s): stats[s] = 0
+				stats[s] += comp_stats[s]
 
 func set_stat_base(stat, value):
 	stats_base[stat] = value
@@ -48,17 +56,26 @@ func get_buff(buff):
 func set_buff(buff, values):
 	buffs[buff] = values
 
-func get_component(type):
-	return components[type]
+func get_component(slot):
+	return components[slot]
 
 func set_component(instance):
-	if is_instance_valid(instance):
-		var type = instance.get_type()
+	var type = instance.get_type()
+	if is_instance_valid(instance) and can_equip_type(type):
+		
+		# Remove previous
+		var prev_component = components[type]
+		
+		# Attach new
 		components[type] = instance
 		add_child(instance)
 		update_stats()
-		return true
-	return false
+		
+		if prev_component:
+			remove_child(prev_component)
+			prev_component.queue_free()
+		
+		return instance
 
 func remove_component(type):
 	var instance = get_component(type)

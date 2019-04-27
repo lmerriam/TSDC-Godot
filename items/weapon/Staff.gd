@@ -7,8 +7,13 @@ var cooldown = 0.0
 
 var attack = preload("res://Bullet.tscn")
 
+func _init():
+	set_stat_base("damage", damage)
+	set_stat_base("attack_speed", attack_speed)
+
 func _ready():
-	pass
+	set_component(ItemLibrary.instance_item("gemfire"))
+	set_component(ItemLibrary.instance_item("triggerfast"))
 
 func _process(delta):
 	cooldown -= delta
@@ -25,6 +30,7 @@ func _attack():
 	var angle = global_position.angle_to_point(mouse_pos)
 	b.angle = angle
 	b.global_position = global_position
+	b.damage = stats.damage
 	
 	# Reset cooldown timer
-	cooldown = 1.0 / attack_speed
+	cooldown = 1.0 / stats.attack_speed

@@ -40,7 +40,7 @@ config/icon="res://sprites/icon.png"
 
 Global="*res://Global.gd"
 Generators="*res://Generators.gd"
-Items="*res://Items.gd"
+ItemLibrary="*res://ItemLibrary.gd"
 
 [display]
 
