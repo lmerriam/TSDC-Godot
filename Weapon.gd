@@ -1,16 +1,5 @@
-extends Node2D
-
+extends Item
 class_name Weapon
 
-var type = "weapon"
-
-#var components = {
-#	gem: null,
-#	mat: null
-#}
-
-func _ready():
-	pass
-
-func get_type():
-	return type
+func _init():
+	set_type("weapon")

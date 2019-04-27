@@ -1,6 +1,6 @@
 extends Weapon
 
-export var damage = 20
+export var damage = 10
 export var attack_speed = 2
 
 var attack = preload("res://attacks/Slash.tscn")
@@ -8,8 +8,13 @@ var attack = preload("res://attacks/Slash.tscn")
 var angle = Vector2(0,0)
 var cooldown = 0.0
 
+func _init():
+	set_stat_base("damage", damage)
+	set_stat_base("attack_speed", attack_speed)
+
 func _ready():
-	pass
+	set_component(Items.instance_item("gemfire"))
+	set_component(Items.instance_item("triggerfast"))
 
 func _process(delta):
 	cooldown -= delta
@@ -27,7 +32,7 @@ func _attack():
 	var angle = global_position.angle_to_point(mouse_pos)
 	s.set_angle(angle)
 	s.set_global_position(global_position)
-	s.damage = damage
+	s.damage = stats.damage
 	
 	# Reset cooldown timer
-	cooldown = 1.0 / attack_speed
+	cooldown = 1.0 / stats.attack_speed

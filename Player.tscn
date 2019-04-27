@@ -31,9 +31,6 @@ extents = Vector2( 8.01086, 2.04037 )
 ]]
 position = Vector2( 326.693, 222.129 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

@@ -13,7 +13,7 @@ func _exit_tree():
 
 func _on_update_libraries():
 	print("Updating libraries")
-	_generate_library(Equipment.ITEM_FOLDER, Equipment.ITEM_JSON)
+	_generate_library(Items.ITEM_FOLDER, Items.ITEM_JSON)
 
 func _generate_library(folder_path, json_path):
 	
@@ -46,5 +46,5 @@ func _iterate_dir(path, data):
 					data[file_name.to_lower().trim_suffix(".tscn")] = string
 			file_name = dir.get_next()
 	else:
-		print("Equipment watcher: invalid path")
+		print("Items watcher: invalid path")
 	dir.list_dir_end()

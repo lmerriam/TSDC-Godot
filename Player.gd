@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 export var speed = 100
 
+var stats_base = {}
+var stats_final = {}
+
 onready var equipment_slots = {
 	"weapon": $WeaponSlot,
 	"armor": $ArmorSlot
@@ -10,7 +13,7 @@ onready var equipment_slots = {
 func _ready():
 	Global.player = self
 	$AnimatedSprite.play()
-	set_equipped(Equipment.instance_item("sword"))
+	set_equipped(Items.instance_item("sword"))
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -51,3 +54,14 @@ func get_equipped(type):
 
 func get_equipment_slot(type):
 	return equipment_slots.get(type)
+
+func update_stats():
+	pass
+
+func get_stat_base(stat):
+	if stats_base.has(stat):
+		return stats_base[stat]
+
+func get_stat_final(stat):
+	if stats_final.has(stat):
+		return stats_final[stat]

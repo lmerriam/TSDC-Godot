@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://Component.gd"
 }, {
 "base": "Node2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Item.gd"
+}, {
+"base": "Item",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Weapon.gd"
 } ]
 _global_script_class_icons={
 "Component": "",
+"Item": "",
 "Weapon": ""
 }
 
@@ -34,7 +40,7 @@ config/icon="res://sprites/icon.png"
 
 Global="*res://Global.gd"
 Generators="*res://Generators.gd"
-Equipment="*res://Equipment.gd"
+Items="*res://Items.gd"
 
 [display]
 
@@ -45,7 +51,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "equipment_watcher" )
+enabled=PoolStringArray( "equipment_watcher", "godot-behavior-tree-plugin" )
 
 [input]
 
