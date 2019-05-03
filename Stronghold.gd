@@ -26,10 +26,13 @@ func _on_AggroRadius_body_entered(body):
 	# Spawn the 
 	if !spawned and body == Global.player:
 		for i in 8:
-			var spawn = enemy.instance()
-			enemies_spawned.append(spawn)
-			var offset = Vector2(rand_range(-50,50),rand_range(-50,50))
-			spawn.global_position = global_position + offset
-			Global.entities.add_child(spawn)
-			spawn.connect("killed",self,"_on_SpawnKilled")
+			call_deferred("_spawn_enemy")
 		spawned = true
+
+func _spawn_enemy():
+	var spawn = enemy.instance()
+	enemies_spawned.append(spawn)
+	var offset = Vector2(rand_range(-50,50),rand_range(-50,50))
+	spawn.global_position = global_position + offset
+	Global.entities.add_child(spawn)
+	spawn.connect("killed",self,"_on_SpawnKilled")

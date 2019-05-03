@@ -1,8 +1,5 @@
 extends KinematicBody2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 export var health = 10
 export var speed = .8
 onready var origin = global_position

@@ -2,11 +2,12 @@ extends Node2D
 class_name Item
 
 var type
+var item_name
 
 var stats_base = {}
 var stats = {}
 var buffs = {}
-const components = {
+var components = {
 	base = null,
 	gem = null,
 	inscription = null
@@ -14,6 +15,9 @@ const components = {
 
 func get_type():
 	return type
+
+func get_name():
+	return item_name
 
 func can_equip_type(item_type):
 	return components.has(item_type)

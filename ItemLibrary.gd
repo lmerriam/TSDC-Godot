@@ -10,9 +10,9 @@ const ARMOR_JSON = "res://items/armor/armor.json"
 var equipment_types = {}
 var equipment
 
-func _ready():
+func _init():
 	equipment = _load_library(ITEM_JSON)
-	equipment_types["weapon"] = _load_library(WEAPON_JSON)
+#	equipment_types["weapon"] = _load_library(WEAPON_JSON)
 #	equipment_types["armor"] = _load_library(ARMOR_JSON)
 
 func _load_library(path):

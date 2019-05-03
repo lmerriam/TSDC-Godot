@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Stronghold.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Camera2D.gd" type="Script" id=8]
+[ext_resource path="res://Loot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,7 +49,7 @@ script = ExtResource( 5 )
 position = Vector2( 528.262, 248.913 )
 
 [node name="Player" parent="World/Entities" instance=ExtResource( 7 )]
-position = Vector2( 360.893, 241.841 )
+position = Vector2( 216.08, 198.47 )
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true
@@ -59,21 +61,30 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 script = ExtResource( 8 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
+[node name="Loot" parent="World/Entities" instance=ExtResource( 9 )]
+position = Vector2( 230.819, 278.601 )
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Loot2" parent="World/Entities" instance=ExtResource( 9 )]
+position = Vector2( 277.13, 305.064 )
+loot_id = "staff"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="GUI"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 710.0
 margin_bottom = 470.0
+mouse_filter = 2
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BtnGenMap" type="Button" parent="CanvasLayer/Control"]
+[node name="BtnGenMap" type="Button" parent="GUI/Control"]
 margin_right = 110.0
 margin_bottom = 40.0
 text = "Generate"
 
-[connection signal="button_up" from="CanvasLayer/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
+[node name="Inventory" parent="GUI" instance=ExtResource( 10 )]
+
+[connection signal="button_up" from="GUI/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]

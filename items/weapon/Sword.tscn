@@ -3,7 +3,6 @@
 [ext_resource path="res://items/weapon/Sword.gd" type="Script" id=1]
 [ext_resource path="res://sprites/rpg-pack/props n decorations/generic-rpg-loot01.png" type="Texture" id=2]
 
-
 [node name="Sword" type="Node2D"]
 script = ExtResource( 1 )
 

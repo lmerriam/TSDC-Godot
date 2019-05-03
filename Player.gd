@@ -17,24 +17,36 @@ onready var equipment_slots = {
 	"armor": $ArmorSlot
 }
 
-func _ready():
+# Components
+var inventory = preload("res://components/ComponentInventory.gd").new()
+
+func _init():
 	Global.player = self
+	Global.inventory = inventory
+
+func _ready():
+	add_child(inventory)
+	inventory.control = get_node('/root/Game/GUI/Inventory')
 	$AnimatedSprite.play()
 	var staff = set_equipped(ItemLibrary.instance_item("staff"))
-	staff.set_component(ItemLibrary.instance_item("gemfire"))
+#	staff.set_component(ItemLibrary.instance_item("gemfire"))
+
+func _process(delta):
+	if Input.is_action_pressed("attack"):
+		$WeaponSlot.get_child(0).attack()
 
 func _physics_process(delta):
 	var velocity = Vector2()
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 		$AnimatedSprite.flip_h = false;
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
 		$AnimatedSprite.flip_h = true;
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	
 	if velocity.length() > 0:
