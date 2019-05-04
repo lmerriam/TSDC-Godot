@@ -30,6 +30,7 @@ water_threshold = -0.2
 show_behind_parent = true
 margin_right = 24.0
 margin_bottom = 26.0
+mouse_filter = 2
 color = Color( 0.937255, 0.803922, 0.678431, 1 )
 
 [node name="Environment" type="TileMap" parent="World"]
@@ -83,8 +84,10 @@ __meta__ = {
 [node name="BtnGenMap" type="Button" parent="GUI/Control"]
 margin_right = 110.0
 margin_bottom = 40.0
+mouse_filter = 1
 text = "Generate"
 
 [node name="Inventory" parent="GUI" instance=ExtResource( 10 )]
+mouse_filter = 2
 
 [connection signal="button_up" from="GUI/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
