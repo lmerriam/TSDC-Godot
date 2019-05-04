@@ -91,3 +91,5 @@ text = "Generate"
 mouse_filter = 2
 
 [connection signal="button_up" from="GUI/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
+
+[editable path="World/Entities/Player"]

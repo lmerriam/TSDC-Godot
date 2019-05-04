@@ -19,11 +19,11 @@ func _ready():
 	_gen_nodes()
 #	_place_player()
 
-func _draw():
-	for node in nodes:
-		draw_circle(node.origin*cell_size.x,32,Color.red)
-		for neighbor in node.neighbors:
-			draw_line(node.origin*cell_size,neighbor.origin*cell_size,Color.red)
+#func _draw():
+#	for node in nodes:
+#		draw_circle(node.origin*cell_size.x,32,Color.red)
+#		for neighbor in node.neighbors:
+#			draw_line(node.origin*cell_size,neighbor.origin*cell_size,Color.red)
 
 # Generate base terrain
 func generate_map(noise,width,height):

@@ -22,9 +22,10 @@ func _process(delta):
 
 func attack():
 	if cooldown <= 0:
+		
 		#Instance projectile
 		var b = attack.instance()
-		add_child(b)
+		Global.entities.add_child(b)
 		
 		# Point the projectile in the right direction
 		var mouse_pos = get_global_mouse_position()

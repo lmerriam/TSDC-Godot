@@ -62,7 +62,7 @@ func set_equipped(new_equipment, send_prev_to_inv = true):
 	var prev_equipment = get_equipped(type)
 	if send_prev_to_inv and prev_equipment:
 		Global.inventory.add_item(prev_equipment)
-	$WeaponOrigin.remove_child(prev_equipment)
+		$WeaponOrigin.remove_child(prev_equipment)
 	$WeaponOrigin.add_child(new_equipment)
 	equipment[type] = new_equipment
 	return new_equipment
