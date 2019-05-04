@@ -64,6 +64,9 @@ func get_buff(buff):
 func set_buff(buff, values):
 	buffs[buff] = values
 
+func get_components():
+	return components
+
 func get_component(slot):
 	return components[slot]
 

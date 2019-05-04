@@ -12,10 +12,10 @@ var equipment = {
 	scroll = null
 }
 
-onready var equipment_slots = {
-	"weapon": $WeaponSlot,
-	"armor": $ArmorSlot
-}
+#onready var equipment_slots = {
+#	"weapon": $WeaponSlot,
+#	"armor": $ArmorSlot
+#}
 
 # Components
 var inventory = preload("res://components/ComponentInventory.gd").new()
@@ -26,14 +26,13 @@ func _init():
 
 func _ready():
 	add_child(inventory)
-	inventory.control = get_node('/root/Game/GUI/Inventory')
 	$AnimatedSprite.play()
 	var staff = set_equipped(ItemLibrary.instance_item("staff"))
 #	staff.set_component(ItemLibrary.instance_item("gemfire"))
 
 func _process(delta):
 	if Input.is_action_pressed("attack"):
-		$WeaponSlot.get_child(0).attack()
+		get_equipped("weapon").attack()
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -58,28 +57,22 @@ func _physics_process(delta):
 	
 	move_and_slide(velocity)
 
-func set_equipped(new_equipment):
+func set_equipped(new_equipment, send_prev_to_inv = true):
 	var type = new_equipment.get_type()
-	var slot = get_equipment_slot(type)
-	var old_equipment = get_equipped(type)
-	
-	slot.remove_child(old_equipment)
-	slot.add_child(new_equipment)
-	
-#	old_equipment.queue_free()
-	
+	var prev_equipment = get_equipped(type)
+	if send_prev_to_inv and prev_equipment:
+		Global.inventory.add_item(prev_equipment)
+	$WeaponOrigin.remove_child(prev_equipment)
+	$WeaponOrigin.add_child(new_equipment)
+	equipment[type] = new_equipment
 	return new_equipment
 
-func get_equipped(type):
-	var slot = get_equipment_slot(type)
-	return slot.get_children()[0]
-
-func get_equipment_slot(type):
-	return equipment_slots.get(type)
+func get_equipped(item_type):
+	return equipment[item_type]
 
 func update_stats():
 	stats = stats_base.duplicate()
-	for type in equipment_slots:
+	for type in equipment:
 		var item_stats = get_equipped(type).get_stats()
 		for s in item_stats:
 			stats[s] += item_stats[s]

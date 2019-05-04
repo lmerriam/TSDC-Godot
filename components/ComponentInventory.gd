@@ -8,14 +8,11 @@ func _ready():
 	control = Global.player.inventory
 
 func add_item(item):
-	add_child(item)
 	slots.append(item)
 	emit_signal("inventory_updated", slots)
 	return item
 
 func remove_item(item):
-#	var item = get_item(slot)
-	remove_child(item)
 	slots.erase(item)
 	emit_signal("inventory_updated", slots)
 	return item
