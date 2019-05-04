@@ -5,6 +5,7 @@ var loot
 
 func _ready():
 	set_loot(ItemLibrary.instance_item(loot_id))
+	$Sprite.set_texture(loot.get_sprite())
 
 func set_loot(instance):
 	loot = instance

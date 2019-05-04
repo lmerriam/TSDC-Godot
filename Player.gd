@@ -66,7 +66,7 @@ func set_equipped(new_equipment):
 	slot.remove_child(old_equipment)
 	slot.add_child(new_equipment)
 	
-	old_equipment.queue_free()
+#	old_equipment.queue_free()
 	
 	return new_equipment
 

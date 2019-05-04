@@ -1,6 +1,7 @@
 extends Control
 
 var inventory
+var selected_item
 
 func _ready():
 	inventory = Global.inventory
@@ -15,7 +16,7 @@ func add_item(item):
 	return item
 
 func update_selected_item(item):
-	print("Update selected item")
+	selected_item = item
 	var name_label = $ItemSelected/Name 
 	var stats_label = $ItemSelected/Stats
 	var sprite_rect = $ItemSelected/Sprite
@@ -30,7 +31,6 @@ func update_selected_item(item):
 		stats_label.newline()
 
 func _on_inventory_updated(slots):
-	print("Inventory updated")
 	$ItemList.clear()
 	for item in slots:
 		add_item(item)
@@ -38,3 +38,11 @@ func _on_inventory_updated(slots):
 func _on_ItemList_item_selected(index):
 	var item = $ItemList.get_item_metadata(index)
 	update_selected_item(item)
+
+func _on_EquipButton_button_up():
+	var type = selected_item.get_type()
+	var prev_item = Global.player.get_equipped(type)
+	
+	inventory.add_item(prev_item)
+	inventory.remove_item(selected_item)
+	Global.player.set_equipped(selected_item)

@@ -13,10 +13,10 @@ func add_item(item):
 	emit_signal("inventory_updated", slots)
 	return item
 
-func remove_item(slot):
-	var item = get_item(slot)
+func remove_item(item):
+#	var item = get_item(slot)
 	remove_child(item)
-	slots.erase(slot)
+	slots.erase(item)
 	emit_signal("inventory_updated", slots)
 	return item
 
