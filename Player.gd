@@ -12,11 +12,6 @@ var equipment = {
 	scroll = null
 }
 
-#onready var equipment_slots = {
-#	"weapon": $WeaponSlot,
-#	"armor": $ArmorSlot
-#}
-
 # Components
 var inventory = preload("res://components/ComponentInventory.gd").new()
 
@@ -27,7 +22,7 @@ func _init():
 func _ready():
 	add_child(inventory)
 	$AnimatedSprite.play()
-	var staff = set_equipped(ItemLibrary.instance_item("staff"))
+	var staff = set_equipped(ItemLibrary.instance_item("axe"))
 #	staff.set_component(ItemLibrary.instance_item("gemfire"))
 
 func _process(delta):

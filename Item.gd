@@ -70,25 +70,20 @@ func get_components():
 func get_component(slot):
 	return components[slot]
 
-func set_component(instance):
+func set_component(instance, send_prev_to_inv = true):
 	var type = instance.get_type()
 	if is_instance_valid(instance) and can_equip_type(type):
 		
 		# Remove previous
 		var prev_component = components[type]
+		if send_prev_to_inv:
+			remove_component(prev_component)
 		
 		# Attach new
 		components[type] = instance
-		add_child(instance)
 		update_stats()
-		
-		if prev_component:
-			remove_child(prev_component)
-			prev_component.queue_free()
 		
 		return instance
 
-func remove_component(type):
-	var instance = get_component(type)
-	components.erase(type)
-	remove_child(instance)
+func remove_component(inst):
+	components.erase(inst)

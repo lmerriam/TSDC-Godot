@@ -12,6 +12,7 @@ export var water_threshold = 0.00
 var noise = _gen_noise()
 var nodes = []
 var node_edges = []
+var time_before
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,6 +30,7 @@ func _ready():
 func generate_map(noise,width,height):
 	clear()
 	
+	time_before = OS.get_ticks_msec()
 	for x in range(width):
 		for y in range(height):
 			var tile
@@ -37,12 +39,19 @@ func generate_map(noise,width,height):
 				tile = tile_set.find_tile_by_name("Grass")
 			elif value < water_threshold:
 				tile = tile_set.find_tile_by_name("Water")
-			
+
 			if tile != null:
 				set_cell(x,y,tile)
+	var newtime = OS.get_ticks_msec()
+	print("Time to set tiles: " + String(newtime-time_before))
+	time_before = newtime
 	
 	update_bitmask_region(Vector2(0,width),Vector2(0,height))
 	$Background.rect_size = Vector2(width*cell_size.x,height*cell_size.y)
+	
+	newtime = OS.get_ticks_msec()
+	print("Time to bitmask: " + String(newtime-time_before))
+	time_before = newtime
 
 func _on_BtnGenMap_button_up():
 	noise = _gen_noise()

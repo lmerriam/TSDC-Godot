@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Camera2D.gd" type="Script" id=8]
 [ext_resource path="res://Loot.tscn" type="PackedScene" id=9]
-[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=10]
+[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,8 +20,8 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 3 )
-map_width = 200
-map_height = 200
+map_width = 400
+map_height = 400
 octaves = 3
 period = 30.0
 grass_threshold = 1.0
@@ -87,7 +88,15 @@ margin_bottom = 40.0
 mouse_filter = 1
 text = "Generate"
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 10 )]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="GUI/Control"]
+visible = false
+position = Vector2( 604.71, 365.46 )
+scale = Vector2( 0.627024, 0.627024 )
+normal = ExtResource( 10 )
+action = "attack"
+
+[node name="Inventory" parent="GUI" instance=ExtResource( 11 )]
+visible = false
 mouse_filter = 2
 
 [connection signal="button_up" from="GUI/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]

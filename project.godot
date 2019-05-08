@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Component.gd"
 }, {
+"base": "Node",
+"class": "ComponentEquippable",
+"language": "GDScript",
+"path": "res://components/ComponentEquippable.gd"
+}, {
+"base": "Node",
+"class": "ComponentInventory",
+"language": "GDScript",
+"path": "res://components/ComponentInventory.gd"
+}, {
 "base": "Node2D",
 "class": "Item",
 "language": "GDScript",
@@ -26,6 +36,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Component": "",
+"ComponentEquippable": "",
+"ComponentInventory": "",
 "Item": "",
 "Weapon": ""
 }
@@ -144,6 +156,11 @@ move_right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[physics]
+
+2d/default_gravity_vector=Vector2( 0, 0 )
+2d/default_linear_damp=10.0
 
 [rendering]
 

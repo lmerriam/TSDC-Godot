@@ -1,4 +1,5 @@
 extends Node
+class_name ComponentInventory
 
 var slots = []
 var control

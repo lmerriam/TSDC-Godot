@@ -20,9 +20,11 @@ radius = 120.0
 [sub_resource type="CircleShape2D" id=4]
 radius = 173.527
 
-[node name="Enemy" type="KinematicBody2D" groups=[
+[node name="Enemy" type="RigidBody2D" groups=[
 "enemies",
 ]]
+mode = 2
+gravity_scale = 0.0
 script = ExtResource( 1 )
 speed = 80.0
 
@@ -48,4 +50,3 @@ shape = SubResource( 4 )
 
 [connection signal="body_entered" from="AggroRadius" to="." method="_on_AggroRadius_body_entered"]
 [connection signal="body_exited" from="ChaseRadius" to="." method="_on_ChaseRadius_body_exited"]
-[connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]

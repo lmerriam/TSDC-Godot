@@ -1,16 +1,19 @@
 extends Weapon
 
 export var damage = 2
-export var attack_speed = 5
+export var attack_speed = 2
+export var knockback = 600
 
+var attack = preload("res://attacks/Slash.tscn")
+
+var angle = Vector2(0,0)
 var cooldown = 0.0
 
-var attack = preload("res://Bullet.tscn")
-
 func _init():
-	item_name = "Staff"
+	item_name = "Axe"
 	set_stat_base("damage", damage)
 	set_stat_base("attack_speed", attack_speed)
+	set_stat_base("knockback", knockback)
 
 func _ready():
 	pass
@@ -22,17 +25,16 @@ func _process(delta):
 
 func attack():
 	if cooldown <= 0:
+		var s = attack.instance()
+		add_child(s)
 		
-		#Instance projectile
-		var b = attack.instance()
-		Global.entities.add_child(b)
-		
-		# Point the projectile in the right direction
 		var mouse_pos = get_global_mouse_position()
 		var angle = global_position.angle_to_point(mouse_pos)
-		b.angle = angle
-		b.global_position = global_position
-		b.damage = stats.damage
+		s.set_angle(angle)
+		s.set_global_position(global_position)
+		s.damage = stats.damage
+		s.knockback = stats.knockback
+		print(s.knockback)
 		
 		# Reset cooldown timer
 		cooldown = 1.0 / stats.attack_speed

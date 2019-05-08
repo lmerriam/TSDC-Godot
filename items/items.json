@@ -1,4 +1,5 @@
 {
+  "axe": "res://items/weapon/Axe.tscn",
   "bow": "res://items/weapon/Bow.tscn",
   "gemfire": "res://items/component/GemFire.tscn",
   "staff": "res://items/weapon/Staff.tscn",

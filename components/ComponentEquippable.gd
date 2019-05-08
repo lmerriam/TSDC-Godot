@@ -1,4 +1,5 @@
 extends Node
+class_name ComponentEquippable
 
 var equipment = {}
 var parent = get_parent()
