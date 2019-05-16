@@ -11,11 +11,20 @@ var velocity = Vector2(0,0)
 
 var idle_timer
 var stun_timer
+var status_current = []
+var stats = {speed = 1}
+var stat_modifiers = {speed = {}}
 
 signal killed(id)
 
 func _ready():
-	pass
+#	var fire = Status.Fire.new()
+#	fire.init(5,5)
+#	fire.apply(self)
+	
+	var cold = Status.Cold.new()
+	cold.init(5,.1)
+	cold.apply(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,13 +37,13 @@ func _process(delta):
 	match state:
 		HOME:
 			if global_position.distance_to(origin) > 4:
-				velocity = (origin - global_position).normalized()
+				velocity = (origin - global_position).normalized() * get_stat("speed")
 #				move_and_slide(velocity * speed)
 			else:
 				state = IDLE
 		CHASE:
 			var player_pos = Global.player.global_position
-			velocity = (player_pos - global_position).normalized()
+			velocity = (player_pos - global_position).normalized() * get_stat("speed")
 #			move_and_slide(velocity * speed)
 		IDLE:
 			velocity = Vector2(0,0)
@@ -65,3 +74,28 @@ func knockback(vector):
 	apply_central_impulse(vector)
 	state = STUNNED
 	stun_timer = .5
+
+func apply_status(status):
+	status_current.append(status)
+	add_child(status)
+
+func remove_status(status):
+	status_current.erase(status)
+
+func get_stat(stat):
+	var value = stats[stat]
+	var mod = get_modifier_total(stat)
+	return value * mod
+
+func add_modifier(stat,id,value):
+	stat_modifiers[stat][id] = value
+
+func get_modifier_total(stat):
+	var value = 1
+	var mods = stat_modifiers[stat]
+	for mod in mods:
+		value *= mods[mod]
+	return value
+
+func remove_modifier(stat, id):
+	stat_modifiers[stat].erase(id)

@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Component",
 "language": "GDScript",
-"path": "res://Component.gd"
+"path": "res://component.gd"
 }, {
 "base": "Node",
 "class": "ComponentEquippable",
@@ -53,6 +53,7 @@ config/icon="res://sprites/icon.png"
 Global="*res://Global.gd"
 Generators="*res://Generators.gd"
 ItemLibrary="*res://ItemLibrary.gd"
+Status="*res://Status.gd"
 
 [display]
 
