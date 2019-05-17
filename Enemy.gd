@@ -13,15 +13,11 @@ var idle_timer
 var stun_timer
 var status_current = []
 var stats = {speed = 1}
-var stat_modifiers = {speed = {}}
+var stat_modifiers = {}
 
 signal killed(id)
 
 func _ready():
-#	var fire = Status.Fire.new()
-#	fire.init(5,5)
-#	fire.apply(self)
-	
 	var cold = Status.Cold.new()
 	cold.init(5,.1)
 	cold.apply(self)
@@ -88,6 +84,8 @@ func get_stat(stat):
 	return value * mod
 
 func add_modifier(stat,id,value):
+	if !stat_modifiers.has(stat):
+		stat_modifiers[stat] = {}
 	stat_modifiers[stat][id] = value
 
 func get_modifier_total(stat):
