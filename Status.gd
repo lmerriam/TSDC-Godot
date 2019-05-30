@@ -52,8 +52,10 @@ class Cold:
 	
 	func apply(inst):
 		.apply(inst)
-		inst.add_modifier("speed", self, amount)
+		if inst.has_method("get_stats_component"):
+			inst.stats.add_modifier("speed", self, amount)
 	
 	func expire():
 		.expire()
-		instance.remove_modifier("speed", self)
+		if instance.has_method("get_stats_component"):
+			instance.stats.remove_modifier("speed", self)

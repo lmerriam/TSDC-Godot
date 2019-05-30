@@ -32,6 +32,7 @@ func _on_AggroRadius_body_entered(body):
 func _spawn_enemy():
 	var spawn = enemy.instance()
 	enemies_spawned.append(spawn)
+	spawn.mob = enemies_spawned
 	var offset = Vector2(rand_range(-50,50),rand_range(-50,50))
 	spawn.global_position = global_position + offset
 	Global.entities.add_child(spawn)

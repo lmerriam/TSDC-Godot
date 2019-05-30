@@ -9,25 +9,40 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
-"class": "Component",
-"language": "GDScript",
-"path": "res://component.gd"
-}, {
 "base": "Node",
-"class": "ComponentEquippable",
+"class": "ComponentBase",
 "language": "GDScript",
-"path": "res://components/ComponentEquippable.gd"
+"path": "res://components/ComponentBase.gd"
 }, {
-"base": "Node",
+"base": "ComponentBase",
+"class": "ComponentEquipment",
+"language": "GDScript",
+"path": "res://components/ComponentEquipment.gd"
+}, {
+"base": "ComponentBase",
 "class": "ComponentInventory",
 "language": "GDScript",
 "path": "res://components/ComponentInventory.gd"
+}, {
+"base": "ComponentBase",
+"class": "ComponentStats",
+"language": "GDScript",
+"path": "res://components/ComponentStats.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Enemy.gd"
 }, {
 "base": "Node2D",
 "class": "Item",
 "language": "GDScript",
 "path": "res://Item.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player.gd"
 }, {
 "base": "Item",
 "class": "Weapon",
@@ -35,10 +50,13 @@ _global_script_classes=[ {
 "path": "res://Weapon.gd"
 } ]
 _global_script_class_icons={
-"Component": "",
-"ComponentEquippable": "",
+"ComponentBase": "",
+"ComponentEquipment": "",
 "ComponentInventory": "",
+"ComponentStats": "",
+"Enemy": "",
 "Item": "",
+"Player": "",
 "Weapon": ""
 }
 
@@ -53,6 +71,7 @@ config/icon="res://sprites/icon.png"
 Global="*res://Global.gd"
 Generators="*res://Generators.gd"
 ItemLibrary="*res://ItemLibrary.gd"
+ComponentLibrary="*res://components/ComponentLibrary.gd"
 Status="*res://Status.gd"
 
 [display]

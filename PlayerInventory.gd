@@ -1,10 +1,15 @@
 extends Control
 
-var inventory
-var selected_item
+var inventory: ComponentInventory
+var selected_item: Item
+var equipment: ComponentEquipment
+
+#func _init():
+#	inventory = Global.inventory
 
 func _ready():
 	inventory = Global.inventory
+	equipment = Global.player.get_equipment_component()
 	inventory.set_control(self)
 
 func add_item(item): 
@@ -15,7 +20,7 @@ func add_item(item):
 	$ItemList.set_item_metadata(item_idx, item)
 	return item
 
-func update_selected_item(item):
+func _set_selected_item(item):
 	selected_item = item
 	if item:
 		$ItemSelected.visible = true
@@ -41,10 +46,22 @@ func _on_inventory_updated(slots):
 
 func _on_ItemList_item_selected(index):
 	var item = $ItemList.get_item_metadata(index)
-	update_selected_item(item)
+	_set_selected_item(item)
 
 func _on_EquipButton_button_up():
 	if selected_item:
+		
+		# Get previous item
+		var item_type = selected_item.get_type()
+		var prev_item = equipment.get_equipped(item_type)
+		
+		# Remove previous item from equipment and send to inv
+		equipment.remove_equipped(item_type)
+		inventory.add_item(prev_item)
+		
+		# Remove selected item from inventory and equip
 		inventory.remove_item(selected_item)
-		Global.player.set_equipped(selected_item)
-		update_selected_item(null)
+		equipment.set_equipped(selected_item)
+		
+		# Reset the selected item
+		_set_selected_item(null)

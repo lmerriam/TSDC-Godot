@@ -1,12 +1,10 @@
-extends Node
+extends ComponentBase
 class_name ComponentInventory
 
 var slots = []
 var control
+var type = "ComponentInventory"
 signal inventory_updated
-
-func _ready():
-	control = Global.player.inventory
 
 func add_item(item):
 	slots.append(item)
@@ -22,7 +20,7 @@ func get_item(slot):
 	return slots[slot]
 
 func set_control(new_control):
-	if "inventory_updated" in control.get_signal_list():
+	if control and "inventory_updated" in control.get_signal_list():
 		disconnect("inventory_updated", control, "_on_inventory_updated")
 	connect("inventory_updated", new_control, "_on_inventory_updated")
 	control = new_control

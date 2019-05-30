@@ -1,33 +1,27 @@
 extends KinematicBody2D
+class_name Player
 
 export var speed = 100
 
-var stats_base = {}
-var stats = {}
-var equipment = {
-	weapon = null,
-	armor = null,
-	helmet = null,
-	boots = null,
-	scroll = null
-}
-
 # Components
-var inventory = preload("res://components/ComponentInventory.gd").new()
+onready var inventory = $ComponentInventory
+onready var equipment = $ComponentEquipment
+onready var stats = $ComponentStats
 
 func _init():
 	Global.player = self
-	Global.inventory = inventory
 
 func _ready():
-	add_child(inventory)
+#	for component in [inventory, equipment, stats]:
+#		add_child(component)
+	Global.inventory = inventory # Easier to send to inv from anywhere
 	$AnimatedSprite.play()
-	var staff = set_equipped(ItemLibrary.instance_item("axe"))
+	var staff = equipment.set_equipped(ItemLibrary.instance_item("axe"))
 #	staff.set_component(ItemLibrary.instance_item("gemfire"))
-
+	
 func _process(delta):
 	if Input.is_action_pressed("attack"):
-		get_equipped("weapon").attack()
+		equipment.get_equipped("weapon").attack()
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -52,30 +46,11 @@ func _physics_process(delta):
 	
 	move_and_slide(velocity)
 
-func set_equipped(new_equipment, send_prev_to_inv = true):
-	var type = new_equipment.get_type()
-	var prev_equipment = get_equipped(type)
-	if send_prev_to_inv and prev_equipment:
-		Global.inventory.add_item(prev_equipment)
-		$WeaponOrigin.remove_child(prev_equipment)
-	$WeaponOrigin.add_child(new_equipment)
-	equipment[type] = new_equipment
-	return new_equipment
+func get_inventory_component():
+	return inventory
 
-func get_equipped(item_type):
-	return equipment[item_type]
+func get_stats_component():
+	return stats
 
-func update_stats():
-	stats = stats_base.duplicate()
-	for type in equipment:
-		var item_stats = get_equipped(type).get_stats()
-		for s in item_stats:
-			stats[s] += item_stats[s]
-
-func get_stat_base(stat):
-	if stats_base.has(stat):
-		return stats_base[stat]
-
-func get_stat_final(stat):
-	if stats.has(stat):
-		return stats[stat]
+func get_equipment_component():
+	return equipment

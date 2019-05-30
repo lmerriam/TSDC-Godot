@@ -1,8 +1,8 @@
 extends Node
 
-export var player = false
-export var inventory = false
-export var entities = false
+var player: Player
+var inventory: ComponentInventory
+var entities
 
 func _ready():
 	pass
