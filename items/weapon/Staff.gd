@@ -5,7 +5,7 @@ export var attack_speed = 5
 
 var cooldown = 0.0
 
-var attack = preload("res://Bullet.tscn")
+var attack_obj = preload("res://Bullet.tscn")
 
 func _init():
 	item_name = "Staff"
@@ -24,7 +24,7 @@ func attack():
 	if cooldown <= 0:
 		
 		#Instance projectile
-		var b = attack.instance()
+		var b = attack_obj.instance()
 		Global.entities.add_child(b)
 		
 		# Point the projectile in the right direction

@@ -4,7 +4,7 @@ export var damage = 2
 export var attack_speed = 2
 export var knockback = 600
 
-var attack = preload("res://attacks/Slash.tscn")
+var attack_obj = preload("res://attacks/Slash.tscn")
 
 var angle = Vector2(0,0)
 var cooldown = 0.0
@@ -25,7 +25,7 @@ func _process(delta):
 
 func attack():
 	if cooldown <= 0:
-		var s = attack.instance()
+		var s = attack_obj.instance()
 		add_child(s)
 		
 		var mouse_pos = get_global_mouse_position()
@@ -34,7 +34,6 @@ func attack():
 		s.set_global_position(global_position)
 		s.damage = stats.damage
 		s.knockback = stats.knockback
-		print(s.knockback)
 		
 		# Reset cooldown timer
 		cooldown = 1.0 / stats.attack_speed

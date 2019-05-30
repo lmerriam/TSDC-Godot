@@ -3,7 +3,7 @@ extends Weapon
 export var damage = 10
 export var attack_speed = 2
 
-var attack = preload("res://attacks/Slash.tscn")
+var attack_obj = preload("res://attacks/Slash.tscn")
 
 var angle = Vector2(0,0)
 var cooldown = 0.0
@@ -24,7 +24,7 @@ func _process(delta):
 func attack():
 	if cooldown <= 0:
 		# Swing the sword
-		var s = attack.instance()
+		var s = attack_obj.instance()
 		add_child(s)
 		
 		# Point the projectile in the right direction

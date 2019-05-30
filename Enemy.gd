@@ -69,7 +69,8 @@ func take_damage(damage):
 	state = CHASE
 	if mob:
 		for enemy in mob:
-			enemy.state = CHASE
+			if enemy.state != STUNNED:
+				enemy.state = CHASE
 
 func _on_AggroRadius_body_entered(body):
 	if body == Global.player and state != STUNNED:
@@ -82,7 +83,7 @@ func _on_ChaseRadius_body_exited(body):
 func knockback(vector):
 	apply_central_impulse(vector)
 	state = STUNNED
-	stun_timer = .75
+	stun_timer = 1
 
 func apply_status(status):
 	status_current.append(status)

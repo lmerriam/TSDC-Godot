@@ -32,6 +32,6 @@ func set_equipped(item):
 	return false
 
 func remove_equipped(type):
-	var instance = get_equipped(type)
+	var instance: Item = get_equipped(type)
 	equipment.erase(type)
 	entity.remove_child(instance)
