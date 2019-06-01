@@ -11,9 +11,9 @@ var cooldown = 0.0
 
 func _init():
 	item_name = "Axe"
-	set_stat_base("damage", damage)
-	set_stat_base("attack_speed", attack_speed)
-	set_stat_base("knockback", knockback)
+	stats_component.set_stat_base("damage", damage)
+	stats_component.set_stat_base("attack_speed", attack_speed)
+	stats_component.set_stat_base("knockback", knockback)
 
 func _ready():
 	pass
@@ -32,8 +32,8 @@ func attack():
 		var angle = global_position.angle_to_point(mouse_pos)
 		s.set_angle(angle)
 		s.set_global_position(global_position)
-		s.damage = stats.damage
-		s.knockback = stats.knockback
+		s.damage = stats_component.get_stat("damage")
+		s.knockback = stats_component.get_stat("damage")
 		
 		# Reset cooldown timer
-		cooldown = 1.0 / stats.attack_speed
+		cooldown = 1.0 / stats_component.get_stat("attack_speed")

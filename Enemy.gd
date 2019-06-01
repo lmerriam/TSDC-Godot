@@ -15,7 +15,7 @@ var idle_timer
 var stun_timer
 var status_current = []
 
-onready var stats_component: ComponentStats = $ComponentStats
+onready var stats_component = $ComponentStats
 
 signal killed(id)
 

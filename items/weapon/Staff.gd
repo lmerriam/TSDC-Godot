@@ -9,11 +9,13 @@ var attack_obj = preload("res://Bullet.tscn")
 
 func _init():
 	item_name = "Staff"
-	set_stat_base("damage", damage)
-	set_stat_base("attack_speed", attack_speed)
+	stats_component.set_stat_base("damage", damage)
+	stats_component.set_stat_base("attack_speed", attack_speed)
 
 func _ready():
-	pass
+	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
+#	equipment_component.set_equipment_slots(["component"])
+#	pass
 #	set_component(ItemLibrary.instance_item("gemfire"))
 #	set_component(ItemLibrary.instance_item("triggerfast"))
 
@@ -22,6 +24,7 @@ func _process(delta):
 
 func attack():
 	if cooldown <= 0:
+		var stats = stats_component.get_stats()
 		
 		#Instance projectile
 		var b = attack_obj.instance()

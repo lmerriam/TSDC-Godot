@@ -4,17 +4,24 @@ class_name Item
 var type
 var item_name
 
-var stats_base = {}
-var stats = {}
-var buffs = {}
-var components = {
-	base = null,
-	gem = null,
-	inscription = null
-}
+var stats_component = ComponentStats.new()
+var equipment_component = ComponentEquipment.new()
+
+func _init():
+	add_child(stats_component,true)
+	add_child(equipment_component,true)
+
+func get_stats_component():
+	return stats_component
+
+func get_equipment_component():
+	return equipment_component
 
 func get_type():
 	return type
+
+func set_type(item_type):
+	type = item_type
 
 func get_sprite():
 	var sprite = get_node("Sprite")
@@ -23,67 +30,8 @@ func get_sprite():
 func get_name():
 	return item_name
 
-func can_equip_type(item_type):
-	return components.has(item_type)
-
-func set_type(item_type):
-	type = item_type
-
 func get_stats():
-	return stats
+	return stats_component.get_stats()
 
-func get_stat(stat):
-	if stats.has(stat):
-		return stats[stat]
-
-func get_stat_base(stat):
-	if stats.has(stat):
-		return stats_base[stat]
-
-func update_stats():
-	# @REFACTOR probably, too much nesting
-	stats = stats_base.duplicate()
-	for slot in components:
-		var comp = get_component(slot)
-		if comp:
-			var comp_stats = comp.get_stats()
-			for s in comp_stats:
-				if !stats.get(s): stats[s] = 0
-				stats[s] += comp_stats[s]
-
-func set_stat_base(stat, value):
-	stats_base[stat] = value
-	update_stats()
-
-func get_buffs():
-	return buffs
-
-func get_buff(buff):
-	return buffs[buff]
-
-func set_buff(buff, values):
-	buffs[buff] = values
-
-func get_components():
-	return components
-
-func get_component(slot):
-	return components[slot]
-
-func set_component(instance, send_prev_to_inv = true):
-	var type = instance.get_type()
-	if is_instance_valid(instance) and can_equip_type(type):
-		
-		# Remove previous
-		var prev_component = components[type]
-		if send_prev_to_inv:
-			remove_component(prev_component)
-		
-		# Attach new
-		components[type] = instance
-		update_stats()
-		
-		return instance
-
-func remove_component(inst):
-	components.erase(inst)
+func get_stats_base():
+	return stats_component.get_stats_base()

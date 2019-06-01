@@ -1,8 +1,8 @@
 extends Control
 
-var inventory: ComponentInventory
-var selected_item: Item
-var equipment: ComponentEquipment
+var inventory
+var selected_item
+var equipment
 
 #func _init():
 #	inventory = Global.inventory
@@ -56,7 +56,7 @@ func _on_EquipButton_button_up():
 		var prev_item = equipment.get_equipped(item_type)
 		
 		# Remove previous item from equipment and send to inv
-		equipment.remove_equipped(item_type)
+		equipment.remove_equipped(prev_item)
 		inventory.add_item(prev_item)
 		
 		# Remove selected item from inventory and equip

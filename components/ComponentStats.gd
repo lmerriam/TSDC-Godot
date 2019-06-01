@@ -6,10 +6,11 @@ var stats_base = {}
 var stats = {}
 var stat_modifiers = {}
 
-var equipment: ComponentEquipment
+var equipment
 
 func _ready():
-	equipment = get_sibling_component("ComponentEquipment")
+	if entity.has_method("get_equipment_component"):
+		equipment = entity.get_equipment_component()
 
 func get_stats():
 	return stats

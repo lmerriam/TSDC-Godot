@@ -12,12 +12,12 @@ func _init():
 	Global.player = self
 
 func _ready():
-#	for component in [inventory, equipment, stats]:
-#		add_child(component)
-	Global.inventory = inventory # Easier to send to inv from anywhere
+	# Start sprite
 	$AnimatedSprite.play()
+	
+	# Set up equipment and inventory
+	Global.inventory = inventory # Easier to send to inv from anywhere
 	var staff = equipment.set_equipped(ItemLibrary.instance_item("axe"))
-#	staff.set_component(ItemLibrary.instance_item("gemfire"))
 	
 func _process(delta):
 	if Input.is_action_pressed("attack"):
