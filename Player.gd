@@ -4,12 +4,16 @@ class_name Player
 export var speed = 100
 
 # Components
-onready var inventory = $ComponentInventory
-onready var equipment = $ComponentEquipment
-onready var stats = $ComponentStats
+var inventory = ComponentInventory.new()
+var equipment = ComponentEquipment.new()
+var stats = ComponentStats.new()
 
 func _init():
 	Global.player = self
+	
+	# Initialize all the components
+	for comp in [inventory, equipment, stats]:
+		comp.init(self)
 
 func _ready():
 	# Start sprite
@@ -17,7 +21,7 @@ func _ready():
 	
 	# Set up equipment and inventory
 	Global.inventory = inventory # Easier to send to inv from anywhere
-	var staff = equipment.set_equipped(ItemLibrary.instance_item("axe"))
+	equipment.set_equipped(ItemLibrary.instance_item("axe"))
 	
 func _process(delta):
 	if Input.is_action_pressed("attack"):

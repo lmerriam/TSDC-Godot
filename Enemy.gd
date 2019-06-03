@@ -15,9 +15,12 @@ var idle_timer
 var stun_timer
 var status_current = []
 
-onready var stats_component = $ComponentStats
+var stats_component = ComponentStats.new()
 
 signal killed(id)
+
+func _init():
+	stats_component.init(self)
 
 func _ready():
 	var cold = Status.Cold.new()
@@ -91,3 +94,6 @@ func apply_status(status):
 
 func remove_status(status):
 	status_current.erase(status)
+
+func get_component_stats():
+	return stats_component

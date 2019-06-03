@@ -23,7 +23,7 @@ func attack():
 	if cooldown <= 0:
 		# Swing the sword
 		var s = attack_obj.instance()
-		add_child(s)
+		Global.entites.add_child(s)
 		
 		# Point the projectile in the right direction
 		var mouse_pos = get_global_mouse_position()

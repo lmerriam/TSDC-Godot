@@ -8,8 +8,8 @@ var stats_component = ComponentStats.new()
 var equipment_component = ComponentEquipment.new()
 
 func _init():
-	add_child(stats_component,true)
-	add_child(equipment_component,true)
+	for comp in [stats_component, equipment_component]:
+		comp.init(self)
 
 func get_stats_component():
 	return stats_component

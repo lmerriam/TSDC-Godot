@@ -8,12 +8,16 @@ var stat_modifiers = {}
 
 var equipment
 
-func _ready():
+func init(entity):
+	.init(entity)
 	if entity.has_method("get_equipment_component"):
 		equipment = entity.get_equipment_component()
 
 func get_stats():
 	return stats
+
+func set_stats(_stats):
+	stats = stats
 
 func get_stats_base():
 	return stats_base
@@ -42,7 +46,7 @@ func add_to_stat_base(stat_name, value_to_add):
 func update_stats():
 	stats = stats_base.duplicate()
 	if equipment:
-		equipment.update_stats()
+		equipment.update_stats_with_equipment()
 
 func add_modifier(stat,id,value):
 	if !stat_modifiers.has(stat):

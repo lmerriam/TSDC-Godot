@@ -6,12 +6,15 @@ var equipment_slots := []
 var equipment_stats_cumulative := {}
 var type = "ComponentEquipment"
 
-onready var component_stats = entity.get_stats_component()
-#onready var stats = component_stats.get_stats()
-#onready var stats_base = component_stats.get_stats_base()
+var stats_component
+
+func init(entity):
+	.init(entity)
+	if entity.has_method("get_stats_component"):
+		stats_component = entity.get_stats_component()
 
 func update_stats_with_equipment():
-	var stats = entity.get_stats_component().get_stats_base().duplicate()
+	var stats = stats_component.get_stats_base().duplicate()
 	for item in equipment:
 		var item_stats = get_equipped(item).get_stats()
 		for s in item_stats:
@@ -19,6 +22,7 @@ func update_stats_with_equipment():
 				stats[s] += item_stats[s]
 			else:
 				stats[s] = item_stats[s]
+	stats_component.set_stats(stats)
 
 func get_equipped(type):
 	return equipment[type]
@@ -27,8 +31,14 @@ func set_equipped(item):
 	var type = item.get_type()
 	if is_instance_valid(item) and accepts_type(type):
 		equipment[type] = item
-		entity.add_child(item)
 		update_stats_with_equipment()
+		
+		# Reparent thi bih and make sure it shows up
+		if not item.get_parent():
+#			item.get_parent().remove_child(item)
+			entity.add_child(item)
+#		item.visible = true
+		
 		return true
 	return false
 
@@ -36,6 +46,7 @@ func remove_equipped(item):
 	var type = item.get_type()
 	equipment[type] = null
 	entity.remove_child(item)
+#	item.visible = false
 
 func remove_equipped_type(type):
 	var item = get_equipped(type)

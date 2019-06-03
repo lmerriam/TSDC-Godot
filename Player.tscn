@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -8,9 +8,6 @@
 [ext_resource path="res://sprites/player/75b554c1-6834-464b-adca-5f154479a644.png" type="Texture" id=6]
 [ext_resource path="res://sprites/player/768a1ab6-a4c4-40d8-b416-c0c7b8a9d06d.png" type="Texture" id=7]
 [ext_resource path="res://sprites/player/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
-[ext_resource path="res://components/ComponentInventory.gd" type="Script" id=9]
-[ext_resource path="res://components/ComponentEquipment.gd" type="Script" id=10]
-[ext_resource path="res://components/ComponentStats.gd" type="Script" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -44,13 +41,4 @@ shape = SubResource( 2 )
 
 [node name="WeaponOrigin" type="Position2D" parent="."]
 position = Vector2( 0, -4.80086 )
-
-[node name="ComponentInventory" type="Node" parent="."]
-script = ExtResource( 9 )
-
-[node name="ComponentEquipment" type="Node" parent="."]
-script = ExtResource( 10 )
-
-[node name="ComponentStats" type="Node" parent="."]
-script = ExtResource( 11 )
 
