@@ -1,16 +1,20 @@
 extends Node
 
-enum {EQUIPMENT, INVENTORY, STATS}
+static func init_components(entity: Node, components: Array):
+	var new_components = {}
+	
+	# Instantiate the components and save to list
+	for comp in components:
+		new_components[comp] = comp.new()
+	
+	# Call custom init function for each component (allows them to find each other and hook in, etc)
+	for comp in new_components:
+		var component: ComponentBase = new_components[comp]
+#		component.sibling_components = new_components
+		component.init(entity,new_components)
+	
+	return new_components
 
-#var components = {
-#	EQUIPMENT: 'res://components/ComponentEquipment.gd',
-#	INVENTORY: 'res://components/ComponentInventory.gd',
-#	STATS: 'res://components/ComponentStats.gd'
-#}
-
-#func init_component(component):
-#	if components.has(component):
-#		return load(components.component).new()
 
 func get_type(id):
 	return id.type

@@ -8,10 +8,9 @@ var type = "ComponentEquipment"
 
 var stats_component
 
-func init(entity):
-	.init(entity)
-	if entity.has_method("get_stats_component"):
-		stats_component = entity.get_stats_component()
+func init(_entity,_siblings):
+	.init(_entity,_siblings)
+	stats_component = get_sibling(ComponentStats)
 
 func update_stats_with_equipment():
 	var stats = stats_component.get_stats_base().duplicate()
@@ -33,11 +32,9 @@ func set_equipped(item):
 		equipment[type] = item
 		update_stats_with_equipment()
 		
-		# Reparent thi bih and make sure it shows up
+		# Reparent thi bih
 		if not item.get_parent():
-#			item.get_parent().remove_child(item)
 			entity.add_child(item)
-#		item.visible = true
 		
 		return true
 	return false

@@ -15,12 +15,10 @@ var idle_timer
 var stun_timer
 var status_current = []
 
-var stats_component = ComponentStats.new()
+var components = ComponentLibrary.init_components(self,[ComponentStats])
+var stats_component = components[ComponentStats]
 
 signal killed(id)
-
-func _init():
-	stats_component.init(self)
 
 func _ready():
 	var cold = Status.Cold.new()

@@ -8,8 +8,8 @@ var stat_modifiers = {}
 
 var equipment
 
-func init(entity):
-	.init(entity)
+func init(_entity,_siblings):
+	.init(_entity,_siblings)
 	if entity.has_method("get_equipment_component"):
 		equipment = entity.get_equipment_component()
 

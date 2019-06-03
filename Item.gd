@@ -4,12 +4,12 @@ class_name Item
 var type
 var item_name
 
-var stats_component = ComponentStats.new()
-var equipment_component = ComponentEquipment.new()
+var components = ComponentLibrary.init_components(self,[ComponentStats,ComponentEquipment])
+var stats_component = get_component(ComponentStats)
+var equipment_component = get_component(ComponentEquipment)
 
-func _init():
-	for comp in [stats_component, equipment_component]:
-		comp.init(self)
+func get_component(type):
+	return components[type]
 
 func get_stats_component():
 	return stats_component
@@ -31,7 +31,7 @@ func get_name():
 	return item_name
 
 func get_stats():
-	return stats_component.get_stats()
+	return get_stats_component().get_stats()
 
 func get_stats_base():
-	return stats_component.get_stats_base()
+	return get_stats_component().get_stats_base()

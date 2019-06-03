@@ -3,17 +3,13 @@ class_name Player
 
 export var speed = 100
 
-# Components
-var inventory = ComponentInventory.new()
-var equipment = ComponentEquipment.new()
-var stats = ComponentStats.new()
+var components = ComponentLibrary.init_components(self,[ComponentInventory,ComponentEquipment,ComponentStats])
+var inventory = components[ComponentInventory]
+var stats = components[ComponentStats]
+var equipment = components[ComponentEquipment]
 
 func _init():
 	Global.player = self
-	
-	# Initialize all the components
-	for comp in [inventory, equipment, stats]:
-		comp.init(self)
 
 func _ready():
 	# Start sprite
