@@ -21,7 +21,6 @@ func update_stats_with_equipment():
 				stats[s] += item_stats[s]
 			else:
 				stats[s] = item_stats[s]
-	stats_component.set_stats(stats)
 
 func get_equipped(type):
 	return equipment[type]
@@ -30,6 +29,7 @@ func set_equipped(item):
 	var type = item.get_type()
 	if is_instance_valid(item) and accepts_type(type):
 		equipment[type] = item
+#		item.get_equipment_component().update_stats_with_equipment()
 		update_stats_with_equipment()
 		
 		# Reparent thi bih

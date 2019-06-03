@@ -49,19 +49,18 @@ func _on_ItemList_item_selected(index):
 	_set_selected_item(item)
 
 func _on_EquipButton_button_up():
-	if selected_item:
-		
-		# Get previous item
-		var item_type = selected_item.get_type()
-		var prev_item = equipment.get_equipped(item_type)
-		
-		# Remove previous item from equipment and send to inv
-		equipment.remove_equipped(prev_item)
-		inventory.add_item(prev_item)
-		
-		# Remove selected item from inventory and equip
-		inventory.remove_item(selected_item)
-		equipment.set_equipped(selected_item)
-		
-		# Reset the selected item
-		_set_selected_item(null)
+	
+	# Get previous item
+	var item_type = selected_item.get_type()
+	var prev_item = equipment.get_equipped(item_type)
+	
+	# Remove previous item from equipment and send to inv
+	equipment.remove_equipped(prev_item)
+	inventory.add_item(prev_item)
+	
+	# Remove selected item from inventory and equip
+	inventory.remove_item(selected_item)
+	equipment.set_equipped(selected_item)
+	
+	# Reset the selected item
+	_set_selected_item(null)
