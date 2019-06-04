@@ -21,11 +21,12 @@ var stats_component = components[ComponentStats]
 signal killed(id)
 
 func _ready():
+	stats_component.set_stat_base("speed", 1)
+	stats_component.set_stat_base("max_health", health)
+	
 	var cold = Status.Cold.new()
 	cold.init(5,.1)
 	cold.apply(self)
-	stats_component.set_stat_base("speed", 1)
-	stats_component.set_stat_base("max_health", health)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -93,5 +94,5 @@ func apply_status(status):
 func remove_status(status):
 	status_current.erase(status)
 
-func get_component_stats():
+func get_stats_component():
 	return stats_component
