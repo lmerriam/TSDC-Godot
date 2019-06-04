@@ -10,6 +10,7 @@ class BaseStatus:
 	func _ready():
 		set_process(false)
 	
+	
 	func apply(inst):
 		instance = inst
 		instance.apply_status(self)
@@ -59,9 +60,9 @@ class Cold:
 	func apply(inst):
 		.apply(inst)
 		if inst.has_method("get_stats_component"):
-			inst.stats.add_modifier("speed", self, amount)
+			inst.get_stats_component().add_modifier("speed", self, amount)
 	
 	func expire():
 		.expire()
 		if instance.has_method("get_stats_component"):
-			instance.stats.remove_modifier("speed", self)
+			instance.get_stats_component().remove_modifier("speed", self)
