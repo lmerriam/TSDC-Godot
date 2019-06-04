@@ -30,7 +30,7 @@ class Fire:
 		damage = dmg
 		duration = dur
 		type = "Fire"
-		desc = "Deals " + String(dmg) + " over " + String(dur) + " seconds"
+		desc = "Deals " + String(dmg) + " damage over " + String(dur) + " sec"
 	
 	func _process(delta):
 		duration -= delta

@@ -19,16 +19,16 @@ margin_top = 74.0
 margin_right = 178.0
 mouse_filter = 1
 custom_constants/vseparation = 12
-items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false, "Item 6", null, false, "Item 7", null, false, "Item 8", null, false, "Item 9", null, false, "Item 10", null, false, "Item 11", null, false, "Item 12", null, false, "Item 13", null, false, "Item 14", null, false, "Item 15", null, false ]
 icon_scale = 2.0
 
 [node name="ItemSelected" type="Panel" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -178.0
 margin_top = 74.0
 margin_right = 2.0
-margin_bottom = 318.0
+margin_bottom = 451.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="ItemSelected"]
@@ -51,7 +51,7 @@ text = "ItemName"
 margin_left = 10.0
 margin_top = 74.0
 margin_right = 170.0
-margin_bottom = 144.0
+margin_bottom = 314.0
 mouse_filter = 2
 text = "Stats"
 
@@ -64,9 +64,9 @@ margin_bottom = 62.0
 
 [node name="EquipButton" type="Button" parent="ItemSelected"]
 margin_left = 10.0
-margin_top = 194.0
+margin_top = 324.0
 margin_right = 170.0
-margin_bottom = 234.0
+margin_bottom = 364.0
 text = "Equip"
 
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]

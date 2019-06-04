@@ -14,6 +14,12 @@ func _init():
 	stats_component.set_stat_base("damage", damage)
 	stats_component.set_stat_base("attack_speed", attack_speed)
 	stats_component.set_stat_base("knockback", knockback)
+	
+	var ice = Status.Cold.new()
+	ice.init(2,.2)
+	add_buff_base(ice)
+	
+	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
 
 func _ready():
 	pass

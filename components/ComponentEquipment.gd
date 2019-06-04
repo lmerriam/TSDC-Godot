@@ -12,6 +12,9 @@ func init(_entity,_siblings):
 	.init(_entity,_siblings)
 	stats_component = get_sibling(ComponentStats)
 
+func get_equipment():
+	return equipment
+
 func update_stats_with_equipment():
 	var stats = stats_component.get_stats_base().duplicate()
 	for item in equipment:

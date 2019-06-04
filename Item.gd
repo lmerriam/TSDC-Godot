@@ -8,6 +8,9 @@ var components = ComponentLibrary.init_components(self,[ComponentStats,Component
 var stats_component = get_component(ComponentStats)
 var equipment_component = get_component(ComponentEquipment)
 
+var buffs_base = []
+var buffs = []
+
 func get_component(type):
 	return components[type]
 
@@ -35,3 +38,24 @@ func get_stats():
 
 func get_stats_base():
 	return get_stats_component().get_stats_base()
+
+func get_buffs():
+	return buffs
+
+func get_buffs_base():
+	return buffs_base
+
+func add_buff(new_buff):
+	buffs.append(new_buff)
+
+func add_buff_base(new_buff):
+	buffs_base.append(new_buff)
+	update_buffs()
+
+func update_buffs():
+	var equipment = equipment_component.get_equipment()
+	buffs.clear()
+	for item in equipment:
+		item.update_buffs()
+		buffs += item.get_buffs()
+	buffs += buffs_base
