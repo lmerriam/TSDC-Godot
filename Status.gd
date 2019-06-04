@@ -4,6 +4,8 @@ class BaseStatus:
 	extends Node
 	var duration
 	var instance
+	var desc = ""
+	var type = "Status"
 	
 	func _ready():
 		set_process(false)
@@ -26,6 +28,8 @@ class Fire:
 	func init(dmg, dur):
 		damage = dmg
 		duration = dur
+		type = "Fire"
+		desc = "Deals " + String(dmg) + " over " + String(dur) + " seconds"
 	
 	func _process(delta):
 		duration -= delta
@@ -44,6 +48,8 @@ class Cold:
 	func init(dur, amt):
 		duration = dur
 		amount = amt
+		type = "Cold"
+		desc = "Slows enemy by " + String((1 - amt) * 100) + "% for " + String(dur) + " seconds"
 	
 	func _process(delta):
 		duration -= delta
