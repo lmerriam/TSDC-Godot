@@ -17,29 +17,22 @@ func _init():
 	
 	var buff = Buff.new(ColdStatus, {"duration": 4, "amount": .5})
 	add_buff_base(buff)
-	
-#	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
-
-func _ready():
-	pass
-#	set_component(ItemLibrary.instance_item("gemfire"))
-#	set_component(ItemLibrary.instance_item("triggerfast"))
 
 func _process(delta):
 	cooldown -= delta
 
 func attack():
 	if cooldown <= 0:
-		var s = attack_obj.instance()
-		Global.entities.add_child(s)
+		var resource = AttackResource.new("player", stats_component.get_stat("damage"), stats_component.get_stat("knockback"), buffs)
+		var slash = attack_obj.instance()
+		slash.set_attack_resource(resource)
 		
+		# Add slash to 
+		Global.entities.add_child(slash)
 		var mouse_pos = get_global_mouse_position()
 		var angle = global_position.angle_to_point(mouse_pos)
-		s.set_angle(angle)
-		s.set_global_position(global_position)
-		s.init(self, buffs)
-		s.damage = stats_component.get_stat("damage")
-		s.knockback = stats_component.get_stat("knockback")
+		slash.set_angle(angle)
+		slash.set_global_position(global_position)
 		
 		# Reset cooldown timer
 		cooldown = 1.0 / stats_component.get_stat("attack_speed")

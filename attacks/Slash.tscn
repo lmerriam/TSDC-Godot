@@ -3,7 +3,6 @@
 [ext_resource path="res://attacks/Slash.gd" type="Script" id=1]
 [ext_resource path="res://attacks/slash.png" type="Texture" id=2]
 
-
 [node name="Slash" type="Area2D"]
 script = ExtResource( 1 )
 
@@ -15,4 +14,4 @@ polygon = PoolVector2Array( 4.95013, -5.68682, 0.00892931, -8.09888, -5.03059, -
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[connection signal="body_entered" from="." to="." method="_on_Slash_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_area_entered"]

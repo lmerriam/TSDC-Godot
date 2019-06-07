@@ -10,9 +10,14 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
-"class": "Attack",
+"class": "AttackArea",
 "language": "GDScript",
-"path": "res://attacks/Attack.gd"
+"path": "res://attacks/AttackArea.gd"
+}, {
+"base": "Reference",
+"class": "AttackResource",
+"language": "GDScript",
+"path": "res://attacks/AttackResource.gd"
 }, {
 "base": "Reference",
 "class": "Buff",
@@ -75,7 +80,8 @@ _global_script_classes=[ {
 "path": "res://Weapon.gd"
 } ]
 _global_script_class_icons={
-"Attack": "",
+"AttackArea": "",
+"AttackResource": "",
 "Buff": "",
 "ColdStatus": "",
 "ComponentBase": "",

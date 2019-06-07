@@ -16,7 +16,7 @@ var stun_timer
 var status_current = []
 
 var components = ComponentLibrary.init_components(self,[ComponentStats])
-var stats_component = components[ComponentStats]
+var stats_component = components[ComponentStats] as ComponentStats
 
 signal killed(id)
 
@@ -65,14 +65,38 @@ func _integrate_forces(state):
 	t.origin.y += velocity.y
 	state.set_transform(t)
 
-func take_damage(damage):
-#	stats_component.add_to_stat_base("health",-damage)
-	health -= damage
-	state = CHASE
-	if mob:
-		for enemy in mob:
-			if enemy.state != STUNNED:
-				enemy.state = CHASE
+func receive_attack(atk_resource):
+	var damage = atk_resource.damage
+	var knockback = atk_resource.knockback
+	var creator = atk_resource.creator
+	var buffs = atk_resource.buffs
+	
+	if not is_in_group(creator):
+		
+		# Take damage
+		health -= damage
+		
+		# Take knockback
+		var angle = Global.player.global_position.angle_to_point(global_position)
+		var kb = -Vector2(cos(angle), sin(angle)) * knockback
+		knockback(kb)
+		
+		# Activate statuses from buffs
+		for buff in buffs:
+			pass
+		
+		# Set state to chase
+		state = CHASE
+		
+		# Alert others in mob
+		# TODO: signalize the following
+		if mob:
+			for enemy in mob:
+				if enemy.state != STUNNED:
+					enemy.state = CHASE
+		return true
+	else:
+		return false
 
 func _on_AggroRadius_body_entered(body):
 	if body == Global.player and state != STUNNED:
