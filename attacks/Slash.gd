@@ -1,4 +1,4 @@
-extends Area2D
+extends Attack
 
 var time_left = .1
 var damage
@@ -12,6 +12,8 @@ func _process(delta):
 func _on_Slash_body_entered(body):
 	if damage and body.has_method("take_damage"):
 		body.take_damage(damage)
+		for buff in buffs:
+			buff.apply_to(body)
 	if knockback and body.has_method("knockback"):
 		body.knockback(calc_knockback(body))
 

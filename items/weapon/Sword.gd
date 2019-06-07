@@ -30,6 +30,7 @@ func attack():
 		var angle = global_position.angle_to_point(mouse_pos)
 		s.set_angle(angle)
 		s.set_global_position(global_position)
+		s.init(self, buffs)
 		s.damage = stats_component.get_stat("damage")
 		
 		# Reset cooldown timer

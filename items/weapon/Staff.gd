@@ -5,7 +5,7 @@ export var attack_speed = 5
 
 var cooldown = 0.0
 
-var attack_obj = preload("res://Bullet.tscn")
+var attack_obj = preload("res://attacks/Bullet.tscn")
 
 func _init():
 	item_name = "Staff"
@@ -35,6 +35,7 @@ func attack():
 		var angle = global_position.angle_to_point(mouse_pos)
 		b.angle = angle
 		b.global_position = global_position
+		b.init("player", buffs)
 		b.damage = stats.damage
 		
 		# Reset cooldown timer

@@ -24,9 +24,9 @@ func _ready():
 	stats_component.set_stat_base("speed", 1)
 	stats_component.set_stat_base("max_health", health)
 	
-	var cold = Status.Cold.new()
-	cold.init(5,.1)
-	cold.apply(self)
+#	var cold = Status.Cold.new()
+#	cold.init(5,.1)
+#	cold.apply(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -87,12 +87,14 @@ func knockback(vector):
 	state = STUNNED
 	stun_timer = 1
 
-func apply_status(status):
+func add_status(status):
 	status_current.append(status)
-	add_child(status)
 
 func remove_status(status):
 	status_current.erase(status)
+
+func get_status_current():
+	return status_current
 
 func get_stats_component():
 	return stats_component

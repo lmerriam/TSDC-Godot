@@ -9,6 +9,21 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Attack",
+"language": "GDScript",
+"path": "res://attacks/Attack.gd"
+}, {
+"base": "Reference",
+"class": "Buff",
+"language": "GDScript",
+"path": "res://Buff.gd"
+}, {
+"base": "Status",
+"class": "ColdStatus",
+"language": "GDScript",
+"path": "res://status/ColdStatus.gd"
+}, {
 "base": "Reference",
 "class": "ComponentBase",
 "language": "GDScript",
@@ -34,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Enemy.gd"
 }, {
+"base": "Status",
+"class": "FireStatus",
+"language": "GDScript",
+"path": "res://status/FireStatus.gd"
+}, {
 "base": "Node2D",
 "class": "Item",
 "language": "GDScript",
@@ -44,19 +64,29 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player.gd"
 }, {
+"base": "Node",
+"class": "Status",
+"language": "GDScript",
+"path": "res://status/Status.gd"
+}, {
 "base": "Item",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://Weapon.gd"
 } ]
 _global_script_class_icons={
+"Attack": "",
+"Buff": "",
+"ColdStatus": "",
 "ComponentBase": "",
 "ComponentEquipment": "",
 "ComponentInventory": "",
 "ComponentStats": "",
 "Enemy": "",
+"FireStatus": "",
 "Item": "",
 "Player": "",
+"Status": "",
 "Weapon": ""
 }
 
@@ -72,7 +102,7 @@ Global="*res://Global.gd"
 Generators="*res://Generators.gd"
 ItemLibrary="*res://ItemLibrary.gd"
 ComponentLibrary="*res://components/ComponentLibrary.gd"
-Status="*res://Status.gd"
+Status="*res://status/Status.gd"
 
 [debug]
 

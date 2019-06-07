@@ -5,6 +5,5 @@ func _init():
 	item_name = "Fiery Gem"
 	stats_component.set_stat_base("damage", 10)
 	
-	var fire = Status.Fire.new()
-	fire.init(5,5)
-	add_buff_base(fire)
+	var buff = Buff.new(FireStatus, {"duration": 5, "damage": 5})
+	add_buff_base(buff)

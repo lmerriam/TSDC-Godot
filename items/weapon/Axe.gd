@@ -15,11 +15,10 @@ func _init():
 	stats_component.set_stat_base("attack_speed", attack_speed)
 	stats_component.set_stat_base("knockback", knockback)
 	
-	var ice = Status.Cold.new()
-	ice.init(2,.2)
-	add_buff_base(ice)
+	var buff = Buff.new(ColdStatus, {"duration": 4, "amount": .5})
+	add_buff_base(buff)
 	
-	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
+#	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
 
 func _ready():
 	pass
@@ -38,6 +37,7 @@ func attack():
 		var angle = global_position.angle_to_point(mouse_pos)
 		s.set_angle(angle)
 		s.set_global_position(global_position)
+		s.init(self, buffs)
 		s.damage = stats_component.get_stat("damage")
 		s.knockback = stats_component.get_stat("knockback")
 		

@@ -1,4 +1,4 @@
-class_name ComponentBase
+class_name ComponentBase extends Reference
 
 var entity: Node
 var sibling_components: Dictionary
