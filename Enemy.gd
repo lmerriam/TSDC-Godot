@@ -23,12 +23,7 @@ signal killed(id)
 func _ready():
 	stats_component.set_stat_base("speed", 1)
 	stats_component.set_stat_base("max_health", health)
-	
-#	var cold = Status.Cold.new()
-#	cold.init(5,.1)
-#	cold.apply(self)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	# Die if no health
@@ -68,22 +63,34 @@ func _integrate_forces(state):
 func receive_attack(atk_resource):
 	var damage = atk_resource.damage
 	var knockback = atk_resource.knockback
-	var creator = atk_resource.creator
+	var group = atk_resource.group
 	var buffs = atk_resource.buffs
 	
-	if not is_in_group(creator):
-		
+	if not is_in_group(group):
 		# Take damage
 		health -= damage
 		
 		# Take knockback
-		var angle = Global.player.global_position.angle_to_point(global_position)
-		var kb = -Vector2(cos(angle), sin(angle)) * knockback
-		knockback(kb)
+		if knockback:
+			var angle = Global.player.global_position.angle_to_point(global_position)
+			var kb = -Vector2(cos(angle), sin(angle)) * knockback
+			knockback(kb)
 		
 		# Activate statuses from buffs
-		for buff in buffs:
-			pass
+		if buffs:
+			for buff in buffs:
+				
+				# Check for existing status from this buff
+				var status_already_exists = false
+				for status in status_current:
+					if status.buff == buff:
+						status_already_exists = true
+						status.properties = buff.properties.duplicate()
+				
+				# Add new status
+				if not status_already_exists:
+					var status = buff.new_status(self, group)
+					add_status(status)
 		
 		# Set state to chase
 		state = CHASE
@@ -95,6 +102,7 @@ func receive_attack(atk_resource):
 				if enemy.state != STUNNED:
 					enemy.state = CHASE
 		return true
+		
 	else:
 		return false
 
@@ -113,9 +121,12 @@ func knockback(vector):
 
 func add_status(status):
 	status_current.append(status)
+	add_child(status)
 
 func remove_status(status):
 	status_current.erase(status)
+	if get_child(status):
+		remove_child(status)
 
 func get_status_current():
 	return status_current

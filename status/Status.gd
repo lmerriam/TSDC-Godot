@@ -1,18 +1,22 @@
 extends Node
 class_name Status
 
-var properties = {"duration": null}
-var instance
-var desc = ""
-var type = "Status"
-var creator
+var entity
+var buff
+var properties
+var group
+
+signal expired
 
 # TODO: we shouldn't have to instantiate an unused status just to get it's description for the buff
 # Consider passing shared buff/status properties around through a wrapper object that contains stats and description
-func init(_instance, _creator, _properties):
-	instance = _instance
-	creator = _creator
+func _init(_entity, _group, _buff, _properties):
+	buff = _buff
+	group = _group
 	properties = _properties
+	entity = _entity
+	if entity.has_method("status_expired"):
+		connect("expired", _entity, "status_expired")
 	start()
 
 func start():
@@ -20,7 +24,8 @@ func start():
 
 func remove():
 	queue_free()
-	instance.remove_status(self)
+	entity.remove_status(self)
 
 func expire():
+	emit_signal("expired", self)
 	remove()

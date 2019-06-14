@@ -68,7 +68,7 @@ func _append_item_info(label,item):
 		label.newline()
 	label.newline()
 	for b in buffs_base:
-		label.add_text(b.desc)
+		label.add_text(b.description)
 		label.newline()
 
 func _on_EquipButton_button_up():

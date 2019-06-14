@@ -15,8 +15,9 @@ func _init():
 	stats_component.set_stat_base("attack_speed", attack_speed)
 	stats_component.set_stat_base("knockback", knockback)
 	
-	var buff = Buff.new(ColdStatus, {"duration": 4, "amount": .5})
-	add_buff_base(buff)
+	add_buff_base(ColdBuff.new({"duration": 4, "amount": .5}))
+	
+	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
 
 func _process(delta):
 	cooldown -= delta

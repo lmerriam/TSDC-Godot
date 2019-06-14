@@ -7,8 +7,10 @@ var attack_resource
 #	attack_resource = resource
 
 func _on_area_entered(entity):
-	if attack_resource.transfer_attack(entity):
-		return true
+	if entity.has_method("receive_attack"):
+		entity.receive_attack(attack_resource)
+#	if attack_resource.transfer_attack(entity):
+#		return true
 
 func set_attack_resource(resource):
 	attack_resource = resource

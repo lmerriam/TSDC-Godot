@@ -1,12 +1,12 @@
 class_name AttackResource
 
-var creator
+var group
 var buffs
 var damage
 var knockback
 
-func _init(_creator, _damage, _knockback, _buffs=null):
-	creator = _creator
+func _init(_group, _damage=null, _knockback=null, _buffs=null):
+	group = _group
 	buffs = _buffs
 	damage = _damage
 	knockback = _knockback

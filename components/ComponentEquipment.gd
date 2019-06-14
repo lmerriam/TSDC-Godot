@@ -24,6 +24,15 @@ func update_stats_with_equipment():
 				stats[s] += item_stats[s]
 			else:
 				stats[s] = item_stats[s]
+		if entity.get("buffs"):
+			entity.buffs += get_equipped(item).buffs
+
+#func update_buffs_with_equipment():
+#	if entity.has_method(get_buffs)
+#	buffs = buffs_base.duplicate()
+#	for item in equipment:
+#		bu
+#	pass
 
 func get_equipped(type):
 	return equipment[type]
