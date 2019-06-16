@@ -17,7 +17,7 @@ func get_stats():
 	return stats
 
 func set_stats(_stats):
-	stats = stats
+	stats = _stats
 
 func get_stats_base():
 	return stats_base
@@ -36,6 +36,10 @@ func set_stat_base(stat_name, value):
 	stats_base[stat_name] = value
 	update_stats()
 
+func set_stats_base(_stats):
+	stats_base = _stats
+	update_stats()
+
 func add_to_stat_base(stat_name, value_to_add):
 	if stats_base.has(stat_name):
 		stats_base[stat_name] += value_to_add
@@ -45,8 +49,14 @@ func add_to_stat_base(stat_name, value_to_add):
 
 func update_stats():
 	stats = stats_base.duplicate()
-	if equipment:
-		equipment.update_stats_with_equipment()
+	if entity.has_method('get_equipment_component'):
+		var eqp_stats = entity.get_equipment_component().update_equipment_stats()
+		for s in eqp_stats:
+			if stats.has(s):
+				stats[s] += eqp_stats[s]
+			else:
+				stats[s] = eqp_stats[s]
+	return stats
 
 func add_modifier(stat,id,value):
 	if !stat_modifiers.has(stat):

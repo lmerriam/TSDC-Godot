@@ -3,7 +3,7 @@ class_name ComponentEquipment
 
 var equipment := {}
 var equipment_slots := []
-var equipment_stats_cumulative := {}
+var equipment_stats := {}
 var type = "ComponentEquipment"
 
 var stats_component
@@ -15,24 +15,22 @@ func init(_entity,_siblings):
 func get_equipment():
 	return equipment
 
-func update_stats_with_equipment():
-	var stats = stats_component.get_stats_base().duplicate()
-	for item in equipment:
-		var item_stats = get_equipped(item).get_stats()
+func update_equipment_stats():
+	equipment_stats.clear()
+	for item_type in equipment:
+		var item = get_equipped(item_type)
+		var item_stats = item.get_stats_component().update_stats()
 		for s in item_stats:
-			if stats.has(s):
-				stats[s] += item_stats[s]
+			if equipment_stats.has(s):
+				equipment_stats[s] += item_stats[s]
 			else:
-				stats[s] = item_stats[s]
+				equipment_stats[s] = item_stats[s]
 		if entity.get("buffs"):
-			entity.buffs += get_equipped(item).buffs
+			entity.buffs += item.buffs
+	return equipment_stats
 
-#func update_buffs_with_equipment():
-#	if entity.has_method(get_buffs)
-#	buffs = buffs_base.duplicate()
-#	for item in equipment:
-#		bu
-#	pass
+func get_equipment_stats():
+	return equipment_stats
 
 func get_equipped(type):
 	return equipment[type]
@@ -41,8 +39,7 @@ func set_equipped(item):
 	var type = item.get_type()
 	if is_instance_valid(item) and accepts_type(type):
 		equipment[type] = item
-#		item.get_equipment_component().update_stats_with_equipment()
-		update_stats_with_equipment()
+		entity.get_stats_component().update_stats()
 		
 		# Reparent thi bih
 		if not item.get_parent():

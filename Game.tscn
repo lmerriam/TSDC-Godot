@@ -65,10 +65,10 @@ drag_margin_bottom = 0.0
 script = ExtResource( 8 )
 
 [node name="Loot" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 230.819, 278.601 )
+position = Vector2( 167.421, 233.247 )
 
 [node name="Loot2" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 277.13, 305.064 )
+position = Vector2( 233.239, 242.641 )
 loot_id = "staff"
 
 [node name="GUI" type="CanvasLayer" parent="."]
