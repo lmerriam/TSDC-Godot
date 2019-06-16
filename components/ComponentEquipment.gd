@@ -60,8 +60,11 @@ func remove_equipped(item):
 	var type = item.get_type()
 	equipment[type] = null
 	entity.remove_child(item)
-	item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
+	
+	# Hook up signals
 	emit_signal("item_unequipped", item)
+	if "item_stats_updated" in item.get_signal_list():
+		item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
 
 func remove_equipped_type(type):
 	var item = get_equipped(type)
