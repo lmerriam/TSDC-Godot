@@ -6,6 +6,9 @@ var stats_base = {}
 var stats = {}
 var stat_modifiers = {}
 
+signal stats_updated
+signal modifiers_updated
+
 var equipment
 
 func init(_entity,_siblings):
@@ -56,12 +59,14 @@ func update_stats():
 				stats[s] += eqp_stats[s]
 			else:
 				stats[s] = eqp_stats[s]
+	emit_signal("stats_updated")
 	return stats
 
 func add_modifier(stat,id,value):
 	if !stat_modifiers.has(stat):
 		stat_modifiers[stat] = {}
 	stat_modifiers[stat][id] = value
+	emit_signal("modifiers_updated")
 
 func get_modifier_total(stat):
 	var value = 1
@@ -73,3 +78,4 @@ func get_modifier_total(stat):
 
 func remove_modifier(stat, id):
 	stat_modifiers[stat].erase(id)
+	emit_signal("modifiers_updated")

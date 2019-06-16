@@ -11,13 +11,11 @@ func _init():
 	item_name = "Staff"
 	stats_component.set_stat_base("damage", damage)
 	stats_component.set_stat_base("attack_speed", attack_speed)
+	add_buff_base(ColdBuff.new({"duration": 4, "amount": .5}))
 
-func _ready():
-	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
+#func _ready():
+#	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
 #	equipment_component.set_equipment_slots(["component"])
-#	pass
-#	set_component(ItemLibrary.instance_item("gemfire"))
-#	set_component(ItemLibrary.instance_item("triggerfast"))
 
 func _process(delta):
 	cooldown -= delta
@@ -25,9 +23,9 @@ func _process(delta):
 func attack():
 	if cooldown <= 0:
 		var stats = stats_component.get_stats()
-		
-		#Instance projectile
+		var resource = AttackResource.new("player", stats.damage, null, buffs)
 		var b = attack_obj.instance()
+		b.set_attack_resource(resource)
 		Global.entities.add_child(b)
 		
 		# Point the projectile in the right direction
@@ -35,8 +33,6 @@ func attack():
 		var angle = global_position.angle_to_point(mouse_pos)
 		b.angle = angle
 		b.global_position = global_position
-		b.init("player", buffs)
-		b.damage = stats.damage
 		
 		# Reset cooldown timer
 		cooldown = 1.0 / stats.attack_speed

@@ -29,7 +29,7 @@ func _process(delta):
 	# Die if no health
 	if health <= 0:
 		emit_signal("killed",self)
-		queue_free()
+		call_deferred("queue_free")
 	
 	match state:
 		HOME:
@@ -70,12 +70,6 @@ func receive_attack(atk_resource):
 		# Take damage
 		health -= damage
 		
-		# Take knockback
-		if knockback:
-			var angle = Global.player.global_position.angle_to_point(global_position)
-			var kb = -Vector2(cos(angle), sin(angle)) * knockback
-			knockback(kb)
-		
 		# Activate statuses from buffs
 		if buffs:
 			for buff in buffs:
@@ -94,6 +88,12 @@ func receive_attack(atk_resource):
 		
 		# Set state to chase
 		state = CHASE
+		
+		# Take knockback
+		if knockback:
+			var angle = Global.player.global_position.angle_to_point(global_position)
+			var kb = -Vector2(cos(angle), sin(angle)) * knockback
+			knockback(kb)
 		
 		# Alert others in mob
 		# TODO: signalize the following
@@ -125,8 +125,8 @@ func add_status(status):
 
 func remove_status(status):
 	status_current.erase(status)
-	if get_child(status):
-		remove_child(status)
+#	if get_child(status):
+#		remove_child(status)
 
 func get_status_current():
 	return status_current

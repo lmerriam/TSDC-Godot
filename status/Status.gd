@@ -23,8 +23,8 @@ func start():
 	set_process(true)
 
 func remove():
-	queue_free()
 	entity.remove_status(self)
+	queue_free()
 
 func expire():
 	emit_signal("expired", self)

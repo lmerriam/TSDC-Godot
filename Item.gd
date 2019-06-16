@@ -59,3 +59,6 @@ func update_buffs():
 		item.update_buffs()
 		buffs += item.get_buffs()
 	buffs += buffs_base
+
+#func _on_equipment_stats_updated(_equipment_stats):
+#	emit_signal("equipment_stats_updated", _equipment_stats)
