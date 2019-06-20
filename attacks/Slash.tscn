@@ -1,16 +1,18 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://attacks/Slash.gd" type="Script" id=1]
-[ext_resource path="res://attacks/slash.png" type="Texture" id=2]
+[ext_resource path="res://attacks/LargeSlash.png" type="Texture" id=2]
 
 [node name="Slash" type="Area2D"]
+position = Vector2( -0.307789, 0 )
 script = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 2.03737, 1.23571 )
+position = Vector2( 12.0374, 1.23571 )
 scale = Vector2( 3.12143, 3.12143 )
-polygon = PoolVector2Array( 4.95013, -5.68682, 0.00892931, -8.09888, -5.03059, -6.70648, -0.459431, -6.36595, -0.670192, 5.71774, -4.86202, 5.62407, -0.459431, 7.4741, 4.92671, 5.13229, 7.29193, -0.722206 )
+polygon = PoolVector2Array( 4.66425, -6.40182, -0.660315, -8.25062, -0.459431, 7.4741, 5.20656, 5.33194, 7.29193, -0.722206 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 22.6194, 0 )
 texture = ExtResource( 2 )
 

@@ -169,6 +169,8 @@ func remove_equipped(item):
 	emit_signal("item_unequipped", item)
 	if item.is_connected("item_stats_updated", self, "_on_item_stats_updated"):
 		item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
+	if item.is_connected("item_buffs_updated", self, "_on_item_buffs_updated"):
+		item.disconnect("item_buffs_updated", self, "_on_item_buffs_updated")
 
 func remove_equipped_type(type):
 	var item = get_equipped(type)
@@ -208,7 +210,6 @@ func set_control(new_control):
 		disconnect("inventory_updated", inventory_control, "_on_inventory_updated")
 	connect("inventory_updated", new_control, "_on_inventory_updated")
 	inventory_control = new_control
-
 
 ###################
 #  BUFFS & STATUS

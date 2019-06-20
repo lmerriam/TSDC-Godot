@@ -53,6 +53,7 @@ position = Vector2( 528.262, 248.913 )
 
 [node name="Player" parent="World/Entities" instance=ExtResource( 7 )]
 editor/display_folded = true
+position = Vector2( 210, 160 )
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player/Player" index="3"]
 current = true
@@ -65,7 +66,15 @@ drag_margin_bottom = 0.0
 script = ExtResource( 8 )
 
 [node name="Loot" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 167.421, 233.247 )
+position = Vector2( 125.534, 241.172 )
+
+[node name="Loot3" parent="World/Entities" instance=ExtResource( 9 )]
+position = Vector2( 158.892, 239.318 )
+loot_id = "axe"
+
+[node name="Loot4" parent="World/Entities" instance=ExtResource( 9 )]
+position = Vector2( 195.955, 242.098 )
+loot_id = "dagger"
 
 [node name="Loot2" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 233.239, 242.641 )

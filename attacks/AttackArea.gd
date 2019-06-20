@@ -2,14 +2,11 @@ extends Area2D
 class_name AttackArea
 
 var attack_resource
+var angle
 
-#func _init(resource):
-#	attack_resource = resource
-
-#func _on_area_entered(entity):
-#	if entity.has_method("receive_attack"):
-#		if entity.receive_attack(attack_resource):
-#			_attack_successful(entity)
+func set_angle(_angle):
+	rotation_degrees = rad2deg(_angle) - 180
+	angle = _angle
 
 func attack_successful(entity):
 	pass

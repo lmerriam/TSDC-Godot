@@ -2,7 +2,7 @@ extends Entity
 class_name Player
 
 export var speed = 100
-
+var attacking
 onready var sprite = $Player/AnimatedSprite
 
 func _init():
@@ -11,12 +11,14 @@ func _init():
 func _ready():
 	Global.player_character = $Player
 	sprite.play()
-	set_equipped(ItemLibrary.instance_item("axe"))
+	set_equipped(ItemLibrary.instance_item("sword"))
 	
 func _process(delta):
+	attacking = false
 	
 	if Input.is_action_pressed("attack"):
 		get_equipped("weapon").attack()
+		attacking = true
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -38,6 +40,9 @@ func _physics_process(delta):
 		
 	else:
 		sprite.animation = "idle"
+	
+	if attacking: # Slow the player when attacking
+		velocity *= .5
 	
 	$Player.move_and_slide(velocity)
 

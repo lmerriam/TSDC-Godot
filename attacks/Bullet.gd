@@ -2,7 +2,6 @@ extends AttackArea
 
 export var speed = 400
 export var damage = 6
-var angle = Vector2(0,0)
 var time_left = 1
 
 func _ready():

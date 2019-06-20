@@ -1,14 +1,15 @@
 extends Weapon
 
-export var damage = 4
-export var attack_speed = 2
+export var damage = 2
+export var attack_speed = 4
 
 func _init():
-	item_name = "Sword"
-	attack_area = preload("res://attacks/Slash.tscn")
+	item_name = "Dagger"
+	attack_area = preload("res://attacks/SmallStab.tscn")
+	player_speed_modifier = .85
 	set_stat_base("damage", damage)
 	set_stat_base("attack_speed", attack_speed)
-	set_stat_base("knockback", 0)
+	set_stat_base("knockback", 1)
 
 func attack():
 	if !on_cooldown():
