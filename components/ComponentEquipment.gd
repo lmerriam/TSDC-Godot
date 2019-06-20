@@ -6,6 +6,8 @@ var equipment_slots := []
 var equipment_stats := {}
 var type = "ComponentEquipment"
 
+var equipment_buffs := []
+
 signal item_equipped
 signal item_unequipped
 signal item_stats_updated
@@ -21,6 +23,7 @@ func get_equipment():
 
 func update_equipment_stats():
 	equipment_stats.clear()
+	equipment_buffs.clear()
 	for item_type in equipment:
 		var item = get_equipped(item_type)
 		var item_stats = item.get_stats_component().get_stats()
@@ -29,8 +32,7 @@ func update_equipment_stats():
 				equipment_stats[s] += item_stats[s]
 			else:
 				equipment_stats[s] = item_stats[s]
-		if entity.get("buffs"):
-			entity.buffs += item.buffs
+			equipment_buffs += item.buffs
 	emit_signal("item_stats_updated", equipment_stats)
 	return equipment_stats
 
@@ -77,4 +79,5 @@ func accepts_type(type):
 	return true if equipment_slots.has(type) or equipment_slots.empty() else false
 
 func _on_item_stats_updated():
-	update_equipment_stats()
+#	update_equipment_stats()
+	entity.get_stats_component().update_stats()

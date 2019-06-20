@@ -11,22 +11,19 @@ var cooldown = 0.0
 
 func _init():
 	item_name = "Axe"
-	stats_component.set_stats_base({"damage": damage, "attack_speed": attack_speed, "knockback": knockback})
-#	stats_component.set_stat_base("damage", damage)
-#	stats_component.set_stat_base("attack_speed", attack_speed)
-#	stats_component.set_stat_base("knockback", knockback)
+	set_stats_base({"damage": damage, "attack_speed": attack_speed, "knockback": knockback})
 	
 	add_buff_base(ColdBuff.new({"duration": 4, "amount": .5}))
 	
-	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
-	equipment_component.set_equipped(ItemLibrary.instance_item("triggerfast"))
+	set_equipped(ItemLibrary.instance_item("gemfire"))
+	set_equipped(ItemLibrary.instance_item("triggerfast"))
 
 func _process(delta):
 	cooldown -= delta
 
 func attack():
 	if cooldown <= 0:
-		var resource = AttackResource.new("player", stats_component.get_stat("damage"), stats_component.get_stat("knockback"), buffs)
+		var resource = AttackResource.new("player", stats.damage, stats.knockback, buffs)
 		var slash = attack_obj.instance()
 		slash.set_attack_resource(resource)
 		
@@ -38,4 +35,4 @@ func attack():
 		slash.set_global_position(global_position)
 		
 		# Reset cooldown timer
-		cooldown = 1.0 / stats_component.get_stat("attack_speed")
+		cooldown = 1.0 / stats.attack_speed

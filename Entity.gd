@@ -1,27 +1,50 @@
-extends Node
+extends Node2D
+class_name Entity
 
 # Stats
-var stats_base = {}
-var stats = {}
-var stat_modifiers = {}
+export var has_stats := true
+var stats_base := {}
+var stats := {}
+var stat_modifiers := {}
+signal stats_updated
+signal modifiers_updated
 
 # Equipment
+export var has_equipment := true
 var equipment := {}
 var equipment_slots := []
-var equipment_stats_cumulative := {}
+var equipment_stats := {}
+var equipment_buffs := []
+signal item_equipped
+signal item_unequipped
+signal item_stats_updated
+signal item_buffs_updated
 
 # Inventory
+export var has_inventory := true
+var inventory_slots := []
+var inventory_control: Control
+signal inventory_updated
 
-# Status/Buffs
+# Buffs
+export var has_buffs := true
+var buffs_base = []
+var buffs = []
+signal buffs_updated
+
+# Status
+export var has_status := true
+var status_current := []
 
 # Attacks
+export var can_attack := true
+
+# Receive attacks
+export var receives_attacks := true
 
 ###################
 #     STATS
 ###################
-
-func _ready():
-	pass
 
 func get_stats():
 	return stats
@@ -46,6 +69,10 @@ func set_stat_base(stat_name, value):
 	stats_base[stat_name] = value
 	update_stats()
 
+func set_stats_base(_stats):
+	stats_base = _stats
+	update_stats()
+
 func add_to_stat_base(stat_name, value_to_add):
 	if stats_base.has(stat_name):
 		stats_base[stat_name] += value_to_add
@@ -55,12 +82,24 @@ func add_to_stat_base(stat_name, value_to_add):
 
 func update_stats():
 	stats = stats_base.duplicate()
-	update_stats_with_equipment()
+	# Equipment
+	if has_equipment:
+		update_equipment_stats()
+		update_equipment_buffs()
+		for s in equipment_stats:
+			if stats.has(s):
+				stats[s] += equipment_stats[s]
+			else:
+				stats[s] = equipment_stats[s]
+	# Let parent know that you were updated son
+	emit_signal("stats_updated")
+	return stats
 
 func add_modifier(stat,id,value):
 	if !stat_modifiers.has(stat):
 		stat_modifiers[stat] = {}
 	stat_modifiers[stat][id] = value
+	emit_signal("modifiers_updated")
 
 func get_modifier_total(stat):
 	var value = 1
@@ -72,22 +111,36 @@ func get_modifier_total(stat):
 
 func remove_modifier(stat, id):
 	stat_modifiers[stat].erase(id)
+	emit_signal("modifiers_updated")
 
 ###################
 #    EQUIPMENT
 ###################
 
-func update_stats_with_equipment():
-	var stats = get_stats_base().duplicate()
-	for item in equipment:
-		var item_stats = get_equipped(item).get_stats()
+func get_equipment():
+	return equipment
+
+func update_equipment_stats():
+	equipment_stats.clear()
+	for item_type in equipment:
+		var item = get_equipped(item_type)
+		var item_stats = item.stats
 		for s in item_stats:
-			if stats.has(s):
-				stats[s] += item_stats[s]
+			if equipment_stats.has(s):
+				equipment_stats[s] += item_stats[s]
 			else:
-				stats[s] = item_stats[s]
-		if buffs:
-			entity.buffs += get_equipped(item).buffs
+				equipment_stats[s] = item_stats[s]
+	emit_signal("item_stats_updated", equipment_stats)
+
+func update_equipment_buffs():
+	equipment_buffs.clear()
+	for item_type in equipment:
+		var item = get_equipped(item_type)
+		equipment_buffs += item.buffs
+	emit_signal("item_buffs_updated", equipment_buffs)
+
+func get_equipment_stats():
+	return equipment_stats
 
 func get_equipped(type):
 	return equipment[type]
@@ -96,12 +149,12 @@ func set_equipped(item):
 	var type = item.get_type()
 	if is_instance_valid(item) and accepts_type(type):
 		equipment[type] = item
-#		item.get_equipment_component().update_stats_with_equipment()
-		update_stats_with_equipment()
+		update_stats()
+		update_buffs()
 		
-		# Reparent thi bih
-		if not item.get_parent():
-			entity.add_child(item)
+		item.connect("item_stats_updated", self, "_on_item_stats_updated")
+		item.connect("item_buffs_updated", self, "_on_item_buffs_updated")
+		emit_signal("item_equipped", item)
 		
 		return true
 	return false
@@ -109,8 +162,13 @@ func set_equipped(item):
 func remove_equipped(item):
 	var type = item.get_type()
 	equipment[type] = null
-	entity.remove_child(item)
-#	item.visible = false
+	update_stats()
+	update_buffs()
+	
+	# Hook up signals
+	emit_signal("item_unequipped", item)
+	if item.is_connected("item_stats_updated", self, "_on_item_stats_updated"):
+		item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
 
 func remove_equipped_type(type):
 	var item = get_equipped(type)
@@ -121,3 +179,66 @@ func set_equipment_slots(slots: Array):
 
 func accepts_type(type):
 	return true if equipment_slots.has(type) or equipment_slots.empty() else false
+
+func _on_item_stats_updated():
+	update_stats()
+
+func _on_item_buffs_updated():
+	update_buffs()
+
+###################
+#    INVENTORY
+###################
+
+func add_item(item):
+	inventory_slots.append(item)
+	emit_signal("inventory_updated", inventory_slots)
+	return item
+
+func remove_item(item):
+	inventory_slots.erase(item)
+	emit_signal("inventory_updated", inventory_slots)
+	return item
+
+func get_item(slot):
+	return inventory_slots[slot]
+
+func set_control(new_control):
+	if inventory_control and is_connected("inventory_updated", inventory_control, "_on_inventory_updated"):
+		disconnect("inventory_updated", inventory_control, "_on_inventory_updated")
+	connect("inventory_updated", new_control, "_on_inventory_updated")
+	inventory_control = new_control
+
+
+###################
+#  BUFFS & STATUS
+###################
+func add_status(status):
+	status_current.append(status)
+#	add_child(status)
+
+func remove_status(status):
+	status_current.erase(status)
+
+func get_buffs():
+	return buffs
+
+func get_buffs_base():
+	return buffs_base
+
+func add_buff(new_buff):
+	buffs.append(new_buff)
+
+func add_buff_base(new_buff):
+	buffs_base.append(new_buff)
+	update_buffs()
+
+func update_buffs():
+	buffs = buffs_base.duplicate()
+	update_equipment_buffs()
+	buffs += equipment_buffs
+	emit_signal("buffs_updated")
+
+###################
+#    ATTACKS
+###################

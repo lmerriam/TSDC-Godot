@@ -13,6 +13,6 @@ func set_angle(angle):
 	rotation_degrees = rad2deg(angle) - 180
 
 func calc_knockback(body):
-	var angle = Global.player.global_position.angle_to_point(body.global_position)
+	var angle = Global.player_character.global_position.angle_to_point(body.global_position)
 	var kb = -Vector2(cos(angle), sin(angle)) * knockback
 	return kb

@@ -6,4 +6,6 @@ var status
 var description
 
 func new_status(_entity, _group):
-	return status.new(_entity, _group, self, properties.duplicate())
+	var s = status.new()
+	s.init(_entity, _group, self, properties.duplicate())
+	return s

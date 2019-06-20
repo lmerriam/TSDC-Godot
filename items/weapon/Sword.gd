@@ -1,6 +1,6 @@
 extends Weapon
 
-export var damage = 10
+export var damage = 4
 export var attack_speed = 2
 
 var attack_obj = preload("res://attacks/Slash.tscn")
@@ -10,10 +10,11 @@ var cooldown = 0.0
 
 func _init():
 	item_name = "Sword"
-	stats_component.set_stat_base("damage", damage)
-	stats_component.set_stat_base("attack_speed", attack_speed)
+	set_stat_base("damage", damage)
+	set_stat_base("attack_speed", attack_speed)
+	set_stat_base("knockback", 0)
 	
-	equipment_component.set_equipped(ItemLibrary.instance_item("gemfire"))
+	set_equipped(ItemLibrary.instance_item("gemfire"))
 
 func _process(delta):
 	cooldown -= delta
@@ -21,7 +22,7 @@ func _process(delta):
 func attack():
 	if cooldown <= 0:
 		# Swing the sword
-		var resource = AttackResource.new("player", stats_component.get_stat("damage"), stats_component.get_stat("knockback"), buffs)
+		var resource = AttackResource.new("player", stats.damage, stats.knockback, buffs)
 		var slash = attack_obj.instance()
 		slash.set_attack_resource(resource)
 
@@ -34,4 +35,4 @@ func attack():
 		slash.set_global_position(global_position)
 		
 		# Reset cooldown timer
-		cooldown = 1.0 / stats_component.get_stat("attack_speed")
+		cooldown = 1.0 / stats.attack_speed

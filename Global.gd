@@ -1,7 +1,8 @@
 extends Node
 
-var player: Player
-var inventory: ComponentInventory
+var player
+var player_character
+var inventory
 var entities
 
 func _ready():

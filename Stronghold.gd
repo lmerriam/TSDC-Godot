@@ -24,7 +24,7 @@ func _on_SpawnKilled(id):
 func _on_AggroRadius_body_entered(body):
 	
 	# Spawn the 
-	if !spawned and body == Global.player:
+	if !spawned and body == Global.player_character:
 		for i in 8:
 			call_deferred("_spawn_enemy")
 		spawned = true

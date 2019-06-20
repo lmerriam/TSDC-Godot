@@ -20,7 +20,7 @@ func get_item(slot):
 	return slots[slot]
 
 func set_control(new_control):
-	if control and "inventory_updated" in control.get_signal_list():
+	if control and control.is_connected("inventory_updated", control, "_on_inventory_updated"):
 		disconnect("inventory_updated", control, "_on_inventory_updated")
 	connect("inventory_updated", new_control, "_on_inventory_updated")
 	control = new_control

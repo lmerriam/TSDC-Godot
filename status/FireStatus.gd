@@ -3,9 +3,6 @@ class_name FireStatus
 
 var current_tick = 1
 
-func _init(_entity, _group, _buff, _properties).(_entity, _group, _buff, _properties):
-	pass
-
 func _process(delta):
 	properties.duration -= delta
 	current_tick -= delta
@@ -14,3 +11,6 @@ func _process(delta):
 	elif current_tick <= 0:
 		entity.receive_attack(AttackResource.new(group, properties.damage, null, null))
 		current_tick = 1
+
+func start():
+	add_child(load("res://particles/FireParticles.tscn").instance())

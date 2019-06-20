@@ -14,5 +14,5 @@ func _process(delta):
 	if time_left <= 0:
 		queue_free()
 
-func _attack_successful(entity):
+func attack_successful(entity):
 	queue_free()

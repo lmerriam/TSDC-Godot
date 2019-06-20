@@ -8,9 +8,9 @@ var equipment
 #	inventory = Global.inventory
 
 func _ready():
-	inventory = Global.inventory
-	equipment = Global.player.get_equipment_component()
-	inventory.set_control(self)
+	inventory = Global.player
+	equipment = Global.player
+	Global.player.set_control(self)
 
 func add_item(item): 
 	var item_name = item.get_name()
@@ -27,10 +27,10 @@ func _set_selected_item(item):
 		var name_label = $ItemSelected/Name 
 		var stats_label = $ItemSelected/Stats
 		var sprite_rect = $ItemSelected/Sprite
-		var stats = item.get_stats()
-		var buffs_base = item.get_buffs_base()
+		var stats = item.stats
+		var buffs_base = item.buffs_base
 		var sprite = item.get_sprite()
-		var child_equipment = item.get_equipment_component().get_equipment()
+		var child_equipment = item.equipment
 		name_label.clear()
 		stats_label.clear()
 		sprite_rect.set_texture(sprite)
