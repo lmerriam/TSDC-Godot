@@ -161,7 +161,7 @@ func set_equipped(item):
 
 func remove_equipped(item):
 	var type = item.get_type()
-	equipment[type] = null
+	equipment.erase(type)
 	update_stats()
 	update_buffs()
 	

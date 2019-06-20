@@ -14,6 +14,7 @@ func _ready():
 	set_equipped(ItemLibrary.instance_item("axe"))
 	
 func _process(delta):
+	
 	if Input.is_action_pressed("attack"):
 		get_equipped("weapon").attack()
 
@@ -42,7 +43,6 @@ func _physics_process(delta):
 
 func set_equipped(item):
 	.set_equipped(item)
-#	if not item.get_parent():
 	$Player.add_child(item)
 
 func remove_equipped(item):
