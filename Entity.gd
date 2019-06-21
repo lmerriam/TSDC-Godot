@@ -143,7 +143,8 @@ func get_equipment_stats():
 	return equipment_stats
 
 func get_equipped(type):
-	return equipment[type]
+	if equipment.has(type):
+		return equipment[type]
 
 func set_equipped(item):
 	var type = item.get_type()

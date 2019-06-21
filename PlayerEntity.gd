@@ -7,11 +7,12 @@ onready var sprite = $Player/AnimatedSprite
 
 func _init():
 	Global.player = self
+	set_equipment_slots(["weapon", "armor"])
 
 func _ready():
 	Global.player_character = $Player
 	sprite.play()
-	set_equipped(ItemLibrary.instance_item("sword"))
+	set_equipped(ItemLibrary.instance_item("bow"))
 	
 func _process(delta):
 	attacking = false

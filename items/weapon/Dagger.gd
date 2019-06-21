@@ -15,8 +15,7 @@ func attack():
 	if !on_cooldown():
 		var resource = AttackResource.new("player", stats.damage, stats.knockback, buffs)
 		
-		var mouse_pos = get_global_mouse_position()
-		var angle = global_position.angle_to_point(mouse_pos)
+		var angle = _get_vector_to_mouse()
 		var atk = _create_attack_area(resource, Global.player_character, angle)
 		
 		set_cooldown(stats.attack_speed)

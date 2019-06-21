@@ -35,3 +35,8 @@ func set_cooldown(atk_speed):
 
 func on_cooldown():
 	return true if cooldown >= 0 else false
+
+func _get_vector_to_mouse():
+	var mouse_pos = get_global_mouse_position()
+	var vec = (mouse_pos - global_position).normalized()
+	return vec

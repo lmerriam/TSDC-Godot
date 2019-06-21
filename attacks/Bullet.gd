@@ -1,6 +1,6 @@
 extends AttackArea
 
-export var speed = 400
+export var speed = 8
 export var damage = 6
 var time_left = 1
 
@@ -8,7 +8,7 @@ func _ready():
 	set_as_toplevel(true)
 
 func _process(delta):
-	global_position += -Vector2((cos(angle) * speed * delta), (sin(angle) * speed * delta))
+	global_position += (angle * speed)
 	time_left -= delta
 	if time_left <= 0:
 		queue_free()

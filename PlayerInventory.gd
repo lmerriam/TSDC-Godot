@@ -4,9 +4,6 @@ var inventory
 var selected_item
 var equipment
 
-#func _init():
-#	inventory = Global.inventory
-
 func _ready():
 	inventory = Global.player
 	equipment = Global.player
@@ -59,6 +56,10 @@ func _on_inventory_updated(slots):
 func _on_ItemList_item_selected(index):
 	var item = $ItemList.get_item_metadata(index)
 	_set_selected_item(item)
+	if equipment.accepts_type(item.type):
+		$ItemSelected/EquipButton.visible = true
+	else:
+		$ItemSelected/EquipButton.visible = false
 
 func _append_item_info(label,item):
 	var stats = item.get_stats()
@@ -78,6 +79,7 @@ func _on_EquipButton_button_up():
 	var prev_item = equipment.get_equipped(item_type)
 	
 	# Remove previous item from equipment and send to inv
+
 	equipment.remove_equipped(prev_item)
 	inventory.add_item(prev_item)
 	

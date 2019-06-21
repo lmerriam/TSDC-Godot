@@ -4,9 +4,9 @@ class_name AttackArea
 var attack_resource
 var angle
 
-func set_angle(_angle):
-	rotation_degrees = rad2deg(_angle) - 180
-	angle = _angle
+func set_angle(vec):
+	rotation = vec.angle()
+	angle = vec
 
 func attack_successful(entity):
 	pass

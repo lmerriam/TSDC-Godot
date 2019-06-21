@@ -2,7 +2,8 @@
   "axe": "res://items/weapon/Axe.tscn",
   "bow": "res://items/weapon/Bow.tscn",
   "dagger": "res://items/weapon/Dagger.tscn",
-  "gemfire": "res://items/component/GemFire.tscn",
+  "firegem": "res://items/component/FireGem.tscn",
+  "icegem": "res://items/component/IceGem.tscn",
   "staff": "res://items/weapon/Staff.tscn",
   "sword": "res://items/weapon/Sword.tscn",
   "triggerfast": "res://items/component/TriggerFast.tscn"
