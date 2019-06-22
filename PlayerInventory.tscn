@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://PlayerInventory.gd" type="Script" id=1]
-[ext_resource path="res://sprites/pixeltier/misc/crystalball_1.png" type="Texture" id=2]
+[ext_resource path="res://InventoryList.gd" type="Script" id=2]
+[ext_resource path="res://sprites/pixeltier/misc/crystalball_1.png" type="Texture" id=3]
 
 [node name="PlayerInventory" type="Control"]
 anchor_right = 1.0
@@ -15,11 +16,12 @@ script = ExtResource( 1 )
 
 [node name="ItemList" type="ItemList" parent="."]
 anchor_bottom = 1.0
-margin_top = 74.0
+margin_top = 58.0
 margin_right = 178.0
 mouse_filter = 1
 custom_constants/vseparation = 12
 icon_scale = 2.0
+script = ExtResource( 2 )
 
 [node name="ItemSelected" type="Panel" parent="."]
 visible = false
@@ -36,7 +38,7 @@ margin_left = 10.0
 margin_top = 14.0
 margin_right = 42.0
 margin_bottom = 46.0
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 expand = true
 
 [node name="Name" type="RichTextLabel" parent="ItemSelected"]
@@ -69,5 +71,20 @@ margin_right = 170.0
 margin_bottom = 364.0
 text = "Equip"
 
+[node name="WeaponFilter" type="Button" parent="."]
+margin_top = 8.0
+margin_right = 108.0
+margin_bottom = 46.0
+text = "Weapons"
+
+[node name="GemFilter" type="Button" parent="."]
+margin_left = 118.0
+margin_top = 8.0
+margin_right = 228.0
+margin_bottom = 46.0
+text = "Gems"
+
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="button_up" from="ItemSelected/EquipButton" to="." method="_on_EquipButton_button_up"]
+[connection signal="button_up" from="WeaponFilter" to="." method="_on_filter_button_up" binds= [ "weapon" ]]
+[connection signal="button_up" from="GemFilter" to="." method="_on_filter_button_up" binds= [ "gem" ]]

@@ -195,22 +195,23 @@ func _on_item_buffs_updated():
 
 func add_item(item):
 	inventory_slots.append(item)
-	emit_signal("inventory_updated", inventory_slots)
+	emit_signal("inventory_updated")
 	return item
 
 func remove_item(item):
 	inventory_slots.erase(item)
-	emit_signal("inventory_updated", inventory_slots)
+	emit_signal("inventory_updated")
 	return item
 
 func get_item(slot):
 	return inventory_slots[slot]
 
-func set_control(new_control):
+func set_list_control(new_control):
 	if inventory_control and is_connected("inventory_updated", inventory_control, "_on_inventory_updated"):
 		disconnect("inventory_updated", inventory_control, "_on_inventory_updated")
 	connect("inventory_updated", new_control, "_on_inventory_updated")
 	inventory_control = new_control
+	new_control.slots = inventory_slots
 
 ###################
 #  BUFFS & STATUS

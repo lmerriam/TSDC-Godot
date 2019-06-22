@@ -7,15 +7,7 @@ var equipment
 func _ready():
 	inventory = Global.player
 	equipment = Global.player
-	Global.player.set_control(self)
-
-func add_item(item): 
-	var item_name = item.get_name()
-	var item_sprite = item.get_sprite()
-	var item_idx = $ItemList.get_item_count()
-	$ItemList.add_item(item_name, item_sprite)
-	$ItemList.set_item_metadata(item_idx, item)
-	return item
+	Global.player.set_list_control($ItemList)
 
 func _set_selected_item(item):
 	selected_item = item
@@ -47,11 +39,6 @@ func _set_selected_item(item):
 			_append_item_info(stats_label,child_equipment[i])
 	else:
 		$ItemSelected.visible = false
-
-func _on_inventory_updated(slots):
-	$ItemList.clear()
-	for item in slots:
-		add_item(item)
 
 func _on_ItemList_item_selected(index):
 	var item = $ItemList.get_item_metadata(index)
@@ -89,3 +76,7 @@ func _on_EquipButton_button_up():
 	
 	# Reset the selected item
 	_set_selected_item(null)
+
+func _on_filter_button_up(type):
+	$ItemList.filter = type
+	$ItemList.update_list()

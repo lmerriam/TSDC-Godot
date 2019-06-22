@@ -91,7 +91,7 @@ loot_id = "staff"
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
 
-[node name="Control" type="Control" parent="GUI"]
+[node name="HUD" type="Control" parent="GUI"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 710.0
@@ -101,13 +101,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BtnGenMap" type="Button" parent="GUI/Control"]
+[node name="BtnGenMap" type="Button" parent="GUI/HUD"]
 margin_right = 110.0
 margin_bottom = 40.0
 mouse_filter = 1
 text = "Generate"
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="GUI/Control"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="GUI/HUD"]
 visible = false
 position = Vector2( 604.71, 365.46 )
 scale = Vector2( 0.627024, 0.627024 )
@@ -118,6 +118,6 @@ action = "attack"
 visible = false
 mouse_filter = 2
 
-[connection signal="button_up" from="GUI/Control/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
+[connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
 
 [editable path="World/Entities/Player"]

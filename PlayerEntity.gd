@@ -15,11 +15,14 @@ func _ready():
 	set_equipped(ItemLibrary.instance_item("bow"))
 	
 func _process(delta):
-	attacking = false
-	
-	if Input.is_action_pressed("attack"):
+	if attacking:
 		get_equipped("weapon").attack()
+
+func _unhandled_input(event):
+	if event.is_action_pressed("attack"):
 		attacking = true
+	elif event.is_action_released("attack"):
+		attacking = false
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -42,7 +45,7 @@ func _physics_process(delta):
 	else:
 		sprite.animation = "idle"
 	
-	if attacking: # Slow the player when attacking
+	if attacking:
 		velocity *= .5
 	
 	$Player.move_and_slide(velocity)
