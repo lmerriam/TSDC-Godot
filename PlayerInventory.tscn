@@ -2,7 +2,7 @@
 
 [ext_resource path="res://PlayerInventory.gd" type="Script" id=1]
 [ext_resource path="res://InventoryList.gd" type="Script" id=2]
-[ext_resource path="res://sprites/pixeltier/misc/crystalball_1.png" type="Texture" id=3]
+[ext_resource path="res://ItemTooltip.tscn" type="PackedScene" id=3]
 
 [node name="PlayerInventory" type="Control"]
 anchor_right = 1.0
@@ -23,53 +23,15 @@ custom_constants/vseparation = 12
 icon_scale = 2.0
 script = ExtResource( 2 )
 
-[node name="ItemSelected" type="Panel" parent="."]
-visible = false
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -178.0
-margin_top = 74.0
-margin_right = 2.0
-margin_bottom = 451.0
-mouse_filter = 2
-
-[node name="Sprite" type="TextureRect" parent="ItemSelected"]
-margin_left = 10.0
-margin_top = 14.0
-margin_right = 42.0
-margin_bottom = 46.0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="Name" type="RichTextLabel" parent="ItemSelected"]
-margin_left = 50.0
-margin_top = 24.0
-margin_right = 170.0
-margin_bottom = 40.0
-mouse_filter = 2
-text = "ItemName"
-
-[node name="Stats" type="RichTextLabel" parent="ItemSelected"]
-margin_left = 10.0
-margin_top = 74.0
-margin_right = 170.0
-margin_bottom = 314.0
-mouse_filter = 2
-text = "Stats"
-
-[node name="HSeparator" type="HSeparator" parent="ItemSelected"]
-modulate = Color( 0.380392, 0.380392, 0.380392, 1 )
-margin_left = 10.0
-margin_top = 58.0
-margin_right = 170.0
-margin_bottom = 62.0
+[node name="ItemSelected" parent="." instance=ExtResource( 3 )]
+visible = true
 
 [node name="EquipButton" type="Button" parent="ItemSelected"]
 margin_left = 10.0
 margin_top = 324.0
 margin_right = 170.0
 margin_bottom = 364.0
-text = "Equip"
+text = "Equip Item"
 
 [node name="WeaponFilter" type="Button" parent="."]
 margin_top = 8.0
