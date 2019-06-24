@@ -7,6 +7,7 @@ var player_speed_modifier := .5
 
 func _init():
 	set_type("weapon")
+	set_equipment_slots(["gem", "base"])
 
 func _process(delta):
 	cooldown -= delta

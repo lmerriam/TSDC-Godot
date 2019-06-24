@@ -4,13 +4,11 @@
 [ext_resource path="res://sprites/pixeltier/misc/crystalball_1.png" type="Texture" id=2]
 
 [node name="ItemTooltip" type="Panel"]
-visible = false
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -178.0
-margin_top = 74.0
-margin_right = 2.0
-margin_bottom = 451.0
+margin_left = -720.0
+margin_right = -540.0
+margin_bottom = 377.0
 mouse_filter = 2
 script = ExtResource( 1 )
 

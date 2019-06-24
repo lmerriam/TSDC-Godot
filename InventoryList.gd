@@ -16,6 +16,7 @@ func update_list():
 	for item in slots:
 		if filter == null or item.type == filter:
 			add_to_list(item)
+	
 
 func _on_inventory_updated():
 	update_list()

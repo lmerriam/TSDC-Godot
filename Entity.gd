@@ -36,11 +36,17 @@ signal buffs_updated
 export var has_status := true
 var status_current := []
 
-# Attacks
-export var can_attack := true
+# Health
+export var has_health := true
+export var health := 10.0
 
-# Receive attacks
-export var receives_attacks := true
+# Attacks
+#export var has_attacks := true
+#export var has_attackable := true
+export var faction := "neutral"
+
+func _init():
+	connect("stats_updated", self, "_on_stats_updated")
 
 ###################
 #     STATS
@@ -112,6 +118,10 @@ func get_modifier_total(stat):
 func remove_modifier(stat, id):
 	stat_modifiers[stat].erase(id)
 	emit_signal("modifiers_updated")
+
+func _on_stats_updated():
+#	if has_health and stats.max_health
+	pass
 
 ###################
 #    EQUIPMENT

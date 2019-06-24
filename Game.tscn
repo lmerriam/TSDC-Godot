@@ -54,6 +54,8 @@ position = Vector2( 528.262, 248.913 )
 [node name="Player" parent="World/Entities" instance=ExtResource( 7 )]
 editor/display_folded = true
 position = Vector2( 210, 160 )
+health = 20.0
+faction = "player"
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player/Player" index="3"]
 current = true
@@ -92,6 +94,7 @@ loot_id = "staff"
 script = ExtResource( 10 )
 
 [node name="HUD" type="Control" parent="GUI"]
+visible = false
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 710.0
@@ -115,7 +118,6 @@ normal = ExtResource( 11 )
 action = "attack"
 
 [node name="Inventory" parent="GUI" instance=ExtResource( 12 )]
-visible = false
 mouse_filter = 2
 
 [connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]

@@ -9,7 +9,7 @@ var state = HOME
 var velocity = Vector2(0,0)
 var mob: Array
 
-var health = 10
+#var health = 10
 
 var idle_timer
 var stun_timer
