@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Item.gd"
 }, {
+"base": "Area2D",
+"class": "Loot",
+"language": "GDScript",
+"path": "res://Loot.gd"
+}, {
 "base": "Entity",
 "class": "Player",
 "language": "GDScript",
@@ -115,6 +120,7 @@ _global_script_class_icons={
 "FireStatus": "",
 "InventoryList": "",
 "Item": "",
+"Loot": "",
 "Player": "",
 "Status": "",
 "Weapon": ""

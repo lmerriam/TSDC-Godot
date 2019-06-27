@@ -1,7 +1,7 @@
 extends TileMap
 
 
-func _ready():
+func _init():
 	Global.entities = self
 #	generate_props()
 

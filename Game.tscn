@@ -69,6 +69,7 @@ script = ExtResource( 8 )
 
 [node name="Loot" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 125.534, 241.172 )
+loot_id = "sword"
 
 [node name="Loot3" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 158.892, 239.318 )
@@ -77,6 +78,10 @@ loot_id = "axe"
 [node name="Loot5" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 187.616, 291.671 )
 loot_id = "firegem"
+
+[node name="Loot7" parent="World/Entities" instance=ExtResource( 9 )]
+position = Vector2( 218.029, 291.671 )
+loot_id = "triggerfast"
 
 [node name="Loot6" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 158.892, 292.134 )
@@ -94,7 +99,6 @@ loot_id = "staff"
 script = ExtResource( 10 )
 
 [node name="HUD" type="Control" parent="GUI"]
-visible = false
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 710.0
@@ -118,6 +122,7 @@ normal = ExtResource( 11 )
 action = "attack"
 
 [node name="Inventory" parent="GUI" instance=ExtResource( 12 )]
+visible = false
 mouse_filter = 2
 
 [connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]

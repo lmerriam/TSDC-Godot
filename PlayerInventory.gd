@@ -9,7 +9,6 @@ func _ready():
 
 func _set_selected_item(item):
 	selected_item = item
-	print(selected_item)
 	if selected_item:
 		$ItemSelected.set_item(item)
 		$ItemSelected.visible = true
@@ -50,7 +49,7 @@ func _on_modify_button_up():
 
 func _on_CloseModify_button_up():
 	$ModifyPopup.hide()
-
+	$ItemSelected.set_item(selected_item)
 
 func _on_ModifyPopup_about_to_show():
 	pass # Replace with function body.

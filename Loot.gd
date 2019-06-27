@@ -1,14 +1,16 @@
 extends Area2D
+class_name Loot
 
-export var loot_id = "sword"
+export var loot_id: String
 var loot
 
 func _ready():
-	set_loot(ItemLibrary.instance_item(loot_id))
-	$Sprite.set_texture(loot.get_sprite())
+	if loot_id:
+		set_loot(ItemLibrary.instance_item(loot_id))
 
 func set_loot(instance):
 	loot = instance
+	$Sprite.set_texture(loot.get_sprite())
 	return loot
 
 func get_loot():

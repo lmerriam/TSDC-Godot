@@ -10,6 +10,10 @@ func _ready():
 	var tilemap = get_parent()
 	var tile = tilemap.tile_set.find_tile_by_name("rock")
 	Generators.gen_building(global_position / 16, 13, 13, tilemap, tile)
+	for item in range(0,3):
+		var i = ItemLibrary.instance_random_loot()
+		Global.entities.call_deferred("add_child", i)
+		i.global_position = global_position + Vector2(rand_range(-64,64), rand_range(-64,64))
 
 func _on_SpawnKilled(id):
 	
