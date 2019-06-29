@@ -140,14 +140,14 @@ func update_equipment_stats():
 				equipment_stats[s] += item_stats[s]
 			else:
 				equipment_stats[s] = item_stats[s]
-	emit_signal("item_stats_updated", equipment_stats)
+	emit_signal("item_stats_updated")
 
 func update_equipment_buffs():
 	equipment_buffs.clear()
 	for item_type in equipment:
 		var item = get_equipped(item_type)
 		equipment_buffs += item.buffs
-	emit_signal("item_buffs_updated", equipment_buffs)
+	emit_signal("item_buffs_updated")
 
 func get_equipment_stats():
 	return equipment_stats

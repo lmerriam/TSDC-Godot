@@ -15,7 +15,7 @@ func _ready():
 	set_equipped(ItemLibrary.instance_item("bow"))
 	
 func _process(delta):
-	if attacking:
+	if attacking and get_equipped("weapon"):
 		get_equipped("weapon").attack()
 
 func _unhandled_input(event):

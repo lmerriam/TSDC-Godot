@@ -31,44 +31,44 @@ func update_slots():
 		$ItemSlots.select(selected_slot_idx)
 
 func _on_equip_button_up():
-	$ModTooltip.visible = false
+	$ModTooltip.hide()
 	item.set_equipped(selected_mod)
 	Global.player.remove_item(selected_mod)
 	$ItemTooltip.set_item(item)
-	$ModList.visible = false
+	$ModList.hide()
 	update_slots()
 
 func _on_remove_button_up():
-	$ModTooltip.visible = false
+	$ModTooltip.hide()
 	item.remove_equipped(selected_slot)
 	Global.player.add_item(selected_slot)
 	$ItemTooltip.set_item(item)
-	$ModList.visible = true
+	$ModList.show()
 	$ModList.update_list()
 	update_slots()
 
 func _on_mod_selected(index):
-	$ModTooltip.visible = true
+	$ModTooltip.show()
 	selected_mod = $ModList.get_item_metadata(index)
 	$ModTooltip.set_item(selected_mod)
-	$ModTooltip/RemoveButton.visible = false
-	$ModTooltip/EquipButton.visible = true
+	$ModTooltip/RemoveButton.hide()
+	$ModTooltip/EquipButton.show()
 
 func _on_slot_selected(index):
-	$ModList.visible = true
+	$ModList.show()
 	selected_slot = $ItemSlots.get_item_metadata(index)
 	selected_slot_idx = index
 	if selected_slot:
-		$ModList.visible = false
+		$ModList.hide()
 		$ModList.filter = selected_slot.type
-		$ModTooltip.visible = true
+		$ModTooltip.show()
 		$ModTooltip.set_item(selected_slot)
-		$ModTooltip/RemoveButton.visible = true
-		$ModTooltip/EquipButton.visible = false
+		$ModTooltip/RemoveButton.show()
+		$ModTooltip/EquipButton.hide()
 	else:
-		$ModList.visible = true
+		$ModList.show()
 		$ModList.filter = item.equipment_slots[selected_slot_idx]
 		$ModList.update_list()
-		$ModTooltip.visible = false
-#		$ModTooltip/RemoveButton.visible = false
-#		$ModTooltip/EquipButton.visible = true
+		$ModTooltip.hide()
+#		$ModTooltip/RemoveButton.hide()
+#		$ModTooltip/EquipButton.show()

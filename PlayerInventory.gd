@@ -11,17 +11,25 @@ func _set_selected_item(item):
 	selected_item = item
 	if selected_item:
 		$ItemSelected.set_item(item)
-		$ItemSelected.visible = true
+		$ItemSelected.show()
+		
+		if selected_item in player.equipment.values():
+			$ItemSelected/EquipButton.hide()
+			$ItemSelected/UnequipButton.show()
+		else:
+			$ItemSelected/EquipButton.show()
+			$ItemSelected/UnequipButton.hide()
 	else:
-		$ItemSelected.visible = false
+		$ItemSelected.hide()
 
 func _on_ItemList_item_selected(index):
 	var item = $ItemList.get_item_metadata(index)
 	_set_selected_item(item)
+	$ItemSelected/UnequipButton.hide()
 	if player.accepts_type(item.type):
-		$ItemSelected/EquipButton.visible = true
+		$ItemSelected/EquipButton.show()
 	else:
-		$ItemSelected/EquipButton.visible = false
+		$ItemSelected/EquipButton.hide()
 
 func _on_EquipButton_button_up():
 	# Get previous item
@@ -29,8 +37,9 @@ func _on_EquipButton_button_up():
 	var prev_item = player.get_equipped(item_type)
 	
 	# Remove previous item from equipment and send to inv
-	player.remove_equipped(prev_item)
-	player.add_item(prev_item)
+	if prev_item:
+		player.remove_equipped(prev_item)
+		player.add_item(prev_item)
 	
 	# Remove selected item from inventory and equip
 	player.remove_item(selected_item)
@@ -51,5 +60,10 @@ func _on_CloseModify_button_up():
 	$ModifyPopup.hide()
 	$ItemSelected.set_item(selected_item)
 
-func _on_ModifyPopup_about_to_show():
-	pass # Replace with function body.
+func _on_equipment_slot_selected(type):
+	var item = player.equipment[type]
+	_set_selected_item(item)
+
+func _on_unequip_button_up():
+	player.remove_equipped(selected_item)
+	player.add_item(selected_item)
