@@ -40,10 +40,11 @@ func _on_equip_button_up():
 
 func _on_remove_button_up():
 	$ModTooltip.visible = false
-	item.remove_equipped(selected_mod)
-	Global.player.add_item(selected_mod)
+	item.remove_equipped(selected_slot)
+	Global.player.add_item(selected_slot)
 	$ItemTooltip.set_item(item)
-	$ModList.visible = false
+	$ModList.visible = true
+	$ModList.update_list()
 	update_slots()
 
 func _on_mod_selected(index):
@@ -61,11 +62,13 @@ func _on_slot_selected(index):
 		$ModList.visible = false
 		$ModList.filter = selected_slot.type
 		$ModTooltip.visible = true
+		$ModTooltip.set_item(selected_slot)
 		$ModTooltip/RemoveButton.visible = true
 		$ModTooltip/EquipButton.visible = false
 	else:
 		$ModList.visible = true
 		$ModList.filter = item.equipment_slots[selected_slot_idx]
 		$ModList.update_list()
-		$ModTooltip/RemoveButton.visible = false
-		$ModTooltip/EquipButton.visible = true
+		$ModTooltip.visible = false
+#		$ModTooltip/RemoveButton.visible = false
+#		$ModTooltip/EquipButton.visible = true

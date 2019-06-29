@@ -72,19 +72,19 @@ position = Vector2( 125.534, 241.172 )
 loot_id = "sword"
 
 [node name="Loot3" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 158.892, 239.318 )
+position = Vector2( 160.442, 241.255 )
 loot_id = "axe"
 
 [node name="Loot5" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 187.616, 291.671 )
+position = Vector2( 179.674, 291.865 )
 loot_id = "firegem"
 
 [node name="Loot7" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 218.029, 291.671 )
+position = Vector2( 213.38, 291.477 )
 loot_id = "triggerfast"
 
 [node name="Loot6" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 158.892, 292.134 )
+position = Vector2( 145.526, 294.071 )
 loot_id = "icegem"
 
 [node name="Loot4" parent="World/Entities" instance=ExtResource( 9 )]
@@ -92,7 +92,7 @@ position = Vector2( 195.955, 242.098 )
 loot_id = "dagger"
 
 [node name="Loot2" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 233.239, 242.641 )
+position = Vector2( 229.558, 242.641 )
 loot_id = "staff"
 
 [node name="GUI" type="CanvasLayer" parent="."]
