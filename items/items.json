@@ -3,6 +3,7 @@
   "bow": "res://items/weapon/Bow.tscn",
   "dagger": "res://items/weapon/Dagger.tscn",
   "firegem": "res://items/component/FireGem.tscn",
+  "heavyarmor": "res://items/armor/HeavyArmor.tscn",
   "icegem": "res://items/component/IceGem.tscn",
   "staff": "res://items/weapon/Staff.tscn",
   "sword": "res://items/weapon/Sword.tscn",

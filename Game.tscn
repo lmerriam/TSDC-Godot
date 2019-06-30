@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://tiles/outdoors_tileset.tres" type="TileSet" id=2]
@@ -10,8 +10,35 @@
 [ext_resource path="res://Camera2D.gd" type="Script" id=8]
 [ext_resource path="res://Loot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://GUI.gd" type="Script" id=10]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=11]
-[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=12]
+[ext_resource path="res://HUD.gd" type="Script" id=11]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=12]
+[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=13]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0941176, 0.643137, 0, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.670588, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.12549, 0.12549, 0.12549, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -52,9 +79,7 @@ script = ExtResource( 5 )
 position = Vector2( 528.262, 248.913 )
 
 [node name="Player" parent="World/Entities" instance=ExtResource( 7 )]
-editor/display_folded = true
 position = Vector2( 210, 160 )
-health = 20.0
 faction = "player"
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player/Player" index="3"]
@@ -70,6 +95,10 @@ script = ExtResource( 8 )
 [node name="Loot" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 125.534, 241.172 )
 loot_id = "sword"
+
+[node name="Loot8" parent="World/Entities" instance=ExtResource( 9 )]
+position = Vector2( 259.454, 242.041 )
+loot_id = "heavyarmor"
 
 [node name="Loot3" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 160.442, 241.255 )
@@ -104,12 +133,14 @@ margin_top = 10.0
 margin_right = 710.0
 margin_bottom = 470.0
 mouse_filter = 2
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="BtnGenMap" type="Button" parent="GUI/HUD"]
-margin_right = 110.0
+margin_left = 587.054
+margin_right = 697.054
 margin_bottom = 40.0
 mouse_filter = 1
 text = "Generate"
@@ -118,10 +149,21 @@ text = "Generate"
 visible = false
 position = Vector2( 604.71, 365.46 )
 scale = Vector2( 0.627024, 0.627024 )
-normal = ExtResource( 11 )
+normal = ExtResource( 12 )
 action = "attack"
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 12 )]
+[node name="HealthBar" type="ProgressBar" parent="GUI/HUD"]
+margin_left = 6.0
+margin_top = 5.84857
+margin_right = 172.0
+margin_bottom = 26.8486
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+step = 1.0
+value = 75.0
+rounded = true
+
+[node name="Inventory" parent="GUI" instance=ExtResource( 13 )]
 visible = false
 mouse_filter = 2
 

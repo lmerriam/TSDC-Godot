@@ -70,5 +70,3 @@ func _on_slot_selected(index):
 		$ModList.filter = item.equipment_slots[selected_slot_idx]
 		$ModList.update_list()
 		$ModTooltip.hide()
-#		$ModTooltip/RemoveButton.hide()
-#		$ModTooltip/EquipButton.show()

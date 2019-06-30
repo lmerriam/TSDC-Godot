@@ -1,4 +1,5 @@
 extends AttackArea
+class_name Slash
 
 var time_left = .1
 var damage

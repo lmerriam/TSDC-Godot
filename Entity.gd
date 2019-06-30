@@ -39,6 +39,8 @@ var status_current := []
 # Health
 export var has_health := true
 export var health := 10.0
+var max_health = health
+signal health_changed
 
 # Attacks
 #export var has_attacks := true
@@ -122,6 +124,11 @@ func remove_modifier(stat, id):
 func _on_stats_updated():
 #	if has_health and stats.max_health
 	pass
+
+func set_health(_health):
+	var _old_health = health
+	health = _health
+	emit_signal("health_changed", _health, _old_health)
 
 ###################
 #    EQUIPMENT

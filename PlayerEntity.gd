@@ -7,7 +7,7 @@ onready var sprite = $Player/AnimatedSprite
 
 func _init():
 	Global.player = self
-	set_equipment_slots(["weapon", "armor"])
+	set_equipment_slots(["weapon", "armor", "footwear", "amulet"])
 
 func _ready():
 	Global.player_character = $Player
@@ -49,6 +49,10 @@ func _physics_process(delta):
 		velocity *= .5
 	
 	$Player.move_and_slide(velocity)
+
+func receive_attack(atk):
+	var dmg = atk.damage
+	set_health(health - dmg)
 
 func set_equipped(item):
 	.set_equipped(item)

@@ -8,6 +8,7 @@ enum {HOME, CHASE, IDLE, STUNNED}
 var state = HOME
 var velocity = Vector2(0,0)
 var mob: Array
+var cooldown = 0
 
 #var health = 10
 
@@ -20,6 +21,7 @@ func _ready():
 	set_stat_base("speed", 1)
 
 func _process(delta):
+	
 	
 	# Die if no health
 	if health <= 0:
@@ -35,6 +37,11 @@ func _process(delta):
 		CHASE:
 			var player_pos = Global.player_character.global_position
 			velocity = (player_pos - $Enemy.global_position).normalized() * get_stat("speed")
+			if $Enemy.global_position.distance_to(player_pos) < 16:
+				var atk = AttackResource.new("enemies", 1)
+				Global.player.receive_attack(atk)
+				state = STUNNED
+				stun_timer = 1
 		IDLE:
 			velocity = Vector2(0,0)
 			if Global.player_character.global_position.distance_to($Enemy.global_position) < 175:
@@ -57,7 +64,7 @@ func receive_attack(atk_resource):
 	
 	if not is_in_group(group):
 		# Take damage
-		health -= damage
+		set_health(health - damage)
 		
 		# Activate statuses from buffs
 		if buffs:
