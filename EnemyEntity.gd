@@ -1,19 +1,23 @@
 extends Entity
 class_name Enemy
 
+export var attack_radius = 32
+export var chase_radius = 256
+export var aggro_radius = 128
+export var origin_radius = 8
+var in_origin_range = false
+var in_aggro_range = false
+var in_attack_range = false
+var in_chase_range = false
+
 onready var origin = $Enemy.global_position
 
-enum {HOME, CHASE, IDLE, STUNNED}
+var player_dis
+var origin_dis
 
-var state = HOME
 var velocity = Vector2(0,0)
 var mob: Array
 var cooldown = 0
-
-#var health = 10
-
-var idle_timer
-var stun_timer
 
 signal killed(id)
 
@@ -22,39 +26,32 @@ func _ready():
 
 func _process(delta):
 	
-	
 	# Die if no health
 	if health <= 0:
 		emit_signal("killed",self)
 		call_deferred("queue_free")
 	
-	match state:
-		HOME:
-			if $Enemy.global_position.distance_to(origin) > 4:
-				velocity = (origin - $Enemy.global_position).normalized() * get_stat("speed")
-			else:
-				state = IDLE
-		CHASE:
-			var player_pos = Global.player_character.global_position
-			velocity = (player_pos - $Enemy.global_position).normalized() * get_stat("speed")
-			if $Enemy.global_position.distance_to(player_pos) < 16:
-				var atk = AttackResource.new("enemies", 1)
-				Global.player.receive_attack(atk)
-				state = STUNNED
-				stun_timer = 1
-		IDLE:
-			velocity = Vector2(0,0)
-			if Global.player_character.global_position.distance_to($Enemy.global_position) < 175:
-				state = CHASE
-			elif $Enemy.global_position.distance_to(origin) < 24:
-				state = HOME
-		STUNNED:
-			stun_timer -= delta
-			velocity = Vector2(0,0)
-			if stun_timer <= 0:
-				state = IDLE
+	# Check distances
+	var player_pos = Global.player_character.global_position
+	player_dis = $Enemy.global_position.distance_to(player_pos)
+	origin_dis = $Enemy.global_position.distance_to(origin)
 	
-	$Enemy.velocity = velocity
+	in_aggro_range = false
+	in_attack_range = false
+	in_chase_range = false
+	in_origin_range = false
+	
+	if player_dis < aggro_radius:
+		in_aggro_range = true
+	
+	if player_dis < chase_radius:
+		in_chase_range = true
+	
+	if player_dis < attack_radius:
+		in_attack_range = true
+	
+	if player_dis < origin_radius:
+		in_origin_range = true
 
 func receive_attack(atk_resource):
 	var damage = atk_resource.damage
@@ -81,37 +78,21 @@ func receive_attack(atk_resource):
 				if not status_already_exists:
 					add_status(buff.new_status(self, group))
 		
-		# Set state to chase
-		state = CHASE
-		
 		# Take knockback
 		if knockback:
 			var angle = Global.player_character.global_position.angle_to_point($Enemy.global_position)
 			var kb = -Vector2(cos(angle), sin(angle)) * knockback
 			knockback(kb)
 		
-		# Alert others in mob
-		# TODO: signalize the following
-		if mob:
-			for enemy in mob:
-				if enemy.state != STUNNED:
-					enemy.state = CHASE
-		return true
-		
 	else:
 		return false
+
+func move_toward_point(vec):
+	$Enemy.velocity = (vec - $Enemy.global_position).normalized() * get_stat("speed")
 
 func add_status(status):
 	.add_status(status)
 	$Enemy.add_child(status)
-
-func _on_AggroRadius_body_entered(body):
-	if body == Global.player_character and state != STUNNED:
-		self.state = CHASE
-
-func _on_ChaseRadius_body_exited(body):
-	if body == Global.player_character and state != STUNNED:
-		self.state = HOME
 
 func _on_Hitbox_area_entered(area):
 	if area is AttackArea:
@@ -120,5 +101,3 @@ func _on_Hitbox_area_entered(area):
 
 func knockback(vector):
 	$Enemy.apply_central_impulse(vector)
-	state = STUNNED
-	stun_timer = 1

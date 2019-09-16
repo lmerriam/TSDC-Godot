@@ -3,7 +3,7 @@ extends StaticBody2D
 export var aggro_radius = 128
 var defeated = false
 var spawned = false
-var enemy = preload("res://Enemy.tscn")
+var enemy = preload("res://enemies/Enemy.tscn")
 var enemies_spawned = []
 
 func _ready():

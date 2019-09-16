@@ -7,3 +7,5 @@ func _integrate_forces(state):
 	t.origin.x += velocity.x
 	t.origin.y += velocity.y
 	state.set_transform(t)
+	
+	velocity = Vector2(0,0)

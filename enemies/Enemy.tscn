@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://EnemyEntity.gd" type="Script" id=1]
+[ext_resource path="res://enemies/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://enemies/EnemyStateMachine.gd" type="Script" id=3]
+[ext_resource path="res://enemies/WanderState.gd" type="Script" id=4]
+[ext_resource path="res://enemies/AttackState.gd" type="Script" id=5]
+[ext_resource path="res://enemies/ChaseState.gd" type="Script" id=6]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 11.1288
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 12.8924
+
+[node name="Entity" type="Node2D"]
+script = ExtResource( 1 )
+faction = "enemy"
+chase_radius = 128
+
+[node name="Enemy" type="RigidBody2D" parent="." groups=[
+"enemies",
+]]
+mode = 2
+gravity_scale = 0.0
+script = ExtResource( 2 )
+
+[node name="StateLabel" type="Label" parent="Enemy"]
+margin_right = 53.0
+margin_bottom = 14.0
+text = "NOT SET"
+
+[node name="StateMachine" type="Node" parent="Enemy"]
+script = ExtResource( 3 )
+START_STATE = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="Enemy/StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Attack" type="Node" parent="Enemy/StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Chase" type="Node" parent="Enemy/StateMachine"]
+script = ExtResource( 6 )
+
+[node name="Stunned" type="Node" parent="Enemy/StateMachine"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Enemy"]
+modulate = Color( 0.909804, 0.0470588, 0.0470588, 1 )
+scale = Vector2( 0.2, 0.2 )
+frames = SubResource( 2 )
+
+[node name="Hitbox" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Hitbox"]
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="Enemy/Hitbox" to="." method="_on_Hitbox_area_entered"]
