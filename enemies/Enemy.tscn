@@ -25,7 +25,6 @@ radius = 12.8924
 [node name="Entity" type="Node2D"]
 script = ExtResource( 1 )
 faction = "enemy"
-chase_radius = 128
 
 [node name="Enemy" type="RigidBody2D" parent="." groups=[
 "enemies",

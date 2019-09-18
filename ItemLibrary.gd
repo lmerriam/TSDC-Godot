@@ -1,3 +1,4 @@
+tool
 extends Node
 
 const ITEM_FOLDER = "res://items"
@@ -24,6 +25,9 @@ func _load_library(path):
 	var library = JSON.parse(json).result
 	file.close()
 	return library
+
+func regen_library():
+	equipment = _load_library(ITEM_JSON)
 
 func instance_item(item_name):
 	return load_item(item_name).instance()

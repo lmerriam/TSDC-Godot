@@ -4,7 +4,7 @@ class_name Enemy
 export var attack_radius = 32
 export var chase_radius = 256
 export var aggro_radius = 128
-export var origin_radius = 8
+export var origin_radius = 16
 var in_origin_range = false
 var in_aggro_range = false
 var in_attack_range = false
@@ -50,7 +50,7 @@ func _process(delta):
 	if player_dis < attack_radius:
 		in_attack_range = true
 	
-	if player_dis < origin_radius:
+	if origin_dis < origin_radius:
 		in_origin_range = true
 
 func receive_attack(atk_resource):
