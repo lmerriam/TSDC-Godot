@@ -10,6 +10,8 @@ var in_aggro_range = false
 var in_attack_range = false
 var in_chase_range = false
 
+var stun_timer = 0
+
 onready var origin = $Enemy.global_position
 
 var player_dis
@@ -83,6 +85,8 @@ func receive_attack(atk_resource):
 			var angle = Global.player_character.global_position.angle_to_point($Enemy.global_position)
 			var kb = -Vector2(cos(angle), sin(angle)) * knockback
 			knockback(kb)
+			stun_timer = 1
+			$Enemy/StateMachine._change_state("stunned")
 		
 	else:
 		return false

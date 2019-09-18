@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://EnemyEntity.gd" type="Script" id=1]
 [ext_resource path="res://enemies/Enemy.gd" type="Script" id=2]
@@ -6,14 +6,15 @@
 [ext_resource path="res://enemies/WanderState.gd" type="Script" id=4]
 [ext_resource path="res://enemies/AttackState.gd" type="Script" id=5]
 [ext_resource path="res://enemies/ChaseState.gd" type="Script" id=6]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=7]
+[ext_resource path="res://enemies/EnemyStunnedState.gd" type="Script" id=7]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.1288
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -52,6 +53,7 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 
 [node name="Stunned" type="Node" parent="Enemy/StateMachine"]
+script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 shape = SubResource( 1 )
