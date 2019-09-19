@@ -9,15 +9,13 @@ var in_origin_range = false
 var in_aggro_range = false
 var in_attack_range = false
 var in_chase_range = false
+var player_dis
+var origin_dis
 
 var stun_timer = 0
 
 onready var origin = $Enemy.global_position
 
-var player_dis
-var origin_dis
-
-var velocity = Vector2(0,0)
 var mob: Array
 var cooldown = 0
 

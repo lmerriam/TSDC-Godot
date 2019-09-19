@@ -6,7 +6,7 @@
 [ext_resource path="res://enemies/WanderState.gd" type="Script" id=4]
 [ext_resource path="res://enemies/AttackState.gd" type="Script" id=5]
 [ext_resource path="res://enemies/ChaseState.gd" type="Script" id=6]
-[ext_resource path="res://enemies/EnemyStunnedState.gd" type="Script" id=7]
+[ext_resource path="res://enemies/StunnedState.gd" type="Script" id=7]
 [ext_resource path="res://sprites/icon.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]

@@ -1,6 +1,6 @@
 extends State
 
-var stun_timer = 0
-
-func update():
-	pass
+func update(delta):
+	entity.stun_timer -= delta
+	if entity.stun_timer <= 0:
+		emit_signal("finished", "wander")
