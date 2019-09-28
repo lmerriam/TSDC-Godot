@@ -56,30 +56,8 @@ func _get_vector_to_mouse():
 	var vec = (mouse_pos - global_position).normalized()
 	return vec
 
-#func event_published(event_key, payload):
-#	match event_key:
-#		"player equipped item":
-#			var item = payload
-#			if item == self:
-#				$StateMachine.initialize($StateMachine.START_STATE)
-#				print("Player equipped me!")
-#		"player unequipped item":
-#			var item = payload
-#			if item == self:
-#				$StateMachine.set_active(false)
-
 func on_attack_started():
 	$StateMachine._change_state("attack")
 
 func on_attack_ended():
 	$StateMachine._change_state("idle")
-
-#func _on_Weapon_tree_entered():
-#	if get_parent() == Global.entities:
-#		$StateMachine.set_active(false)
-#	else:
-#		$StateMachine.initialize($StateMachine.START_STATE)
-#
-#func _on_Weapon_tree_exited():
-##	$StateMachine.set_active(false)
-#	pass

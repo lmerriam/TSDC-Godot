@@ -127,7 +127,7 @@ _global_script_classes=[ {
 "base": "Item",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://Weapon.gd"
+"path": "res://items/weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Armor": "",

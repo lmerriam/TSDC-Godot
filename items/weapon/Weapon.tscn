@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Weapon.gd" type="Script" id=1]
+[ext_resource path="res://items/weapon/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://sprites/pixeltier/swords/sword_88.png" type="Texture" id=2]
 [ext_resource path="res://items/weapon/WeaponStateMachine.gd" type="Script" id=3]
-[ext_resource path="res://WeaponAttackingState.gd" type="Script" id=4]
+[ext_resource path="res://items/weapon/WeaponAttackingState.gd" type="Script" id=4]
 [ext_resource path="res://items/weapon/WeaponIdleState.gd" type="Script" id=5]
 
 [node name="Weapon" type="Node2D"]

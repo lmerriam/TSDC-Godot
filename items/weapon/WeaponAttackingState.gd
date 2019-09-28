@@ -1,9 +1,6 @@
 extends State
 
 func update(delta):
-#	if Global.player.attacking == false:
-#		emit_signal("finished","idle")
-#
 	if not entity.on_cooldown():
 		var stats = entity.stats
 		var buffs = entity.buffs

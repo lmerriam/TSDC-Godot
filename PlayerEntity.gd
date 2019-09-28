@@ -15,7 +15,7 @@ func _init():
 func _ready():
 	Global.player_character = $Player
 	sprite.play()
-	set_equipped(ItemLibrary.instance_item("swordnew"))
+	set_equipped(ItemLibrary.instance_item("sword"))
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
@@ -53,7 +53,6 @@ func receive_attack(atk):
 	set_health(health - dmg)
 
 func set_equipped(item):
-#	Events.publish("player equipped item", item)
 	.set_equipped(item)
 	if item.get_parent():
 		item.get_parent().remove_child(item)
@@ -64,7 +63,6 @@ func set_equipped(item):
 	item.position = Vector2(0,0)
 
 func remove_equipped(item):
-#	Events.publish("player unequipped item", item)
 	.remove_equipped(item)
 	item.get_parent().remove_child(item)
 	if item.get_type() == "weapon":
