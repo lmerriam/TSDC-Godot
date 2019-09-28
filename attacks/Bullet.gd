@@ -1,7 +1,7 @@
 extends AttackArea
 
 export var speed = 8
-export var damage = 6
+export var pierce := 1
 var time_left = 1
 
 func _ready():
@@ -14,4 +14,6 @@ func _process(delta):
 		queue_free()
 
 func attack_successful(entity):
-	queue_free()
+	pierce -= 1
+	if pierce <= 0:
+		queue_free()

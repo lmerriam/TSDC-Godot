@@ -1,7 +1,7 @@
 extends Weapon
 
-export var damage = 12
-export var attack_speed = 1
+#export var damage = 12
+#export var attack_speed = 1
 
 func _init():
 	item_name = "Bow"

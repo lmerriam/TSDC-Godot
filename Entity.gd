@@ -2,7 +2,7 @@ extends Node2D
 class_name Entity
 
 # Stats
-export var has_stats := true
+#export var has_stats := true
 var stats_base := {}
 var stats := {}
 var stat_modifiers := {}
@@ -21,23 +21,23 @@ signal item_stats_updated
 signal item_buffs_updated
 
 # Inventory
-export var has_inventory := true
+#export var has_inventory := true
 var inventory_slots := []
 var inventory_control: Control
 signal inventory_updated
 
 # Buffs
-export var has_buffs := true
+#export var has_buffs := true
 var buffs_base = []
 var buffs = []
 signal buffs_updated
 
 # Status
-export var has_status := true
+#export var has_status := true
 var status_current := []
 
 # Health
-export var has_health := true
+#export var has_health := true
 export var health := 10.0
 var max_health = health
 signal health_changed

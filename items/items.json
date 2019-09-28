@@ -1,11 +1,15 @@
 {
   "axe": "res://items/weapon/Axe.tscn",
   "bow": "res://items/weapon/Bow.tscn",
+  "bownew": "res://items/weapon/BowNew.tscn",
   "dagger": "res://items/weapon/Dagger.tscn",
   "firegem": "res://items/component/FireGem.tscn",
   "heavyarmor": "res://items/armor/HeavyArmor.tscn",
   "icegem": "res://items/component/IceGem.tscn",
   "staff": "res://items/weapon/Staff.tscn",
   "sword": "res://items/weapon/Sword.tscn",
-  "triggerfast": "res://items/component/TriggerFast.tscn"
+  "swordnew": "res://items/weapon/SwordNew.tscn",
+  "triggerfast": "res://items/component/TriggerFast.tscn",
+  "wand": "res://items/weapon/Wand.tscn",
+  "weaponbase": "res://items/weapon/WeaponBase.tscn"
 }

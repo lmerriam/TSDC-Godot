@@ -37,7 +37,7 @@ script = ExtResource( 2 )
 [node name="StateLabel" type="Label" parent="Enemy"]
 margin_right = 53.0
 margin_bottom = 14.0
-text = "NOT SET"
+text = "DEFAULT"
 
 [node name="StateMachine" type="Node" parent="Enemy"]
 script = ExtResource( 3 )

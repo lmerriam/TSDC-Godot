@@ -54,8 +54,9 @@ func _process(delta):
 		in_origin_range = true
 
 func receive_attack(atk_resource):
-	var damage = atk_resource.damage
-	var knockback = atk_resource.knockback
+	var damage = atk_resource.stats.damage
+	var knockback = atk_resource.stats.knockback
+	var stagger = atk_resource.stats.stagger
 	var group = atk_resource.group
 	var buffs = atk_resource.buffs
 	
@@ -83,8 +84,12 @@ func receive_attack(atk_resource):
 			var angle = Global.player_character.global_position.angle_to_point($Enemy.global_position)
 			var kb = -Vector2(cos(angle), sin(angle)) * knockback
 			knockback(kb)
-			stun_timer = 1
+		
+		if stagger:
 			$Enemy/StateMachine._change_state("stunned")
+			stun_timer = stagger
+		
+		return true
 		
 	else:
 		return false
@@ -98,7 +103,7 @@ func add_status(status):
 
 func _on_Hitbox_area_entered(area):
 	if area is AttackArea:
-		if receive_attack(area.attack_resource):
+		if receive_attack(area.properties):
 			area.attack_successful(self)
 
 func knockback(vector):

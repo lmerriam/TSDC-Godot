@@ -1,13 +1,27 @@
 extends Item
 class_name Weapon
 
-var attack_area: Resource
 var cooldown := 0.0
-var player_speed_modifier := .5
+
+export var player_speed_modifier := .5
+export var damage := 0.0
+export var attack_speed := 1
+export var knockback := 0.0
+export var stagger := 0.0
+export var charge_time := 0.0
+
+export var attack_area = preload("res://attacks/Slash.tscn")
 
 func _init():
 	set_type("weapon")
+	Events.subscribe("player equipped item", self)
+
+func _ready():
 	set_equipment_slots(["gem", "base"])
+	set_stat_base("damage", damage)
+	set_stat_base("attack_speed", attack_speed)
+	set_stat_base("knockback", knockback)
+	set_stat_base("stagger", stagger)
 
 func _process(delta):
 	cooldown -= delta
@@ -16,7 +30,7 @@ func _create_attack_area(resource, parent, angle = null, origin = null):
 	
 	# Instance the attack area
 	var area = attack_area.instance()
-	area.set_attack_resource(resource)
+	area.set_attack_properties(resource)
 	
 	# Parent the attack
 	parent.add_child(area)
@@ -41,3 +55,31 @@ func _get_vector_to_mouse():
 	var mouse_pos = get_global_mouse_position()
 	var vec = (mouse_pos - global_position).normalized()
 	return vec
+
+#func event_published(event_key, payload):
+#	match event_key:
+#		"player equipped item":
+#			var item = payload
+#			if item == self:
+#				$StateMachine.initialize($StateMachine.START_STATE)
+#				print("Player equipped me!")
+#		"player unequipped item":
+#			var item = payload
+#			if item == self:
+#				$StateMachine.set_active(false)
+
+func on_attack_started():
+	$StateMachine._change_state("attack")
+
+func on_attack_ended():
+	$StateMachine._change_state("idle")
+
+#func _on_Weapon_tree_entered():
+#	if get_parent() == Global.entities:
+#		$StateMachine.set_active(false)
+#	else:
+#		$StateMachine.initialize($StateMachine.START_STATE)
+#
+#func _on_Weapon_tree_exited():
+##	$StateMachine.set_active(false)
+#	pass

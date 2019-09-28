@@ -30,7 +30,10 @@ func regen_library():
 	equipment = _load_library(ITEM_JSON)
 
 func instance_item(item_name):
-	return load_item(item_name).instance()
+	var item = load_item(item_name).instance()
+	Global.entities.call_deferred("add_child", item)
+	item.global_position = Vector2(-999,-999)
+	return item
 
 func load_item(item_name):
 	return load(equipment[item_name])
@@ -47,5 +50,5 @@ func instance_random_loot():
 	var itm = instance_random_item()
 	var lt = loot.instance()
 	Global.entities.call_deferred("add_child", lt)
-	lt.set_loot(itm)
+	lt.set_item(itm)
 	return lt

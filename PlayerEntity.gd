@@ -5,6 +5,9 @@ export var speed = 100
 var attacking
 onready var sprite = $Player/AnimatedSprite
 
+signal attack_started
+signal attack_ended
+
 func _init():
 	Global.player = self
 	set_equipment_slots(["weapon", "armor", "footwear", "amulet"])
@@ -12,17 +15,13 @@ func _init():
 func _ready():
 	Global.player_character = $Player
 	sprite.play()
-	set_equipped(ItemLibrary.instance_item("bow"))
-	
-func _process(delta):
-	if attacking and get_equipped("weapon"):
-		get_equipped("weapon").attack()
+	set_equipped(ItemLibrary.instance_item("swordnew"))
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
-		attacking = true
+		emit_signal("attack_started")
 	elif event.is_action_released("attack"):
-		attacking = false
+		emit_signal("attack_ended")
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -41,7 +40,6 @@ func _physics_process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		sprite.animation = "run"
-		
 	else:
 		sprite.animation = "idle"
 	
@@ -55,9 +53,22 @@ func receive_attack(atk):
 	set_health(health - dmg)
 
 func set_equipped(item):
+#	Events.publish("player equipped item", item)
 	.set_equipped(item)
-	$Player.add_child(item)
+	if item.get_parent():
+		item.get_parent().remove_child(item)
+	if item.get_type() == "weapon":
+		connect("attack_started", item, "on_attack_started")
+		connect("attack_ended", item, "on_attack_ended")
+	$Player/WeaponOrigin.add_child(item)
+	item.position = Vector2(0,0)
 
 func remove_equipped(item):
+#	Events.publish("player unequipped item", item)
 	.remove_equipped(item)
-	$Player.remove_child(item)
+	item.get_parent().remove_child(item)
+	if item.get_type() == "weapon":
+		disconnect("attack_started", item, "on_attack_started")
+		disconnect("attack_ended", item, "on_attack_ended")
+	Global.entities.add_child(item)
+	item.position = Vector2(-999,-999)

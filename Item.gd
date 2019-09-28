@@ -2,7 +2,7 @@ extends Entity
 class_name Item
 
 var type
-var item_name
+export var item_name := "Base Item"
 
 func get_type():
 	return type

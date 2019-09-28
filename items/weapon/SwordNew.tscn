@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://items/weapon/WeaponBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/pixeltier/swords/sword_25.png" type="Texture" id=2]
+
+[node name="Weapon" instance=ExtResource( 1 )]
+item_name = "New Sword"
+damage = 4.0
+attack_speed = 2
+knockback = 800.0
+stagger = 1.0
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
