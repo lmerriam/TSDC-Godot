@@ -4,14 +4,16 @@
 [ext_resource path="res://attacks/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/pixeltier/magic-weapons/magicweapon_12.png" type="Texture" id=3]
 
-
-[node name="Weapon" instance=ExtResource( 1 )]
+[node name="Wand" index="0" instance=ExtResource( 1 )]
 item_name = "Wand"
-damage = 2
+damage = 1.0
 attack_speed = 2
-knockback = 1
+knockback = 100.0
 attack_area = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
+
+[node name="StateMachine" parent="." index="1"]
+START_STATE = NodePath("../../Wand/StateMachine/Idle")
 

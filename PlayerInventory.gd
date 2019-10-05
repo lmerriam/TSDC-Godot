@@ -4,7 +4,7 @@ var player
 var selected_item
 
 func _ready():
-	player = Global.player
+	player = Global.player_entity
 	player.set_list_control($ItemList)
 
 func _set_selected_item(item):
@@ -38,12 +38,12 @@ func _on_EquipButton_button_up():
 	
 	# Remove previous item from equipment and send to inv
 	if prev_item:
-		player.remove_equipped(prev_item)
+		Global.player.remove_equipped(prev_item)
 		player.add_item(prev_item)
 	
 	# Remove selected item from inventory and equip
 	player.remove_item(selected_item)
-	player.set_equipped(selected_item)
+	Global.player.set_equipped(selected_item)
 	
 	# Reset the selected item
 	_set_selected_item(null)
@@ -65,5 +65,5 @@ func _on_equipment_slot_selected(type):
 	_set_selected_item(item)
 
 func _on_unequip_button_up():
-	player.remove_equipped(selected_item)
+	Global.player.remove_equipped(selected_item)
 	player.add_item(selected_item)

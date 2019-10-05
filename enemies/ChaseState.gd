@@ -1,7 +1,7 @@
 extends State
 
 func update(delta):
-	var player_pos = Global.player_character.global_position
+	var player_pos = Global.player.global_position
 	
 	if entity.in_attack_range:
 		emit_signal("finished", "attack")

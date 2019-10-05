@@ -45,7 +45,7 @@ signal health_changed
 # Attacks
 #export var has_attacks := true
 #export var has_attackable := true
-export var faction := "neutral"
+export var faction:String
 
 func _init():
 	connect("stats_updated", self, "_on_stats_updated")
@@ -129,6 +129,10 @@ func set_health(_health):
 	var _old_health = health
 	health = _health
 	emit_signal("health_changed", _health, _old_health)
+	return health
+
+func modify_health(amount):
+	return set_health(health + amount)
 
 ###################
 #    EQUIPMENT

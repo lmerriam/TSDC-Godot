@@ -11,7 +11,7 @@ func update(delta):
 		atk.buffs = buffs.duplicate(true)
 		
 		var angle = entity._get_vector_to_mouse()
-		var area = entity._create_attack_area(atk, Global.player_character, angle)
+		var area = entity._create_attack_area(atk, Global.player, angle)
 		area.global_position = entity.global_position
 		
 		entity.set_cooldown(stats.attack_speed)

@@ -14,7 +14,6 @@ export var attack_area = preload("res://attacks/Slash.tscn")
 
 func _init():
 	set_type("weapon")
-	Events.subscribe("player equipped item", self)
 
 func _ready():
 	set_equipment_slots(["gem", "base"])

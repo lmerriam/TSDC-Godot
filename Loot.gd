@@ -29,6 +29,6 @@ func get_item():
 	return item
 
 func _on_Loot_body_entered(body):
-	if body == Global.player_character:
-		Global.player.add_item(item)
+	if body == Global.player:
+		Global.player_entity.add_item(item)
 		queue_free()

@@ -1,37 +1,37 @@
 extends KinematicBody2D
 
-
 export var speed = 100
+onready var sprite = $AnimatedSprite
+const START_WEAPON = preload("res://items/weapon/Sword.tscn")
 
-var components = ComponentLibrary.init_components(self,[ComponentInventory,ComponentEquipment,ComponentStats])
-var inventory = components[ComponentInventory]
-var stats = components[ComponentStats]
-var equipment = components[ComponentEquipment]
+signal attack_started
+signal attack_ended
 
 func _init():
 	Global.player = self
 
+
 func _ready():
-	# Start sprite
-	$AnimatedSprite.play()
-	
-	# Set up equipment and inventory
-	Global.inventory = inventory # Easier to send to inv from anywhere
-	equipment.set_equipped(ItemLibrary.instance_item("axe"))
-	
-func _process(delta):
-	if Input.is_action_pressed("attack"):
-		equipment.get_equipped("weapon").attack()
+	sprite.play()
+	set_equipped(START_WEAPON.instance())
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("attack"):
+		emit_signal("attack_started")
+	elif event.is_action_released("attack"):
+		emit_signal("attack_ended")
+
 
 func _physics_process(delta):
 	var velocity = Vector2()
 	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
-		$AnimatedSprite.flip_h = false;
+		sprite.flip_h = false;
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-		$AnimatedSprite.flip_h = true;
+		sprite.flip_h = true;
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
@@ -39,18 +39,35 @@ func _physics_process(delta):
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.animation = "run"
-		
+		sprite.animation = "run"
 	else:
-		$AnimatedSprite.animation = "idle"
+		sprite.animation = "idle"
 	
+	#TODO: modify player speed when attacking
 	move_and_slide(velocity)
 
-func get_inventory_component():
-	return inventory
 
-func get_stats_component():
-	return stats
+func receive_attack(atk):
+	var dmg = atk.damage
+	$Entity.modify_health(-dmg)
 
-func get_equipment_component():
-	return equipment
+
+func set_equipped(item):
+	$Entity.set_equipped(item)
+	if item.get_parent():
+		item.get_parent().remove_child(item)
+	if item.get_type() == "weapon":
+		connect("attack_started", item, "on_attack_started")
+		connect("attack_ended", item, "on_attack_ended")
+	$WeaponOrigin.add_child(item)
+	item.position = Vector2(0,0)
+
+
+func remove_equipped(item):
+	$Entity.remove_equipped(item)
+	item.get_parent().remove_child(item)
+	if item.get_type() == "weapon":
+		disconnect("attack_started", item, "on_attack_started")
+		disconnect("attack_ended", item, "on_attack_ended")
+	Global.entities.add_child(item)
+	item.position = Vector2(-999,-999)

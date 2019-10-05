@@ -1,10 +1,10 @@
 extends Entity
 class_name Enemy
 
-export var attack_radius = 32
-export var chase_radius = 256
-export var aggro_radius = 128
-export var origin_radius = 16
+export var attack_radius := 32
+export var chase_radius := 256
+export var aggro_radius := 128
+var origin_radius = 16
 var in_origin_range = false
 var in_aggro_range = false
 var in_attack_range = false
@@ -32,7 +32,7 @@ func _process(delta):
 		call_deferred("queue_free")
 	
 	# Check distances
-	var player_pos = Global.player_character.global_position
+	var player_pos = Global.player.global_position
 	player_dis = $Enemy.global_position.distance_to(player_pos)
 	origin_dis = $Enemy.global_position.distance_to(origin)
 	
@@ -81,7 +81,7 @@ func receive_attack(atk_resource):
 		
 		# Take knockback
 		if knockback:
-			var angle = Global.player_character.global_position.angle_to_point($Enemy.global_position)
+			var angle = Global.player.global_position.angle_to_point($Enemy.global_position)
 			var kb = -Vector2(cos(angle), sin(angle)) * knockback
 			knockback(kb)
 		

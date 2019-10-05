@@ -6,7 +6,7 @@ var selected_slot
 var selected_slot_idx
 
 func _ready():
-	$ModList.slots = Global.player.inventory_slots
+	$ModList.slots = Global.player_entity.inventory_slots
 
 func set_item(_item):
 	item = _item
