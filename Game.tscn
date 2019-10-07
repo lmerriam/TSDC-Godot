@@ -74,7 +74,7 @@ water_threshold = -0.2
 script = ExtResource( 5 )
 
 [node name="Player" parent="World/Entities" instance=ExtResource( 6 )]
-position = Vector2( 231.965, 205.719 )
+position = Vector2( 238.077, 200.944 )
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true

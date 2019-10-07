@@ -89,6 +89,12 @@ func receive_attack(atk_resource):
 			$StateMachine._change_state("stunned")
 			stun_timer = stagger
 		
+		var angle = Global.player.global_position.angle_to_point(global_position)
+		print(angle)
+		$BloodParticles.global_rotation = angle-3.1416
+		$BloodParticles.emitting = true
+		$BloodParticles.restart()
+		
 		return true
 		
 	else:
