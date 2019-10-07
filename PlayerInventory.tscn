@@ -67,7 +67,6 @@ type = "amulet"
 [node name="ItemList" parent="." instance=ExtResource( 3 )]
 
 [node name="ItemSelected" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
 margin_left = -178.0
 margin_top = 66.0
 margin_right = 2.0

@@ -63,6 +63,7 @@ func _on_CloseModify_button_up():
 func _on_equipment_slot_selected(type):
 	var item = player.equipment[type]
 	_set_selected_item(item)
+	$ItemList.
 
 func _on_unequip_button_up():
 	Global.player.remove_equipped(selected_item)

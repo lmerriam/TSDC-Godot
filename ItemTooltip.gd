@@ -30,12 +30,18 @@ func set_item(item):
 			_append_item_info(stats_label,child_equipment[i])
 
 func _append_item_info(label,item):
+	var level = item.level
 	var stats = item.get_stats()
 	var buffs_base = item.get_buffs_base()
+	# Level
+	label.add_text("Level " + String(level))
+	label.newline()
+	#Stats
 	for line in stats:
 		label.add_text(line + ": " + String(stats[line]))
 		label.newline()
 	label.newline()
+	#Buffs
 	for b in buffs_base:
 		label.add_text(b.description)
 		label.newline()

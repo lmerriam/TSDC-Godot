@@ -3,9 +3,11 @@ class_name Entity
 
 # Stats
 #export var has_stats := true
+export var level := 1
 var stats_base := {}
 var stats := {}
 var stat_modifiers := {}
+var stat_increments := {}
 signal stats_updated
 signal modifiers_updated
 
@@ -90,6 +92,10 @@ func add_to_stat_base(stat_name, value_to_add):
 
 func update_stats():
 	stats = stats_base.duplicate()
+	# Level stats
+	for s in stat_increments:
+		if stats.has(s):
+			stats[s] = stats[s] + stats[s] * stat_increments[s] * level
 	# Equipment
 	if has_equipment:
 		update_equipment_stats()
