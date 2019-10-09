@@ -162,7 +162,6 @@ Global="*res://Global.gd"
 Generators="*res://Generators.gd"
 ItemLibrary="*res://ItemLibrary.gd"
 ComponentLibrary="*res://components/ComponentLibrary.gd"
-Status="*res://status/Status.gd"
 Events="*res://Events.gd"
 
 [debug]

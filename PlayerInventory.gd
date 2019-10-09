@@ -47,7 +47,7 @@ func _on_EquipButton_button_up():
 	
 	# Reset the selected item
 	_set_selected_item(null)
-
+#
 func _on_filter_button_up(type):
 	$ItemList.filter = type
 	$ItemList.update_list()
@@ -61,9 +61,12 @@ func _on_CloseModify_button_up():
 	$ItemSelected.set_item(selected_item)
 
 func _on_equipment_slot_selected(type):
-	var item = player.equipment[type]
-	_set_selected_item(item)
-	$ItemList.
+	if player.equipment.has(type):
+		var item = player.equipment[type]
+		_set_selected_item(item)
+		$ItemList.unselect_all()
+	else:
+		_set_selected_item(null)
 
 func _on_unequip_button_up():
 	Global.player.remove_equipped(selected_item)
