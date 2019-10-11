@@ -4,6 +4,8 @@ export var speed = 100
 onready var sprite = $AnimatedSprite
 const START_WEAPON = preload("res://items/weapon/Sword.tscn")
 
+var attack_move_speed = 1
+
 signal attack_started
 signal attack_ended
 
@@ -44,7 +46,7 @@ func _physics_process(delta):
 		sprite.animation = "idle"
 	
 	#TODO: modify player speed when attacking
-	move_and_slide(velocity)
+	move_and_slide(velocity*attack_move_speed)
 
 
 func receive_attack(atk):
@@ -71,3 +73,13 @@ func remove_equipped(item):
 		disconnect("attack_ended", item, "on_attack_ended")
 	Global.entities.add_child(item)
 	item.position = Vector2(-999,-999)
+
+
+func _on_Player_attack_started():
+	var weapon = $Entity.get_equipped("weapon")
+	if weapon:
+		attack_move_speed = weapon.player_speed_modifier
+
+
+func _on_Player_attack_ended():
+	attack_move_speed = 1

@@ -26,10 +26,18 @@ func _on_ItemList_item_selected(index):
 	var item = $ItemList.get_item_metadata(index)
 	_set_selected_item(item)
 	$ItemSelected/UnequipButton.hide()
+	
+	# Show equip button if equipable
 	if player.accepts_type(item.type):
 		$ItemSelected/EquipButton.show()
 	else:
 		$ItemSelected/EquipButton.hide()
+	
+	# Show mod button if moddable
+	if item.has_equipment:
+		$ItemSelected/ModButton.show()
+	else:
+		$ItemSelected/ModButton.hide()
 
 func _on_EquipButton_button_up():
 	# Get previous item

@@ -9,7 +9,13 @@ func _process(delta):
 	if properties.duration <= 0:
 		expire()
 	elif current_tick <= 0:
-		entity.receive_attack(AttackResource.new(group, properties.damage, null, null))
+		
+		# Create attack dict
+		var atk = {}
+		atk.faction = "neutral"
+		atk.damage = properties.damage
+		
+		actor.receive_attack(atk)
 		current_tick = 1
 
 func start():

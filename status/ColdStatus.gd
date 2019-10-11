@@ -8,10 +8,10 @@ func _process(delta):
 
 func start():
 	.start()
-	entity.modulate = Color(.5,.5,1)
-	entity.add_modifier("speed", self, properties.amount)
+	actor.modulate = Color(.5,.5,1)
+	actor.get_node("Entity").add_modifier("speed", self, properties.amount)
 
 func remove():
 	.remove()
-	entity.remove_modifier("speed", self)
-	entity.modulate = Color(1,1,1)
+	actor.get_node("Entity").remove_modifier("speed", self)
+	actor.modulate = Color(1,1,1)

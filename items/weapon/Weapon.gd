@@ -26,11 +26,11 @@ func _ready():
 func _process(delta):
 	cooldown -= delta
 
-func _create_attack_area(resource, parent, angle = null, origin = null):
+func _create_attack_area(props, parent, angle = null, origin = null):
 	
 	# Instance the attack area
 	var area = attack_area.instance()
-	area.set_attack_properties(resource)
+	area.set_attack_properties(props)
 	
 	# Parent the attack
 	parent.add_child(area)

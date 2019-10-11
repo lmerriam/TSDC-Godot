@@ -33,7 +33,7 @@ func update_slots():
 func _on_equip_button_up():
 	$ModTooltip.hide()
 	item.set_equipped(selected_mod)
-	Global.player.remove_item(selected_mod)
+	Global.player_entity.remove_item(selected_mod)
 	$ItemTooltip.set_item(item)
 	$ModList.hide()
 	update_slots()
@@ -41,9 +41,9 @@ func _on_equip_button_up():
 func _on_remove_button_up():
 	$ModTooltip.hide()
 	item.remove_equipped(selected_slot)
-	Global.player.add_item(selected_slot)
+	Global.player_entity.add_item(selected_slot)
 	$ItemTooltip.set_item(item)
-	$ModList.show()
+	$ModList.hide()
 	$ModList.update_list()
 	update_slots()
 

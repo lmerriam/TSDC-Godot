@@ -5,9 +5,12 @@ func update(delta):
 		var stats = entity.stats
 		var buffs = entity.buffs
 		var atk = {}
-		# TODO: rename "group" to faction
-		atk.group = "player"
-		atk.stats = stats.duplicate(true)
+		atk.faction = "player"
+#		atk.stats = stats.duplicate(true)
+		atk.damage = stats.damage
+		atk.knockback = stats.knockback
+		atk.stagger = stats.stagger
+		atk.bleed = true
 		atk.buffs = buffs.duplicate(true)
 		
 		var angle = entity._get_vector_to_mouse()

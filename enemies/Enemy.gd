@@ -54,20 +54,22 @@ func _process(delta):
 	if origin_dis < origin_radius:
 		in_origin_range = true
 
-func receive_attack(atk_resource):
-	var damage = atk_resource.stats.damage
-	var knockback = atk_resource.stats.knockback
-	var stagger = atk_resource.stats.stagger
-	var group = atk_resource.group
-	var buffs = atk_resource.buffs
+func receive_attack(atk):
+#	var damage = atk.damage
+#	var knockback = atk.knockback
+#	var stagger = atk.stagger
+#	var group = atk.group
+#	var buffs = atk.buffs
 	
-	if not is_in_group(group):
+	if not is_in_group(atk.faction):
+		
 		# Take damage
-		$Entity.modify_health(-damage)
+		if atk.has("damage"):
+			$Entity.modify_health(-atk.damage)
 		
 		# Activate statuses from buffs
-		if buffs:
-			for buff in buffs:
+		if atk.has("buffs"):
+			for buff in atk.buffs:
 				
 				# Check for existing status from this buff
 				var status_already_exists = false
@@ -78,22 +80,22 @@ func receive_attack(atk_resource):
 				
 				# Add new status
 				if not status_already_exists:
-					add_status(buff.new_status(self, group))
+					add_status(buff.new_status(self, atk.faction))
 		
-		if knockback:
+		if atk.has("knockback"):
 			var angle = Global.player.global_position.angle_to_point(global_position)
-			var kb = -Vector2(cos(angle), sin(angle)) * knockback
+			var kb = -Vector2(cos(angle), sin(angle)) * atk.knockback
 			knockback(kb)
 		
-		if stagger:
+		if atk.has("stagger"):
 			$StateMachine._change_state("stunned")
-			stun_timer = stagger
+			stun_timer = atk.stagger
 		
-		var angle = Global.player.global_position.angle_to_point(global_position)
-		print(angle)
-		$BloodParticles.global_rotation = angle-3.1416
-		$BloodParticles.emitting = true
-		$BloodParticles.restart()
+		if atk.has("bleed"):
+			var angle = Global.player.global_position.angle_to_point(global_position)
+			$BloodParticles.global_rotation = angle-3.1416
+			$BloodParticles.emitting = true
+			$BloodParticles.restart()
 		
 		return true
 		
@@ -104,7 +106,7 @@ func move_toward_point(vec):
 	velocity = (vec - global_position).normalized() * $Entity.get_stat("speed")
 
 func add_status(status):
-	.add_status(status)
+	$Entity.add_status(status)
 	add_child(status)
 
 func _on_Hitbox_area_entered(area):
