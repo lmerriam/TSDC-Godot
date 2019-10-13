@@ -2,6 +2,8 @@ extends RigidBody2D
 
 var velocity = Vector2(0,0)
 
+export var blood_particles:PackedScene
+
 export var attack_radius := 32
 export var chase_radius := 256
 export var aggro_radius := 128
@@ -27,10 +29,10 @@ func _ready():
 
 func _process(delta):
 	
-	# Die if no health
-	if $Entity.health <= 0:
-		emit_signal("killed",self)
-		call_deferred("queue_free")
+#	# Die if no health
+#	if $Entity.health <= 0:
+#		emit_signal("killed",self)
+#		call_deferred("queue_free")
 	
 	# Check distances
 	var player_pos = Global.player.global_position
@@ -93,9 +95,7 @@ func receive_attack(atk):
 		
 		if atk.has("bleed"):
 			var angle = Global.player.global_position.angle_to_point(global_position)
-			$BloodParticles.global_rotation = angle-3.1416
-			$BloodParticles.emitting = true
-			$BloodParticles.restart()
+			bleed(angle)
 		
 		return true
 		
@@ -124,3 +124,18 @@ func _integrate_forces(state):
 	state.set_transform(t)
 	
 	velocity = Vector2(0,0)
+
+func bleed(angle):
+	var blood = blood_particles.instance()
+	Global.entities.add_child(blood)
+	blood.global_rotation = angle-3.1416
+	blood.global_position = global_position
+	return blood
+
+func _on_Entity_killed():
+	var angle = Global.player.global_position.angle_to_point(global_position)
+	bleed(angle)
+	bleed(angle-.2)
+	bleed(angle+.2)
+	emit_signal("killed",self)
+	call_deferred("queue_free")

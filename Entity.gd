@@ -43,6 +43,7 @@ var status_current := []
 export var health := 10.0
 var max_health = health
 signal health_changed
+signal killed
 
 # Attacks
 #export var has_attacks := true
@@ -135,6 +136,8 @@ func set_health(_health):
 	var _old_health = health
 	health = _health
 	emit_signal("health_changed", _health, _old_health)
+	if health <= 0:
+		emit_signal("killed")
 	return health
 
 func modify_health(amount):

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://particles/BloodParticles.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+max_value = 100.0
+_data = [ Vector2( 0, 0 ), 0.0, -4.38197, 0, 0, Vector2( 0.653728, 100 ), -2.54452, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 10.0
+gravity = Vector3( 0, -300, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 0.4
+angular_velocity = -2.90126e+038
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping_curve = SubResource( 2 )
+scale = 2.0
+color = Color( 0.917647, 0.345098, 0.345098, 1 )
+
+[node name="BloodParticles" type="Particles2D"]
+rotation = 3.14159
+amount = 10
+lifetime = 0.3
+explosiveness = 1.0
+process_material = SubResource( 3 )
+script = ExtResource( 1 )
+
