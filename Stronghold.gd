@@ -6,13 +6,10 @@ var spawned = false
 var enemy = preload("res://enemies/Enemy.tscn")
 var enemies_spawned = []
 
-func _ready():
+#func _ready():
 #	var tilemap = get_parent()
 #	var tile = tilemap.tile_set.find_tile_by_name("rock")
 #	Generators.gen_building(global_position / 16, 13, 13, tilemap, tile)
-	for item in range(0,3):
-		var i = ItemLibrary.instance_random_loot()
-		i.global_position = global_position + Vector2(rand_range(-64,64), rand_range(-64,64))
 
 func _on_SpawnKilled(id):
 	
@@ -23,10 +20,12 @@ func _on_SpawnKilled(id):
 	if enemies_spawned.size() <= 0:
 		defeated = true
 		print("Stronghold defeated")
+		for item in range(0,3):
+			var i = ItemLibrary.instance_random_loot()
+			i.global_position = global_position + Vector2(rand_range(-64,64), rand_range(-64,64))
 
 func _on_AggroRadius_body_entered(body):
-	
-	# Spawn the 
+	# Spawn the enemies
 	if !spawned and body == Global.player:
 		for i in 8:
 			call_deferred("_spawn_enemy")

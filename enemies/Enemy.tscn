@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://particles/BloodParticles.tscn" type="PackedScene" id=2]
@@ -8,14 +8,20 @@
 [ext_resource path="res://enemies/AttackState.gd" type="Script" id=6]
 [ext_resource path="res://enemies/ChaseState.gd" type="Script" id=7]
 [ext_resource path="res://enemies/StunnedState.gd" type="Script" id=8]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=9]
+[ext_resource path="res://sprites/bat/tile000.png" type="Texture" id=9]
+[ext_resource path="res://sprites/bat/tile001.png" type="Texture" id=10]
+[ext_resource path="res://sprites/bat/tile002.png" type="Texture" id=11]
+[ext_resource path="res://sprites/bat/tile003.png" type="Texture" id=12]
+[ext_resource path="res://sprites/bat/tile004.png" type="Texture" id=13]
+[ext_resource path="res://sprites/bat/tile005.png" type="Texture" id=14]
+[ext_resource path="res://all_white_shader.tres" type="Material" id=15]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.1288
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -23,6 +29,22 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 12.8924
+
+[sub_resource type="Animation" id=4]
+resource_name = "DamageFlashWhite"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 15 ), null, ExtResource( 15 ), null ]
+}
 
 [node name="Enemy" type="RigidBody2D" groups=[
 "enemies",
@@ -65,14 +87,17 @@ valign = 2
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.909804, 0.0470588, 0.0470588, 1 )
-scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 2 )
+frame = 1
+playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 3 )
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+anims/DamageFlashWhite = SubResource( 4 )
 
 [connection signal="killed" from="Entity" to="." method="_on_Entity_killed"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

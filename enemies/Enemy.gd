@@ -21,6 +21,7 @@ onready var origin = global_position
 
 var mob: Array
 var cooldown = 0
+var hitshader = preload("res://all_white_shader.tres")
 
 signal killed(id)
 
@@ -28,11 +29,6 @@ func _ready():
 	$Entity.set_stat_base("speed", 1)
 
 func _process(delta):
-	
-#	# Die if no health
-#	if $Entity.health <= 0:
-#		emit_signal("killed",self)
-#		call_deferred("queue_free")
 	
 	# Check distances
 	var player_pos = Global.player.global_position
@@ -55,6 +51,7 @@ func _process(delta):
 	
 	if origin_dis < origin_radius:
 		in_origin_range = true
+
 
 func receive_attack(atk):
 #	var damage = atk.damage
@@ -97,25 +94,32 @@ func receive_attack(atk):
 			var angle = Global.player.global_position.angle_to_point(global_position)
 			bleed(angle)
 		
+		$DamageAnimation.play("DamageFlashWhite")
+		
 		return true
 		
 	else:
 		return false
 
+
 func move_toward_point(vec):
 	velocity = (vec - global_position).normalized() * $Entity.get_stat("speed")
+
 
 func add_status(status):
 	$Entity.add_status(status)
 	add_child(status)
+
 
 func _on_Hitbox_area_entered(area):
 	if area is AttackArea:
 		if receive_attack(area.properties):
 			area.attack_successful(self)
 
+
 func knockback(vector):
 	apply_central_impulse(vector)
+
 
 func _integrate_forces(state):
 	var t = state.get_transform()
@@ -125,12 +129,14 @@ func _integrate_forces(state):
 	
 	velocity = Vector2(0,0)
 
+
 func bleed(angle):
 	var blood = blood_particles.instance()
 	Global.entities.add_child(blood)
 	blood.global_rotation = angle-3.1416
 	blood.global_position = global_position
 	return blood
+
 
 func _on_Entity_killed():
 	var angle = Global.player.global_position.angle_to_point(global_position)
