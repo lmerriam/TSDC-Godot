@@ -15,7 +15,7 @@ func _process(delta):
 		atk.faction = "neutral"
 		atk.damage = properties.damage
 		
-		actor.receive_attack(atk)
+		entity.get_parent().receive_attack(atk)
 		current_tick = 1
 
 func start():

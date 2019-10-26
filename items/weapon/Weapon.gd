@@ -22,6 +22,10 @@ func _ready():
 	set_stat_base("attack_speed", attack_speed)
 	set_stat_base("knockback", knockback)
 	set_stat_base("stagger", stagger)
+	
+	var combust_props = {"damage":10, "duration":2}
+	var combust = CombustBuff.new(combust_props)
+	add_buff_base(combust)
 
 func _process(delta):
 	cooldown -= delta

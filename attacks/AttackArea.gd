@@ -13,9 +13,3 @@ func attack_successful(entity):
 
 func set_attack_properties(props):
 	properties = props
-
-func transfer_attack(entity):
-	if entity.has_method("receive_attack"):
-		if entity.receive_attack(properties):
-			return true
-	return false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blood spatter3.png-91ea1a9bb648558b8a2286b22c9cde4d.stex"
+path="res://.import/small-mushroom-cloud_frame_0007.png-7cbaf51b8371a2853f807b4e771f5b0a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/blood spatter3.png"
-dest_files=[ "res://.import/blood spatter3.png-91ea1a9bb648558b8a2286b22c9cde4d.stex" ]
+source_file="res://sprites/fx/small mushroom cloud/small-mushroom-cloud_frame_0007.png"
+dest_files=[ "res://.import/small-mushroom-cloud_frame_0007.png-7cbaf51b8371a2853f807b4e771f5b0a.stex" ]
 
 [params]
 

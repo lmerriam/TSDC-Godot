@@ -79,7 +79,7 @@ func receive_attack(atk):
 				
 				# Add new status
 				if not status_already_exists:
-					add_status(buff.new_status(self, atk.faction))
+					add_status(buff.new_status($Entity, atk.faction))
 		
 		if atk.has("knockback"):
 			var angle = Global.player.global_position.angle_to_point(global_position)

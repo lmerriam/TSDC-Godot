@@ -272,6 +272,9 @@ func update_buffs():
 	buffs += equipment_buffs
 	emit_signal("buffs_updated")
 
+func _on_status_expired(status):
+	remove_status(status)
+
 ###################
 #    ATTACKS
 ###################

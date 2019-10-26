@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://status/ColdStatus.gd"
 }, {
+"base": "Buff",
+"class": "CombustBuff",
+"language": "GDScript",
+"path": "res://status/CombustBuff.gd"
+}, {
 "base": "Status",
 "class": "CombustStatus",
 "language": "GDScript",
@@ -136,6 +141,7 @@ _global_script_class_icons={
 "Buff": "",
 "ColdBuff": "",
 "ColdStatus": "",
+"CombustBuff": "",
 "CombustStatus": "",
 "ComponentBase": "",
 "ComponentEquipment": "",
