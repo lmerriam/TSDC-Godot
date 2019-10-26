@@ -17,12 +17,6 @@ func init(_entity, _group, _buff, _properties):
 	
 	connect("expired", entity, "_on_status_expired")
 	entity.connect("killed", self, "_on_entity_killed")
-	
-	start()
-
-
-func start():
-	set_process(true)
 
 
 func expire():

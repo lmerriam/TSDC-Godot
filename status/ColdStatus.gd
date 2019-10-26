@@ -6,8 +6,7 @@ func _process(delta):
 	if properties.duration <= 0:
 		expire()
 
-func start():
-	.start()
+func _ready():
 	entity.get_parent().modulate = Color(.5,.5,1)
 	entity.add_modifier("speed", self, properties.amount)
 
