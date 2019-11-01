@@ -54,32 +54,8 @@ func _process(delta):
 
 
 func receive_attack(atk):
-#	var damage = atk.damage
-#	var knockback = atk.knockback
-#	var stagger = atk.stagger
-#	var group = atk.group
-#	var buffs = atk.buffs
 	
-	if not is_in_group(atk.faction):
-		
-		# Take damage
-		if atk.has("damage"):
-			$Entity.modify_health(-atk.damage)
-		
-		# Activate statuses from buffs
-		if atk.has("buffs"):
-			for buff in atk.buffs:
-				
-				# Check for existing status from this buff
-				var status_already_exists = false
-				for status in $Entity.status_current:
-					if status.buff == buff:
-						status_already_exists = true
-						status.properties = buff.properties.duplicate()
-				
-				# Add new status
-				if not status_already_exists:
-					add_status(buff.new_status($Entity, atk.faction))
+	if $Entity.receive_attack(atk):
 		
 		if atk.has("knockback"):
 			var angle = Global.player.global_position.angle_to_point(global_position)

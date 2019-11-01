@@ -4,14 +4,12 @@ class_name Status
 var entity
 var buff
 var properties
-var group
 
 signal expired
 
 # TODO: Change actor to entity
-func init(_entity, _group, _buff, _properties):
+func init(_entity, _buff, _properties):
 	buff = _buff
-	group = _group
 	properties = _properties
 	entity = _entity
 	

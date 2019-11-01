@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://attacks/AttackResource.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "Buff",
 "language": "GDScript",
 "path": "res://status/Buff.gd"

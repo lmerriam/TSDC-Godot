@@ -46,6 +46,8 @@ signal health_changed
 signal killed
 
 # Attacks
+
+# Attacks
 #export var has_attacks := true
 #export var has_attackable := true
 export var faction:String
@@ -250,6 +252,13 @@ func add_status(status):
 	status_current.append(status)
 #	add_child(status)
 
+func add_status_from_buff(buff):
+	var status_existing = find_status_from_buff(buff)
+	if status_existing:
+		status_existing.properties = buff.properties.duplicate()
+	else:
+		add_status(buff.new_status(self))
+
 func remove_status(status):
 	status_current.erase(status)
 
@@ -275,9 +284,38 @@ func update_buffs():
 func _on_status_expired(status):
 	remove_status(status)
 
+func find_status_from_buff(buff):
+	for status in status_current:
+		if status.buff == buff:
+			return status
+	return false
+
 ###################
 #    ATTACKS
 ###################
+
+func create_attack():
+	var atk = stats.duplicate()
+	atk.faction = faction
+	atk.buffs = buffs
+	return atk
+
+func receive_attack(atk):
+	if not faction == atk.faction:
+		
+		# Take damage
+		if atk.has("damage"):
+			modify_health(-atk.damage)
+		
+		# Activate statuses from buffs
+		if atk.has("buffs"):
+			for buff in atk.buffs:
+				add_status_from_buff(buff)
+		
+		return true
+		
+	else:
+		return false
 
 ###################
 #    STATE

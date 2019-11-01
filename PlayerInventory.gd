@@ -19,6 +19,12 @@ func _set_selected_item(item):
 		else:
 			$ItemSelected/EquipButton.show()
 			$ItemSelected/UnequipButton.hide()
+		
+		# Show mod button if moddable
+		if item.has_equipment:
+			$ItemSelected/ModButton.show()
+		else:
+			$ItemSelected/ModButton.hide()
 	else:
 		$ItemSelected.hide()
 
@@ -32,12 +38,6 @@ func _on_ItemList_item_selected(index):
 		$ItemSelected/EquipButton.show()
 	else:
 		$ItemSelected/EquipButton.hide()
-	
-	# Show mod button if moddable
-	if item.has_equipment:
-		$ItemSelected/ModButton.show()
-	else:
-		$ItemSelected/ModButton.hide()
 
 func _on_EquipButton_button_up():
 	# Get previous item

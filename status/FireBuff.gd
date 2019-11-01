@@ -1,4 +1,5 @@
-class_name FireBuff extends Buff
+extends Buff
+class_name FireBuff
 
 func _init(_properties):
 	properties = _properties
