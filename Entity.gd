@@ -48,9 +48,8 @@ signal killed
 # Attacks
 
 # Attacks
-#export var has_attacks := true
-#export var has_attackable := true
 export var faction:String
+signal attack_received(atk)
 
 func _init():
 	connect("stats_updated", self, "_on_stats_updated")
@@ -312,6 +311,7 @@ func receive_attack(atk):
 			for buff in atk.buffs:
 				add_status_from_buff(buff)
 		
+		emit_signal("attack_received", atk)
 		return true
 		
 	else:

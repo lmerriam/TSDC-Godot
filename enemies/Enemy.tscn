@@ -88,6 +88,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+frame = 2
 playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -98,5 +99,6 @@ shape = SubResource( 3 )
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
 anims/DamageFlashWhite = SubResource( 4 )
 
+[connection signal="attack_received" from="Entity" to="." method="_on_attack_received"]
 [connection signal="killed" from="Entity" to="." method="_on_Entity_killed"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

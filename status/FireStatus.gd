@@ -4,7 +4,7 @@ class_name FireStatus
 var current_tick = 1
 
 func _ready():
-	add_child(load("res://particles/FireParticles.tscn").instance())
+	entity.add_child(load("res://particles/FireParticles.tscn").instance())
 
 func _process(delta):
 	properties.duration -= delta
@@ -18,5 +18,5 @@ func _process(delta):
 		atk.faction = "neutral"
 		atk.damage = properties.damage
 		
-		entity.get_parent().receive_attack(atk)
+		entity.receive_attack(atk)
 		current_tick = 1

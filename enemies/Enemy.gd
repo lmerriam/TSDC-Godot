@@ -53,29 +53,22 @@ func _process(delta):
 		in_origin_range = true
 
 
-func receive_attack(atk):
+func _on_attack_received(atk):
 	
-	if $Entity.receive_attack(atk):
-		
-		if atk.has("knockback"):
-			var angle = Global.player.global_position.angle_to_point(global_position)
-			var kb = -Vector2(cos(angle), sin(angle)) * atk.knockback
-			knockback(kb)
-		
-		if atk.has("stagger"):
-			$StateMachine._change_state("stunned")
-			stun_timer = atk.stagger
-		
-		if atk.has("bleed"):
-			var angle = Global.player.global_position.angle_to_point(global_position)
-			bleed(angle)
-		
-		$DamageAnimation.play("DamageFlashWhite")
-		
-		return true
-		
-	else:
-		return false
+	if atk.has("knockback"):
+		var angle = Global.player.global_position.angle_to_point(global_position)
+		var kb = -Vector2(cos(angle), sin(angle)) * atk.knockback
+		knockback(kb)
+	
+	if atk.has("stagger"):
+		$StateMachine._change_state("stunned")
+		stun_timer = atk.stagger
+	
+	if atk.has("bleed"):
+		var angle = Global.player.global_position.angle_to_point(global_position)
+		bleed(angle)
+	
+	$DamageAnimation.play("DamageFlashWhite")
 
 
 func move_toward_point(vec):
@@ -88,9 +81,8 @@ func add_status(status):
 
 
 func _on_Hitbox_area_entered(area):
-	if area is AttackArea:
-		if receive_attack(area.properties):
-			area.attack_successful(self)
+	if area is AttackArea and $Entity.receive_attack(area.properties):
+		area.attack_successful(self)
 
 
 func knockback(vector):
