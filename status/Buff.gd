@@ -5,6 +5,7 @@ var properties
 var type
 var status
 var description
+var faction
 
 func new_status(_entity):
 	var s = status.new()

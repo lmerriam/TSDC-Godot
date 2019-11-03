@@ -249,14 +249,16 @@ func set_list_control(new_control):
 ###################
 func add_status(status):
 	status_current.append(status)
+	return status
 #	add_child(status)
 
 func add_status_from_buff(buff):
 	var status_existing = find_status_from_buff(buff)
 	if status_existing:
 		status_existing.properties = buff.properties.duplicate()
+		return status_existing
 	else:
-		add_status(buff.new_status(self))
+		return add_status(buff.new_status(self))
 
 func remove_status(status):
 	status_current.erase(status)
@@ -309,7 +311,8 @@ func receive_attack(atk):
 		# Activate statuses from buffs
 		if atk.has("buffs"):
 			for buff in atk.buffs:
-				add_status_from_buff(buff)
+				var s = add_status_from_buff(buff)
+				s.properties.faction = atk.faction
 		
 		emit_signal("attack_received", atk)
 		return true
