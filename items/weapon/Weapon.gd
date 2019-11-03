@@ -60,8 +60,9 @@ func _get_vector_to_mouse():
 	var vec = (mouse_pos - global_position).normalized()
 	return vec
 
-func on_attack_started():
+func on_attack_started(attacker):
 	$StateMachine._change_state("attack")
+	$StateMachine/Attack.attacker = attacker
 
-func on_attack_ended():
+func on_attack_ended(attacker):
 	$StateMachine._change_state("idle")
