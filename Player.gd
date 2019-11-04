@@ -6,8 +6,8 @@ const START_WEAPON = preload("res://items/weapon/Sword.tscn")
 
 var attack_move_speed = 1
 
-signal attack_started(id)
-signal attack_ended(id)
+signal attack_started(entity_id)
+signal attack_ended()
 
 func _init():
 	Global.player = self
@@ -22,7 +22,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
 		emit_signal("attack_started", $Entity)
 	elif event.is_action_released("attack"):
-		emit_signal("attack_ended", $Entity)
+		emit_signal("attack_ended")
 
 
 func _physics_process(delta):
@@ -62,7 +62,6 @@ func set_equipped(item):
 		connect("attack_started", item, "on_attack_started")
 		connect("attack_ended", item, "on_attack_ended")
 	$WeaponOrigin.add_child(item)
-	item.set_owner($Entity)
 	item.position = Vector2(0,0)
 
 
@@ -76,7 +75,7 @@ func remove_equipped(item):
 	item.position = Vector2(-999,-999)
 
 
-func _on_Player_attack_started():
+func _on_Player_attack_started(entity_id):
 	var weapon = $Entity.get_equipped("weapon")
 	if weapon:
 		attack_move_speed = weapon.player_speed_modifier

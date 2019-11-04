@@ -39,7 +39,7 @@ func _create_attack_area(props, parent, angle = null, origin = null):
 	# Parent the attack
 	parent.add_child(area)
 	
-	# Put the attack in the right spot relative to it's parent
+	# Put the attack in the right spot relative to its parent
 	if origin:
 		area.set_position(origin)
 	
@@ -64,5 +64,5 @@ func on_attack_started(attacker):
 	$StateMachine._change_state("attack")
 	$StateMachine/Attack.attacker = attacker
 
-func on_attack_ended(attacker):
+func on_attack_ended():
 	$StateMachine._change_state("idle")

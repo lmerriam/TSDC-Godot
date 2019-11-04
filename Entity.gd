@@ -298,21 +298,22 @@ func find_status_from_buff(buff):
 func create_attack():
 	var atk = stats.duplicate()
 	atk.faction = faction
+	atk.creator = self
 	atk.buffs = buffs
 	return atk
 
 func receive_attack(atk):
 	if not faction == atk.faction:
 		
-		# Take damage
-		if atk.has("damage"):
-			modify_health(-atk.damage)
-		
 		# Activate statuses from buffs
 		if atk.has("buffs"):
 			for buff in atk.buffs:
 				var s = add_status_from_buff(buff)
 				s.properties.faction = atk.faction
+		
+		# Take damage
+		if atk.has("damage"):
+			modify_health(-atk.damage)
 		
 		emit_signal("attack_received", atk)
 		return true

@@ -12,10 +12,14 @@ var in_origin_range = false
 var in_aggro_range = false
 var in_attack_range = false
 var in_chase_range = false
-var player_dis
+var target_dis
 var origin_dis
 
+export var attack_speed = 1
+var attack_timer = 0
 var stun_timer = 0
+
+var target = Global.player
 
 onready var origin = global_position
 
@@ -27,12 +31,14 @@ signal killed(id)
 
 func _ready():
 	$Entity.set_stat_base("speed", 1)
+	$Entity.set_stat_base("damage", 1)
+	$Entity.set_stat_base("knockback", 100)
 
 func _process(delta):
 	
 	# Check distances
-	var player_pos = Global.player.global_position
-	player_dis = global_position.distance_to(player_pos)
+	var target_pos = target.global_position
+	target_dis = global_position.distance_to(target_pos)
 	origin_dis = global_position.distance_to(origin)
 	
 	in_aggro_range = false
@@ -40,21 +46,24 @@ func _process(delta):
 	in_chase_range = false
 	in_origin_range = false
 	
-	if player_dis < aggro_radius:
+	if target_dis < aggro_radius:
 		in_aggro_range = true
 	
-	if player_dis < chase_radius:
+	if target_dis < chase_radius:
 		in_chase_range = true
 	
-	if player_dis < attack_radius:
+	if target_dis < attack_radius:
 		in_attack_range = true
 	
 	if origin_dis < origin_radius:
 		in_origin_range = true
+	
+#	stun_timer -= delta
+	attack_timer -= delta
 
 
 func _on_attack_received(atk):
-	
+#	TODO: make knockback and blood effects dependent on attack area position
 	if atk.has("knockback"):
 		var angle = Global.player.global_position.angle_to_point(global_position)
 		var kb = -Vector2(cos(angle), sin(angle)) * atk.knockback
