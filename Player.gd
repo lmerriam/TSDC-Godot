@@ -39,6 +39,12 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	
+	if Input.is_mouse_button_pressed(BUTTON_RIGHT):
+		var scene = load("res://AreaSpell.tscn")
+		var spell = scene.instance()
+		Global.entities.add_child(spell)
+		spell.global_position = get_global_mouse_position()
+	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		sprite.animation = "run"
@@ -58,9 +64,8 @@ func set_equipped(item):
 	$Entity.set_equipped(item)
 	if item.get_parent():
 		item.get_parent().remove_child(item)
-	if item.get_type() == "weapon":
-		connect("attack_started", item, "on_attack_started")
-		connect("attack_ended", item, "on_attack_ended")
+	if item.has_method("connect_entity"):
+		item.connect_entity(self)
 	$WeaponOrigin.add_child(item)
 	item.position = Vector2(0,0)
 
@@ -68,9 +73,8 @@ func set_equipped(item):
 func remove_equipped(item):
 	$Entity.remove_equipped(item)
 	item.get_parent().remove_child(item)
-	if item.get_type() == "weapon":
-		disconnect("attack_started", item, "on_attack_started")
-		disconnect("attack_ended", item, "on_attack_ended")
+	if item.has_method("disconnect_entity"):
+		item.disconnect_entity(self)
 	Global.entities.add_child(item)
 	item.position = Vector2(-999,-999)
 

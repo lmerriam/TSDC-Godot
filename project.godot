@@ -119,7 +119,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://State.gd"
 }, {
-"base": "Node",
+"base": "State",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://StateMachine.gd"

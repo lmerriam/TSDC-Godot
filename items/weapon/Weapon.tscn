@@ -16,6 +16,7 @@ texture = ExtResource( 2 )
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 START_STATE = NodePath("Idle")
+root_machine = true
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )

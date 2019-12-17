@@ -16,19 +16,18 @@ func _init():
 	set_type("weapon")
 	stat_increments.damage = .1
 
+
 func _ready():
 	set_equipment_slots(["gem", "base"])
 	set_stat_base("damage", damage)
 	set_stat_base("attack_speed", attack_speed)
 	set_stat_base("knockback", knockback)
 	set_stat_base("stagger", stagger)
-	
-	var combust_props = {"damage":10, "duration":2}
-	var combust = CombustBuff.new(combust_props)
-	add_buff_base(combust)
+
 
 func _process(delta):
 	cooldown -= delta
+
 
 func _create_attack_area(props, parent, angle = null, origin = null):
 	
@@ -49,20 +48,36 @@ func _create_attack_area(props, parent, angle = null, origin = null):
 	
 	return area
 
+
 func set_cooldown(atk_speed):
 	cooldown = 1.0 / atk_speed
 
+
 func on_cooldown():
 	return true if cooldown >= 0 else false
+
 
 func _get_vector_to_mouse():
 	var mouse_pos = get_global_mouse_position()
 	var vec = (mouse_pos - global_position).normalized()
 	return vec
 
+
 func on_attack_started(attacker):
 	$StateMachine._change_state("attack")
 	$StateMachine/Attack.attacker = attacker
 
+
 func on_attack_ended():
-	$StateMachine._change_state("idle")
+#	$StateMachine._change_state("idle")
+	pass
+
+
+func connect_entity(entity):
+	entity.connect("attack_started", self, "on_attack_started")
+	entity.connect("attack_ended", self, "on_attack_ended")
+
+
+func disconnect_entity(entity):
+		entity.disconnect("attack_started", self, "on_attack_started")
+		entity.disconnect("attack_ended", self, "on_attack_ended")
