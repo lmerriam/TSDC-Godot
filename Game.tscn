@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://HUD.gd" type="Script" id=17]
 [ext_resource path="res://sprites/icon.png" type="Texture" id=18]
 [ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=19]
+[ext_resource path="res://CharacterControl.gd" type="Script" id=20]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0941176, 0.643137, 0, 1 )
@@ -159,4 +160,24 @@ rounded = true
 visible = false
 mouse_filter = 2
 
+[node name="Character" type="Control" parent="GUI"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 710.0
+margin_bottom = 473.0
+mouse_filter = 2
+script = ExtResource( 20 )
+
+[node name="StatList" type="Tree" parent="GUI/Character"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -210.0
+
+[connection signal="stats_updated" from="World/Entities/Player/Entity" to="GUI/Character" method="_on_player_stats_updated"]
 [connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World/Environment" method="_on_BtnGenMap_button_up"]
+
+[editable path="World/Entities/Player"]
+
+[editable path="World/Entities/Player/Entity"]

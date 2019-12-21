@@ -15,6 +15,7 @@ func set_item(_item):
 
 func update_slots():
 	$ItemSlots.clear()
+	item.update_equipment()
 	for slot in item.equipment_slots:
 		var equipped_mod = item.get_equipped(slot)
 		if equipped_mod:
@@ -32,7 +33,7 @@ func update_slots():
 
 func _on_equip_button_up():
 	$ModTooltip.hide()
-	item.set_equipped(selected_mod)
+	item.set_equipped(selected_mod, item.find_equipment_slot(selected_mod.type).name)
 	Global.player_entity.remove_item(selected_mod)
 	$ItemTooltip.set_item(item)
 	$ModList.hide()
@@ -58,15 +59,14 @@ func _on_slot_selected(index):
 	$ModList.show()
 	selected_slot = $ItemSlots.get_item_metadata(index)
 	selected_slot_idx = index
+	$ModList.filter = item.get_equipment_slot(item.equipment_slots[index]).type
 	if selected_slot:
 		$ModList.hide()
-		$ModList.filter = selected_slot.type
 		$ModTooltip.show()
 		$ModTooltip.set_item(selected_slot)
 		$ModTooltip/RemoveButton.show()
 		$ModTooltip/EquipButton.hide()
 	else:
 		$ModList.show()
-		$ModList.filter = item.equipment_slots[selected_slot_idx]
 		$ModList.update_list()
 		$ModTooltip.hide()

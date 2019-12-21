@@ -13,7 +13,7 @@ signal modifiers_updated
 
 # Equipment
 export var has_equipment := true
-var equipment := {}
+var equipment := []
 var equipment_slots := []
 var equipment_stats := {}
 var equipment_buffs := []
@@ -44,8 +44,6 @@ export var health := 10.0
 var max_health = health
 signal health_changed
 signal killed
-
-# Attacks
 
 # Attacks
 export var faction:String
@@ -148,13 +146,9 @@ func modify_health(amount):
 #    EQUIPMENT
 ###################
 
-func get_equipment():
-	return equipment
-
 func update_equipment_stats():
 	equipment_stats.clear()
-	for item_type in equipment:
-		var item = get_equipped(item_type)
+	for item in equipment:
 		var item_stats = item.stats
 		for s in item_stats:
 			if equipment_stats.has(s):
@@ -165,60 +159,82 @@ func update_equipment_stats():
 
 func update_equipment_buffs():
 	equipment_buffs.clear()
-	for item_type in equipment:
-		var item = get_equipped(item_type)
+	for item in equipment:
 		equipment_buffs += item.buffs
 	emit_signal("item_buffs_updated")
 
-func get_equipment_stats():
-	return equipment_stats
-
-func get_equipped(type):
-	if equipment.has(type):
-		return equipment[type]
-
-func set_equipped(item):
-	var type = item.get_type()
-	if is_instance_valid(item) and accepts_type(type):
-		equipment[type] = item
-		update_stats()
-		update_buffs()
-		
-		item.connect("item_stats_updated", self, "_on_item_stats_updated")
-		item.connect("item_buffs_updated", self, "_on_item_buffs_updated")
-		emit_signal("item_equipped", item)
-		
-		return true
+func get_equipped(slot):
+	if $Equipment.get_node(slot).get_child_count() > 0:
+		return $Equipment.get_node(slot).get_child(0)
 	return false
 
-func remove_equipped(item):
-	var type = item.get_type()
-	equipment.erase(type)
+func set_equipped(item, slot):
+	if get_equipped(slot):
+		remove_equipped(slot, false)
+		
+	if item.get_parent():
+		item.get_parent().remove_child(item)
+	
+	$Equipment.get_node(slot).add_child(item)
+	get_equipped(slot).position = Vector2(0,0)
+	item.faction = faction
+	item.item_owner = self
+	update_equipment()
+	connect_equipment(item)
+	emit_signal("item_equipped", item)
+
+func remove_equipped(slot, update_required=true):
+	var item = get_equipped(slot)
+	$Equipment.get_node(slot).remove_child(item)
+	
+	if update_required:
+		update_equipment()
+	
+	emit_signal("item_unequipped", item)
+	disconnect_equipment(item)
+
+func update_equipment():
+	equipment.clear()
+	equipment_slots.clear()
+	for slot in $Equipment.get_children():
+		equipment_slots.append(slot.name)
+		if slot.get_child_count() > 0:
+			equipment.append(slot.get_child(0))
 	update_stats()
 	update_buffs()
-	
-	# Hook up signals
-	emit_signal("item_unequipped", item)
-	if item.is_connected("item_stats_updated", self, "_on_item_stats_updated"):
-		item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
-	if item.is_connected("item_buffs_updated", self, "_on_item_buffs_updated"):
-		item.disconnect("item_buffs_updated", self, "_on_item_buffs_updated")
-
-func remove_equipped_type(type):
-	var item = get_equipped(type)
-	remove_equipped(item)
-
-func set_equipment_slots(slots: Array):
-	equipment_slots = slots
 
 func accepts_type(type):
-	return true if equipment_slots.has(type) or equipment_slots.empty() else false
+	return true if find_equipment_slot(type) else false
+
+func get_equipment_slot(slot_name):
+	return $Equipment.get_node(slot_name)
+
+func find_equipment_slot(type):
+	for slot in $Equipment.get_children():
+		if slot.type == type:
+			return slot
+	return false
 
 func _on_item_stats_updated():
 	update_stats()
 
 func _on_item_buffs_updated():
 	update_buffs()
+
+func connect_equipment(item):
+	item.connect("item_stats_updated", self, "_on_item_stats_updated")
+	item.connect("item_buffs_updated", self, "_on_item_buffs_updated")
+
+func disconnect_equipment(item):
+	if item.is_connected("item_stats_updated", self, "_on_item_stats_updated"):
+		item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
+	if item.is_connected("item_buffs_updated", self, "_on_item_buffs_updated"):
+		item.disconnect("item_buffs_updated", self, "_on_item_buffs_updated")
+
+func _on_equipment_ready():
+	update_equipment()
+	for item in equipment:
+		connect_equipment(item)
 
 ###################
 #    INVENTORY

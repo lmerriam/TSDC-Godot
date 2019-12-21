@@ -2,6 +2,7 @@ extends Item
 class_name Weapon
 
 var cooldown := 0.0
+var is_attacking = false
 
 export var player_speed_modifier := .5
 export var damage := 0.0
@@ -18,7 +19,6 @@ func _init():
 
 
 func _ready():
-	set_equipment_slots(["gem", "base"])
 	set_stat_base("damage", damage)
 	set_stat_base("attack_speed", attack_speed)
 	set_stat_base("knockback", knockback)
@@ -63,21 +63,10 @@ func _get_vector_to_mouse():
 	return vec
 
 
-func on_attack_started(attacker):
-	$StateMachine._change_state("attack")
-	$StateMachine/Attack.attacker = attacker
+func on_attack_started():
+	is_attacking = true
 
 
 func on_attack_ended():
-#	$StateMachine._change_state("idle")
-	pass
-
-
-func connect_entity(entity):
-	entity.connect("attack_started", self, "on_attack_started")
-	entity.connect("attack_ended", self, "on_attack_ended")
-
-
-func disconnect_entity(entity):
-		entity.disconnect("attack_started", self, "on_attack_started")
-		entity.disconnect("attack_ended", self, "on_attack_ended")
+	is_attacking = false
+	

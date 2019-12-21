@@ -38,7 +38,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
-type = "weapon"
+slot = "Weapon"
 
 [node name="ArmorSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -46,7 +46,7 @@ anchor_bottom = 0.0
 margin_left = 60.0
 margin_right = 60.0
 margin_bottom = 0.0
-type = "armor"
+slot = "Armor"
 
 [node name="FootwearSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -54,7 +54,7 @@ anchor_bottom = 0.0
 margin_left = 120.0
 margin_right = 120.0
 margin_bottom = 0.0
-type = "shoes"
+slot = "Footwear"
 
 [node name="AmuletSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -62,7 +62,7 @@ anchor_bottom = 0.0
 margin_left = 180.0
 margin_right = 180.0
 margin_bottom = 0.0
-type = "amulet"
+slot = "Amulet"
 
 [node name="ItemList" parent="." instance=ExtResource( 3 )]
 

@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 export var speed = 100
 onready var sprite = $AnimatedSprite
-const START_WEAPON = preload("res://items/weapon/Sword.tscn")
 
 var attack_move_speed = 1
 
@@ -15,7 +14,7 @@ func _init():
 
 func _ready():
 	sprite.play()
-	set_equipped(START_WEAPON.instance())
+	$Entity.set_stat_base("damage", 3)
 
 
 func _unhandled_input(event):
@@ -60,30 +59,17 @@ func receive_attack(atk):
 	$Entity.modify_health(-dmg)
 
 
-func set_equipped(item):
-	$Entity.set_equipped(item)
-	if item.get_parent():
-		item.get_parent().remove_child(item)
-	if item.has_method("connect_entity"):
-		item.connect_entity(self)
-	$WeaponOrigin.add_child(item)
-	item.position = Vector2(0,0)
-
-
-func remove_equipped(item):
-	$Entity.remove_equipped(item)
-	item.get_parent().remove_child(item)
-	if item.has_method("disconnect_entity"):
-		item.disconnect_entity(self)
-	Global.entities.add_child(item)
-	item.position = Vector2(-999,-999)
-
-
 func _on_Player_attack_started(entity_id):
-	var weapon = $Entity.get_equipped("weapon")
+	var weapon = $Entity.get_equipped("Weapon")
 	if weapon:
 		attack_move_speed = weapon.player_speed_modifier
+	weapon.on_attack_started()
 
 
 func _on_Player_attack_ended():
 	attack_move_speed = 1
+	$Entity.get_equipped("Weapon").on_attack_ended()
+
+
+func _on_entity_tree_entered():
+	Global.player_entity = $Entity

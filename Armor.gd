@@ -7,4 +7,3 @@ var player_speed_modifier := .5
 
 func _init():
 	set_type("armor")
-	set_equipment_slots(["gem", "base"])

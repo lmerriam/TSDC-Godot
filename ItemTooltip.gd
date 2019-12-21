@@ -21,13 +21,13 @@ func set_item(item):
 		stats_label.newline()
 		
 		# Show stats of child items
-		for i in child_equipment:
-			var child_item = child_equipment[i]
+		for child_item in child_equipment:
+#			var child_item = child_equipment[i]
 			stats_label.add_text('---')
 			stats_label.newline()
 			stats_label.add_text(child_item.item_name)
 			stats_label.newline()
-			_append_item_info(stats_label,child_equipment[i])
+			_append_item_info(stats_label,child_item)
 
 func _append_item_info(label,item):
 	var level = item.level
