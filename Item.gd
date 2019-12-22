@@ -1,4 +1,4 @@
-extends Entity
+extends Node2D
 class_name Item
 
 var type
@@ -12,7 +12,7 @@ func set_type(item_type):
 	type = item_type
 
 func get_sprite():
-	var sprite = get_node("Sprite")
+	var sprite = $Sprite
 	return sprite.texture
 
 func get_name():

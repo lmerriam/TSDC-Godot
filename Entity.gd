@@ -149,7 +149,7 @@ func modify_health(amount):
 func update_equipment_stats():
 	equipment_stats.clear()
 	for item in equipment:
-		var item_stats = item.stats
+		var item_stats = item.get_node("Entity").stats
 		for s in item_stats:
 			if equipment_stats.has(s):
 				equipment_stats[s] += item_stats[s]
@@ -160,7 +160,8 @@ func update_equipment_stats():
 func update_equipment_buffs():
 	equipment_buffs.clear()
 	for item in equipment:
-		equipment_buffs += item.buffs
+		var item_buffs = item.get_node("Entity").buffs
+		equipment_buffs += item_buffs
 	emit_signal("item_buffs_updated")
 
 func get_equipped(slot):
@@ -222,19 +223,20 @@ func _on_item_buffs_updated():
 	update_buffs()
 
 func connect_equipment(item):
-	item.connect("item_stats_updated", self, "_on_item_stats_updated")
-	item.connect("item_buffs_updated", self, "_on_item_buffs_updated")
+	item.get_node("Entity").connect("item_stats_updated", self, "_on_item_stats_updated")
+	item.get_node("Entity").connect("item_buffs_updated", self, "_on_item_buffs_updated")
 
 func disconnect_equipment(item):
-	if item.is_connected("item_stats_updated", self, "_on_item_stats_updated"):
-		item.disconnect("item_stats_updated", self, "_on_item_stats_updated")
-	if item.is_connected("item_buffs_updated", self, "_on_item_buffs_updated"):
-		item.disconnect("item_buffs_updated", self, "_on_item_buffs_updated")
+	if item.get_node("Entity").is_connected("item_stats_updated", self, "_on_item_stats_updated"):
+		item.get_node("Entity").disconnect("item_stats_updated", self, "_on_item_stats_updated")
+	if item.get_node("Entity").is_connected("item_buffs_updated", self, "_on_item_buffs_updated"):
+		item.get_node("Entity").disconnect("item_buffs_updated", self, "_on_item_buffs_updated")
 
 func _on_equipment_ready():
 	update_equipment()
 	for item in equipment:
 		connect_equipment(item)
+		item.item_owner = self
 
 ###################
 #    INVENTORY

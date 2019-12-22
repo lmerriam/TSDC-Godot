@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://sprites/player/f11f1b6a-48f2-41f1-8083-b6cf266e6377.png" type="Texture" id=8]
 [ext_resource path="res://Entity.tscn" type="PackedScene" id=9]
 [ext_resource path="res://EquipmentSlot.gd" type="Script" id=10]
-[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -43,8 +42,6 @@ offset = Vector2( -1, -11 )
 [node name="Weapon" type="Node2D" parent="Entity/Equipment" index="0"]
 script = ExtResource( 10 )
 type = "weapon"
-
-[node name="Weapon" parent="Entity/Equipment/Weapon" instance=ExtResource( 11 )]
 
 [node name="Armor" type="Node2D" parent="Entity/Equipment" index="1"]
 script = ExtResource( 10 )

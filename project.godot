@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Entity.gd"
 }, {
+"base": "Item",
+"class": "Equipment",
+"language": "GDScript",
+"path": "res://Equipment.gd"
+}, {
 "base": "Buff",
 "class": "FireBuff",
 "language": "GDScript",
@@ -94,7 +99,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://InventoryList.gd"
 }, {
-"base": "Entity",
+"base": "Node2D",
 "class": "Item",
 "language": "GDScript",
 "path": "res://Item.gd"
@@ -129,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://status/Status.gd"
 }, {
-"base": "Item",
+"base": "Equipment",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://items/weapon/Weapon.gd"
@@ -149,6 +154,7 @@ _global_script_class_icons={
 "ComponentStats": "",
 "Enemy": "",
 "Entity": "",
+"Equipment": "",
 "FireBuff": "",
 "FireStatus": "",
 "InventoryList": "",

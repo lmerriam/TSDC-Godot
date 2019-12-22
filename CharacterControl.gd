@@ -14,8 +14,9 @@ func _on_player_stats_updated():
 			$StatList.create_item(line).set_text(0,txt)
 		
 		for item in Global.player_entity.equipment:
-			if item.stats.has(stat):
-				txt = item.item_name + ": " + String(item.stats[stat])
+			var item_stats = item.get_node("Entity").stats
+			if item_stats.has(stat):
+				txt = item.item_name + ": " + String(item_stats[stat])
 				$StatList.create_item(line).set_text(0,txt)
 		
 		line.set_collapsed(true)

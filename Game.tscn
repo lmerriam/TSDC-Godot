@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,20 +6,14 @@
 [ext_resource path="res://Props.gd" type="Script" id=4]
 [ext_resource path="res://Entities.gd" type="Script" id=5]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Camera2D.gd" type="Script" id=7]
-[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=8]
-[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Loot.tscn" type="PackedScene" id=10]
-[ext_resource path="res://items/weapon/Wand.tscn" type="PackedScene" id=11]
-[ext_resource path="res://items/component/IceGem.tscn" type="PackedScene" id=12]
-[ext_resource path="res://items/component/FireGem.tscn" type="PackedScene" id=13]
-[ext_resource path="res://items/component/TriggerFast.tscn" type="PackedScene" id=14]
-[ext_resource path="res://items/armor/HeavyArmor.tscn" type="PackedScene" id=15]
-[ext_resource path="res://GUI.gd" type="Script" id=16]
-[ext_resource path="res://HUD.gd" type="Script" id=17]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=18]
-[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=19]
-[ext_resource path="res://CharacterControl.gd" type="Script" id=20]
+[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Camera2D.gd" type="Script" id=8]
+[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=9]
+[ext_resource path="res://GUI.gd" type="Script" id=10]
+[ext_resource path="res://HUD.gd" type="Script" id=11]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=12]
+[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=13]
+[ext_resource path="res://CharacterControl.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0941176, 0.643137, 0, 1 )
@@ -80,45 +74,20 @@ script = ExtResource( 5 )
 [node name="Player" parent="World/Entities" instance=ExtResource( 6 )]
 position = Vector2( 238.077, 200.944 )
 
+[node name="Sword" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
+
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
-[node name="Stronghold" parent="World/Entities" instance=ExtResource( 8 )]
+[node name="Stronghold" parent="World/Entities" instance=ExtResource( 9 )]
 position = Vector2( 528.262, 248.913 )
 
-[node name="Weapon" parent="World/Entities" instance=ExtResource( 9 )]
-position = Vector2( 196.704, 195.859 )
-
-[node name="Loot8" parent="World/Entities" instance=ExtResource( 10 )]
-position = Vector2( 260, 242.696 )
-item_path = ExtResource( 11 )
-
-[node name="Loot9" parent="World/Entities" instance=ExtResource( 10 )]
-position = Vector2( 209.535, 161.616 )
-item_path = ExtResource( 12 )
-
-[node name="Loot10" parent="World/Entities" instance=ExtResource( 10 )]
-position = Vector2( 238.596, 161.616 )
-item_path = ExtResource( 13 )
-
-[node name="Loot11" parent="World/Entities" instance=ExtResource( 10 )]
-position = Vector2( 264.569, 161.616 )
-item_path = ExtResource( 14 )
-
-[node name="Loot2" parent="World/Entities" instance=ExtResource( 10 )]
-position = Vector2( 206.915, 242.641 )
-item_path = ExtResource( 9 )
-
-[node name="Loot3" parent="World/Entities" instance=ExtResource( 10 )]
-position = Vector2( 232.732, 242.641 )
-item_path = ExtResource( 15 )
-
 [node name="GUI" type="CanvasLayer" parent="."]
-script = ExtResource( 16 )
+script = ExtResource( 10 )
 
 [node name="HUD" type="Control" parent="GUI"]
 margin_left = 10.0
@@ -126,7 +95,7 @@ margin_top = 10.0
 margin_right = 710.0
 margin_bottom = 470.0
 mouse_filter = 2
-script = ExtResource( 17 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -142,7 +111,7 @@ text = "Generate"
 visible = false
 position = Vector2( 604.71, 365.46 )
 scale = Vector2( 0.627024, 0.627024 )
-normal = ExtResource( 18 )
+normal = ExtResource( 12 )
 action = "attack"
 
 [node name="HealthBar" type="ProgressBar" parent="GUI/HUD"]
@@ -156,7 +125,7 @@ step = 1.0
 value = 75.0
 rounded = true
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 19 )]
+[node name="Inventory" parent="GUI" instance=ExtResource( 13 )]
 visible = false
 mouse_filter = 2
 
@@ -167,7 +136,7 @@ margin_top = 7.0
 margin_right = 710.0
 margin_bottom = 473.0
 mouse_filter = 2
-script = ExtResource( 20 )
+script = ExtResource( 14 )
 
 [node name="StatList" type="Tree" parent="GUI/Character"]
 anchor_left = 1.0

@@ -63,12 +63,14 @@ func _on_Player_attack_started(entity_id):
 	var weapon = $Entity.get_equipped("Weapon")
 	if weapon:
 		attack_move_speed = weapon.player_speed_modifier
-	weapon.on_attack_started()
+		weapon.on_attack_started()
 
 
 func _on_Player_attack_ended():
 	attack_move_speed = 1
-	$Entity.get_equipped("Weapon").on_attack_ended()
+	var weapon = $Entity.get_equipped("Weapon")
+	if weapon:
+		weapon.on_attack_ended()
 
 
 func _on_entity_tree_entered():

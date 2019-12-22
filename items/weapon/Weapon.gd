@@ -1,4 +1,4 @@
-extends Item
+extends Equipment
 class_name Weapon
 
 var cooldown := 0.0
@@ -15,14 +15,14 @@ export var attack_area = preload("res://attacks/Slash.tscn")
 
 func _init():
 	set_type("weapon")
-	stat_increments.damage = .1
+	$Entity.stat_increments.damage = .1
 
 
 func _ready():
-	set_stat_base("damage", damage)
-	set_stat_base("attack_speed", attack_speed)
-	set_stat_base("knockback", knockback)
-	set_stat_base("stagger", stagger)
+	$Entity.set_stat_base("damage", damage)
+	$Entity.set_stat_base("attack_speed", attack_speed)
+	$Entity.set_stat_base("knockback", knockback)
+	$Entity.set_stat_base("stagger", stagger)
 
 
 func _process(delta):
