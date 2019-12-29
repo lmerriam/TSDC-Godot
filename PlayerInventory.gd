@@ -21,7 +21,7 @@ func _set_selected_item(item):
 			$ItemSelected/UnequipButton.hide()
 		
 		# Show mod button if moddable
-		if item.has_equipment:
+		if item.get_node("Entity").has_equipment:
 			$ItemSelected/ModButton.show()
 		else:
 			$ItemSelected/ModButton.hide()

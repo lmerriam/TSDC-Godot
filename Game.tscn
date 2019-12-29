@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,14 +6,19 @@
 [ext_resource path="res://Props.gd" type="Script" id=4]
 [ext_resource path="res://Entities.gd" type="Script" id=5]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Camera2D.gd" type="Script" id=8]
-[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=9]
-[ext_resource path="res://GUI.gd" type="Script" id=10]
-[ext_resource path="res://HUD.gd" type="Script" id=11]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=12]
-[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=13]
-[ext_resource path="res://CharacterControl.gd" type="Script" id=14]
+[ext_resource path="res://items/armor/LeatherArmor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://items/weapon/Bow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://items/component/FireGem.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Camera2D.gd" type="Script" id=10]
+[ext_resource path="res://TestLight.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sprites/lights/TestLightHard.png" type="Texture" id=12]
+[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Loot.tscn" type="PackedScene" id=14]
+[ext_resource path="res://GUI.gd" type="Script" id=15]
+[ext_resource path="res://HUD.gd" type="Script" id=16]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=17]
+[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=18]
+[ext_resource path="res://CharacterControl.gd" type="Script" id=19]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0941176, 0.643137, 0, 1 )
@@ -74,20 +79,50 @@ script = ExtResource( 5 )
 [node name="Player" parent="World/Entities" instance=ExtResource( 6 )]
 position = Vector2( 238.077, 200.944 )
 
-[node name="Sword" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
+[node name="AnimatedSprite" parent="World/Entities/Player" index="0"]
+light_mask = 2
+
+[node name="Armor" parent="World/Entities/Player/Entity/Equipment" index="0"]
+editor/display_folded = true
+position = Vector2( 0, -4 )
+
+[node name="Leather Armor" parent="World/Entities/Player/Entity/Equipment/Armor" index="0" instance=ExtResource( 7 )]
+type = ""
+
+[node name="Weapon" parent="World/Entities/Player/Entity/Equipment" index="3"]
+position = Vector2( 0, -4 )
+
+[node name="Bow" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 8 )]
+type = ""
+
+[node name="Fire Gem" parent="World/Entities/Player/Entity/Equipment/Weapon/Bow/Entity/Equipment/GemSlot" index="0" instance=ExtResource( 9 )]
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 
-[node name="Stronghold" parent="World/Entities" instance=ExtResource( 9 )]
+[node name="Node2D2" parent="World/Entities/Player" instance=ExtResource( 11 )]
+position = Vector2( 0.49118, -5.62729 )
+
+[node name="Light2D" parent="World/Entities/Player/Node2D2" index="0"]
+texture = ExtResource( 12 )
+texture_scale = 4.0
+energy = 0.5
+shadow_enabled = true
+
+[node name="Stronghold" parent="World/Entities" instance=ExtResource( 13 )]
 position = Vector2( 528.262, 248.913 )
 
+[node name="Loot" parent="World/Entities" instance=ExtResource( 14 )]
+position = Vector2( 221.637, 155.091 )
+item_path = ExtResource( 9 )
+
 [node name="GUI" type="CanvasLayer" parent="."]
-script = ExtResource( 10 )
+editor/display_folded = true
+script = ExtResource( 15 )
 
 [node name="HUD" type="Control" parent="GUI"]
 margin_left = 10.0
@@ -95,7 +130,7 @@ margin_top = 10.0
 margin_right = 710.0
 margin_bottom = 470.0
 mouse_filter = 2
-script = ExtResource( 11 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -111,7 +146,7 @@ text = "Generate"
 visible = false
 position = Vector2( 604.71, 365.46 )
 scale = Vector2( 0.627024, 0.627024 )
-normal = ExtResource( 12 )
+normal = ExtResource( 17 )
 action = "attack"
 
 [node name="HealthBar" type="ProgressBar" parent="GUI/HUD"]
@@ -125,7 +160,7 @@ step = 1.0
 value = 75.0
 rounded = true
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 13 )]
+[node name="Inventory" parent="GUI" instance=ExtResource( 18 )]
 visible = false
 mouse_filter = 2
 
@@ -136,7 +171,7 @@ margin_top = 7.0
 margin_right = 710.0
 margin_bottom = 473.0
 mouse_filter = 2
-script = ExtResource( 14 )
+script = ExtResource( 19 )
 
 [node name="StatList" type="Tree" parent="GUI/Character"]
 anchor_left = 1.0
@@ -150,3 +185,9 @@ margin_left = -210.0
 [editable path="World/Entities/Player"]
 
 [editable path="World/Entities/Player/Entity"]
+
+[editable path="World/Entities/Player/Entity/Equipment/Weapon/Bow"]
+
+[editable path="World/Entities/Player/Entity/Equipment/Weapon/Bow/Entity"]
+
+[editable path="World/Entities/Player/Node2D2"]

@@ -39,21 +39,21 @@ offset = Vector2( -1, -11 )
 
 [node name="Entity" parent="." instance=ExtResource( 9 )]
 
-[node name="Weapon" type="Node2D" parent="Entity/Equipment" index="0"]
-script = ExtResource( 10 )
-type = "weapon"
-
-[node name="Armor" type="Node2D" parent="Entity/Equipment" index="1"]
+[node name="Armor" type="Node2D" parent="Entity/Equipment" index="0"]
 script = ExtResource( 10 )
 type = "armor"
 
-[node name="Footwear" type="Node2D" parent="Entity/Equipment" index="2"]
+[node name="Footwear" type="Node2D" parent="Entity/Equipment" index="1"]
 script = ExtResource( 10 )
 type = "footwear"
 
-[node name="Amulet" type="Node2D" parent="Entity/Equipment" index="3"]
+[node name="Amulet" type="Node2D" parent="Entity/Equipment" index="2"]
 script = ExtResource( 10 )
 type = "amulet"
+
+[node name="Weapon" type="Node2D" parent="Entity/Equipment" index="3"]
+script = ExtResource( 10 )
+type = "weapon"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

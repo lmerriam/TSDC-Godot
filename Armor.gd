@@ -1,9 +1,9 @@
-extends Item
+extends Equipment
 class_name Armor
 
-var attack_area: Resource
-var cooldown := 0.0
-var player_speed_modifier := .5
+export var defense := 0
+export var speed := 0
 
 func _init():
-	set_type("armor")
+	$Entity.set_stat_base("defense", defense)
+	$Entity.set_stat_base("speed", speed)

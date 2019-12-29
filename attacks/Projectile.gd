@@ -1,0 +1,19 @@
+extends AttackArea
+
+export var speed = 12
+export var pierce := 1
+var time_left = 1
+
+func _ready():
+	set_as_toplevel(true)
+
+func _process(delta):
+	global_position += (angle * speed)
+	time_left -= delta
+	if time_left <= 0:
+		queue_free()
+
+func attack_successful(entity):
+	pierce -= 1
+	if pierce <= 0:
+		queue_free()

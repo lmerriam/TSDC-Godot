@@ -177,11 +177,11 @@ func set_equipped(item, slot):
 		item.get_parent().remove_child(item)
 	
 	$Equipment.get_node(slot).add_child(item)
-	get_equipped(slot).position = Vector2(0,0)
-	item.faction = faction
+	item.position = Vector2(0,0)
+	item.get_node("Entity").faction = faction
 	item.item_owner = self
-	update_equipment()
 	connect_equipment(item)
+	update_equipment()
 	emit_signal("item_equipped", item)
 
 func remove_equipped(slot, update_required=true):
@@ -216,21 +216,15 @@ func find_equipment_slot(type):
 			return slot
 	return false
 
-func _on_item_stats_updated():
-	update_stats()
-
-func _on_item_buffs_updated():
-	update_buffs()
-
 func connect_equipment(item):
-	item.get_node("Entity").connect("item_stats_updated", self, "_on_item_stats_updated")
-	item.get_node("Entity").connect("item_buffs_updated", self, "_on_item_buffs_updated")
+	item.get_node("Entity").connect("stats_updated", self, "update_stats")
+	item.get_node("Entity").connect("buffs_updated", self, "update_buffs")
 
 func disconnect_equipment(item):
-	if item.get_node("Entity").is_connected("item_stats_updated", self, "_on_item_stats_updated"):
-		item.get_node("Entity").disconnect("item_stats_updated", self, "_on_item_stats_updated")
-	if item.get_node("Entity").is_connected("item_buffs_updated", self, "_on_item_buffs_updated"):
-		item.get_node("Entity").disconnect("item_buffs_updated", self, "_on_item_buffs_updated")
+	if item.get_node("Entity").is_connected("stats_updated", self, "update_stats"):
+		item.get_node("Entity").disconnect("stats_updated", self, "update_stats")
+	if item.get_node("Entity").is_connected("buffs_updated", self, "update_buffs"):
+		item.get_node("Entity").disconnect("buffs_updated", self, "update_buffs")
 
 func _on_equipment_ready():
 	update_equipment()

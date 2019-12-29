@@ -1,7 +1,7 @@
 extends Node2D
 class_name Item
 
-var type
+export var type := ""
 export var item_name := "Base Item"
 var item_owner
 

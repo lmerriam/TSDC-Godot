@@ -1,12 +1,10 @@
 {
+  "basearmor": "res://items/armor/BaseArmor.tscn",
   "bow": "res://items/weapon/Bow.tscn",
   "firegem": "res://items/component/FireGem.tscn",
-  "heavyarmor": "res://items/armor/HeavyArmor.tscn",
-  "icegem": "res://items/component/IceGem.tscn",
-  "oldsword": "res://items/weapon/OLDSword.tscn",
-  "oldwand": "res://items/weapon/OLDWand.tscn",
-  "oldweapon": "res://items/weapon/OLDWeapon.tscn",
+  "gem": "res://items/component/Gem.tscn",
+  "leatherarmor": "res://items/armor/LeatherArmor.tscn",
   "sword": "res://items/weapon/Sword.tscn",
-  "triggerfast": "res://items/component/TriggerFast.tscn",
-  "wand": "res://items/weapon/Wand.tscn"
+  "wand": "res://items/weapon/Wand.tscn",
+  "weapon": "res://items/Weapon.tscn"
 }

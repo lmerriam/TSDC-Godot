@@ -14,7 +14,6 @@ export var charge_time := 0.0
 export var attack_area = preload("res://attacks/Slash.tscn")
 
 func _init():
-	set_type("weapon")
 	$Entity.stat_increments.damage = .1
 
 
