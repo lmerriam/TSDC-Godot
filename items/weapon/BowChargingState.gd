@@ -11,6 +11,7 @@ func enter():
 	current_charge = 0
 	entity.get_node("Sprite").texture = charging_sprite
 	line.visible = true
+	line.scale.x = 0
 
 
 func update(delta):
@@ -27,7 +28,7 @@ func update(delta):
 	var rot = entity.global_position.angle_to_point(entity.get_global_mouse_position())
 	entity.get_node("Sprite").rotation = rot + .75
 	line.scale.x = current_charge_level()
-	line.rotation = rot
+#	line.rotation = rot
 
 
 func exit():
