@@ -20,7 +20,14 @@ attack_area = ExtResource( 2 )
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 
-[node name="StateMachine" parent="." index="2"]
+[node name="Line2D" type="Line2D" parent="." index="2"]
+scale = Vector2( 1e-005, 1 )
+points = PoolVector2Array( 0, 0, -40, 0 )
+width = 1.0
+default_color = Color( 1, 1, 1, 1 )
+texture_mode = 5331968
+
+[node name="StateMachine" parent="." index="3"]
 START_STATE = NodePath("../../Bow/StateMachine/Idling")
 
 [node name="Attacking" parent="StateMachine" index="0"]
@@ -30,6 +37,7 @@ START_STATE = NodePath("Cooldown")
 [node name="Charging" type="Node" parent="StateMachine/Attacking" index="0"]
 script = ExtResource( 5 )
 charging_sprite = ExtResource( 6 )
+line = NodePath("../../../Line2D")
 
 [node name="Cooldown" type="Node" parent="StateMachine/Attacking" index="1"]
 script = ExtResource( 7 )
