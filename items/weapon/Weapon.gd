@@ -52,6 +52,10 @@ func set_cooldown(atk_speed):
 	cooldown = 1.0 / atk_speed
 
 
+func start_cooldown():
+	set_cooldown(attack_speed)
+
+
 func on_cooldown():
 	return true if cooldown >= 0 else false
 
