@@ -1,6 +1,6 @@
 class_name ColdBuff extends Buff
 
-func _init(_properties):
+func _init(_properties={"amount":.5, "duration":4}):
 	properties = _properties
 	status = ColdStatus
 	type = "Cold"

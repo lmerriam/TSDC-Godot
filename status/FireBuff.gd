@@ -1,7 +1,7 @@
 extends Buff
 class_name FireBuff
 
-func _init(_properties):
+func _init(_properties={"damage":4,"duration":4}):
 	properties = _properties
 	status = FireStatus
 	type = "Fire"

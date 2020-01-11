@@ -13,6 +13,11 @@ attack_speed = 2
 knockback = 200.0
 stagger = 0.5
 
+[node name="Entity" parent="." index="0"]
+level = 1
+has_equipment = true
+health = 10.0
+
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )
 

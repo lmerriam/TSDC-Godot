@@ -1,6 +1,8 @@
 {
   "basearmor": "res://items/armor/BaseArmor.tscn",
   "bow": "res://items/weapon/Bow.tscn",
+  "coldgem": "res://items/component/ColdGem.tscn",
+  "combustgem": "res://items/component/CombustGem.tscn",
   "firegem": "res://items/component/FireGem.tscn",
   "gem": "res://items/component/Gem.tscn",
   "leatherarmor": "res://items/armor/LeatherArmor.tscn",

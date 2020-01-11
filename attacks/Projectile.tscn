@@ -15,7 +15,6 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
 "projectiles",
 ]]
 script = ExtResource( 1 )
-speed = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

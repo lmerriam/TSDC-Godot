@@ -303,6 +303,10 @@ func find_status_from_buff(buff):
 			return status
 	return false
 
+func _on_buffs_ready():
+	for buff in $Buffs.get_children():
+		add_buff_base(buff)
+
 ###################
 #    ATTACKS
 ###################

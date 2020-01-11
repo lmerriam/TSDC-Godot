@@ -1,6 +1,6 @@
 class_name CombustBuff extends Buff
 
-func _init(_properties):
+func _init(_properties={"damage": 5, "duration": 5}):
 	properties = _properties
 	status = CombustStatus
 	type = "Combustion"

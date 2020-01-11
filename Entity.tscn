@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 
 [node name="Equipment" type="Node2D" parent="."]
 
-[node name="Status" type="Node" parent="."]
+[node name="Buffs" type="Node" parent="."]
 
 [connection signal="ready" from="Equipment" to="." method="_on_equipment_ready"]
+[connection signal="ready" from="Buffs" to="." method="_on_buffs_ready"]
