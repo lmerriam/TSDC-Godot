@@ -10,7 +10,7 @@ func update(delta):
 	windup_timer -= delta
 	
 	if windup_timer <= 0:
-		emit_signal("finished", "swing")
+		emit_signal("finished", "Swing")
 
 func exit():
 	print("Exit windup state")

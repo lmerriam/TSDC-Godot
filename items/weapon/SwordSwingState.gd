@@ -13,7 +13,7 @@ func update(delta):
 	swing_timer -= delta
 	
 	if swing_timer <= 0:
-		get_parent().emit_signal("finished","idle")
+		get_parent().emit_signal("finished","Idling")
 
 func exit():
 	print("Exit swing state")

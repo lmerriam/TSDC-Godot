@@ -1,9 +1,9 @@
 extends StateMachine
 
-var attacker
+#var attacker
 
-func _ready():
-	states_map = {
-		"swing": $Swing,
-		"windup": $Windup
-	}
+#func _ready():
+#	states_map = {
+#		"swing": $Swing,
+#		"windup": $Windup
+#	}

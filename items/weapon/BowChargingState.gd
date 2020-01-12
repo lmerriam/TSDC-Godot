@@ -22,7 +22,7 @@ func update(delta):
 		atk.damage *= current_charge_level()
 		area.speed *= current_charge_level()
 		line.visible = false
-		emit_signal("finished","cooldown")
+		emit_signal("finished","Cooldown")
 		
 	current_charge += delta
 	var rot = entity.global_position.angle_to_point(entity.get_global_mouse_position())

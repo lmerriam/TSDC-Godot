@@ -62,6 +62,7 @@ func remove_equipped(item):
 	var type = item.get_type()
 	equipment[type] = null
 	entity.remove_child(item)
+	Global.entities.add_child(item)
 	
 	# Hook up signals
 	emit_signal("item_unequipped", item)

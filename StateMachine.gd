@@ -13,6 +13,12 @@ var _active = false setget set_active
 
 
 func _ready():
+	
+	for child in get_children():
+		states_map[child.name] = child
+	
+	print(states_map)
+	
 	initialize(START_STATE)
 	if root_machine:
 		set_active(true)

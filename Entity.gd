@@ -187,6 +187,7 @@ func set_equipped(item, slot):
 func remove_equipped(slot, update_required=true):
 	var item = get_equipped(slot)
 	$Equipment.get_node(slot).remove_child(item)
+	Global.entities.add_child(item)
 	
 	if update_required:
 		update_equipment()
