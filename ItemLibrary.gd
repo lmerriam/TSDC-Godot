@@ -36,18 +36,24 @@ func instance_item(item_name):
 	return item
 
 func load_item(item_name):
-	return load(equipment[item_name])
+	for type in equipment:
+		if equipment[type].has(item_name):
+			return load(equipment[type][item_name])
+#	return load(equipment[item_name])
 
-func get_random_item():
-	var values = equipment.keys()
-	return values[randi() % values.size()]
+func get_random_item(type=null):
+	if type == null:
+		var types = equipment.keys()
+		type = types[randi() % types.size()]
+	var items = equipment[type].keys()
+	return items[randi() % items.size()]
 
-func instance_random_item():
-	var item_name = get_random_item()
+func instance_random_item(type=null):
+	var item_name = get_random_item(type)
 	return instance_item(item_name)
 
-func instance_random_loot():
-	var itm = instance_random_item()
+func instance_random_loot(type=null):
+	var itm = instance_random_item(type)
 	var lt = loot.instance()
 	Global.entities.call_deferred("add_child", lt)
 	lt.set_item(itm)

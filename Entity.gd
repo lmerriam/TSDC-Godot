@@ -7,7 +7,7 @@ export var level := 1
 var stats_base := {}
 var stats := {}
 var stat_modifiers := {}
-var stat_increments := {}
+export var stat_increments := {}
 signal stats_updated
 signal modifiers_updated
 

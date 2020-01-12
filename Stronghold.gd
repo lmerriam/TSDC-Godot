@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 export var aggro_radius = 128
+export var level = 1
 var defeated = false
 var spawned = false
 var enemy = preload("res://enemies/Enemy.tscn")
@@ -23,6 +24,7 @@ func _on_SpawnKilled(id):
 		for item in range(0,3):
 			var i = ItemLibrary.instance_random_loot()
 			i.global_position = global_position + Vector2(rand_range(-64,64), rand_range(-64,64))
+			i.item.level = level
 
 func _on_AggroRadius_body_entered(body):
 	# Spawn the enemies

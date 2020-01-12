@@ -19,7 +19,18 @@ func _generate_library(folder_path, json_path):
 	
 	#Create JSON
 	var data = {}
-	_iterate_dir(folder_path, data)
+	var dir = Directory.new()
+	if dir.open(folder_path) == OK:
+		dir.list_dir_begin(true, true)
+		var file_name = dir.get_next()
+		while (file_name != ""):
+			if dir.current_is_dir():
+				data[file_name] = {}
+				_iterate_dir(folder_path.plus_file(file_name), data[file_name])
+			file_name = dir.get_next()
+	else:
+		print("ItemLibrary watcher: invalid path")
+	dir.list_dir_end()
 	to_json(data)
 	
 	#Save JSON

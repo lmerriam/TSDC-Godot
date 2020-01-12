@@ -4,10 +4,12 @@ class_name Loot
 export var item_path: PackedScene
 var item
 var item_loaded
+export var level := 1
 
 func _ready():
 	if item_path:
 		set_item(item_path.instance())
+		item.level = level
 	if !item.get_parent():
 		Global.entities.call_deferred("add_child", item)
 

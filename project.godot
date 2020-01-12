@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Equipment",
 "class": "Armor",
 "language": "GDScript",
-"path": "res://Armor.gd"
+"path": "res://items/Armor.gd"
 }, {
 "base": "Area2D",
 "class": "AttackArea",
@@ -102,7 +102,7 @@ _global_script_classes=[ {
 "base": "Item",
 "class": "Gem",
 "language": "GDScript",
-"path": "res://items/component/BaseGem.gd"
+"path": "res://items/Gem.gd"
 }, {
 "base": "ItemList",
 "class": "InventoryList",
@@ -147,7 +147,7 @@ _global_script_classes=[ {
 "base": "Equipment",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://items/weapon/Weapon.gd"
+"path": "res://items/Weapon.gd"
 } ]
 _global_script_class_icons={
 "Armor": "",
