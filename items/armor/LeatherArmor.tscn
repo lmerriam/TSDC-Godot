@@ -4,9 +4,7 @@
 [ext_resource path="res://items/armor/LeatherArmor.gd" type="Script" id=2]
 [ext_resource path="res://sprites/pixeltier/armors/armor_27.png" type="Texture" id=3]
 
-
-
-[node name="Leather Armor" index="0" instance=ExtResource( 1 )]
+[node name="Leather Armor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 item_name = "Leather Armor"
 defense = 2

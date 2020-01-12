@@ -5,8 +5,10 @@ onready var sprite = $AnimatedSprite
 
 var attack_move_speed = 1
 
-signal attack_started(entity_id)
-signal attack_ended()
+signal attack_started
+signal attack_ended
+signal spell_started
+signal spell_ended
 
 func _init():
 	Global.player = self
@@ -19,9 +21,17 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
-		emit_signal("attack_started", $Entity)
+		emit_signal("attack_started")
 	elif event.is_action_released("attack"):
 		emit_signal("attack_ended")
+	
+	var skill = $Entity.get_equipped("Skill1")
+	if event.is_action_pressed("skill_1"):
+		if skill:
+			skill.on_cast_started()
+	elif event.is_action_released("skill_1"):
+		if skill:
+			skill.on_cast_ended()
 
 
 func _physics_process(delta):
@@ -38,12 +48,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	
-	if Input.is_mouse_button_pressed(BUTTON_RIGHT):
-		var scene = load("res://AreaSpell.tscn")
-		var spell = scene.instance()
-		Global.entities.add_child(spell)
-		spell.global_position = get_global_mouse_position()
-	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		sprite.animation = "run"
@@ -59,7 +63,7 @@ func receive_attack(atk):
 	$Entity.modify_health(-dmg)
 
 
-func _on_Player_attack_started(entity_id):
+func _on_Player_attack_started():
 	var weapon = $Entity.get_equipped("Weapon")
 	if weapon:
 		attack_move_speed = weapon.player_speed_modifier

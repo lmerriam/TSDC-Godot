@@ -4,11 +4,9 @@
 [ext_resource path="res://items/component/CombustGem.gd" type="Script" id=2]
 [ext_resource path="res://sprites/pixeltier/materials/gem_10.png" type="Texture" id=3]
 
-
 [node name="Gem" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-type = ""
-item_name = "Base Item"
+item_name = "Combust Gem"
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
