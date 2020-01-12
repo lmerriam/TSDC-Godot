@@ -70,7 +70,7 @@ func _on_attack_received(atk):
 		knockback(kb)
 	
 	if atk.has("stagger"):
-		$StateMachine._change_state("stunned")
+		$StateMachine._change_state("Stunned")
 		stun_timer = atk.stagger
 	
 	if atk.has("bleed"):

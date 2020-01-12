@@ -61,7 +61,6 @@ script = ExtResource( 3 )
 faction = "enemies"
 
 [node name="StateMachine" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 4 )
 START_STATE = NodePath("Wander")
 root_machine = true
@@ -93,6 +92,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+frame = 5
 playing = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]

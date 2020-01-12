@@ -3,7 +3,7 @@ extends State
 func update(delta):
 	
 	if !owner.in_attack_range:
-		emit_signal("finished", "chase")
+		emit_signal("finished", "Chase")
 	
 	if owner.attack_timer <= 0:
 		
@@ -14,4 +14,4 @@ func update(delta):
 		owner.attack_timer = 1
 		owner.stun_timer = .5
 		
-		emit_signal("finished", "stunned")
+		emit_signal("finished", "Stunned")

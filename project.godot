@@ -49,26 +49,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://CombustStatus.gd"
 }, {
-"base": "Reference",
-"class": "ComponentBase",
-"language": "GDScript",
-"path": "res://components/ComponentBase.gd"
-}, {
-"base": "ComponentBase",
-"class": "ComponentEquipment",
-"language": "GDScript",
-"path": "res://components/ComponentEquipment.gd"
-}, {
-"base": "ComponentBase",
-"class": "ComponentInventory",
-"language": "GDScript",
-"path": "res://components/ComponentInventory.gd"
-}, {
-"base": "ComponentBase",
-"class": "ComponentStats",
-"language": "GDScript",
-"path": "res://components/ComponentStats.gd"
-}, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
@@ -158,10 +138,6 @@ _global_script_class_icons={
 "ColdStatus": "",
 "CombustBuff": "",
 "CombustStatus": "",
-"ComponentBase": "",
-"ComponentEquipment": "",
-"ComponentInventory": "",
-"ComponentStats": "",
 "Enemy": "",
 "Entity": "",
 "Equipment": "",
@@ -191,7 +167,6 @@ config/icon="res://sprites/icon.png"
 Global="*res://Global.gd"
 Generators="*res://Generators.gd"
 ItemLibrary="*res://ItemLibrary.gd"
-ComponentLibrary="*res://components/ComponentLibrary.gd"
 Events="*res://Events.gd"
 
 [debug]
