@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 export var aggro_radius = 128
-export var level = 1
+export var level = 1 setget set_level
 var defeated = false
 var spawned = false
 var enemy = preload("res://enemies/Enemy.tscn")
@@ -41,3 +41,8 @@ func _spawn_enemy():
 	spawn.global_position = global_position + offset
 	Global.entities.add_child(spawn)
 	spawn.connect("killed",self,"_on_SpawnKilled")
+
+func set_level(lvl):
+	level = lvl
+	$Label.text = String(level)
+	return level
