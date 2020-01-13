@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Stronghold.gd" type="Script" id=1]
 [ext_resource path="res://sprites/rpg-pack/props n decorations/generic-rpg-house-inn.png" type="Texture" id=2]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( 24, 44, -24, 44, -24, -4, 24, -4 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 26 )
@@ -16,8 +19,10 @@ script = ExtResource( 1 )
 position = Vector2( 0, -20 )
 texture = ExtResource( 2 )
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+occluder = SubResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="AggroRadius" type="Area2D" parent="."]
@@ -26,11 +31,11 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -141.0
-margin_top = -122.0
-margin_right = -48.0
-margin_bottom = -108.0
-rect_scale = Vector2( 3, 3 )
+margin_left = -94.0
+margin_top = -112.0
+margin_right = -1.0
+margin_bottom = -98.0
+rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = "Level not set"

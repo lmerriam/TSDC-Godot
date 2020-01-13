@@ -3,7 +3,7 @@ extends State
 export(Texture) var idle_sprite
 
 func enter():
-	print("Enter bow cooldown state")
+#	print("Enter bow cooldown state")
 	entity.get_node("Sprite").texture = idle_sprite
 
 func update(delta):
