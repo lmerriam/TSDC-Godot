@@ -28,7 +28,7 @@ animations = [ {
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=3]
-polygon = PoolVector2Array( 3.29126, -2.27423, -3.68049, -2.60067, -3.98361, 3.43841, 2.87156, 4.13791 )
+polygon = PoolVector2Array( 2, -1, -2, -1, -2, 2, 2, 2 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 12.8924
@@ -96,6 +96,7 @@ frame = 5
 playing = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
+visible = false
 occluder = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]

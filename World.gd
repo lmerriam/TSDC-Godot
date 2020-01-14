@@ -23,7 +23,7 @@ var time_before
 func _ready():
 #	generate_map(noise,map_width,map_height)
 	_gen_nodes()
-	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
+	$Environment/Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
 #	_place_player()
 	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 	for node in nodes:
@@ -131,8 +131,9 @@ func generate_map(noise,width,height):
 
 func _on_BtnGenMap_button_up():
 	noise = _gen_noise()
-	generate_map(noise,map_width,map_height)
-	_gen_nodes()
+	_on_chunk_changed(current_chunk,current_chunk)
+#	generate_map(noise,map_width,map_height)
+#	_gen_nodes()
 #	_place_player()
 
 func _gen_noise():
