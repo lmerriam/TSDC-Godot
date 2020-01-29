@@ -68,8 +68,8 @@ script = ExtResource( 1 )
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource( 2 )
-map_width = 4000
-map_height = 4000
+map_width = 800
+map_height = 800
 grass_threshold = -0.13
 water_threshold = -0.2
 
@@ -93,24 +93,18 @@ script = ExtResource( 4 )
 [node name="Player" parent="World/Entities" instance=ExtResource( 5 )]
 position = Vector2( 364.424, 310.973 )
 
-[node name="Entity" parent="World/Entities/Player" index="1"]
-editor/display_folded = true
-
 [node name="Armor" parent="World/Entities/Player/Entity/Equipment" index="0"]
-editor/display_folded = true
 position = Vector2( 0, -4 )
 
 [node name="Leather Armor" parent="World/Entities/Player/Entity/Equipment/Armor" index="0" instance=ExtResource( 6 )]
 type = ""
 
 [node name="Weapon" parent="World/Entities/Player/Entity/Equipment" index="3"]
-editor/display_folded = true
 position = Vector2( 0, -4 )
 
 [node name="Bow" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
 
 [node name="Skill1" parent="World/Entities/Player/Entity/Equipment" index="4"]
-editor/display_folded = true
 visible = false
 
 [node name="Skill" parent="World/Entities/Player/Entity/Equipment/Skill1" index="0" instance=ExtResource( 8 )]
@@ -120,8 +114,6 @@ visible = false
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_enabled = true
 script = ExtResource( 9 )
 
@@ -130,7 +122,6 @@ visible = false
 position = Vector2( 0.49118, 0.37271 )
 
 [node name="Light2D" parent="World/Entities/Player/Node2D2" index="0"]
-editor/display_folded = true
 texture = ExtResource( 11 )
 texture_scale = 2.0
 color = Color( 0.992157, 0.960784, 0.815686, 1 )
@@ -164,7 +155,6 @@ position = Vector2( 221.637, 155.091 )
 item_path = ExtResource( 15 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 script = ExtResource( 16 )
 
 [node name="HUD" type="Control" parent="GUI"]
@@ -249,7 +239,6 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -210.0
-
 [connection signal="chunk_changed" from="World" to="World" method="_on_chunk_changed"]
 [connection signal="stats_updated" from="World/Entities/Player/Entity" to="GUI/Character" method="_on_player_stats_updated"]
 [connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
