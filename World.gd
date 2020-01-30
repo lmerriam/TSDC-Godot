@@ -25,8 +25,8 @@ var tiles = {}
 func _ready():
 #	generate_map(noise,map_width,map_height)
 	_gen_nodes()
-	$Environment/Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
-#	_place_player()
+	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
+	_place_player()
 	for node in nodes:
 		var stronghold = load("res://Stronghold.tscn").instance()
 		Global.entities.add_child(stronghold)
@@ -34,18 +34,18 @@ func _ready():
 		node.stronghold = stronghold
 		stronghold.level = node.level * 10
 		
-	for x in map_width:
-		tiles[x] = {}
-		for y in map_height:
-			var value = noise.get_noise_2d(x,y)
-			var tile
-			var grass = $Environment.tile_set.find_tile_by_name("Grass")
-			var water = $Environment.tile_set.find_tile_by_name("Water")
-			if value > grass_threshold:
-				tile = grass
-			elif value < water_threshold:
-				tile = water
-			tiles[x][y] = tile
+#	for x in map_width:
+#		tiles[x] = {}
+#		for y in map_height:
+#			var value = noise.get_noise_2d(x,y)
+#			var tile
+#			var grass = $Environment.tile_set.find_tile_by_name("Grass")
+#			var water = $Environment.tile_set.find_tile_by_name("Water")
+#			if value > grass_threshold:
+#				tile = grass
+#			elif value < water_threshold:
+#				tile = water
+#			tiles[x][y] = tile
 	
 	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
@@ -73,18 +73,24 @@ func _on_chunk_changed(new_chunk, old_chunk):
 
 	$Environment.clear()
 #	time_before = OS.get_ticks_msec()
-	var start_x = clamp(new_chunk.x * chunk_size - chunk_size, 0,map_width)
-	var end_x = clamp(start_x + chunk_size * 3, 0, map_width)
-	var start_y = clamp(new_chunk.y * chunk_size - chunk_size*.75, 0, map_height)
-	var end_y = clamp(start_y + chunk_size * 2.5, 0, map_height)
+	var start_x = new_chunk.x * chunk_size - chunk_size
+	var end_x = start_x + chunk_size * 3
+	var start_y = new_chunk.y * chunk_size - chunk_size*.75
+	var end_y = start_y + chunk_size * 2.5
+	var grass = $Environment.tile_set.find_tile_by_name("grass")
+	var water = $Environment.tile_set.find_tile_by_name("water")
 	for x in range(start_x, end_x):
 		for y in range(start_y, end_y):
-			var tile = tiles[x][y]
+			var tile
+			var value = noise.get_noise_2d(x,y)
+			if value > grass_threshold:
+				tile = grass
+			elif value < water_threshold:
+				tile = water
+
 			if tile != null:
 				$Environment.set_cell(x,y,tile)
 	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
-#	var newtime = OS.get_ticks_msec()
-#	print("Time to set and bitmask tiles: " + String(newtime-time_before))
 
 # Generate base terrain
 func generate_map(_noise,width,height):
