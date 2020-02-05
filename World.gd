@@ -17,13 +17,20 @@ signal chunk_changed(new_chunk, old_chunk)
 var noise = _gen_noise()
 var nodes = []
 var node_edges = []
+#var astar = AStar2D.new()
+
+
 var time_before
 
 var tiles = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	generate_map(noise,map_width,map_height)
+#	for x in map_width:
+#		for y in map_height:
+#			var pos = Vector2(x,y)
+#			astar.add_point(calculate_point_index(pos), pos, 1.0)
+#	print(astar.get_point_count())
 	_gen_nodes()
 	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
 	_place_player()
@@ -33,19 +40,6 @@ func _ready():
 		stronghold.global_position = node.origin*$Environment.cell_size.x
 		node.stronghold = stronghold
 		stronghold.level = node.level * 10
-		
-#	for x in map_width:
-#		tiles[x] = {}
-#		for y in map_height:
-#			var value = noise.get_noise_2d(x,y)
-#			var tile
-#			var grass = $Environment.tile_set.find_tile_by_name("Grass")
-#			var water = $Environment.tile_set.find_tile_by_name("Water")
-#			if value > grass_threshold:
-#				tile = grass
-#			elif value < water_threshold:
-#				tile = water
-#			tiles[x][y] = tile
 	
 	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
@@ -92,32 +86,6 @@ func _on_chunk_changed(new_chunk, old_chunk):
 				$Environment.set_cell(x,y,tile)
 	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
 
-# Generate base terrain
-func generate_map(_noise,width,height):
-	$Environment.clear()
-
-	time_before = OS.get_ticks_msec()
-	for x in range(width):
-		for y in range(height):
-			var tile
-			var value = _noise.get_noise_2d(x,y)
-			if value > grass_threshold:
-				tile = $Environment.tile_set.find_tile_by_name("Grass")
-			if value < water_threshold:
-				tile = $Environment.tile_set.find_tile_by_name("Water")
-
-			if tile != null:
-				$Environment.set_cell(x,y,tile)
-	var newtime = OS.get_ticks_msec()
-	print("Time to set tiles: " + String(newtime-time_before))
-	time_before = newtime
-
-	$Environment.update_bitmask_region(Vector2(0,width),Vector2(0,height))
-
-	newtime = OS.get_ticks_msec()
-	print("Time to bitmask: " + String(newtime-time_before))
-	time_before = newtime
-
 func _on_BtnGenMap_button_up():
 	noise = _gen_noise()
 	_on_chunk_changed(current_chunk,current_chunk)
@@ -141,9 +109,11 @@ func _gen_nodes():
 		var elevation = noise.get_noise_2dv(origin)
 		if elevation > water_threshold:
 			var node = {}
-			node.origin = origin
+			node.origin = origin.floor()
 			node.neighbors = []
 			nodes.append(node)
+			
+#			node.astar_point = calculate_point_index(node.origin)
 	_connect_nodes()
 
 func _connect_nodes():
@@ -171,6 +141,13 @@ func _connect_nodes():
 		connected_nodes.append(node_new)
 		unconnected_nodes.erase(node_new)
 		node_new.level = node_existing.level + 1
+		draw_tile_path(node_existing.origin.x,node_existing.origin.y,node_new.origin.x,node_new.origin.y)
+		
+#		print("---")
+#		astar.connect_points(node_new.astar_point, node_existing.astar_point)
+#		for point in astar.get_point_path(node_new.astar_point, node_existing.astar_point):
+#			print(point)
+#			$Environment2.set_cellv(point,$Environment2.tile_set.find_tile_by_name("path"))
 #		print("Node new: " + String(node_new.level) + " - Node Existing: " + String(node_existing.level))
 
 func _place_player():
@@ -186,3 +163,27 @@ func _gen_building(width, height):
 		pass
 	elif axis == "v":
 		pass
+
+func calculate_point_index(point):
+	return point.x + map_width * point.y
+
+func draw_tile_path(x0,y0,x1,y1):
+	var xDist = abs(x1 - x0)
+	var yDist = -abs(y1 - y0)
+	var xStep = 1 if x0 < x1 else -1
+	var yStep = 1 if y0 < y1 else -1
+	var error = xDist + yDist
+	
+	$Environment2.set_cell(x0, y0, $Environment2.tile_set.find_tile_by_name("path"))
+	
+	while (x0 != x1 or y0 != y1):
+		if (2*error - yDist > xDist - 2*error):
+			error += yDist
+			x0 += xStep
+		else:
+			error += xDist
+			y0 += yStep
+		
+		$Environment2.set_cell(x0, y0, $Environment2.tile_set.find_tile_by_name("path"));
+	$Environment2.update_bitmask_region(Vector2(x0,y1),Vector2(x1,y1))
+	
