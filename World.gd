@@ -17,7 +17,9 @@ signal chunk_changed(new_chunk, old_chunk)
 var noise = _gen_noise()
 var nodes = []
 var node_edges = []
-#var astar = AStar2D.new()
+
+var path_tiles = {}
+
 
 
 var time_before
@@ -26,11 +28,6 @@ var tiles = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	for x in map_width:
-#		for y in map_height:
-#			var pos = Vector2(x,y)
-#			astar.add_point(calculate_point_index(pos), pos, 1.0)
-#	print(astar.get_point_count())
 	_gen_nodes()
 	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
 	_place_player()
@@ -56,15 +53,6 @@ func _get_player_tile_position():
 	return (Global.player.global_position / $Environment.cell_size.x).floor()
 
 func _on_chunk_changed(new_chunk, old_chunk):
-#	for entity in Global.entities.get_children():
-#		if ((entity.global_position/$Environment.cell_size.x).floor() / chunk_size).floor() == new_chunk:
-#			entity.set_process(true)
-#			entity.visible = true
-#		else:
-#			entity.set_process(false)
-#			entity.visible = false
-#	Global.player.set_process(true)
-
 	$Environment.clear()
 #	time_before = OS.get_ticks_msec()
 	var start_x = new_chunk.x * chunk_size - chunk_size
@@ -82,7 +70,7 @@ func _on_chunk_changed(new_chunk, old_chunk):
 			elif value < water_threshold:
 				tile = water
 
-			if tile != null:
+			if tile != null and not path_tiles.has(Vector2(x,y)):
 				$Environment.set_cell(x,y,tile)
 	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
 
@@ -112,8 +100,6 @@ func _gen_nodes():
 			node.origin = origin.floor()
 			node.neighbors = []
 			nodes.append(node)
-			
-#			node.astar_point = calculate_point_index(node.origin)
 	_connect_nodes()
 
 func _connect_nodes():
@@ -141,14 +127,8 @@ func _connect_nodes():
 		connected_nodes.append(node_new)
 		unconnected_nodes.erase(node_new)
 		node_new.level = node_existing.level + 1
-		draw_tile_path(node_existing.origin.x,node_existing.origin.y,node_new.origin.x,node_new.origin.y)
 		
-#		print("---")
-#		astar.connect_points(node_new.astar_point, node_existing.astar_point)
-#		for point in astar.get_point_path(node_new.astar_point, node_existing.astar_point):
-#			print(point)
-#			$Environment2.set_cellv(point,$Environment2.tile_set.find_tile_by_name("path"))
-#		print("Node new: " + String(node_new.level) + " - Node Existing: " + String(node_existing.level))
+		draw_tile_path(node_existing.origin.x,node_existing.origin.y,node_new.origin.x,node_new.origin.y)
 
 func _place_player():
 	var origin = nodes[0].origin
@@ -185,5 +165,6 @@ func draw_tile_path(x0,y0,x1,y1):
 			y0 += yStep
 		
 		$Environment2.set_cell(x0, y0, $Environment2.tile_set.find_tile_by_name("path"));
+		path_tiles[Vector2(x0,y0)] = true
 	$Environment2.update_bitmask_region(Vector2(x0,y1),Vector2(x1,y1))
 	
