@@ -12,6 +12,7 @@ func enter():
 	entity.get_node("Sprite").texture = charging_sprite
 	line.visible = true
 	line.scale.x = 0
+	entity.start_cooldown()
 
 
 func update(delta):
@@ -29,10 +30,6 @@ func update(delta):
 	entity.get_node("Sprite").rotation = rot + .75
 	line.scale.x = current_charge_level()
 #	line.rotation = rot
-
-
-func exit():
-	entity.start_cooldown()
 
 
 func current_charge_level():
