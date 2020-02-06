@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://font/bitty.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Damage Counter.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "rise"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.196146, 0.196146 ),
+"update": 0,
+"values": [ Vector2( -21, -6 ), Vector2( -21, -24 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Damage Counter" type="Label" parent="."]
+margin_left = -21.0
+margin_top = -24.0
+margin_right = 7.0
+margin_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.5, 1.5 )
+custom_fonts/font = ExtResource( 1 )
+text = "132"
+align = 1
+valign = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Damage Counter"]
+autoplay = "rise"
+anims/rise = SubResource( 1 )
+[connection signal="animation_finished" from="Damage Counter/AnimationPlayer" to="Damage Counter" method="_on_AnimationPlayer_animation_finished"]

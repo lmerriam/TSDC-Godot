@@ -81,13 +81,11 @@ func _on_BtnGenMap_button_up():
 func _gen_noise():
 	randomize()
 	var _noise = OpenSimplexNoise.new()
-
 	_noise.seed = randi()
 	_noise.lacunarity = lacunarity
 	_noise.octaves = octaves
 	_noise.period = period
 	_noise.persistence = persistence
-
 	return _noise
 
 func _gen_nodes():

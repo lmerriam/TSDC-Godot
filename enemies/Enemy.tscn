@@ -78,6 +78,7 @@ script = ExtResource( 7 )
 script = ExtResource( 8 )
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 margin_left = -14.2698
 margin_top = -20.9002
 margin_right = 42.7302
@@ -92,7 +93,6 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 5
 playing = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
@@ -106,7 +106,6 @@ shape = SubResource( 4 )
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
 anims/DamageFlashWhite = SubResource( 5 )
-
 [connection signal="attack_received" from="Entity" to="." method="_on_attack_received"]
 [connection signal="killed" from="Entity" to="." method="_on_Entity_killed"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

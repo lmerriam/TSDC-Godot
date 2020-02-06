@@ -14,7 +14,7 @@ item_name = "Bow"
 damage = 2.0
 attack_speed = 2
 knockback = 100.0
-stagger = 0.2
+stagger = 1.0
 charge_time = 1.0
 attack_area = ExtResource( 2 )
 

@@ -18,6 +18,7 @@ var origin_dis
 export var attack_speed = 1
 var attack_timer = 0
 var stun_timer = 0
+var chase_timer = 0
 
 var target = Global.player
 
@@ -60,6 +61,7 @@ func _process(delta):
 	
 #	stun_timer -= delta
 	attack_timer -= delta
+	chase_timer -= delta
 
 
 func _on_attack_received(atk):
@@ -76,6 +78,8 @@ func _on_attack_received(atk):
 	if atk.has("bleed"):
 		var angle = Global.player.global_position.angle_to_point(global_position)
 		bleed(angle)
+	
+	chase_timer = 3
 	
 	$DamageAnimation.play("DamageFlashWhite")
 

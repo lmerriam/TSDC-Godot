@@ -47,6 +47,7 @@ signal killed
 
 # Attacks
 export var faction:String
+var dmg_counter = preload("res://Damage Counter.tscn")
 signal attack_received(atk)
 
 func _init():
@@ -331,6 +332,10 @@ func receive_attack(atk):
 		# Take damage
 		if atk.has("damage"):
 			modify_health(-atk.damage)
+			var counter = dmg_counter.instance()
+			counter.get_node("Damage Counter").text = String(floor(atk.damage))
+			Global.entities.add_child(counter)
+			counter.global_position = global_position
 		
 		emit_signal("attack_received", atk)
 		return true
