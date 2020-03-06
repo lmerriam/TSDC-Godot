@@ -31,8 +31,6 @@ func regen_library():
 
 func instance_item(item_name):
 	var item = load_item(item_name).instance()
-	Global.entities.call_deferred("add_child", item)
-	item.global_position = Vector2(-999,-999)
 	return item
 
 func load_item(item_name):

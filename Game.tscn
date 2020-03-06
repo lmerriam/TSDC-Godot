@@ -14,7 +14,7 @@
 [ext_resource path="res://sprites/lights/light256core.png" type="Texture" id=12]
 [ext_resource path="res://Stronghold.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Loot.tscn" type="PackedScene" id=14]
-[ext_resource path="res://items/weapon/Wand.tscn" type="PackedScene" id=15]
+[ext_resource path="res://items/weapon/Bow.tscn" type="PackedScene" id=15]
 [ext_resource path="res://GUI.gd" type="Script" id=16]
 [ext_resource path="res://HUD.gd" type="Script" id=17]
 [ext_resource path="res://sprites/icon.png" type="Texture" id=18]
@@ -173,7 +173,8 @@ anims/Flicker = SubResource( 1 )
 
 [node name="Loot" parent="World/Entities" instance=ExtResource( 14 )]
 position = Vector2( 221.637, 155.091 )
-item_path = ExtResource( 15 )
+
+[node name="Bow" parent="World/Entities/Loot/Slot" index="0" instance=ExtResource( 15 )]
 
 [node name="Stronghold" parent="World/Entities" instance=ExtResource( 13 )]
 position = Vector2( 154.503, 283.381 )

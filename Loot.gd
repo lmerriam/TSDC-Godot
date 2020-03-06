@@ -1,36 +1,15 @@
 extends Area2D
 class_name Loot
 
-export var item_path: PackedScene
-var item
-var item_loaded
-export var level := 1
-
-func _ready():
-	if item_path:
-		set_item(item_path.instance())
-		item.level = level
-	if !item.get_parent():
-		Global.entities.call_deferred("add_child", item)
-
-func set_item(instance):
-	item = instance
-	$Sprite.set_texture(item.get_sprite())
-#	if item_path:
-#		var bundle = item_path._bundled
-#		var sprite_idx
-#		for i in range(bundle["names"].length):
-#			if idx == "Sprite":
-#				sprite_idx = idx
-#				break
-#		var tex = bundle["variants"][sprite_idx]
-#		$Sprite.set_texture(tex)
-	return item
+func set_item(inst):
+	$Slot.add_child(inst)
 
 func get_item():
-	return item
+	return $Slot.get_child(0)
 
 func _on_Loot_body_entered(body):
 	if body == Global.player:
+		var item = get_item()
 		Global.player_entity.add_item(item)
+		$Slot.remove_child(item)
 		queue_free()

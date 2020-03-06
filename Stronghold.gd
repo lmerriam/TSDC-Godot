@@ -18,8 +18,8 @@ func _on_SpawnKilled(id):
 		print("Stronghold defeated")
 		for item in range(0,3):
 			var i = ItemLibrary.instance_random_loot()
+			i.get_item().level = level
 			i.global_position = global_position + Vector2(rand_range(-64,64), rand_range(-64,64))
-			i.item.level = level
 
 func _on_AggroRadius_body_entered(body):
 	# Spawn the enemies
