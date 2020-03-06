@@ -8,6 +8,7 @@
     "firegem": "res://items/component/FireGem.tscn"
   },
   "weapon": {
+    "beamweapon": "res://items/weapon/BeamWeapon.tscn",
     "bow": "res://items/weapon/Bow.tscn",
     "sword": "res://items/weapon/Sword.tscn",
     "wand": "res://items/weapon/Wand.tscn"

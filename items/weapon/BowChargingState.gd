@@ -7,7 +7,6 @@ export(NodePath) var line
 func _ready():
 	line = get_node(line)
 
-
 func enter():
 	current_charge = 0
 	entity.get_node("Sprite").texture = charging_sprite

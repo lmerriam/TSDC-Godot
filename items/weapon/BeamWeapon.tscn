@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://items/weapon/BeamWeaponAttackState.gd" type="Script" id=1]
+[ext_resource path="res://Beam.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/pixeltier/misc-weapons/weapon_58.png" type="Texture" id=3]
+[ext_resource path="res://items/Weapon.tscn" type="PackedScene" id=4]
+
+[node name="BeamWeapon" instance=ExtResource( 4 )]
+item_name = "Beam Weapon"
+damage = 6.0
+attack_speed = 0
+knockback = 100.0
+attack_area = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="StateMachine" parent="." index="2"]
+START_STATE = NodePath("../../BeamWeapon/StateMachine/Idling")
+
+[node name="Attacking" parent="StateMachine" index="0"]
+script = ExtResource( 1 )
+
+[editable path="Entity"]

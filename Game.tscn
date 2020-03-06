@@ -6,7 +6,7 @@
 [ext_resource path="res://Entities.gd" type="Script" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://items/armor/LeatherArmor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://items/weapon/Bow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://items/weapon/BeamWeapon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://items/Skill.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Camera2D.gd" type="Script" id=9]
 [ext_resource path="res://TestLight.tscn" type="PackedScene" id=10]
@@ -125,7 +125,7 @@ type = ""
 [node name="Weapon" parent="World/Entities/Player/Entity/Equipment" index="3"]
 position = Vector2( 0, -4 )
 
-[node name="Bow" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
+[node name="BeamWeapon" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
 
 [node name="Skill1" parent="World/Entities/Player/Entity/Equipment" index="4"]
 visible = false
