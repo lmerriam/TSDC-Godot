@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
+[ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=3]
 [ext_resource path="res://Entities.gd" type="Script" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://items/armor/LeatherArmor.tscn" type="PackedScene" id=6]
@@ -13,7 +14,7 @@
 [ext_resource path="res://sprites/lights/light256core.png" type="Texture" id=12]
 [ext_resource path="res://Stronghold.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Loot.tscn" type="PackedScene" id=14]
-[ext_resource path="res://items/component/FireGem.tscn" type="PackedScene" id=15]
+[ext_resource path="res://items/weapon/Wand.tscn" type="PackedScene" id=15]
 [ext_resource path="res://GUI.gd" type="Script" id=16]
 [ext_resource path="res://HUD.gd" type="Script" id=17]
 [ext_resource path="res://sprites/icon.png" type="Texture" id=18]
@@ -22,7 +23,6 @@
 [ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=21]
 
 [sub_resource type="Animation" id=1]
-resource_name = "Flicker"
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -68,10 +68,11 @@ script = ExtResource( 1 )
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource( 2 )
-map_width = 600
-map_height = 600
+map_width = 800
+map_height = 800
 grass_threshold = -0.13
 water_threshold = -0.2
+cliff_threshold = 0.2
 chunk_size = 17
 
 [node name="Background" type="ColorRect" parent="World"]
@@ -96,7 +97,18 @@ tile_set = ExtResource( 21 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 196630, 2, 0, 393250, 2, 0 )
+
+[node name="Floors" type="TileMap" parent="World"]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+format = 1
+
+[node name="Walls" type="TileMap" parent="World"]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+format = 1
 
 [node name="Entities" type="YSort" parent="World"]
 script = ExtResource( 4 )
@@ -159,12 +171,12 @@ shadow_filter_smooth = 10.0
 [node name="AnimationPlayer" parent="World/Entities/Player/Node2D3/Light2D" index="0"]
 anims/Flicker = SubResource( 1 )
 
-[node name="Stronghold" parent="World/Entities" instance=ExtResource( 13 )]
-position = Vector2( 212.052, 311.881 )
-
 [node name="Loot" parent="World/Entities" instance=ExtResource( 14 )]
 position = Vector2( 221.637, 155.091 )
 item_path = ExtResource( 15 )
+
+[node name="Stronghold" parent="World/Entities" instance=ExtResource( 13 )]
+position = Vector2( 154.503, 283.381 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource( 16 )
@@ -181,11 +193,12 @@ __meta__ = {
 }
 
 [node name="BtnGenMap" type="Button" parent="GUI/HUD"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -112.946
-margin_right = -2.94598
-margin_bottom = 40.0
+anchor_left = 1.159
+anchor_right = 1.159
+margin_left = -111.2
+margin_top = -0.716003
+margin_right = 0.312195
+margin_bottom = 42.0
 grow_horizontal = 0
 mouse_filter = 1
 text = "Generate"
@@ -194,35 +207,35 @@ __meta__ = {
 }
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="GUI/HUD"]
-position = Vector2( 604.71, 365.46 )
+position = Vector2( 731.843, 518.836 )
 scale = Vector2( 0.627024, 0.627024 )
 normal = ExtResource( 18 )
 action = "attack"
 visibility_mode = 1
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="GUI/HUD"]
-position = Vector2( 4.09964, 373.16 )
+position = Vector2( -101.867, 502.038 )
 scale = Vector2( 0.386395, 0.386395 )
 normal = ExtResource( 18 )
 action = "move_left"
 visibility_mode = 1
 
 [node name="TouchScreenButton5" type="TouchScreenButton" parent="GUI/HUD"]
-position = Vector2( 108.308, 373.16 )
+position = Vector2( 2.34168, 502.038 )
 scale = Vector2( 0.386395, 0.386395 )
 normal = ExtResource( 18 )
 action = "move_right"
 visibility_mode = 1
 
 [node name="TouchScreenButton3" type="TouchScreenButton" parent="GUI/HUD"]
-position = Vector2( 54.9205, 331.066 )
+position = Vector2( -51.0458, 459.944 )
 scale = Vector2( 0.386395, 0.386395 )
 normal = ExtResource( 18 )
 action = "move_up"
 visibility_mode = 1
 
 [node name="TouchScreenButton4" type="TouchScreenButton" parent="GUI/HUD"]
-position = Vector2( 58.0806, 418.088 )
+position = Vector2( -47.8857, 546.966 )
 scale = Vector2( 0.386395, 0.386395 )
 normal = ExtResource( 18 )
 action = "move_down"
@@ -238,6 +251,9 @@ custom_styles/bg = SubResource( 3 )
 step = 1.0
 value = 75.0
 rounded = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Inventory" parent="GUI" instance=ExtResource( 19 )]
 visible = false
@@ -268,3 +284,5 @@ margin_left = -210.0
 [editable path="World/Entities/Player/Node2D2"]
 
 [editable path="World/Entities/Player/Node2D3"]
+
+[editable path="World/Entities/Loot"]

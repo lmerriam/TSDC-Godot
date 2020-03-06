@@ -1,45 +1,30 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://attacks/Projectile.gd" type="Script" id=1]
-[ext_resource path="res://sprites/pixeltier/bows/arrow_1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/fx/orb.png" type="Texture" id=2]
 [ext_resource path="res://TestLight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/lights/TestLightHard.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.71916, 2.53775 )
+extents = Vector2( 7.6903, 2.2238 )
 
-[sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
-
-[node name="Bullet" type="Area2D" groups=[
+[node name="Projectile" type="Area2D" groups=[
 "projectiles",
 ]]
 script = ExtResource( 1 )
+lifetime = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-editor/display_folded = true
 rotation = 2.35619
 texture = ExtResource( 2 )
 
-[node name="Line2D" type="Line2D" parent="Sprite"]
-visible = false
-position = Vector2( 1.41422, 1.41421 )
-points = PoolVector2Array( 33.9411, 33.9411, 5.65685, 5.65685 )
-width = 1.0
-default_color = Color( 1, 1, 1, 1 )
-gradient = SubResource( 2 )
-texture_mode = 5331968
-
 [node name="TestLight" parent="." instance=ExtResource( 3 )]
-editor/display_folded = true
-visible = false
 
 [node name="Light2D" parent="TestLight" index="0"]
 texture = ExtResource( 4 )
-energy = 0.5
-
+energy = 0.3
 
 [editable path="TestLight"]

@@ -7,11 +7,6 @@ var spawned = false
 var enemy = preload("res://enemies/Enemy.tscn")
 var enemies_spawned = []
 
-func _ready():
-	var tilemap = get_node('../../Environment')
-	var tile = tilemap.tile_set.find_tile_by_name("rock")
-	Generators.gen_building(global_position / 16, 13, 13, tilemap, tile)
-
 func _on_SpawnKilled(id):
 	
 	# Remove spawn from list of spawns

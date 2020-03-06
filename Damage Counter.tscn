@@ -15,19 +15,18 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 0.196146, 0.196146 ),
 "update": 0,
-"values": [ Vector2( -21, -6 ), Vector2( -21, -24 ) ]
+"values": [ Vector2( -5, -6 ), Vector2( -5, -24 ) ]
 }
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Damage Counter" type="Label" parent="."]
-margin_left = -21.0
-margin_top = -24.0
+margin_left = -5.0
+margin_top = -6.0
 margin_right = 7.0
-margin_bottom = -11.0
+margin_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.5, 1.5 )
 custom_fonts/font = ExtResource( 1 )
 text = "132"
 align = 1

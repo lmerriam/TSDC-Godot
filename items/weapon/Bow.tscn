@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://items/Weapon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://attacks/Projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://attacks/Arrow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://status/FireBuff.gd" type="Script" id=3]
 [ext_resource path="res://sprites/pixeltier/bows/bow_2.png" type="Texture" id=4]
 [ext_resource path="res://items/weapon/BowAttackStateMachine.gd" type="Script" id=5]
@@ -14,7 +14,7 @@ item_name = "Bow"
 damage = 2.0
 attack_speed = 2
 knockback = 100.0
-stagger = 1.0
+stagger = 0.2
 charge_time = 1.0
 attack_area = ExtResource( 2 )
 

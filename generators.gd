@@ -19,3 +19,8 @@ func gen_building(origin, width, height, tilemap, tile):
 		var y = origin.y - offset.y + i
 		tilemap.set_cell(x1, y, tile)
 		tilemap.set_cell(x2, y, tile)
+	
+	var door_x = rand_range(1,width-1)
+	tilemap.set_cell(x1 + door_x, y2, -1)
+	
+	tilemap.update_bitmask_region(Vector2(x1,y1),Vector2(x2,y2))

@@ -8,6 +8,7 @@ export var period = 20.0
 export var persistence = 0.8
 export var grass_threshold = 0.20
 export var water_threshold = 0.00
+export var cliff_threshold = 0.30
 
 export var chunk_size := 13
 var current_chunk := Vector2(0,0)
@@ -18,7 +19,7 @@ var noise = _gen_noise()
 var nodes = []
 var node_edges = []
 
-var path_tiles = {}
+var path_tiles = PoolVector2Array()
 
 
 
@@ -30,14 +31,17 @@ var tiles = {}
 func _ready():
 	_gen_nodes()
 	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
-	_place_player()
+#	_place_player()
 	for node in nodes:
-		var stronghold = load("res://Stronghold.tscn").instance()
-		Global.entities.add_child(stronghold)
+		var stronghold = load("res://Building.tscn").instance()
+		add_child(stronghold)
 		stronghold.global_position = node.origin*$Environment.cell_size.x
-		node.stronghold = stronghold
-		stronghold.level = node.level * 10
-	
+#		node.stronghold = stronghold
+#		stronghold.level = node.level * 10
+#		Generators.gen_building(node.origin, 13, 13, $Walls, $Walls.tile_set.find_tile_by_name("walls"))
+		for x in range(node.origin.x-5,node.origin.x+6):
+			for y in range(node.origin.y-5,node.origin.y+6):
+				path_tiles.append(Vector2(x,y))
 	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
 func _process(delta):
@@ -61,18 +65,21 @@ func _on_chunk_changed(new_chunk, old_chunk):
 	var end_y = start_y + chunk_size * 2.5
 	var grass = $Environment.tile_set.find_tile_by_name("grass")
 	var water = $Environment.tile_set.find_tile_by_name("water")
-	for x in range(start_x, end_x):
-		for y in range(start_y, end_y):
-			var tile
-			var value = noise.get_noise_2d(x,y)
-			if value > grass_threshold:
-				tile = grass
-			elif value < water_threshold:
-				tile = water
-
-			if tile != null and not path_tiles.has(Vector2(x,y)):
-				$Environment.set_cell(x,y,tile)
-	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
+	var cliff = $Environment.tile_set.find_tile_by_name("cliffs")
+#	for x in range(start_x, end_x):
+#		for y in range(start_y, end_y):
+#			var tile
+#			var value = noise.get_noise_2d(x,y)
+#			if value > cliff_threshold:
+#				tile = cliff
+#			elif value > grass_threshold:
+#				tile = grass
+#			elif value < water_threshold:
+#				tile = water
+#
+#			if tile != null and not path_tiles.has(Vector2(x,y)):
+#				$Environment.set_cell(x,y,tile)
+#	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
 
 func _on_BtnGenMap_button_up():
 	noise = _gen_noise()
@@ -91,13 +98,21 @@ func _gen_noise():
 func _gen_nodes():
 	nodes.clear()
 	for i in 30:
-		var origin = Vector2(rand_range(0,map_width),rand_range(0,map_height))
-		var elevation = noise.get_noise_2dv(origin)
-		if elevation > water_threshold:
-			var node = {}
-			node.origin = origin.floor()
-			node.neighbors = []
-			nodes.append(node)
+		var origin
+		var nearest = 0
+		while nearest < 100:
+			origin = Vector2(rand_range(0,map_width),rand_range(0,map_height))
+			var nearest_known = 999
+			for n in nodes:
+				var dis = n.origin.distance_to(origin)
+				if dis < nearest_known:
+					nearest_known = dis
+			nearest = nearest_known
+		
+		var node = {}
+		node.origin = origin.floor()
+		node.neighbors = []
+		nodes.append(node)
 	_connect_nodes()
 
 func _connect_nodes():
@@ -163,6 +178,6 @@ func draw_tile_path(x0,y0,x1,y1):
 			y0 += yStep
 		
 		$Environment2.set_cell(x0, y0, $Environment2.tile_set.find_tile_by_name("path"));
-		path_tiles[Vector2(x0,y0)] = true
+		path_tiles.append(Vector2(x0,y0))
 	$Environment2.update_bitmask_region(Vector2(x0,y1),Vector2(x1,y1))
 	

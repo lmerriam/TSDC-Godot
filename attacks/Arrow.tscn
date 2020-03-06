@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://attacks/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://attacks/Arrow.gd" type="Script" id=2]
+[ext_resource path="res://sprites/pixeltier/bows/arrow_1.png" type="Texture" id=3]
+
+[node name="Arrow" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+speed = 26
+drag = 0.4
+drop = 0.03
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="TestLight" parent="." index="2"]
+visible = false
+
+[node name="Light2D" parent="TestLight" index="0"]
+position = Vector2( 0, -1 )
+
+[editable path="TestLight"]
