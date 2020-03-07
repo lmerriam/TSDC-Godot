@@ -19,5 +19,4 @@ position = Vector2( 15, 0 )
 frames = SubResource( 1 )
 offset = Vector2( 20, 0 )
 script = ExtResource( 5 )
-
 [connection signal="animation_finished" from="." to="." method="_on_AnimatedSprite_animation_finished"]

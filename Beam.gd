@@ -1,6 +1,9 @@
 extends AttackArea
 
 var counter = 0
+export var impact_particles = preload("res://particles/BeamParticles.tscn")
+
+var active_particles = {}
 
 func set_length(length):
 	$Line.set_point_position(1,Vector2(length,0))
@@ -23,3 +26,15 @@ func _physics_process(delta):
 		counter = 0
 	else:
 		$CollisionShape2D.disabled = false
+
+func _on_BeamAttack_area_entered(area):
+	var part = impact_particles.instance()
+	area.add_child(part)
+	part.position = Vector2(0,0)
+	active_particles[area] = part
+
+
+func _on_BeamAttack_area_exited(area):
+	if active_particles.has(area):
+		area.remove_child(active_particles[area])
+		active_particles.erase(area)

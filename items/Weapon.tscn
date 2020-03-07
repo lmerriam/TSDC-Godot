@@ -27,5 +27,4 @@ script = ExtResource( 5 )
 [node name="Idling" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 6 )
 
-
 [editable path="Entity"]

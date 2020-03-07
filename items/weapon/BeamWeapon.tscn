@@ -7,7 +7,7 @@
 
 [node name="BeamWeapon" instance=ExtResource( 4 )]
 item_name = "Beam Weapon"
-damage = 6.0
+damage = 1.0
 attack_speed = 0
 knockback = 100.0
 attack_area = ExtResource( 2 )
