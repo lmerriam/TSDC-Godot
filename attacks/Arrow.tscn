@@ -9,6 +9,7 @@ script = ExtResource( 2 )
 speed = 26
 drag = 0.4
 drop = 0.03
+min_speed = 2.0
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )

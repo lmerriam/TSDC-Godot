@@ -9,6 +9,7 @@ export var attack_speed := 1
 export var knockback := 0.0
 export var stagger := 0.0
 export var charge_time := 0.0
+export var angle_vary := 0.0
 
 export var attack_area = preload("res://attacks/Slash.tscn")
 
@@ -38,7 +39,8 @@ func _create_attack_area(props, parent, angle = null, origin = null):
 	
 	# Point the attack in the right direction
 	if angle:
-		area.set_angle(angle)
+		var vary = rand_range(-angle_vary, angle_vary)
+		area.set_angle(angle.rotated(vary))
 	
 	return area
 
@@ -53,4 +55,3 @@ func on_attack_started():
 
 func on_attack_ended():
 	is_attacking = false
-	

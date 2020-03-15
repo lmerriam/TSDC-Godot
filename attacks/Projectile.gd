@@ -4,25 +4,19 @@ export var speed = 12
 export var pierce := 1
 export var drag := 0.0
 export var drop := 0.0
+export var min_speed := 0.0
 export var deform := true
 export var lifetime := 1.0
 
 var time_left = lifetime
 var drop_current = 0
-var grounded_texture = load("res://sprites/pixeltier/bows/arrow_1_grounded.png")
 
 func _ready():
 	set_as_toplevel(true)
 
 func _process(delta):
 	time_left -= delta
-	if time_left <= 0 or speed <= 2:
-		
-		var sprite = Sprite.new()
-		Global.entities.add_child(sprite)
-		sprite.global_position = global_position
-		sprite.global_rotation = $Sprite.global_rotation
-		sprite.texture = grounded_texture
+	if time_left <= 0 or speed <= min_speed:
 		queue_free()
 
 func _physics_process(delta):

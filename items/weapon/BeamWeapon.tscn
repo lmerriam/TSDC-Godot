@@ -9,7 +9,6 @@
 item_name = "Beam Weapon"
 damage = 1.0
 attack_speed = 0
-knockback = 100.0
 attack_area = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="1"]

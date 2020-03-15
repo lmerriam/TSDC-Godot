@@ -27,8 +27,8 @@ color_ramp = SubResource( 2 )
 
 [node name="BeamParticles" type="Particles2D"]
 position = Vector2( 201, 0 )
-amount = 18
-lifetime = 0.25
+amount = 24
+lifetime = 0.3
 explosiveness = 0.2
 local_coords = false
 process_material = SubResource( 5 )

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://attacks/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/fx/small mushroom cloud/small-mushroom-cloud_frame_0002.png" type="Texture" id=2]
+[ext_resource path="res://attacks/FlameProjectile.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.50641
+
+[node name="FlameProjectile" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+speed = 5
+drag = 0.1
+lifetime = 2.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+rotation = 0.0
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" parent="TestLight" index="0"]
+position = Vector2( 0, -1 )
+
+[editable path="TestLight"]

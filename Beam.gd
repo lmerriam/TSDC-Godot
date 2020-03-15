@@ -21,17 +21,18 @@ func _physics_process(delta):
 	set_width(rand_range(2,3.5))
 	
 	counter += delta
-	if counter > .5 and $CollisionShape2D.disabled == false:
+	if counter > .25 and $CollisionShape2D.disabled == false:
 		$CollisionShape2D.disabled = true
 		counter = 0
 	else:
 		$CollisionShape2D.disabled = false
 
 func _on_BeamAttack_area_entered(area):
-	var part = impact_particles.instance()
-	area.add_child(part)
-	part.position = Vector2(0,0)
-	active_particles[area] = part
+	if not active_particles.has(area):
+		var part = impact_particles.instance()
+		area.add_child(part)
+		part.position = Vector2(0,0)
+		active_particles[area] = part
 
 
 func _on_BeamAttack_area_exited(area):

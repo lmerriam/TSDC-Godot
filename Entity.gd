@@ -110,6 +110,20 @@ func update_stats():
 	emit_signal("stats_updated")
 	return stats
 
+# TODO: Update only necessary stats instead of all of them
+#func update_stat(stat, value):
+#	stats[stat] = stats_base[stat]
+#	if stats.has(stat):
+#		stats[stat] += stats[stat] * stat_increments[stat] * level
+#	if has_equipment:
+#		for s in equipment_stats:
+#			if stats.has(s):
+#				stats[s] += equipment_stats[s]
+#			else:
+#				stats[s] = equipment_stats[s]
+#	emit_signal("stats_updated")
+#	return stats
+
 func add_modifier(stat,id,value):
 	if !stat_modifiers.has(stat):
 		stat_modifiers[stat] = {}
