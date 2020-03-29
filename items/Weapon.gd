@@ -1,8 +1,6 @@
 extends Equipment
 class_name Weapon
 
-var is_attacking = false
-
 export var player_speed_modifier := .5
 export var damage := 0.0
 export var attack_speed := 1
@@ -10,8 +8,10 @@ export var knockback := 0.0
 export var stagger := 0.0
 export var charge_time := 0.0
 export var angle_vary := 0.0
-
 export var attack_area = preload("res://attacks/Slash.tscn")
+
+var is_attacking = false
+var active_attack_areas = []
 
 func _init():
 	$Entity.stat_increments.damage = .1
@@ -55,3 +55,9 @@ func on_attack_started():
 
 func on_attack_ended():
 	is_attacking = false
+
+func remove_active_attack(attack):
+	active_attack_areas.erase(attack)
+
+func add_active_attack(attack):
+	active_attack_areas.append(attack)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://Entities.gd" type="Script" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://items/armor/LeatherArmor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://items/weapon/SprayWand.tscn" type="PackedScene" id=7]
+[ext_resource path="res://items/weapon/RecallWeapon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://items/Skill.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Camera2D.gd" type="Script" id=9]
 [ext_resource path="res://TestLight.tscn" type="PackedScene" id=10]
@@ -21,6 +21,10 @@
 [ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=19]
 [ext_resource path="res://CharacterControl.gd" type="Script" id=20]
 [ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=21]
+[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=22]
+[ext_resource path="res://items/component/CombustGem.tscn" type="PackedScene" id=23]
+[ext_resource path="res://items/weapon/BeamWeapon.tscn" type="PackedScene" id=24]
+[ext_resource path="res://items/component/ColdGem.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=1]
 loop = true
@@ -125,7 +129,7 @@ type = ""
 [node name="Weapon" parent="World/Entities/Player/Entity/Equipment" index="3"]
 position = Vector2( 0, -4 )
 
-[node name="SprayWand" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
+[node name="RecallWeapon" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
 
 [node name="Skill1" parent="World/Entities/Player/Entity/Equipment" index="4"]
 visible = false
@@ -180,10 +184,24 @@ position = Vector2( 221.637, 155.091 )
 [node name="Bow" parent="World/Entities/Loot/Slot" index="0" instance=ExtResource( 15 )]
 
 [node name="Loot2" parent="World/Entities" instance=ExtResource( 14 )]
-position = Vector2( 221.637, 155.091 )
+position = Vector2( 261.637, 155.091 )
+
+[node name="Sword" parent="World/Entities/Loot2/Slot" index="0" instance=ExtResource( 22 )]
 
 [node name="Loot3" parent="World/Entities" instance=ExtResource( 14 )]
-position = Vector2( 221.637, 155.091 )
+position = Vector2( 181.637, 155.091 )
+
+[node name="BeamWeapon" parent="World/Entities/Loot3/Slot" index="0" instance=ExtResource( 24 )]
+
+[node name="Loot4" parent="World/Entities" instance=ExtResource( 14 )]
+position = Vector2( 181.637, 155.091 )
+
+[node name="Gem" parent="World/Entities/Loot4/Slot" index="0" instance=ExtResource( 23 )]
+
+[node name="Loot5" parent="World/Entities" instance=ExtResource( 14 )]
+position = Vector2( 181.637, 155.091 )
+
+[node name="Cold Gem" parent="World/Entities/Loot5/Slot" index="0" instance=ExtResource( 25 )]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource( 16 )
@@ -297,3 +315,7 @@ margin_left = -210.0
 [editable path="World/Entities/Loot2"]
 
 [editable path="World/Entities/Loot3"]
+
+[editable path="World/Entities/Loot4"]
+
+[editable path="World/Entities/Loot5"]

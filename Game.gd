@@ -1,9 +1,7 @@
 extends Node2D
 
-var nearest_loot
-
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func _process(delta):
 	pass

@@ -1,16 +1,20 @@
 extends State
 
+export var duration := 0.2
+export var cancelable := false
+
+export (String) var finished_state
+export (String) var canceled_state
+
 var windup_timer
 
 func enter():
-	print("Enter windup state")
-	windup_timer = 0.2
+	windup_timer = duration
 
 func update(delta):
 	windup_timer -= delta
 	
 	if windup_timer <= 0:
 		emit_signal("finished", "Swing")
-
-func exit():
-	print("Exit windup state")
+	elif not owner.is_attacking and cancelable:
+		get_parent().emit_signal("finished", "Idling")

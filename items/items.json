@@ -10,6 +10,7 @@
   "weapon": {
     "beamweapon": "res://items/weapon/BeamWeapon.tscn",
     "bow": "res://items/weapon/Bow.tscn",
+    "recallweapon": "res://items/weapon/RecallWeapon.tscn",
     "spraywand": "res://items/weapon/SprayWand.tscn",
     "sprayweapon": "res://items/weapon/SprayWeapon.tscn",
     "sword": "res://items/weapon/Sword.tscn",

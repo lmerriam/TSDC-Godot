@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://items/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://items/weapon/CooldownState.gd" type="Script" id=3]
+[ext_resource path="res://items/weapon/Return.gd" type="Script" id=4]
+[ext_resource path="res://items/weapon/AimingState.gd" type="Script" id=5]
+[ext_resource path="res://items/weapon/Thrown.gd" type="Script" id=6]
+[ext_resource path="res://sprites/pixeltier/axes/axe_40.png" type="Texture" id=7]
+[ext_resource path="res://attacks/RecallProjectile.tscn" type="PackedScene" id=8]
+
+[node name="RecallWeapon" instance=ExtResource( 1 )]
+item_name = "Recalling Weapon"
+damage = 5.0
+attack_area = ExtResource( 8 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 7 )
+
+[node name="Attacking" parent="StateMachine" index="0"]
+script = ExtResource( 2 )
+START_STATE = NodePath("Cooldown")
+
+[node name="Cooldown" type="Node" parent="StateMachine/Attacking" index="0"]
+script = ExtResource( 3 )
+next_state = "Aim"
+
+[node name="Aim" type="Node" parent="StateMachine/Attacking" index="1"]
+script = ExtResource( 5 )
+next_state = "Thrown"
+
+[node name="Thrown" type="Node" parent="StateMachine/Attacking" index="2"]
+script = ExtResource( 6 )
+
+[node name="Recall" type="Node" parent="StateMachine/Attacking" index="3"]
+script = ExtResource( 4 )
+
+[editable path="Entity"]

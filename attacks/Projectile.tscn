@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/lights/TestLightHard.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.6903, 2.2238 )
+extents = Vector2( 5.51469, 5.1798 )
 
 [node name="Projectile" type="Area2D" groups=[
 "projectiles",
