@@ -6,4 +6,4 @@ func _process(delta):
 		$Sprite/Particles2D.emitting = true
 	else:
 		$Sprite/Particles2D.emitting = false
-#		Yeah, this is sloppy, shouldn't have to false it every frame
+#		TODO: Yeah, this is sloppy, shouldn't have to false it every frame

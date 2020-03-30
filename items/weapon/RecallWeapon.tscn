@@ -6,7 +6,7 @@
 [ext_resource path="res://items/weapon/Return.gd" type="Script" id=4]
 [ext_resource path="res://items/weapon/AimingState.gd" type="Script" id=5]
 [ext_resource path="res://items/weapon/Thrown.gd" type="Script" id=6]
-[ext_resource path="res://sprites/pixeltier/axes/axe_40.png" type="Texture" id=7]
+[ext_resource path="res://sprites/pixeltier/axes/axe_88.png" type="Texture" id=7]
 [ext_resource path="res://attacks/RecallProjectile.tscn" type="PackedScene" id=8]
 
 [node name="RecallWeapon" instance=ExtResource( 1 )]
