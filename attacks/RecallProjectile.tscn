@@ -35,13 +35,12 @@ min_speed = -999.0
 lifetime = 999.0
 
 [node name="Sprite" parent="." index="1"]
-rotation = 0.0
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 anims/Spinning = SubResource( 1 )
 
-[node name="StateMachine" type="Node" parent="." index="3"]
+[node name="StateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 4 )
 START_STATE = NodePath("Default")
 root_machine = true
@@ -54,5 +53,3 @@ script = ExtResource( 7 )
 
 [node name="Recall" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 5 )
-
-[editable path="TestLight"]

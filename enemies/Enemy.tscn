@@ -68,11 +68,11 @@ root_machine = true
 [node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 
-[node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
-
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
 
 [node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
@@ -93,6 +93,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]

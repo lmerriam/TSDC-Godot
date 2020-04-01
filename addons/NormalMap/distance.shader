@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
-vec4 borders(sampler2D TEXTURE, vec2 texCoord){
+vec4 borders(sampler2D TEX, vec2 texCoord){
 	if(texCoord.x > 1.0 || texCoord.y > 1.0 || texCoord.x < 0.0 || texCoord.y < 0.0)
 		return vec4(0.0);
-	return vec4(vec3(float(texture(TEXTURE, texCoord).a != 0.0)),1.0);
+	return vec4(vec3(float(texture(TEX, texCoord).a != 0.0)),1.0);
 }
 
 void fragment(){
