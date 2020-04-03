@@ -8,8 +8,8 @@ var active_particles = {}
 func set_length(length):
 	$Line.set_point_position(1,Vector2(length,0))
 	$Line2.set_point_position(1,Vector2(length,0))
-	$Particles2D.position.x = length
-	$CollisionShape2D.shape.length = length
+	$Particles2D.position.x = length + $Line.position.x
+	$CollisionShape2D.shape.length = length + $Line.position.x
 
 func set_width(width):
 	$Line.width = width

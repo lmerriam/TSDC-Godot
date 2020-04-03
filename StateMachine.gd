@@ -5,7 +5,10 @@ signal state_changed(current_state)
 
 export(NodePath) var START_STATE
 export var root_machine := false
+export var debugging := false
+
 var states_map = {}
+onready var states_list = get_children()
 
 var states_stack = []
 var current_state = null
@@ -57,6 +60,13 @@ func _change_state(state_name):
 		return
 	current_state.exit()
 	
+	if state_name == "next":
+		var idx = states_list.find(current_state) + 1
+		if idx < states_list.size():
+			state_name = states_list[idx].name
+		else:
+			state_name = states_list[0].name
+	
 	if state_name == "previous":
 		states_stack.pop_front()
 	else:
@@ -64,6 +74,8 @@ func _change_state(state_name):
 	
 	current_state = states_stack[0]
 	emit_signal("state_changed", current_state)
+	if debugging:
+		print("Change state to: " + state_name)
 	
 	if state_name != "previous":
 		current_state.enter()

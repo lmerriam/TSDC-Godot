@@ -1,7 +1,5 @@
 extends State
 
-export var next_state := "Recall"
-
 func update(delta):
 	if owner.is_attacking:
 		if recall():

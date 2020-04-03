@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Entity.gd" type="Script" id=1]
+[ext_resource path="res://3DTestPlayer.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.491667
+
+[node name="World" type="Spatial"]
+
+[node name="MeshInstance" type="Area" parent="."]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.952616, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance"]
+shape = SubResource( 4 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.91316, 0 )
+
+[node name="Camera" type="InterpolatedCamera" parent="."]
+transform = Transform( -0.000123459, 0.812494, -0.582969, -0.00406595, 0.582964, 0.812488, 0.999992, 0.00247063, 0.00323159, -10.1547, 11.9692, 0.0671329 )
+target = NodePath("../KinematicBody")
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.550907, 0 )
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+shape = SubResource( 3 )
+
+[node name="Entity" type="Node2D" parent="KinematicBody"]
+script = ExtResource( 1 )

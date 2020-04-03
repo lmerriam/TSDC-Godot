@@ -3,6 +3,8 @@ class_name State
 
 signal finished(next_state_name)
 
+export var next_state := "next"
+
 var entity
 var actor
 

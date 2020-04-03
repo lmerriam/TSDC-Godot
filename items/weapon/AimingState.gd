@@ -1,7 +1,5 @@
 extends State
 
-export var next_state = ""
-
 func update(delta):
 	if !entity.is_attacking:
 		var atk = entity.item_owner.create_attack()

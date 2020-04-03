@@ -1,7 +1,5 @@
 extends State
 
-export var next_state := "Windup"
-
 func enter():
 	pass
 

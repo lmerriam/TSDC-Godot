@@ -713,7 +713,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "equipment_watcher" )
+enabled=PoolStringArray( "AsepriteAnimSetter", "equipment_watcher" )
 
 [importer_defaults]
 

@@ -1,31 +1,30 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
-[ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=3]
-[ext_resource path="res://Entities.gd" type="Script" id=4]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://items/armor/LeatherArmor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://items/weapon/RecallWeapon.tscn" type="PackedScene" id=7]
-[ext_resource path="res://items/Skill.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Camera2D.gd" type="Script" id=9]
-[ext_resource path="res://TestLight.tscn" type="PackedScene" id=10]
-[ext_resource path="res://sprites/lights/DitherLight256.png" type="Texture" id=11]
-[ext_resource path="res://sprites/lights/light256core.png" type="Texture" id=12]
-[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Loot.tscn" type="PackedScene" id=14]
-[ext_resource path="res://items/weapon/Bow.tscn" type="PackedScene" id=15]
-[ext_resource path="res://GUI.gd" type="Script" id=16]
-[ext_resource path="res://HUD.gd" type="Script" id=17]
-[ext_resource path="res://sprites/icon.png" type="Texture" id=18]
-[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=19]
-[ext_resource path="res://CharacterControl.gd" type="Script" id=20]
-[ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=21]
-[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=22]
-[ext_resource path="res://items/component/CombustGem.tscn" type="PackedScene" id=23]
-[ext_resource path="res://items/weapon/BeamWeapon.tscn" type="PackedScene" id=24]
-[ext_resource path="res://items/component/ColdGem.tscn" type="PackedScene" id=25]
-[ext_resource path="res://items/weapon/SprayWand.tscn" type="PackedScene" id=26]
+[ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=3]
+[ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=4]
+[ext_resource path="res://Entities.gd" type="Script" id=5]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://items/armor/LeatherArmor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://items/Skill.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Camera2D.gd" type="Script" id=10]
+[ext_resource path="res://TestLight.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sprites/lights/DitherLight256.png" type="Texture" id=12]
+[ext_resource path="res://sprites/lights/light256core.png" type="Texture" id=13]
+[ext_resource path="res://Stronghold.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Loot.tscn" type="PackedScene" id=15]
+[ext_resource path="res://items/weapon/Bow.tscn" type="PackedScene" id=16]
+[ext_resource path="res://items/weapon/Sword.tscn" type="PackedScene" id=17]
+[ext_resource path="res://items/weapon/BeamWeapon.tscn" type="PackedScene" id=18]
+[ext_resource path="res://items/component/CombustGem.tscn" type="PackedScene" id=19]
+[ext_resource path="res://items/component/ColdGem.tscn" type="PackedScene" id=20]
+[ext_resource path="res://items/weapon/SprayWand.tscn" type="PackedScene" id=21]
+[ext_resource path="res://GUI.gd" type="Script" id=22]
+[ext_resource path="res://HUD.gd" type="Script" id=23]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=24]
+[ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=25]
+[ext_resource path="res://CharacterControl.gd" type="Script" id=26]
 
 [sub_resource type="Animation" id=1]
 loop = true
@@ -91,51 +90,52 @@ __meta__ = {
 }
 
 [node name="Environment" type="TileMap" parent="World"]
-tile_set = ExtResource( 21 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( 524310, 0, 4, 524311, 0, 3, 524315, 0, 196615, 524326, 1, 196615, 589843, 0, 1, 589844, 0, 2, 589845, 0, 5, 589846, 0, 65540, 589847, 0, 196612, 589848, 0, 3, 589850, 0, 4, 589851, 0, 196613, 589852, 0, 5, 589853, 0, 3, 589862, 1, 327680, 589863, 1, 65543, 655379, 1, 196615, 655380, 0, 196611, 655381, 0, 65541, 655382, 0, 65541, 655383, 0, 65541, 655384, 0, 196612, 655385, 0, 5, 655386, 0, 65540, 655387, 0, 262149, 655388, 0, 262149, 655389, 0, 262150, 655393, 1, 4, 655394, 1, 3, 655399, 1, 262151, 720913, 0, 0, 720914, 1, 1, 720915, 1, 196610, 720916, 0, 196611, 720917, 0, 262149, 720918, 0, 65541, 720919, 0, 65541, 720920, 0, 262149, 720921, 0, 65541, 720922, 0, 262149, 720923, 0, 65541, 720924, 0, 262149, 720925, 0, 262150, 720928, 1, 65536, 720929, 1, 327682, 720930, 1, 131078, 720935, 1, 262151, 786448, 1, 65536, 786449, 1, 7, 786450, 0, 0, 786451, 1, 131079, 786452, 0, 327684, 786453, 0, 262148, 786454, 0, 65541, 786455, 0, 65541, 786456, 0, 262149, 786457, 0, 65541, 786458, 0, 262149, 786459, 0, 65541, 786460, 0, 262149, 786461, 0, 262150, 786464, 1, 262151, 786466, 1, 262151, 786471, 1, 327680, 786472, 1, 65543, 851983, 1, 65536, 851984, 1, 327687, 851985, 0, 0, 851986, 2, 1, 851987, 2, 327681, 851988, 2, 65543, 851989, 0, 327684, 851990, 0, 327685, 851991, 0, 262148, 851992, 0, 65541, 851993, 0, 65541, 851994, 0, 65541, 851995, 0, 262149, 851996, 0, 262149, 851997, 0, 262150, 852000, 1, 131072, 852001, 1, 5, 852002, 1, 196614, 852008, 1, 327680, 852009, 1, 65543, 917519, 1, 262151, 917521, 1, 65536, 917522, 1, 7, 917523, 0, 196615, 917524, 2, 327680, 917525, 2, 327681, 917526, 2, 65543, 917527, 0, 327684, 917528, 0, 262148, 917529, 0, 65541, 917530, 0, 262149, 917531, 0, 65541, 917532, 0, 262149, 917533, 0, 262150, 917535, 1, 4, 917536, 1, 262147, 917537, 1, 327685, 917538, 1, 65539, 917539, 1, 6, 917540, 1, 327681, 917541, 1, 65543, 917545, 1, 262151, 983055, 1, 327680, 983056, 1, 2, 983057, 1, 196614, 983059, 0, 131072, 983060, 0, 5, 983061, 0, 3, 983062, 2, 327680, 983063, 2, 65543, 983064, 0, 327684, 983065, 0, 262148, 983066, 0, 262149, 983067, 0, 262149, 983068, 0, 262149, 983069, 0, 262150, 983071, 1, 327684, 983072, 1, 327683, 983074, 1, 196611, 983075, 1, 262150, 983077, 1, 131072, 983078, 1, 3, 983081, 1, 327680, 983082, 1, 65543, 1048592, 1, 196611, 1048593, 1, 262150, 1048595, 0, 196611, 1048596, 0, 262149, 1048597, 0, 196612, 1048598, 0, 3, 1048599, 2, 327680, 1048600, 2, 65543, 1048601, 0, 327684, 1048602, 0, 262148, 1048603, 0, 65541, 1048604, 0, 131076, 1048605, 0, 327683, 1048609, 1, 1, 1048610, 1, 131075, 1048611, 1, 196612, 1048612, 1, 6, 1048613, 1, 327682, 1048614, 1, 327683, 1048618, 1, 262151, 1114128, 1, 196611, 1114129, 1, 262150, 1114130, 0, 4, 1114131, 0, 65540, 1114132, 0, 65541, 1114133, 0, 65541, 1114134, 0, 196612, 1114135, 0, 3, 1114136, 2, 327680, 1114137, 2, 65543, 1114138, 0, 327684, 1114139, 0, 262148, 1114140, 0, 262150, 1114143, 2, 196615, 1114146, 1, 196608, 1114147, 1, 327685, 1114148, 1, 131078, 1114151, 1, 4, 1114152, 1, 5, 1114153, 1, 6, 1114154, 1, 327687, 1179664, 1, 196611, 1179665, 1, 262150, 1179666, 0, 196611, 1179667, 0, 262149, 1179668, 0, 65541, 1179669, 0, 65541, 1179670, 0, 65541, 1179671, 0, 196612, 1179672, 0, 3, 1179673, 2, 327680, 1179674, 2, 65543, 1179675, 0, 327684, 1179676, 0, 327686, 1179677, 0, 7, 1179678, 2, 65536, 1179679, 2, 327687, 1179682, 1, 262151, 1179684, 1, 131072, 1179685, 1, 5, 1179686, 1, 5, 1179687, 1, 65540, 1179688, 1, 262149, 1179689, 1, 262150, 1245200, 1, 196611, 1245201, 1, 262150, 1245202, 0, 327684, 1245203, 0, 327685, 1245204, 0, 262148, 1245205, 0, 262149, 1245206, 0, 262149, 1245207, 0, 262149, 1245208, 0, 196612, 1245209, 0, 3, 1245210, 2, 327680, 1245211, 2, 65543, 1245214, 2, 262151, 1245215, 0, 4, 1245216, 0, 5, 1245217, 0, 3, 1245218, 1, 327680, 1245219, 1, 2, 1245220, 1, 65540, 1245221, 1, 65541, 1245222, 1, 131076, 1245223, 1, 327685, 1245224, 1, 131077, 1245225, 1, 327683, 1310735, 1, 1, 1310736, 1, 131075, 1310737, 1, 262150, 1310740, 0, 327684, 1310741, 0, 327685, 1310742, 0, 327685, 1310743, 0, 327685, 1310744, 0, 327685, 1310745, 0, 327686, 1310746, 0, 7, 1310747, 2, 327680, 1310748, 2, 65537, 1310749, 2, 327681, 1310750, 2, 327687, 1310751, 0, 196611, 1310752, 0, 131076, 1310753, 0, 327683, 1310755, 1, 196608, 1310756, 1, 327685, 1310757, 1, 327685, 1310758, 1, 327683, 1310760, 1, 262151, 1376268, 2, 196615, 1376272, 1, 196608, 1376273, 1, 327686, 1376274, 1, 65543, 1376278, 1, 1, 1376279, 1, 327681, 1376280, 1, 65543, 1376284, 2, 131079, 1376286, 0, 4, 1376287, 0, 262147, 1376288, 0, 327683, 1376291, 1, 262151, 1376295, 1, 65536, 1376296, 1, 327687, 1441804, 2, 262151, 1441808, 1, 131079, 1441810, 1, 327680, 1441811, 1, 327681, 1441812, 1, 65543, 1441816, 1, 327680, 1441817, 1, 327681, 1441818, 1, 327681, 1441819, 1, 7, 1441821, 0, 4, 1441822, 0, 262147, 1441823, 0, 327683, 1441827, 1, 262151, 1441831, 1, 262151, 1507339, 2, 4, 1507340, 2, 196614, 1507343, 2, 1, 1507344, 2, 2, 1507345, 2, 3, 1507348, 1, 327680, 1507349, 1, 327681, 1507350, 1, 65543, 1507357, 0, 196611, 1507358, 0, 262150, 1507363, 1, 262151, 1507366, 1, 65536, 1507367, 1, 327687, 1572875, 2, 196611, 1572876, 2, 262150, 1572880, 2, 327684, 1572881, 2, 327686, 1572882, 2, 327681, 1572883, 2, 327681, 1572884, 2, 65543, 1572886, 1, 327680, 1572887, 1, 327681, 1572888, 1, 65543, 1572892, 0, 1, 1572893, 0, 327682, 1572894, 0, 327683, 1572898, 1, 65536, 1572899, 1, 327687, 1572901, 1, 65536, 1572902, 1, 327687, 1638411, 2, 196611, 1638412, 2, 262150, 1638416, 1, 196615, 1638420, 2, 327680, 1638421, 2, 65543, 1638424, 1, 327680, 1638425, 1, 327681, 1638426, 1, 65543, 1638433, 1, 4, 1638434, 1, 196614, 1638437, 1, 262151, 1703947, 2, 196611, 1703948, 2, 196612, 1703949, 2, 5, 1703950, 2, 3, 1703952, 1, 327680, 1703953, 1, 2, 1703954, 1, 6, 1703955, 1, 327681, 1703956, 1, 7, 1703957, 2, 262151, 1703958, 1, 196615, 1703962, 1, 131072, 1703963, 1, 5, 1703964, 1, 3, 1703969, 1, 196611, 1703970, 1, 262150, 1703972, 1, 65536, 1703973, 1, 327687, 1769483, 2, 327684, 1769484, 2, 262148, 1769485, 2, 65541, 1769486, 2, 262150, 1769488, 2, 196615, 1769489, 1, 327684, 1769490, 1, 327683, 1769493, 2, 262151, 1769494, 1, 262151, 1769498, 1, 196611, 1769499, 1, 65541, 1769500, 1, 196612, 1769501, 1, 5, 1769502, 1, 5, 1769503, 1, 5, 1769504, 1, 6, 1769505, 1, 327682, 1769506, 1, 327686, 1769507, 1, 327681, 1769508, 1, 327687, 1835020, 2, 327684, 1835021, 2, 327685, 1835022, 2, 327683, 1835024, 2, 327680, 1835025, 2, 327681, 1835026, 2, 327681, 1835027, 2, 327681, 1835028, 2, 2, 1835029, 2, 196614, 1835030, 1, 327680, 1835031, 1, 327681, 1835032, 1, 327681, 1835033, 1, 327681, 1835034, 1, 327682, 1835035, 1, 327685, 1835036, 1, 327685, 1835037, 1, 327685, 1835038, 1, 327685, 1835039, 1, 327685, 1835040, 1, 327683, 1900564, 2, 327684, 1900565, 2, 327686, 1900566, 2, 327681, 1900567, 2, 7 )
 
 [node name="Environment2" type="TileMap" parent="World"]
-tile_set = ExtResource( 21 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
 [node name="Floors" type="TileMap" parent="World"]
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
 [node name="Walls" type="TileMap" parent="World"]
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
 [node name="Entities" type="YSort" parent="World"]
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
-[node name="Player" parent="World/Entities" instance=ExtResource( 5 )]
+[node name="Player" parent="World/Entities" instance=ExtResource( 6 )]
 position = Vector2( 364.424, 310.973 )
 
 [node name="Armor" parent="World/Entities/Player/Entity/Equipment" index="0"]
+visible = false
 position = Vector2( 0, -4 )
 
-[node name="Leather Armor" parent="World/Entities/Player/Entity/Equipment/Armor" index="0" instance=ExtResource( 6 )]
+[node name="Leather Armor" parent="World/Entities/Player/Entity/Equipment/Armor" index="0" instance=ExtResource( 7 )]
 type = ""
 
 [node name="Weapon" parent="World/Entities/Player/Entity/Equipment" index="3"]
 position = Vector2( 0, -4 )
 
-[node name="RecallWeapon" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 7 )]
+[node name="Sword" parent="World/Entities/Player/Entity/Equipment/Weapon" index="0" instance=ExtResource( 17 )]
 
 [node name="Skill1" parent="World/Entities/Player/Entity/Equipment" index="4"]
 visible = false
 
-[node name="Skill" parent="World/Entities/Player/Entity/Equipment/Skill1" index="0" instance=ExtResource( 8 )]
+[node name="Skill" parent="World/Entities/Player/Entity/Equipment/Skill1" index="0" instance=ExtResource( 9 )]
 
 [node name="Skill2" parent="World/Entities/Player/Entity/Equipment" index="5"]
 visible = false
@@ -143,14 +143,14 @@ visible = false
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
 current = true
 smoothing_enabled = true
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
-[node name="Node2D2" parent="World/Entities/Player" instance=ExtResource( 10 )]
+[node name="Node2D2" parent="World/Entities/Player" instance=ExtResource( 11 )]
 visible = false
 position = Vector2( 0.49118, 0.37271 )
 
 [node name="Light2D" parent="World/Entities/Player/Node2D2" index="0"]
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 texture_scale = 2.0
 color = Color( 0.992157, 0.960784, 0.815686, 1 )
 shadow_enabled = true
@@ -159,12 +159,12 @@ shadow_gradient_length = 1.0
 shadow_filter = 1
 shadow_filter_smooth = 10.0
 
-[node name="Node2D3" parent="World/Entities/Player" instance=ExtResource( 10 )]
+[node name="Node2D3" parent="World/Entities/Player" instance=ExtResource( 11 )]
 visible = false
 position = Vector2( 0.49118, 0.37271 )
 
 [node name="Light2D" parent="World/Entities/Player/Node2D3" index="0"]
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 texture_scale = 2.0
 color = Color( 0.992157, 0.960784, 0.815686, 1 )
 range_item_cull_mask = 2
@@ -176,41 +176,41 @@ shadow_filter_smooth = 10.0
 [node name="AnimationPlayer" parent="World/Entities/Player/Node2D3/Light2D" index="0"]
 anims/Flicker = SubResource( 1 )
 
-[node name="Stronghold" parent="World/Entities" instance=ExtResource( 13 )]
+[node name="Stronghold" parent="World/Entities" instance=ExtResource( 14 )]
 position = Vector2( 154.503, 283.381 )
 
-[node name="Loot" parent="World/Entities" instance=ExtResource( 14 )]
+[node name="Loot" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 221.637, 155.091 )
 
-[node name="Bow" parent="World/Entities/Loot/Slot" index="0" instance=ExtResource( 15 )]
+[node name="Bow" parent="World/Entities/Loot/Slot" index="0" instance=ExtResource( 16 )]
 
-[node name="Loot2" parent="World/Entities" instance=ExtResource( 14 )]
+[node name="Loot2" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 261.637, 155.091 )
 
-[node name="Sword" parent="World/Entities/Loot2/Slot" index="0" instance=ExtResource( 22 )]
+[node name="Sword" parent="World/Entities/Loot2/Slot" index="0" instance=ExtResource( 17 )]
 
-[node name="Loot3" parent="World/Entities" instance=ExtResource( 14 )]
+[node name="Loot3" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 181.637, 155.091 )
 
-[node name="BeamWeapon" parent="World/Entities/Loot3/Slot" index="0" instance=ExtResource( 24 )]
+[node name="BeamWeapon" parent="World/Entities/Loot3/Slot" index="0" instance=ExtResource( 18 )]
 
-[node name="Loot4" parent="World/Entities" instance=ExtResource( 14 )]
+[node name="Loot4" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 181.637, 155.091 )
 
-[node name="Gem" parent="World/Entities/Loot4/Slot" index="0" instance=ExtResource( 23 )]
+[node name="Gem" parent="World/Entities/Loot4/Slot" index="0" instance=ExtResource( 19 )]
 
-[node name="Loot5" parent="World/Entities" instance=ExtResource( 14 )]
+[node name="Loot5" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 181.637, 155.091 )
 
-[node name="Cold Gem" parent="World/Entities/Loot5/Slot" index="0" instance=ExtResource( 25 )]
+[node name="Cold Gem" parent="World/Entities/Loot5/Slot" index="0" instance=ExtResource( 20 )]
 
-[node name="Loot6" parent="World/Entities" instance=ExtResource( 14 )]
+[node name="Loot6" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 181.637, 155.091 )
 
-[node name="SprayWand" parent="World/Entities/Loot6/Slot" index="0" instance=ExtResource( 26 )]
+[node name="SprayWand" parent="World/Entities/Loot6/Slot" index="0" instance=ExtResource( 21 )]
 
 [node name="GUI" type="CanvasLayer" parent="."]
-script = ExtResource( 16 )
+script = ExtResource( 22 )
 
 [node name="HUD" type="Control" parent="GUI"]
 margin_left = 10.0
@@ -218,14 +218,14 @@ margin_top = 10.0
 margin_right = 950.0
 margin_bottom = 631.0
 mouse_filter = 2
-script = ExtResource( 17 )
+script = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BtnGenMap" type="Button" parent="GUI/HUD"]
-anchor_left = 1.159
-anchor_right = 1.159
+anchor_left = 1.0
+anchor_right = 1.0
 margin_left = -111.2
 margin_top = -0.716003
 margin_right = 0.312195
@@ -240,35 +240,35 @@ __meta__ = {
 [node name="TouchScreenButton" type="TouchScreenButton" parent="GUI/HUD"]
 position = Vector2( 841.843, 518.836 )
 scale = Vector2( 0.627024, 0.627024 )
-normal = ExtResource( 18 )
+normal = ExtResource( 24 )
 action = "attack"
 visibility_mode = 1
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="GUI/HUD"]
 position = Vector2( 18.133, 502.038 )
 scale = Vector2( 0.386395, 0.386395 )
-normal = ExtResource( 18 )
+normal = ExtResource( 24 )
 action = "move_left"
 visibility_mode = 1
 
 [node name="TouchScreenButton5" type="TouchScreenButton" parent="GUI/HUD"]
 position = Vector2( 122.342, 502.038 )
 scale = Vector2( 0.386395, 0.386395 )
-normal = ExtResource( 18 )
+normal = ExtResource( 24 )
 action = "move_right"
 visibility_mode = 1
 
 [node name="TouchScreenButton3" type="TouchScreenButton" parent="GUI/HUD"]
 position = Vector2( 68.9542, 459.944 )
 scale = Vector2( 0.386395, 0.386395 )
-normal = ExtResource( 18 )
+normal = ExtResource( 24 )
 action = "move_up"
 visibility_mode = 1
 
 [node name="TouchScreenButton4" type="TouchScreenButton" parent="GUI/HUD"]
 position = Vector2( 72.1143, 546.966 )
 scale = Vector2( 0.386395, 0.386395 )
-normal = ExtResource( 18 )
+normal = ExtResource( 24 )
 action = "move_down"
 visibility_mode = 1
 
@@ -286,7 +286,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 19 )]
+[node name="Inventory" parent="GUI" instance=ExtResource( 25 )]
 visible = false
 mouse_filter = 2
 
@@ -297,7 +297,7 @@ margin_top = 7.0
 margin_right = 710.0
 margin_bottom = 473.0
 mouse_filter = 2
-script = ExtResource( 20 )
+script = ExtResource( 26 )
 
 [node name="StatList" type="Tree" parent="GUI/Character"]
 anchor_left = 1.0
