@@ -37,7 +37,7 @@ func _physics_process(delta):
 		angle.y += drop_current
 		global_rotation = angle.angle()
 	
-	global_position += (angle * speed)
+	global_position += (angle.normalized() * speed)
 
 func attack_successful(entity):
 	pierce -= 1

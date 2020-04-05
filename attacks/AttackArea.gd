@@ -2,7 +2,7 @@ extends Area2D
 class_name AttackArea
 
 var properties
-var angle
+var angle = Vector2(0,0)
 
 func set_angle(vec):
 	rotation = vec.angle()

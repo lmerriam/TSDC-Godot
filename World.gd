@@ -19,9 +19,7 @@ var noise = _gen_noise()
 var nodes = []
 var node_edges = []
 
-var path_tiles = PoolVector2Array()
-
-
+var path_tiles = []
 
 var time_before
 
@@ -66,20 +64,20 @@ func _on_chunk_changed(new_chunk, old_chunk):
 	var grass = $Environment.tile_set.find_tile_by_name("grass")
 	var water = $Environment.tile_set.find_tile_by_name("water")
 	var cliff = $Environment.tile_set.find_tile_by_name("cliffs")
-#	for x in range(start_x, end_x):
-#		for y in range(start_y, end_y):
-#			var tile
-#			var value = noise.get_noise_2d(x,y)
-#			if value > cliff_threshold:
-#				tile = cliff
-#			elif value > grass_threshold:
-#				tile = grass
-#			elif value < water_threshold:
-#				tile = water
-#
-#			if tile != null and not path_tiles.has(Vector2(x,y)):
-#				$Environment.set_cell(x,y,tile)
-#	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
+	for x in range(start_x, end_x):
+		for y in range(start_y, end_y):
+			var tile
+			var value = noise.get_noise_2d(x,y)
+			if value > cliff_threshold:
+				tile = cliff
+			elif value > grass_threshold:
+				tile = grass
+			elif value < water_threshold:
+				tile = water
+
+			if tile != null and not path_tiles.has(Vector2(x,y)):
+				$Environment.set_cell(x,y,tile)
+	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
 
 func _on_BtnGenMap_button_up():
 	noise = _gen_noise()

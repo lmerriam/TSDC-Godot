@@ -5,7 +5,7 @@ export var cancelable := true
 export var attack_area = preload("res://attacks/Slash.tscn")
 
 func enter():
-	var angle = owner._get_vector_to_mouse()
+	var angle = Global.get_gamepad_force("AimPad")
 	var atk = owner.item_owner.create_attack()
 	var area = owner._create_attack_area(atk, entity, angle)
 	

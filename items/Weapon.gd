@@ -13,6 +13,7 @@ export var attack_area = preload("res://attacks/Slash.tscn")
 var is_attacking = false
 var active_attack_areas = []
 
+
 func _init():
 	$Entity.stat_increments.damage = .1
 
@@ -56,8 +57,10 @@ func on_attack_started():
 func on_attack_ended():
 	is_attacking = false
 
+
 func remove_active_attack(attack):
 	active_attack_areas.erase(attack)
+
 
 func add_active_attack(attack):
 	active_attack_areas.append(attack)

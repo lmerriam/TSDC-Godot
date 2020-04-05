@@ -4,6 +4,7 @@ export var speed = 100
 onready var sprite = $AnimatedSprite
 
 var attack_move_speed = 1
+var pad_velocity = Vector2(0,0)
 
 signal attack_started
 signal attack_ended
@@ -54,6 +55,10 @@ func _physics_process(delta):
 	else:
 		sprite.animation = "idle"
 	
+	if pad_velocity:
+		velocity = pad_velocity * speed
+#	print(velocity)
+	
 	#TODO: modify player speed when attacking
 	move_and_slide(velocity*attack_move_speed)
 
@@ -79,3 +84,7 @@ func _on_Player_attack_ended():
 
 func _on_entity_tree_entered():
 	Global.player_entity = $Entity
+
+
+func _on_MovePad_force_changed(padname, force):
+	pad_velocity = force

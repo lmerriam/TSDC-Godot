@@ -1,7 +1,6 @@
 extends State
 
 var current_charge
-export (String) var next_state
 
 func enter():
 	current_charge = 0

@@ -14,4 +14,3 @@ shape = SubResource( 1 )
 
 [node name="Entity" type="Node2D" parent="."]
 script = ExtResource( 2 )
-

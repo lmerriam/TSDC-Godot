@@ -18,7 +18,7 @@ func enter():
 func update(delta):
 	if entity.is_attacking == false:
 		var atk = entity.item_owner.create_attack()
-		var angle = entity._get_vector_to_mouse()
+		var angle = Global.get_gamepad_force("AimPad")
 		var area = entity._create_attack_area(atk, Global.entities, angle, entity.global_position)
 		atk.damage *= current_charge_level()
 		area.speed *= current_charge_level()
