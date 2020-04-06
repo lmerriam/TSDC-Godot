@@ -56,3 +56,7 @@ func instance_random_loot(type=null):
 	Global.entities.call_deferred("add_child", lt)
 	lt.set_item(itm)
 	return lt
+
+#func get_all_items(type):
+#	for item in item.type:
+#	pass

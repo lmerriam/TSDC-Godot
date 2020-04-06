@@ -22,6 +22,9 @@ func _init():
 func _ready():
 	sprite.play()
 	$Entity.set_stat_base("damage", 3)
+	for type in ItemLibrary.equipment:
+		for item in ItemLibrary.equipment[type]:
+			$Entity.add_item(ItemLibrary.instance_item(item))
 
 
 func _unhandled_input(event):

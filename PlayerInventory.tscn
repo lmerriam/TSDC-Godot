@@ -132,7 +132,6 @@ margin_top = 396.0
 margin_right = 696.0
 margin_bottom = 446.0
 text = "Done Modifying"
-
 [connection signal="slot_selected" from="EquipmentSlots/WeaponSlot" to="." method="_on_equipment_slot_selected"]
 [connection signal="slot_selected" from="EquipmentSlots/ArmorSlot" to="." method="_on_equipment_slot_selected"]
 [connection signal="slot_selected" from="EquipmentSlots/FootwearSlot" to="." method="_on_equipment_slot_selected"]

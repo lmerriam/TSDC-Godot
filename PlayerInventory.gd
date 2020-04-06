@@ -76,3 +76,8 @@ func _on_equipment_slot_selected(slot):
 func _on_unequip_button_up():
 	player.remove_equipped(selected_slot)
 	player.add_item(selected_item)
+
+
+func _on_Inventory_visibility_changed():
+	if visible:
+		$ItemList.update_list()

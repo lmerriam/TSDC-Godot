@@ -41,7 +41,8 @@ func _ready():
 		for x in range(node.origin.x-5,node.origin.x+6):
 			for y in range(node.origin.y-5,node.origin.y+6):
 				path_tiles.append(Vector2(x,y))
-	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
+	if process_chunks:
+		_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
 func _process(delta):
 	var chunk = _get_current_chunk()
@@ -65,18 +66,22 @@ func _on_chunk_changed(new_chunk, old_chunk):
 	var grass = $Environment.tile_set.find_tile_by_name("grass")
 	var water = $Environment.tile_set.find_tile_by_name("water")
 	var cliff = $Environment.tile_set.find_tile_by_name("cliffs")
+	var path = $Environment.tile_set.find_tile_by_name("path")
 	for x in range(start_x, end_x):
 		for y in range(start_y, end_y):
 			var tile
 			var value = noise.get_noise_2d(x,y)
-			if value > cliff_threshold:
+			
+			if path_tiles.has(Vector2(x,y)):
+				tile = path
+			elif value > cliff_threshold:
 				tile = cliff
 			elif value > grass_threshold:
 				tile = grass
 			elif value < water_threshold:
 				tile = water
 
-			if tile != null and not path_tiles.has(Vector2(x,y)):
+			if tile != null:
 				$Environment.set_cell(x,y,tile)
 	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
 
@@ -166,7 +171,7 @@ func draw_tile_path(x0,y0,x1,y1):
 	var yStep = 1 if y0 < y1 else -1
 	var error = xDist + yDist
 	
-	$Environment2.set_cell(x0, y0, $Environment2.tile_set.find_tile_by_name("path"))
+	$Environment.set_cell(x0, y0, $Environment.tile_set.find_tile_by_name("path"))
 	
 	while (x0 != x1 or y0 != y1):
 		if (2*error - yDist > xDist - 2*error):
@@ -176,7 +181,7 @@ func draw_tile_path(x0,y0,x1,y1):
 			error += xDist
 			y0 += yStep
 		
-		$Environment2.set_cell(x0, y0, $Environment2.tile_set.find_tile_by_name("path"));
+		$Environment.set_cell(x0, y0, $Environment.tile_set.find_tile_by_name("path"));
 		path_tiles.append(Vector2(x0,y0))
-	$Environment2.update_bitmask_region(Vector2(x0,y1),Vector2(x1,y1))
+	$Environment.update_bitmask_region(Vector2(x0,y1),Vector2(x1,y1))
 	

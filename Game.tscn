@@ -387,6 +387,7 @@ margin_left = -210.0
 [connection signal="force_changed" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_AimPad_force_changed"]
 [connection signal="pad_released" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_Player_attack_ended"]
 [connection signal="pad_touched" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_Player_attack_started"]
+[connection signal="visibility_changed" from="GUI/Inventory" to="GUI/Inventory" method="_on_Inventory_visibility_changed"]
 
 [editable path="World/Entities/Player"]
 
