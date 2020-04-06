@@ -365,11 +365,8 @@ visible = false
 mouse_filter = 2
 
 [node name="Character" type="Control" parent="GUI"]
-visible = false
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 710.0
-margin_bottom = 473.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 26 )
 
@@ -377,7 +374,12 @@ script = ExtResource( 26 )
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -210.0
+margin_left = -300.0
+margin_top = -0.857391
+margin_bottom = -0.857422
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="chunk_changed" from="World" to="World" method="_on_chunk_changed"]
 [connection signal="item_equipped" from="World/Entities/Player/Entity" to="World/Entities/Player" method="_on_Entity_item_equipped"]
 [connection signal="item_unequipped" from="World/Entities/Player/Entity" to="World/Entities/Player" method="_on_Entity_item_unequipped"]
