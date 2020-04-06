@@ -6,7 +6,7 @@ func update(delta):
 		
 	elif not entity.on_cooldown():
 		var atk = entity.item_owner.create_attack()
-		var angle = Global.get_gamepad_force("AimPad")
+		var angle = owner.aim_force
 		var area = entity._create_attack_area(atk, Global.player, angle)
 		area.global_position = entity.global_position
 		

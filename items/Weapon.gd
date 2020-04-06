@@ -13,6 +13,8 @@ export var attack_area = preload("res://attacks/Slash.tscn")
 var is_attacking = false
 var active_attack_areas = []
 
+var aim_force := Vector2(0,0)
+
 
 func _init():
 	$Entity.stat_increments.damage = .1
@@ -64,3 +66,8 @@ func remove_active_attack(attack):
 
 func add_active_attack(attack):
 	active_attack_areas.append(attack)
+
+
+func _on_item_owner_aim_force_updated(force):
+	if force:
+		aim_force = force

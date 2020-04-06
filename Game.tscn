@@ -379,9 +379,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -210.0
 [connection signal="chunk_changed" from="World" to="World" method="_on_chunk_changed"]
+[connection signal="item_equipped" from="World/Entities/Player/Entity" to="World/Entities/Player" method="_on_Entity_item_equipped"]
+[connection signal="item_unequipped" from="World/Entities/Player/Entity" to="World/Entities/Player" method="_on_Entity_item_unequipped"]
 [connection signal="stats_updated" from="World/Entities/Player/Entity" to="GUI/Character" method="_on_player_stats_updated"]
 [connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
 [connection signal="force_changed" from="GUI/HUD/LeftPad/MovePad" to="World/Entities/Player" method="_on_MovePad_force_changed"]
+[connection signal="force_changed" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_AimPad_force_changed"]
 [connection signal="pad_released" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_Player_attack_ended"]
 [connection signal="pad_touched" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_Player_attack_started"]
 

@@ -18,7 +18,7 @@ func enter():
 func update(delta):
 	if entity.is_attacking == false:
 		var atk = entity.item_owner.create_attack()
-		var angle = Global.get_gamepad_force("AimPad")
+		var angle = -owner.aim_force
 		var area = entity._create_attack_area(atk, Global.entities, angle, entity.global_position)
 		atk.damage *= current_charge_level()
 		area.speed *= current_charge_level()
@@ -26,8 +26,8 @@ func update(delta):
 		emit_signal("finished","Cooldown")
 		
 	current_charge += delta
-	var rot = entity.global_position.angle_to_point(entity.get_global_mouse_position())
-	entity.get_node("Sprite").rotation = rot + .75
+	var rot = owner.aim_force
+	entity.get_node("Sprite").rotation = rot.angle() + .75
 	line.scale.x = current_charge_level()
 #	line.rotation = rot
 

@@ -245,6 +245,7 @@ func disconnect_equipment(item):
 func _on_equipment_ready():
 	update_equipment()
 	for item in equipment:
+		emit_signal("item_equipped",item)
 		connect_equipment(item)
 		item.item_owner = self
 

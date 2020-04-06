@@ -4,12 +4,16 @@ export var speed = 100
 onready var sprite = $AnimatedSprite
 
 var attack_move_speed = 1
-var pad_velocity = Vector2(0,0)
+var move_force = Vector2(0,0)
+var aim_force = Vector2(0,0)
 
 signal attack_started
 signal attack_ended
 signal spell_started
 signal spell_ended
+
+signal aim_force_updated
+signal move_force_updated
 
 func _init():
 	Global.player = self
@@ -33,6 +37,10 @@ func _unhandled_input(event):
 	elif event.is_action_released("skill_1"):
 		if skill:
 			skill.on_cast_ended()
+	
+	if event is InputEventMouseMotion:
+		aim_force = global_position.angle_to_point(get_global_mouse_position())
+		emit_signal("aim_force_updated",aim_force)
 
 
 func _physics_process(delta):
@@ -55,12 +63,13 @@ func _physics_process(delta):
 	else:
 		sprite.animation = "idle"
 	
-	if pad_velocity:
-		velocity = pad_velocity * speed
+	if move_force:
+		velocity = move_force * speed
 #	print(velocity)
 	
 	#TODO: modify player speed when attacking
 	move_and_slide(velocity*attack_move_speed)
+	
 
 
 func receive_attack(atk):
@@ -87,4 +96,20 @@ func _on_entity_tree_entered():
 
 
 func _on_MovePad_force_changed(padname, force):
-	pad_velocity = force
+	move_force = force
+	emit_signal("move_force_updated", force)
+
+
+func _on_AimPad_force_changed(padname, force):
+	aim_force = force
+	emit_signal("aim_force_updated", force)
+
+
+func _on_Entity_item_equipped(item):
+	if item is Weapon:
+		connect("aim_force_updated", item, "_on_item_owner_aim_force_updated")
+
+
+func _on_Entity_item_unequipped(item):
+	if item is Weapon and is_connected("aim_force_updated",item,"_on_item_owner_aim_force_updated"):
+		disconnect("aim_force_updated",item,"_on_item_owner_aim_force_updated")

@@ -10,6 +10,7 @@ export var grass_threshold = 0.20
 export var water_threshold = 0.00
 export var cliff_threshold = 0.30
 
+export var process_chunks := false
 export var chunk_size := 13
 var current_chunk := Vector2(0,0)
 var active_chunks = []
@@ -44,7 +45,7 @@ func _ready():
 
 func _process(delta):
 	var chunk = _get_current_chunk()
-	if chunk != current_chunk:
+	if process_chunks and chunk != current_chunk:
 		emit_signal("chunk_changed",chunk,current_chunk)
 		current_chunk = chunk
 
