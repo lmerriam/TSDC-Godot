@@ -39,7 +39,7 @@ func _unhandled_input(event):
 			skill.on_cast_ended()
 	
 	if event is InputEventMouseMotion:
-		aim_force = global_position.angle_to_point(get_global_mouse_position())
+		aim_force = get_global_mouse_position() - global_position
 		emit_signal("aim_force_updated",aim_force)
 
 
