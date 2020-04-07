@@ -14,6 +14,7 @@ func _ready():
 
 func update_slot():
 	if player.get_equipped(slot):
+		$Label.text = name
 		item = player.get_equipped(slot)
 		$Button/TextureRect.texture = item.get_sprite()
 	else:

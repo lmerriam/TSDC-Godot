@@ -41,7 +41,7 @@ func _unhandled_input(event):
 		if skill:
 			skill.on_cast_ended()
 	
-	if event is InputEventMouseMotion:
+	if event.device != -1 and event is InputEventMouseMotion:
 		aim_force = get_global_mouse_position() - global_position
 		emit_signal("aim_force_updated",aim_force)
 
@@ -72,7 +72,6 @@ func _physics_process(delta):
 	
 	#TODO: modify player speed when attacking
 	move_and_slide(velocity*attack_move_speed)
-	
 
 
 func receive_attack(atk):
@@ -116,3 +115,7 @@ func _on_Entity_item_equipped(item):
 func _on_Entity_item_unequipped(item):
 	if item is Weapon and is_connected("aim_force_updated",item,"_on_item_owner_aim_force_updated"):
 		disconnect("aim_force_updated",item,"_on_item_owner_aim_force_updated")
+
+
+func _on_state_change_requested(state_name, props):
+	pass

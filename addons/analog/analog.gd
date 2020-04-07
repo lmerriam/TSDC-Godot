@@ -48,7 +48,7 @@ func _ready():
 func get_force():
 	return currentForce
 	
-func _input(event):
+func _unhandled_input(event):
 	
 	if event is InputEventScreenTouch:
 		if event.pressed and get_parent().get_global_rect().has_point(Vector2(event.position.x, event.position.y)):

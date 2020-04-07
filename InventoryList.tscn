@@ -10,4 +10,3 @@ mouse_filter = 1
 custom_constants/vseparation = 12
 icon_scale = 2.0
 script = ExtResource( 1 )
-

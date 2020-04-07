@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PlayerInventory.gd" type="Script" id=1]
 [ext_resource path="res://EquipmentSlotControl.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ItemTooltip.tscn" type="PackedScene" id=4]
 [ext_resource path="res://InventoryTabs.tres" type="ButtonGroup" id=5]
 [ext_resource path="res://ItemModControl.tscn" type="PackedScene" id=6]
+[ext_resource path="res://PixelTextTheme.tres" type="Theme" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -16,7 +17,7 @@ margin_left = 12.0
 margin_top = 12.0
 margin_right = -12.0
 margin_bottom = -12.0
-mouse_filter = 1
+theme = ExtResource( 7 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,101 +28,107 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -115.0
+margin_left = -67.7549
 margin_top = -100.0
-margin_right = 115.0
+margin_right = 68.2451
 margin_bottom = -10.0
 custom_constants/vseparation = 60
-custom_constants/hseparation = 60
+custom_constants/hseparation = 40
 columns = 4
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": false
 }
 
-[node name="WeaponSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
+[node name="Weapon" parent="EquipmentSlots" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
+margin_right = 48.0
+margin_bottom = 70.0
 slot = "Weapon"
 
-[node name="ArmorSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
+[node name="Armor" parent="EquipmentSlots" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 60.0
-margin_right = 60.0
-margin_bottom = 0.0
+margin_left = 88.0
+margin_right = 136.0
+margin_bottom = 70.0
 slot = "Armor"
-
-[node name="FootwearSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 120.0
-margin_right = 120.0
-margin_bottom = 0.0
-slot = "Footwear"
-
-[node name="AmuletSlot" parent="EquipmentSlots" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 180.0
-margin_right = 180.0
-margin_bottom = 0.0
-slot = "Amulet"
 
 [node name="ItemList" parent="." instance=ExtResource( 3 )]
 margin_top = 60.0
+margin_right = 283.0
 
 [node name="ItemSelected" parent="." instance=ExtResource( 4 )]
-visible = false
-margin_left = -178.0
+margin_left = -275.0
 margin_top = 66.0
 margin_right = 2.0
-margin_bottom = 456.0
+margin_bottom = 614.0
+
+[node name="Name" parent="ItemSelected" index="1"]
+margin_top = 13.0
+margin_right = 227.0
+margin_bottom = 45.0
 
 [node name="Stats" parent="ItemSelected" index="2"]
-margin_bottom = 282.0
+margin_right = 262.0
+margin_bottom = 436.0
+
+[node name="HSeparator" parent="ItemSelected" index="3"]
+margin_right = 262.0
 
 [node name="EquipButton" type="Button" parent="ItemSelected"]
 margin_left = 10.0
-margin_top = 292.0
-margin_right = 170.0
-margin_bottom = 332.0
+margin_top = 447.0
+margin_right = 266.0
+margin_bottom = 487.0
 text = "Equip Item"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ModButton" type="Button" parent="ItemSelected"]
 margin_left = 10.0
-margin_top = 342.0
-margin_right = 170.0
-margin_bottom = 382.0
+margin_top = 497.0
+margin_right = 266.0
+margin_bottom = 537.0
 text = "Modify Item"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UnequipButton" type="Button" parent="ItemSelected"]
 margin_left = 10.0
-margin_top = 292.0
-margin_right = 170.0
-margin_bottom = 332.0
+margin_top = 447.0
+margin_right = 269.0
+margin_bottom = 487.0
 text = "Unequip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WeaponFilter" type="Button" parent="."]
 margin_top = 8.0
 margin_right = 108.0
 margin_bottom = 46.0
+theme = ExtResource( 7 )
 toggle_mode = true
 group = ExtResource( 5 )
 text = "Weapons"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GemFilter" type="Button" parent="."]
-margin_left = 118.0
+margin_left = 126.123
 margin_top = 8.0
-margin_right = 228.0
+margin_right = 236.123
 margin_bottom = 46.0
 toggle_mode = true
 group = ExtResource( 5 )
 text = "Gems"
 
 [node name="ModifyPopup" type="PopupPanel" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -129,6 +136,10 @@ __meta__ = {
 }
 
 [node name="ItemMods" parent="ModifyPopup" instance=ExtResource( 6 )]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="CloseModify" type="Button" parent="ModifyPopup/ItemMods/ItemTooltip" index="4"]
 anchor_top = 1.0
@@ -145,10 +156,9 @@ __meta__ = {
 
 [node name="ItemSlots" parent="ModifyPopup/ItemMods" index="1"]
 custom_styles/bg = SubResource( 1 )
-[connection signal="slot_selected" from="EquipmentSlots/WeaponSlot" to="." method="_on_equipment_slot_selected"]
-[connection signal="slot_selected" from="EquipmentSlots/ArmorSlot" to="." method="_on_equipment_slot_selected"]
-[connection signal="slot_selected" from="EquipmentSlots/FootwearSlot" to="." method="_on_equipment_slot_selected"]
-[connection signal="slot_selected" from="EquipmentSlots/AmuletSlot" to="." method="_on_equipment_slot_selected"]
+items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false ]
+[connection signal="slot_selected" from="EquipmentSlots/Weapon" to="." method="_on_equipment_slot_selected"]
+[connection signal="slot_selected" from="EquipmentSlots/Armor" to="." method="_on_equipment_slot_selected"]
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="button_up" from="ItemSelected/EquipButton" to="." method="_on_EquipButton_button_up"]
 [connection signal="button_up" from="ItemSelected/ModButton" to="." method="_on_modify_button_up"]

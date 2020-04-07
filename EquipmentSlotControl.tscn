@@ -6,14 +6,22 @@
 [node name="EquipmentSlot" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -672.0
-margin_bottom = -414.0
+margin_right = -910.0
+margin_bottom = -570.0
+rect_min_size = Vector2( 48, 70 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button" type="Button" parent="."]
 margin_top = 19.0
 margin_right = 48.0
 margin_bottom = 67.0
+rect_min_size = Vector2( 48, 48 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="Button"]
 anchor_left = 0.5
@@ -30,12 +38,17 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
-margin_right = 48.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
 margin_bottom = 14.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 1
 text = "Text"
 align = 1
-
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="Button" to="." method="_on_slot_clicked"]

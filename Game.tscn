@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -26,6 +26,9 @@
 [ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=24]
 [ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=25]
 [ext_resource path="res://CharacterControl.gd" type="Script" id=26]
+[ext_resource path="res://PixelTextTheme.tres" type="Theme" id=27]
+[ext_resource path="res://items/weapon/Wand.tscn" type="PackedScene" id=28]
+[ext_resource path="res://items/weapon/RecallWeapon.tscn" type="PackedScene" id=29]
 
 [sub_resource type="Animation" id=1]
 loop = true
@@ -42,7 +45,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -1 ), Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( 0, 0 ), Vector2( -1, -1 ), Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 1, -1 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.0941176, 0.643137, 0, 1 )
 corner_radius_top_left = 1
 corner_radius_top_right = 1
@@ -51,7 +54,7 @@ corner_radius_bottom_left = 1
 corner_detail = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.670588, 0, 0, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -211,6 +214,16 @@ position = Vector2( 181.637, 155.091 )
 
 [node name="SprayWand" parent="World/Entities/Loot6/Slot" index="0" instance=ExtResource( 21 )]
 
+[node name="Loot7" parent="World/Entities" instance=ExtResource( 15 )]
+position = Vector2( 181.637, 155.091 )
+
+[node name="RecallWeapon" parent="World/Entities/Loot7/Slot" index="0" instance=ExtResource( 29 )]
+
+[node name="Loot8" parent="World/Entities" instance=ExtResource( 15 )]
+position = Vector2( 181.637, 155.091 )
+
+[node name="Wand" parent="World/Entities/Loot8/Slot" index="0" instance=ExtResource( 28 )]
+
 [node name="Enemy" parent="World/Entities" instance=ExtResource( 24 )]
 position = Vector2( 391.69, 78.1164 )
 
@@ -300,16 +313,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BtnGenMap" type="Button" parent="GUI/HUD"]
+[node name="Control" type="HBoxContainer" parent="GUI/HUD"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -111.2
-margin_top = -0.716003
-margin_right = 0.312195
-margin_bottom = 42.0
+margin_left = -272.0
+margin_bottom = 48.0
+grow_horizontal = 0
+mouse_filter = 0
+custom_constants/separation = 8
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenInv" type="Button" parent="GUI/HUD/Control"]
+margin_right = 135.0
+margin_bottom = 48.0
 grow_horizontal = 0
 mouse_filter = 1
-text = "Generate"
+theme = ExtResource( 27 )
+action_mode = 0
+text = "INVENTORY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenChar" type="Button" parent="GUI/HUD/Control"]
+margin_left = 143.0
+margin_right = 278.0
+margin_bottom = 48.0
+grow_horizontal = 0
+mouse_filter = 1
+theme = ExtResource( 27 )
+text = "CHARACTER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GenMap" type="Button" parent="GUI/HUD/Control"]
+margin_left = 286.0
+margin_right = 406.0
+margin_bottom = 48.0
+grow_horizontal = 0
+mouse_filter = 1
+theme = ExtResource( 27 )
+text = "GENERATE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -319,8 +367,8 @@ margin_left = 6.0
 margin_top = 5.84857
 margin_right = 172.0
 margin_bottom = 26.8486
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
 step = 1.0
 value = 75.0
 rounded = true
@@ -329,34 +377,29 @@ __meta__ = {
 }
 
 [node name="LeftPad" type="Control" parent="GUI/HUD"]
-anchor_top = 1.0
+anchor_right = 0.3
 anchor_bottom = 1.0
-margin_top = -200.0
-margin_right = 200.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MovePad" parent="GUI/HUD/LeftPad" instance=ExtResource( 8 )]
-position = Vector2( 100, 100 )
+position = Vector2( 65.7998, 545.551 )
 isDynamicallyShowing = true
 padname = "MovePad"
 
 [node name="RightPad" type="Control" parent="GUI/HUD"]
-anchor_left = 1.0
-anchor_top = 1.0
+anchor_left = 0.7
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -200.0
-margin_top = -200.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AimPad" parent="GUI/HUD/RightPad" instance=ExtResource( 8 )]
-position = Vector2( 100, 100 )
+position = Vector2( 217.8, 555.051 )
 isDynamicallyShowing = true
 padname = "AimPad"
 
@@ -364,10 +407,22 @@ padname = "AimPad"
 visible = false
 mouse_filter = 2
 
+[node name="Button" type="Button" parent="GUI/Inventory"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -100.0
+margin_bottom = 48.0
+text = "CLOSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Character" type="Control" parent="GUI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 27 )
 script = ExtResource( 26 )
 
 [node name="StatList" type="Tree" parent="GUI/Character"]
@@ -380,16 +435,32 @@ margin_bottom = -0.857422
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button2" type="Button" parent="GUI/Character"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -413.857
+margin_top = 12.0
+margin_right = -313.857
+margin_bottom = 60.0
+text = "CLOSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="chunk_changed" from="World" to="World" method="_on_chunk_changed"]
 [connection signal="item_equipped" from="World/Entities/Player/Entity" to="World/Entities/Player" method="_on_Entity_item_equipped"]
 [connection signal="item_unequipped" from="World/Entities/Player/Entity" to="World/Entities/Player" method="_on_Entity_item_unequipped"]
 [connection signal="stats_updated" from="World/Entities/Player/Entity" to="GUI/Character" method="_on_player_stats_updated"]
-[connection signal="button_up" from="GUI/HUD/BtnGenMap" to="World" method="_on_BtnGenMap_button_up"]
+[connection signal="button_up" from="GUI/HUD/Control/OpenInv" to="GUI" method="_on_OpenInv_button_up"]
+[connection signal="button_up" from="GUI/HUD/Control/OpenChar" to="GUI" method="_on_OpenChar_button_up"]
+[connection signal="button_up" from="GUI/HUD/Control/GenMap" to="World" method="_on_BtnGenMap_button_up"]
 [connection signal="force_changed" from="GUI/HUD/LeftPad/MovePad" to="World/Entities/Player" method="_on_MovePad_force_changed"]
 [connection signal="force_changed" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_AimPad_force_changed"]
 [connection signal="pad_released" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_Player_attack_ended"]
 [connection signal="pad_touched" from="GUI/HUD/RightPad/AimPad" to="World/Entities/Player" method="_on_Player_attack_started"]
 [connection signal="visibility_changed" from="GUI/Inventory" to="GUI/Inventory" method="_on_Inventory_visibility_changed"]
+[connection signal="button_up" from="GUI/Inventory/Button" to="GUI" method="_on_HUD_button_up"]
+[connection signal="button_up" from="GUI/Character/Button2" to="GUI" method="_on_HUD_button_up"]
 
 [editable path="World/Entities/Player"]
 
@@ -410,3 +481,7 @@ __meta__ = {
 [editable path="World/Entities/Loot5"]
 
 [editable path="World/Entities/Loot6"]
+
+[editable path="World/Entities/Loot7"]
+
+[editable path="World/Entities/Loot8"]
