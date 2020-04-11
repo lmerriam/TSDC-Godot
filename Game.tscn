@@ -45,7 +45,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -1 ), Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( 0, 0 ), Vector2( -1, -1 ), Vector2( -1, 0 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 1, -1 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0941176, 0.643137, 0, 1 )
 corner_radius_top_left = 1
 corner_radius_top_right = 1
@@ -54,7 +54,7 @@ corner_radius_bottom_left = 1
 corner_detail = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.670588, 0, 0, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -188,6 +188,7 @@ position = Vector2( 154.503, 283.381 )
 position = Vector2( 221.637, 155.091 )
 
 [node name="Bow" parent="World/Entities/Loot/Slot" index="0" instance=ExtResource( 16 )]
+attack_speed = 1.0
 
 [node name="Loot2" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 261.637, 155.091 )
@@ -198,6 +199,7 @@ position = Vector2( 261.637, 155.091 )
 position = Vector2( 181.637, 155.091 )
 
 [node name="BeamWeapon" parent="World/Entities/Loot3/Slot" index="0" instance=ExtResource( 18 )]
+attack_speed = 1.0
 
 [node name="Loot4" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 181.637, 155.091 )
@@ -213,6 +215,7 @@ position = Vector2( 181.637, 155.091 )
 position = Vector2( 181.637, 155.091 )
 
 [node name="SprayWand" parent="World/Entities/Loot6/Slot" index="0" instance=ExtResource( 21 )]
+attack_speed = 1.0
 
 [node name="Loot7" parent="World/Entities" instance=ExtResource( 15 )]
 position = Vector2( 181.637, 155.091 )
@@ -223,6 +226,7 @@ position = Vector2( 181.637, 155.091 )
 position = Vector2( 181.637, 155.091 )
 
 [node name="Wand" parent="World/Entities/Loot8/Slot" index="0" instance=ExtResource( 28 )]
+attack_speed = 1.0
 
 [node name="Enemy" parent="World/Entities" instance=ExtResource( 24 )]
 position = Vector2( 391.69, 78.1164 )
@@ -367,8 +371,8 @@ margin_left = 6.0
 margin_top = 5.84857
 margin_right = 172.0
 margin_bottom = 26.8486
-custom_styles/fg = SubResource( 6 )
-custom_styles/bg = SubResource( 7 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
 step = 1.0
 value = 75.0
 rounded = true

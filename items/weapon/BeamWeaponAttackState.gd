@@ -10,7 +10,7 @@ func enter():
 	area.global_position = entity.global_position
 
 func update(delta):
-	if not entity.is_attacking:
+	if not entity.owner_is_attacking:
 		emit_signal("finished","Idling")
 	
 	area.set_angle(owner.aim_force)

@@ -1,7 +1,7 @@
 extends State
 
 func update(delta):
-	if owner.is_attacking:
+	if owner.owner_is_attacking:
 		if recall():
 			emit_signal("finished",next_state)
 

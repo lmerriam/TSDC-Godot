@@ -16,7 +16,7 @@ func enter():
 
 
 func update(delta):
-	if entity.is_attacking == false:
+	if entity.owner_is_attacking == false:
 		var atk = entity.item_owner.create_attack()
 		var angle = -owner.aim_force
 		var area = entity._create_attack_area(atk, Global.entities, angle, entity.global_position)

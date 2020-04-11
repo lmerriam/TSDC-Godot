@@ -11,5 +11,5 @@ func update(delta):
 	time_current -= delta
 	if time_current <= 0:
 		emit_signal("finished",next_state)
-	elif cancelable and !owner.is_attacking:
+	elif cancelable and !owner.owner_is_attacking:
 		get_parent().emit_signal("finished","Idling")

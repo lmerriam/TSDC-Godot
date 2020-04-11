@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Loot.gd"
 }, {
+"base": "AttackArea",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://attacks/Projectile.gd"
+}, {
 "base": "Node",
 "class": "PubSub",
 "language": "GDScript",
@@ -588,6 +593,7 @@ _global_script_class_icons={
 "InventoryList": "",
 "Item": "",
 "Loot": "",
+"Projectile": "",
 "PubSub": "",
 "Slash": "",
 "State": "",

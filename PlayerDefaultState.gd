@@ -4,10 +4,8 @@ func enter():
 	pass
 
 func update(delta):
-	if not owner.owner_is_attacking:
-		emit_signal("finished","Idling")
-	
-	
+	owner.process_movement()
+	owner.process_aim()
 
 func exit():
 	pass

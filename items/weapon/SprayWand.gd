@@ -2,7 +2,7 @@ extends Weapon
 
 func _process(delta):
 	$Sprite.rotation = _get_vector_to_mouse().angle()
-	if is_attacking:
+	if owner_is_attacking:
 		$Sprite/Particles2D.emitting = true
 	else:
 		$Sprite/Particles2D.emitting = false

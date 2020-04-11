@@ -1,4 +1,5 @@
 extends AttackArea
+class_name Projectile
 
 signal projectile_destroyed
 

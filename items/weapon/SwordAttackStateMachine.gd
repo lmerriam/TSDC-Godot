@@ -1,9 +1,8 @@
 extends StateMachine
 
-#var attacker
+func enter():
+	.enter()
+	owner.emit_signal("move_speed_modifier_updated", owner.move_speed_modifier)
 
-#func _ready():
-#	states_map = {
-#		"swing": $Swing,
-#		"windup": $Windup
-#	}
+func exit():
+	owner.emit_signal("move_speed_modifier_updated", 1)

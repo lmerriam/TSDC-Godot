@@ -1,7 +1,7 @@
 extends State
 
 func update(delta):
-	if not entity.is_attacking:
+	if not entity.owner_is_attacking:
 		emit_signal("finished","Idling")
 		
 	elif not entity.on_cooldown():

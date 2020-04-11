@@ -1,19 +1,22 @@
 extends Equipment
 class_name Weapon
 
-export var player_speed_modifier := .5
 export var damage := 0.0
-export var attack_speed := 1
+export var attack_speed := 1.0
 export var knockback := 0.0
 export var stagger := 0.0
 export var charge_time := 0.0
 export var angle_vary := 0.0
 export var attack_area = preload("res://attacks/Slash.tscn")
 
-var is_attacking = false
+var owner_is_attacking = false
+var weapon_is_attacking = false
 var active_attack_areas = []
 
 var aim_force := Vector2(0,0)
+
+export var move_speed_modifier := .5
+signal move_speed_modifier_updated(new_modifier)
 
 
 func _init():
@@ -52,12 +55,12 @@ func start_cooldown():
 	set_cooldown(attack_speed)
 
 
-func on_attack_started():
-	is_attacking = true
+func _on_owner_attack_started():
+	owner_is_attacking = true
 
 
-func on_attack_ended():
-	is_attacking = false
+func _on_owner_attack_ended():
+	owner_is_attacking = false
 
 
 func remove_active_attack(attack):

@@ -68,29 +68,13 @@ func _physics_process(delta):
 	
 	if move_force:
 		velocity = move_force * speed
-#	print(velocity)
 	
-	#TODO: modify player speed when attacking
 	move_and_slide(velocity*attack_move_speed)
 
 
 func receive_attack(atk):
 	var dmg = atk.damage
 	$Entity.modify_health(-dmg)
-
-
-func _on_Player_attack_started():
-	var weapon = $Entity.get_equipped("Weapon")
-	if weapon:
-		attack_move_speed = weapon.player_speed_modifier
-		weapon.on_attack_started()
-
-
-func _on_Player_attack_ended():
-	attack_move_speed = 1
-	var weapon = $Entity.get_equipped("Weapon")
-	if weapon:
-		weapon.on_attack_ended()
 
 
 func _on_entity_tree_entered():
@@ -110,12 +94,33 @@ func _on_AimPad_force_changed(padname, force):
 func _on_Entity_item_equipped(item):
 	if item is Weapon:
 		connect("aim_force_updated", item, "_on_item_owner_aim_force_updated")
+		item.connect("move_speed_modifier_updated", self, "_on_move_speed_modifier_updated")
 
 
 func _on_Entity_item_unequipped(item):
-	if item is Weapon and is_connected("aim_force_updated",item,"_on_item_owner_aim_force_updated"):
-		disconnect("aim_force_updated",item,"_on_item_owner_aim_force_updated")
+	if item is Weapon:
+		attack_move_speed = 1
+		if is_connected("aim_force_updated",item,"_on_item_owner_aim_force_updated"):
+			disconnect("aim_force_updated",item,"_on_item_owner_aim_force_updated")
+		if item.is_connected("move_speed_modifier_updated", self, "_on_move_speed_modifier_updated"):
+			item.disconnect("move_speed_modifier_updated", self, "_on_move_speed_modifier_updated")
+
+
+func _on_Player_attack_started():
+	var weapon = $Entity.get_equipped("Weapon")
+	if weapon:
+		weapon._on_owner_attack_started()
+
+
+func _on_Player_attack_ended():
+	var weapon = $Entity.get_equipped("Weapon")
+	if weapon:
+		weapon._on_owner_attack_ended()
+
+
+func _on_move_speed_modifier_updated(modifier):
+	attack_move_speed = modifier
 
 
 func _on_state_change_requested(state_name, props):
-	pass
+	$StateMachine._change_state(state_name)

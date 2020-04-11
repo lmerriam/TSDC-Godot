@@ -12,7 +12,7 @@ func update(delta):
 	swing_timer -= delta
 	
 	if swing_timer <= 0:
-		if owner.is_attacking:
+		if owner.owner_is_attacking:
 			emit_signal("finished","Cooldown")
 		else:
 			get_parent().emit_signal("finished", "Idling")

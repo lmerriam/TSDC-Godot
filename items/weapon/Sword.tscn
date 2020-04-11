@@ -10,6 +10,7 @@
 [node name="Sword" instance=ExtResource( 1 )]
 item_name = "Sword"
 damage = 4.0
+attack_speed = 2.0
 knockback = 200.0
 stagger = 0.5
 
@@ -28,7 +29,7 @@ script = ExtResource( 7 )
 
 [node name="Wait" type="Node" parent="StateMachine/Attacking" index="2"]
 script = ExtResource( 4 )
-time = 0.1
+time = 0.05
 
 [node name="LeftSwing" type="Node" parent="StateMachine/Attacking" index="3"]
 script = ExtResource( 7 )
@@ -36,13 +37,6 @@ reverse = true
 
 [node name="Wait2" type="Node" parent="StateMachine/Attacking" index="4"]
 script = ExtResource( 4 )
-time = 0.25
-
-[node name="RightSwing2" type="Node" parent="StateMachine/Attacking" index="5"]
-script = ExtResource( 7 )
-
-[node name="Wait3" type="Node" parent="StateMachine/Attacking" index="6"]
-script = ExtResource( 4 )
-time = 0.5
+time = 0.05
 
 [editable path="Entity"]

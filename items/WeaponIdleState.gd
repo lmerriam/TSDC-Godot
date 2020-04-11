@@ -1,5 +1,5 @@
 extends State
 
 func update(delta):
-	if entity.is_attacking:
+	if entity.owner_is_attacking:
 		emit_signal("finished", "Attacking")
