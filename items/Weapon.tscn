@@ -4,7 +4,7 @@
 [ext_resource path="res://items/Weapon.gd" type="Script" id=2]
 [ext_resource path="res://EquipmentSlot.gd" type="Script" id=3]
 [ext_resource path="res://items/WeaponStateMachine.gd" type="Script" id=4]
-[ext_resource path="res://items/WeaponAttackingState.gd" type="Script" id=5]
+[ext_resource path="res://items/weapon/WeaponAttackStateMachine.gd" type="Script" id=5]
 [ext_resource path="res://items/WeaponIdleState.gd" type="Script" id=6]
 
 [node name="Weapon" instance=ExtResource( 1 )]

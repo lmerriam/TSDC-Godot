@@ -158,6 +158,9 @@ __meta__ = {
 [node name="ItemSlots" parent="ModifyPopup/ItemMods" index="1"]
 custom_styles/bg = SubResource( 1 )
 items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false ]
+
+[node name="ModList" parent="ModifyPopup/ItemMods" index="2"]
+visible = true
 [connection signal="slot_selected" from="EquipmentSlots/Weapon" to="." method="_on_equipment_slot_selected"]
 [connection signal="slot_selected" from="EquipmentSlots/Armor" to="." method="_on_equipment_slot_selected"]
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]

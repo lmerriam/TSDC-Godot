@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Equipment.gd" type="Script" id=2]
 
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id=2]
+resource_name = "Running"
+
 [node name="Equipment" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 item_name = "Base Equipment"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+anims/Idle = SubResource( 3 )
+anims/Running = SubResource( 2 )
 
 [editable path="Entity"]
