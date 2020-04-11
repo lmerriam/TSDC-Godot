@@ -215,6 +215,7 @@ position = Vector2( 181.637, 155.091 )
 position = Vector2( 181.637, 155.091 )
 
 [node name="SprayWand" parent="World/Entities/Loot6/Slot" index="0" instance=ExtResource( 21 )]
+type = "weapon"
 attack_speed = 1.0
 
 [node name="Loot7" parent="World/Entities" instance=ExtResource( 15 )]

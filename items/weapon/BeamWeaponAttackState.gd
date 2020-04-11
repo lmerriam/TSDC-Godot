@@ -3,11 +3,12 @@ extends State
 var area
 
 func enter():
-	var atk = entity.item_owner.create_attack()
-	atk.damage /= 4
-	var angle = owner.aim_force
-	area = entity._create_attack_area(atk, Global.player, angle)
-	area.global_position = entity.global_position
+	if owner.item_owner:
+		var atk = entity.item_owner.create_attack()
+		atk.damage /= 4
+		var angle = owner.aim_force
+		area = entity._create_attack_area(atk, Global.player, angle)
+		area.global_position = entity.global_position
 
 func update(delta):
 	if not entity.owner_is_attacking:

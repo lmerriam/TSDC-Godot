@@ -13,7 +13,6 @@ item_name = "Base Skill"
 
 [node name="StateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 3 )
-START_STATE = NodePath("Idling")
 root_machine = true
 
 [node name="Casting" type="Node" parent="StateMachine" index="0"]
@@ -21,6 +20,5 @@ script = ExtResource( 4 )
 
 [node name="Idling" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 5 )
-
 
 [editable path="Entity"]

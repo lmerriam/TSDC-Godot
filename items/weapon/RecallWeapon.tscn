@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://items/Weapon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://items/weapon/WeaponAttackStateMachine.gd" type="Script" id=2]
 [ext_resource path="res://items/weapon/CooldownState.gd" type="Script" id=3]
 [ext_resource path="res://items/weapon/Return.gd" type="Script" id=4]
 [ext_resource path="res://items/weapon/AimingState.gd" type="Script" id=5]
@@ -19,7 +19,6 @@ texture = ExtResource( 7 )
 
 [node name="Attacking" parent="StateMachine" index="0"]
 script = ExtResource( 2 )
-START_STATE = NodePath("Cooldown")
 
 [node name="Cooldown" type="Node" parent="StateMachine/Attacking" index="0"]
 script = ExtResource( 3 )

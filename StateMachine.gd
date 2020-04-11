@@ -3,7 +3,6 @@ class_name StateMachine
 
 signal state_changed(current_state)
 
-export(NodePath) var START_STATE
 export var root_machine := false
 export var debugging := false
 
@@ -19,15 +18,17 @@ func _ready():
 	for child in get_children():
 		states_map[child.name] = child
 	
-	initialize(START_STATE)
+#	initialize(get_child(0).name)
+	
 	if root_machine:
+		initialize(get_child(0).name)
 		set_active(true)
 	else:
 		set_active(false)
 
 
-func initialize(start_state):
-	states_stack.push_front(get_node(start_state))
+func initialize(state):
+	states_stack.push_front(get_node(state))
 	current_state = states_stack[0]
 	current_state.enter()
 
@@ -82,7 +83,7 @@ func _change_state(state_name):
 
 
 func enter():
-	initialize(START_STATE)
+	initialize(get_child(0).name)
 	set_active(true)
 
 

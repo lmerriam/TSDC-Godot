@@ -26,7 +26,7 @@ scale_random = 1.0
 script = ExtResource( 4 )
 item_name = "Spray Wand"
 damage = 0.0
-attack_speed = 20
+attack_speed = 20.0
 knockback = 0.0
 angle_vary = 0.15
 attack_area = ExtResource( 5 )
@@ -48,8 +48,5 @@ amount = 30
 lifetime = 0.7
 local_coords = false
 process_material = SubResource( 1 )
-
-[node name="StateMachine" parent="." index="2"]
-START_STATE = NodePath("../../SprayWand/StateMachine/Idling")
 
 [editable path="Entity"]

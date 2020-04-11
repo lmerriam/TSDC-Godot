@@ -7,7 +7,6 @@
 [node name="Wand" instance=ExtResource( 1 )]
 item_name = "Wand"
 damage = 1.0
-attack_speed = 2
 knockback = 100.0
 attack_area = ExtResource( 2 )
 
