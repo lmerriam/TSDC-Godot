@@ -11,13 +11,13 @@
 item_name = "Sword"
 damage = 4.0
 attack_speed = 2.0
-knockback = 200.0
+knockback = 10.0
 stagger = 0.5
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )
 
-[node name="Attacking" parent="StateMachine" index="0"]
+[node name="Attacking" parent="StateMachine" index="1"]
 script = ExtResource( 3 )
 
 [node name="Cooldown" type="Node" parent="StateMachine/Attacking" index="0"]

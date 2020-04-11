@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://particles/BloodParticles.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://sprites/bat/tile004.png" type="Texture" id=13]
 [ext_resource path="res://sprites/bat/tile005.png" type="Texture" id=14]
 [ext_resource path="res://all_white_shader.tres" type="Material" id=15]
+[ext_resource path="res://State.gd" type="Script" id=16]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.1288
@@ -62,7 +63,6 @@ faction = "enemies"
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
-START_STATE = NodePath("Wander")
 root_machine = true
 
 [node name="Wander" type="Node" parent="StateMachine"]
@@ -77,8 +77,10 @@ script = ExtResource( 6 )
 [node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 
+[node name="Stagger" type="Node" parent="StateMachine"]
+script = ExtResource( 16 )
+
 [node name="StateLabel" type="Label" parent="."]
-visible = false
 margin_left = -14.2698
 margin_top = -20.9002
 margin_right = 42.7302
@@ -93,6 +95,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]

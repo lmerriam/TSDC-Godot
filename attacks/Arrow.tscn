@@ -8,7 +8,7 @@
 script = ExtResource( 2 )
 speed = 26
 drag = 0.4
-drop = 0.03
+drop = 1.0
 min_speed = 2.0
 
 [node name="Sprite" parent="." index="1"]
