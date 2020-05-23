@@ -6,11 +6,7 @@ export var zoom_default = Vector2(.5,.5)
 func _ready():
 	zoom = zoom_default
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func _input(event):
+func _unhandled_input(event):
 	if Input.is_action_pressed("zoom_in"):
 		zoom -= Vector2(.1,.1)
 	if Input.is_action_pressed("zoom_out"):

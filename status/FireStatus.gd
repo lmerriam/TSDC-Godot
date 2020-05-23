@@ -6,7 +6,7 @@ var current_tick = 1
 func _ready():
 	entity.add_child(load("res://particles/FireParticles.tscn").instance())
 
-func _process(delta):
+func _physics_process(delta):
 	properties.duration -= delta
 	current_tick -= delta
 	if properties.duration <= 0:

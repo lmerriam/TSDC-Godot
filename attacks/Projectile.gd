@@ -19,12 +19,11 @@ var impulses = []
 func _ready():
 	set_as_toplevel(true)
 
-func _process(delta):
+func _physics_process(delta):
 	time_left -= delta
 	if time_left <= 0 or speed <= min_speed:
 		queue_free()
-
-func _physics_process(delta):
+	
 	if deform:
 		var x_scale = clamp(1 + speed*.05, 1, 2)
 		var y_scale = 1 - (x_scale - 1)

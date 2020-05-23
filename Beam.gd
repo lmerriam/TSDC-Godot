@@ -38,4 +38,5 @@ func _on_BeamAttack_area_entered(area):
 func _on_BeamAttack_area_exited(area):
 	if active_particles.has(area):
 		area.remove_child(active_particles[area])
+		active_particles[area].queue_free()
 		active_particles.erase(area)

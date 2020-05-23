@@ -12,4 +12,5 @@ func _on_Loot_body_entered(body):
 		var item = get_item()
 		Global.player_entity.add_item(item)
 		$Slot.remove_child(item)
+		Global.entities.add_child(item)
 		queue_free()

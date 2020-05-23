@@ -24,7 +24,7 @@ signal killed(id)
 func _ready():
 	set_stat_base("speed", 1)
 
-func _process(delta):
+func _physics_process(delta):
 	
 	# Die if no health
 	if health <= 0:

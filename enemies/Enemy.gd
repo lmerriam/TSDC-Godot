@@ -35,7 +35,7 @@ func _ready():
 	$Entity.set_stat_base("damage", 1)
 	$Entity.set_stat_base("knockback", 100)
 
-func _process(delta):
+func _physics_process(delta):
 	
 	# Check distances
 	var target_pos = target.global_position

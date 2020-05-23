@@ -3,7 +3,7 @@ class_name Equipment
 
 var cooldown := 0.0
 
-func _process(delta):
+func _physics_process(delta):
 	cooldown -= delta
 
 

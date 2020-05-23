@@ -27,7 +27,7 @@ position = Vector2( 0, -2.37255 )
 item_name = "Sword"
 damage = 4.0
 attack_speed = 2.0
-knockback = 10.0
+knockback = 100.0
 stagger = 0.5
 
 [node name="Sprite" parent="." index="1"]

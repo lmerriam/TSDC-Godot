@@ -1,7 +1,7 @@
 extends Status
 class_name ColdStatus
 
-func _process(delta):
+func _physics_process(delta):
 	properties.duration -= delta
 	if properties.duration <= 0:
 		expire()

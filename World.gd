@@ -28,12 +28,12 @@ var tiles = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_gen_nodes()
+#	_gen_nodes()
 	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
 #	_place_player()
 	for node in nodes:
 		var stronghold = load("res://Building.tscn").instance()
-		add_child(stronghold)
+		$Entities.add_child(stronghold)
 		stronghold.global_position = node.origin*$Environment.cell_size.x
 #		node.stronghold = stronghold
 #		stronghold.level = node.level * 10
@@ -41,8 +41,8 @@ func _ready():
 		for x in range(node.origin.x-5,node.origin.x+6):
 			for y in range(node.origin.y-5,node.origin.y+6):
 				path_tiles.append(Vector2(x,y))
-	if process_chunks:
-		_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
+#	if process_chunks:
+	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
 func _process(delta):
 	var chunk = _get_current_chunk()
@@ -59,10 +59,10 @@ func _get_player_tile_position():
 func _on_chunk_changed(new_chunk, old_chunk):
 	$Environment.clear()
 #	time_before = OS.get_ticks_msec()
-	var start_x = new_chunk.x * chunk_size - chunk_size
-	var end_x = start_x + chunk_size * 3
-	var start_y = new_chunk.y * chunk_size - chunk_size*.75
-	var end_y = start_y + chunk_size * 2.5
+	var start_x = 0
+	var end_x = map_width
+	var start_y = 0
+	var end_y = map_height
 	var grass = $Environment.tile_set.find_tile_by_name("grass")
 	var water = $Environment.tile_set.find_tile_by_name("water")
 	var cliff = $Environment.tile_set.find_tile_by_name("cliffs")
