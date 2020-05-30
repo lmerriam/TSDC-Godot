@@ -15,6 +15,7 @@ export var chunk_size := 13
 var current_chunk := Vector2(0,0)
 var active_chunks = []
 signal chunk_changed(new_chunk, old_chunk)
+signal working_map_ready(map)
 
 var noise = _gen_noise()
 var nodes = []
@@ -26,6 +27,12 @@ var time_before
 
 var tiles = {}
 
+onready var active_map = $Environment
+var map_thread = Thread.new()
+var semaphore = Semaphore.new()
+var mutex = Mutex.new()
+var exit_thread = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_gen_nodes()
@@ -33,7 +40,7 @@ func _ready():
 #	_place_player()
 	for node in nodes:
 		var stronghold = load("res://Building.tscn").instance()
-		add_child(stronghold)
+		add_child_below_node($Environment, stronghold)
 		stronghold.global_position = node.origin*$Environment.cell_size.x
 #		node.stronghold = stronghold
 #		stronghold.level = node.level * 10
@@ -41,10 +48,10 @@ func _ready():
 		for x in range(node.origin.x-5,node.origin.x+6):
 			for y in range(node.origin.y-5,node.origin.y+6):
 				path_tiles.append(Vector2(x,y))
-	if process_chunks:
-		_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
+#	if process_chunks:
+#		_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
-func _process(delta):
+func _physics_process(delta):
 	var chunk = _get_current_chunk()
 	if process_chunks and chunk != current_chunk:
 		emit_signal("chunk_changed",chunk,current_chunk)
@@ -57,16 +64,22 @@ func _get_player_tile_position():
 	return (Global.player.global_position / $Environment.cell_size.x).floor()
 
 func _on_chunk_changed(new_chunk, old_chunk):
-	$Environment.clear()
+	if not map_thread.is_active():
+		var working_map = $Environment.duplicate()
+		map_thread.start(self, "_update_working_map", working_map)
+
+func _update_working_map(map):
+	map.clear()
 #	time_before = OS.get_ticks_msec()
-	var start_x = new_chunk.x * chunk_size - chunk_size
+	var chunk = _get_current_chunk()
+	var start_x = chunk.x * chunk_size - chunk_size
 	var end_x = start_x + chunk_size * 3
-	var start_y = new_chunk.y * chunk_size - chunk_size*.75
-	var end_y = start_y + chunk_size * 2.5
-	var grass = $Environment.tile_set.find_tile_by_name("grass")
-	var water = $Environment.tile_set.find_tile_by_name("water")
-	var cliff = $Environment.tile_set.find_tile_by_name("cliffs")
-	var path = $Environment.tile_set.find_tile_by_name("path")
+	var start_y = chunk.y * chunk_size - chunk_size
+	var end_y = start_y + chunk_size * 3
+	var grass = map.tile_set.find_tile_by_name("grass")
+	var water = map.tile_set.find_tile_by_name("water")
+	var cliff = map.tile_set.find_tile_by_name("cliffs")
+	var path = map.tile_set.find_tile_by_name("path")
 	for x in range(start_x, end_x):
 		for y in range(start_y, end_y):
 			var tile
@@ -82,8 +95,33 @@ func _on_chunk_changed(new_chunk, old_chunk):
 				tile = water
 
 			if tile != null:
-				$Environment.set_cell(x,y,tile)
-	$Environment.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
+				map.set_cell(x,y,tile)
+	map.update_bitmask_region(Vector2(start_x,start_y),Vector2(end_x,end_y))
+	call_deferred("_on_working_map_ready", map)
+#	emit_signal("working_map_ready", map)
+
+func thread_func(userdata):
+	while true:
+		semaphore.wait() # Wait until posted.
+		
+		mutex.lock()
+		var should_exit = exit_thread # Protect with Mutex.
+		mutex.unlock()
+		
+		if should_exit:
+			break
+		
+		mutex.lock()
+		# Increment counter, protect with Mutex.
+		mutex.unlock()
+
+func _on_working_map_ready(map):
+	print("Swapping maps")
+	remove_child($Environment)
+	add_child_below_node($Background, map)
+	map.set_name("Environment")
+	print("Swapped maps")
+#	map_thread.wait_to_finish()
 
 func _on_BtnGenMap_button_up():
 	noise = _gen_noise()
@@ -151,18 +189,6 @@ func _place_player():
 	var origin = nodes[0].origin
 	Global.player.global_position = origin * $Environment.cell_size
 
-func _gen_building(width, height):
-	var bsp = []
-	var axes = ["h","v"]
-	var axis = axes[randi() % 2]
-
-	if axis == "h":
-		pass
-	elif axis == "v":
-		pass
-
-func calculate_point_index(point):
-	return point.x + map_width * point.y
 
 func draw_tile_path(x0,y0,x1,y1):
 	var xDist = abs(x1 - x0)
@@ -185,3 +211,14 @@ func draw_tile_path(x0,y0,x1,y1):
 		path_tiles.append(Vector2(x0,y0))
 	$Environment.update_bitmask_region(Vector2(x0,y1),Vector2(x1,y1))
 	
+
+func _exit_tree():
+	mutex.lock()
+	exit_thread = true # Protect with Mutex.
+	mutex.unlock()
+	
+	# Unblock by posting.
+	semaphore.post()
+	
+	# Wait until it exits.
+	map_thread.wait_to_finish()
