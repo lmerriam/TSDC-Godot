@@ -13,4 +13,10 @@ func _on_Loot_body_entered(body):
 		Global.player_entity.add_item(item)
 		$Slot.remove_child(item)
 		Global.entities.add_child(item)
+		
+		var part = $CPUParticles2D
+		remove_child($CPUParticles2D)
+		Global.entities.add_child(part)
+		part.global_position = global_position
+		part.emitting = true
 		queue_free()

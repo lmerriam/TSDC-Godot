@@ -41,8 +41,8 @@ func _ready():
 		for x in range(node.origin.x-5,node.origin.x+6):
 			for y in range(node.origin.y-5,node.origin.y+6):
 				path_tiles.append(Vector2(x,y))
-#	if process_chunks:
-	_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
+	if process_chunks:
+		_on_chunk_changed(_get_current_chunk(),Vector2(0,0))
 
 func _process(delta):
 	var chunk = _get_current_chunk()
