@@ -29,7 +29,7 @@ var tiles = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	_gen_nodes()
-	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
+#	$Background.rect_size = Vector2(map_width*$Environment.cell_size.x,map_height*$Environment.cell_size.y)
 #	_place_player()
 	for node in nodes:
 		var stronghold = load("res://Building.tscn").instance()
