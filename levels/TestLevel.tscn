@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=5]
+[ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=6]
+
+[node name="Level" type="YSort"]
+script = ExtResource( 1 )
+map_width = 100
+map_height = 100
+grass_threshold = -0.13
+water_threshold = -0.2
+cliff_threshold = 0.2
+process_chunks = true
+chunk_size = 17
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+show_behind_parent = true
+margin_left = -884.0
+margin_top = -126.0
+margin_right = 2916.0
+margin_bottom = 1909.0
+mouse_filter = 2
+color = Color( 0.894118, 0.823529, 0.666667, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Environment" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -2031447, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Floors" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Walls" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 738.252, 568.58 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 690.419, 540.602 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 736.447, 524.357 )
+[connection signal="chunk_changed" from="." to="." method="_on_chunk_changed"]

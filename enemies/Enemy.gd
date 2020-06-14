@@ -12,15 +12,15 @@ var in_origin_range = false
 var in_aggro_range = false
 var in_attack_range = false
 var in_chase_range = false
-var target_dis
-var origin_dis
+var target_dis = 999
+var origin_dis = 0
 
 export var attack_speed = 1
 var attack_timer = 0
 var stun_timer = 0
 var chase_timer = 0
 
-var target = Global.player
+var target
 
 onready var origin = global_position
 
@@ -38,9 +38,11 @@ func _ready():
 func _physics_process(delta):
 	
 	# Check distances
-	var target_pos = target.global_position
-	target_dis = global_position.distance_to(target_pos)
-	origin_dis = global_position.distance_to(origin)
+	target = Global.player
+	if target != null:
+		var target_pos = target.global_position
+		target_dis = global_position.distance_to(target_pos)
+		origin_dis = global_position.distance_to(origin)
 	
 	in_aggro_range = false
 	in_attack_range = false

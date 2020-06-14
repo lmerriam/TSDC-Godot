@@ -124,3 +124,4 @@ func _on_move_speed_modifier_updated(modifier):
 
 func _on_state_change_requested(state_name, props):
 	$StateMachine._change_state(state_name)
+

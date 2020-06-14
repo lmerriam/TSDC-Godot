@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://State.gd" type="Script" id=12]
 [ext_resource path="res://PlayerDefaultState.gd" type="Script" id=13]
 [ext_resource path="res://PlayerLungeState.gd" type="Script" id=14]
+[ext_resource path="res://GameCamera.tscn" type="PackedScene" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -84,8 +85,12 @@ script = ExtResource( 12 )
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 15 )]
 [connection signal="attack_ended" from="." to="." method="_on_Player_attack_ended"]
 [connection signal="attack_started" from="." to="." method="_on_Player_attack_started"]
+[connection signal="item_equipped" from="Entity" to="." method="_on_Entity_item_equipped"]
+[connection signal="item_unequipped" from="Entity" to="." method="_on_Entity_item_unequipped"]
 [connection signal="tree_entered" from="Entity" to="." method="_on_entity_tree_entered"]
 
 [editable path="Entity"]
