@@ -1,19 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entities.gd" type="Script" id=3]
 [ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=5]
 [ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=6]
 
 [node name="Level" type="YSort"]
-script = ExtResource( 1 )
-map_width = 400
-map_height = 400
-grass_threshold = -0.13
-water_threshold = -0.2
-cliff_threshold = 0.2
-chunk_size = 17
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -100
@@ -69,4 +61,3 @@ position = Vector2( 690.419, 540.602 )
 
 [node name="Enemy3" parent="Entities" instance=ExtResource( 2 )]
 position = Vector2( 736.447, 524.357 )
-[connection signal="chunk_changed" from="." to="." method="_on_chunk_changed"]

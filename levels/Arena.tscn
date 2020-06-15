@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=5]
+[ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=6]
+
+[node name="Level" type="YSort"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+show_behind_parent = true
+margin_left = -884.0
+margin_top = -126.0
+margin_right = 2916.0
+margin_bottom = 1909.0
+mouse_filter = 2
+color = Color( 0.894118, 0.823529, 0.666667, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Environment" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -2031447, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Floors" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Walls" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
