@@ -128,3 +128,6 @@ func _on_Entity_killed():
 	bleed(angle+.2)
 	emit_signal("killed",self)
 	call_deferred("queue_free")
+
+func set_state(state_name):
+	$StateMachine._change_state(state_name)

@@ -24,8 +24,9 @@ func spawn_mob(mob):
 		var enemy = mob.enemy.instance()
 		active_spawns.append(enemy)
 		Global.entities.call_deferred("add_child", enemy)
-		enemy.global_position = locations[0].global_position
+		enemy.global_position = locations[randi() % locations.size()].global_position
 		enemy.connect("killed", self, "_on_enemy_killed")
+		enemy.chase_timer = 3
 
 func _on_enemy_killed(enemy):
 	active_spawns.erase(enemy)
