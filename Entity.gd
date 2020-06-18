@@ -53,9 +53,9 @@ signal attack_received(atk)
 func _init():
 	connect("stats_updated", self, "_on_stats_updated")
 
-func _exit_tree():
-	for item in equipment:
-		item.queue_free()
+#func _exit_tree():
+#	for item in equipment:
+#		item.queue_free()
 
 ###################
 #     STATS
