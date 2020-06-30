@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://PixelTextTheme.tres" type="Theme" id=1]
+[ext_resource path="res://gui/Announcement.gd" type="Script" id=2]
+[ext_resource path="res://font/Bitty.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 96
+extra_spacing_top = -16
+extra_spacing_space = -12
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Announce"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 2.5, 3 ),
+"transitions": PoolRealArray( 0.535887, 0.378929, 0.378929, 0.535887 ),
+"update": 0,
+"values": [ Vector2( 0, 30 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -30 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 960.0
+margin_bottom = 31.0
+theme = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.247059 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 3
+text = "NEW QUEST"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigLabel" type="Label" parent="VBoxContainer"]
+margin_top = 35.0
+margin_right = 960.0
+margin_bottom = 95.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.247059 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 3
+text = "Kill the Bad Guy"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Announce"
+anims/Announce = SubResource( 1 )

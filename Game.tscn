@@ -178,6 +178,17 @@ position = Vector2( 217.8, 555.051 )
 isDynamicallyShowing = true
 padname = "AimPad"
 
+[node name="Announcements" type="Control" parent="GUI/HUD"]
+anchor_left = 0.25
+anchor_top = 1.0
+anchor_right = 0.75
+anchor_bottom = 1.0
+margin_top = -200.0
+rect_min_size = Vector2( 200, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Inventory" parent="GUI" instance=ExtResource( 25 )]
 visible = false
 mouse_filter = 2

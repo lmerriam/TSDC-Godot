@@ -6,8 +6,10 @@ var inventory
 var entities
 var gamespeed = 1 setget set_gamespeed
 var gamepads = {}
+var announcements = []
 
 signal gamespeed_changed(new_value, old_value)
+signal announcement_added
 
 func _ready():
 	pass
@@ -22,3 +24,14 @@ func on_gamepad_changed(padname, force):
 
 func get_gamepad_force(padname):
 	return gamepads[padname]
+
+func add_announcement(primary, secondary):
+	var an = {"primary": primary, "secondary": secondary}
+	announcements.append(an)
+	emit_signal("announcement_added")
+
+func get_announcement(index):
+	return announcements[index]
+
+func pop_announcement():
+	return announcements.pop_front()
