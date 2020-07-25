@@ -5,17 +5,19 @@
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource( 1 )
+max_active_spawns = 12
+spawn_rate = 0.2
 
-[node name="LocationList" type="Node2D" parent="."]
+[node name="SpawnerLocationList" type="Node2D" parent="."]
 
-[node name="Position2D" type="Position2D" parent="LocationList"]
+[node name="Position2D" type="Position2D" parent="SpawnerLocationList"]
 
-[node name="MobList" type="Node" parent="."]
+[node name="SpawnerMobList" type="Node" parent="."]
 
-[node name="Mob" type="Node" parent="MobList"]
+[node name="SpawnerMob" type="Node" parent="SpawnerMobList"]
 script = ExtResource( 2 )
 count = 10
 
-[node name="Mob2" type="Node" parent="MobList"]
-script = ExtResource( 2 )
-count = 10
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_up"]

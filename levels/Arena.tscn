@@ -53,18 +53,26 @@ __meta__ = {
 [node name="EnemySpawner" parent="." instance=ExtResource( 1 )]
 position = Vector2( 90, 70 )
 
-[node name="Position2D2" type="Position2D" parent="EnemySpawner/LocationList" index="1"]
-position = Vector2( 219.755, 280.048 )
+[node name="Position2D2" type="Position2D" parent="EnemySpawner/SpawnerLocationList" index="1"]
+position = Vector2( 510, 0 )
 
-[node name="Position2D3" type="Position2D" parent="EnemySpawner/LocationList" index="2"]
-position = Vector2( 478.383, 11.9001 )
+[node name="Position2D3" type="Position2D" parent="EnemySpawner/SpawnerLocationList" index="2"]
+position = Vector2( 275.172, 308.608 )
 
-[node name="EnemySpawnerMob" type="Node" parent="EnemySpawner/MobList" index="2"]
+[node name="SpawnerMob" parent="EnemySpawner/SpawnerMobList" index="0"]
+count = 32
+
+[node name="EnemySpawnerMob" type="Node" parent="EnemySpawner/SpawnerMobList" index="1"]
 script = ExtResource( 2 )
-count = 3
+count = 32
 
-[node name="EnemySpawnerMob2" type="Node" parent="EnemySpawner/MobList" index="3"]
+[node name="EnemySpawnerMob2" type="Node" parent="EnemySpawner/SpawnerMobList" index="2"]
 script = ExtResource( 2 )
+count = 32
+
+[node name="EnemySpawnerMob3" type="Node" parent="EnemySpawner/SpawnerMobList" index="3"]
+script = ExtResource( 2 )
+count = 32
 [connection signal="all_mobs_defeated" from="EnemySpawner" to="." method="_on_wave_completed"]
 
 [editable path="EnemySpawner"]
