@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://EnemySpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://EnemySpawnerMob.gd" type="Script" id=2]
 [ext_resource path="res://levels/Arena.gd" type="Script" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=5]
 [ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 59.4717, 58.351 )
 
 [node name="Level" type="YSort"]
 script = ExtResource( 3 )
@@ -62,17 +66,50 @@ position = Vector2( 275.172, 308.608 )
 [node name="SpawnerMob" parent="EnemySpawner/SpawnerMobList" index="0"]
 count = 32
 
-[node name="EnemySpawnerMob" type="Node" parent="EnemySpawner/SpawnerMobList" index="1"]
+[node name="Waves" type="Node" parent="."]
+
+[node name="Wave" type="Node" parent="Waves"]
+
+[node name="EnemySpawnerMob2" type="Node" parent="Waves/Wave"]
 script = ExtResource( 2 )
 count = 32
 
-[node name="EnemySpawnerMob2" type="Node" parent="EnemySpawner/SpawnerMobList" index="2"]
+[node name="Wave2" type="Node" parent="Waves"]
+
+[node name="EnemySpawnerMob3" type="Node" parent="Waves/Wave2"]
 script = ExtResource( 2 )
 count = 32
 
-[node name="EnemySpawnerMob3" type="Node" parent="EnemySpawner/SpawnerMobList" index="3"]
+[node name="EnemySpawnerMob4" type="Node" parent="Waves/Wave2"]
 script = ExtResource( 2 )
 count = 32
+
+[node name="Wave3" type="Node" parent="Waves"]
+
+[node name="EnemySpawnerMob5" type="Node" parent="Waves/Wave3"]
+script = ExtResource( 2 )
+count = 32
+
+[node name="EnemySpawnerMob6" type="Node" parent="Waves/Wave3"]
+script = ExtResource( 2 )
+count = 32
+
+[node name="EnemySpawnerMob7" type="Node" parent="Waves/Wave3"]
+script = ExtResource( 2 )
+count = 32
+
+[node name="WaveStartButton" type="Node2D" parent="."]
+position = Vector2( 360, 200 )
+
+[node name="Sprite" type="Sprite" parent="WaveStartButton"]
+scale = Vector2( 0.188858, 0.188858 )
+texture = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="WaveStartButton/Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveStartButton/Sprite/Area2D"]
+shape = SubResource( 1 )
 [connection signal="all_mobs_defeated" from="EnemySpawner" to="." method="_on_wave_completed"]
+[connection signal="input_event" from="WaveStartButton/Sprite/Area2D" to="." method="_on_waveStartButton_selected"]
 
 [editable path="EnemySpawner"]

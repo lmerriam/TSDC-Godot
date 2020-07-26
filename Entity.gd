@@ -43,7 +43,7 @@ var status_current := []
 export var health := 10.0
 var max_health = health
 signal health_changed
-signal killed
+signal killed(id)
 
 # Attacks
 export var faction:String

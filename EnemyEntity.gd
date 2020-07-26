@@ -19,8 +19,6 @@ onready var origin = $Enemy.global_position
 var mob: Array
 var cooldown = 0
 
-signal killed(id)
-
 func _ready():
 	set_stat_base("speed", 1)
 

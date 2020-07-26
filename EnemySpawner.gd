@@ -46,6 +46,8 @@ func spawn_next():
 				emit_signal("all_enemies_spawned")
 
 func start():
+	current_mob = 0
+	current_spawn = 0
 	call_deferred("spawn_next")
 
 func attempt_to_spawn():
