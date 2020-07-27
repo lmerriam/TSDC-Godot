@@ -4,14 +4,13 @@
 [ext_resource path="res://gui/Announcement.gd" type="Script" id=2]
 [ext_resource path="res://font/Bitty.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 96
 extra_spacing_top = -16
 extra_spacing_space = -12
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "Announce"
+[sub_resource type="Animation" id=2]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -55,6 +54,7 @@ tracks/2/keys = {
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -85,7 +85,7 @@ __meta__ = {
 margin_top = 35.0
 margin_right = 960.0
 margin_bottom = 95.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.247059 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 3
@@ -98,4 +98,4 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Announce"
-anims/Announce = SubResource( 1 )
+anims/Announce = SubResource( 2 )

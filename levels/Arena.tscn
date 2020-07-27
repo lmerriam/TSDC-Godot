@@ -64,7 +64,7 @@ position = Vector2( 510, 0 )
 position = Vector2( 275.172, 308.608 )
 
 [node name="SpawnerMob" parent="EnemySpawner/SpawnerMobList" index="0"]
-count = 32
+count = 2
 
 [node name="Waves" type="Node" parent="."]
 
@@ -72,31 +72,31 @@ count = 32
 
 [node name="EnemySpawnerMob2" type="Node" parent="Waves/Wave"]
 script = ExtResource( 2 )
-count = 32
+count = 2
 
 [node name="Wave2" type="Node" parent="Waves"]
 
 [node name="EnemySpawnerMob3" type="Node" parent="Waves/Wave2"]
 script = ExtResource( 2 )
-count = 32
+count = 2
 
 [node name="EnemySpawnerMob4" type="Node" parent="Waves/Wave2"]
 script = ExtResource( 2 )
-count = 32
+count = 2
 
 [node name="Wave3" type="Node" parent="Waves"]
 
 [node name="EnemySpawnerMob5" type="Node" parent="Waves/Wave3"]
 script = ExtResource( 2 )
-count = 32
+count = 2
 
 [node name="EnemySpawnerMob6" type="Node" parent="Waves/Wave3"]
 script = ExtResource( 2 )
-count = 32
+count = 2
 
 [node name="EnemySpawnerMob7" type="Node" parent="Waves/Wave3"]
 script = ExtResource( 2 )
-count = 32
+count = 2
 
 [node name="WaveStartButton" type="Node2D" parent="."]
 position = Vector2( 360, 200 )

@@ -18,6 +18,6 @@ func _on_wave_completed():
 	current_wave += 1
 
 func _on_waveStartButton_selected(viewport, event, shape_idx):
-	if event is InputEventScreenTouch or event is InputEventMouseButton and event.pressed:
+	if event is InputEventScreenTouch or event is InputEventMouseButton and event.pressed and current_wave < $Waves.get_child_count():
 		print("firing")
 		start_wave()
