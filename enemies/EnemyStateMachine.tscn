@@ -1,0 +1,39 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://enemies/WanderState.gd" type="Script" id=1]
+[ext_resource path="res://enemies/StunnedState.gd" type="Script" id=2]
+[ext_resource path="res://enemies/AttackState.gd" type="Script" id=3]
+[ext_resource path="res://enemies/EnemyStateMachine.gd" type="Script" id=4]
+[ext_resource path="res://enemies/ChaseState.gd" type="Script" id=5]
+[ext_resource path="res://State.gd" type="Script" id=6]
+[ext_resource path="res://enemies/WindupState.gd" type="Script" id=7]
+[ext_resource path="res://enemies/StrikeState.gd" type="Script" id=8]
+[ext_resource path="res://enemies/Cooldown.gd" type="Script" id=9]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource( 4 )
+root_machine = true
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="Chase" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Cooldown" type="Node" parent="Attack"]
+script = ExtResource( 9 )
+
+[node name="Windup" type="Node" parent="Attack"]
+script = ExtResource( 7 )
+
+[node name="Strike" type="Node" parent="Attack"]
+script = ExtResource( 8 )
+
+[node name="Stunned" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Stagger" type="Node" parent="."]
+script = ExtResource( 6 )

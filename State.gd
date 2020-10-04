@@ -6,11 +6,9 @@ signal finished(next_state_name)
 export var next_state := "next"
 
 var entity
-var actor
 
 func _ready():
 	entity = owner
-	actor = entity.get_child(0)
 	connect("finished", get_parent(), "_change_state")
 
 # Initialize the state. E.g. change the animation

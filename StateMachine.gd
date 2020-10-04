@@ -15,10 +15,10 @@ var _active = false setget set_active
 
 
 func _ready():
+	
 	for child in get_children():
 		states_map[child.name] = child
-	
-#	initialize(get_child(0).name)
+		child.owner = owner
 	
 	if root_machine:
 		initialize(get_child(0).name)

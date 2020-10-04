@@ -1,10 +1,10 @@
 extends State
 
 func update(delta):
-	if !entity.owner_is_attacking:
-		var atk = entity.item_owner.create_attack()
+	if !owner.owner_is_attacking:
+		var atk = owner.item_owner.create_attack()
 		var angle = owner.aim_force
-		var area = entity._create_attack_area(atk, entity, angle)
+		var area = owner._create_attack_area(atk, owner, angle)
 		area.global_position = owner.global_position
 		owner.add_active_attack(area)
 		area.connect("projectile_destroyed", owner, "remove_active_attack")

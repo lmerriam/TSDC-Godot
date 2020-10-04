@@ -4,7 +4,7 @@
 [ext_resource path="res://gui/Announcement.gd" type="Script" id=2]
 [ext_resource path="res://font/Bitty.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 96
 extra_spacing_top = -16
 extra_spacing_space = -12
@@ -52,8 +52,11 @@ tracks/2/keys = {
 }
 
 [node name="Control" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 30.0
+margin_bottom = 30.0
 mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
@@ -63,6 +66,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -85,7 +89,7 @@ __meta__ = {
 margin_top = 35.0
 margin_right = 960.0
 margin_bottom = 95.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.247059 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 3

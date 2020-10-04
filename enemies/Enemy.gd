@@ -29,6 +29,7 @@ var cooldown = 0
 var hitshader = preload("res://all_white_shader.tres")
 
 signal killed(id)
+signal animation_finished(anim)
 
 func _ready():
 	$Entity.set_stat_base("speed", 1)
@@ -121,6 +122,14 @@ func bleed(angle):
 	return blood
 
 
+func set_state(state_name):
+	$StateMachine._change_state(state_name)
+
+
+func get_current_animation():
+	return $AnimationPlayer.get_animation()
+
+
 func _on_Entity_killed():
 	var angle = Global.player.global_position.angle_to_point(global_position)
 	bleed(angle)
@@ -129,5 +138,7 @@ func _on_Entity_killed():
 	emit_signal("killed",self)
 	call_deferred("queue_free")
 
-func set_state(state_name):
-	$StateMachine._change_state(state_name)
+
+func _on_animation_finished(anim):
+	emit_signal("animation_finished", anim)
+
