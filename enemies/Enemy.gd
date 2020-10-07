@@ -4,6 +4,7 @@ var velocity = Vector2(0,0)
 
 export var blood_particles:PackedScene
 
+export var move_speed := 1.0
 export var attack_radius := 32
 export var chase_radius := 256
 export var aggro_radius := 128
@@ -32,7 +33,7 @@ signal killed(id)
 signal animation_finished(anim)
 
 func _ready():
-	$Entity.set_stat_base("speed", 1)
+	$Entity.set_stat_base("speed", move_speed)
 	$Entity.set_stat_base("damage", 1)
 	$Entity.set_stat_base("knockback", 100)
 
@@ -125,6 +126,8 @@ func bleed(angle):
 func set_state(state_name):
 	$StateMachine._change_state(state_name)
 
+func play_animation(anim_name):
+	$AnimationPlayer.play(anim_name)
 
 func get_current_animation():
 	return $AnimationPlayer.get_animation()
@@ -141,4 +144,3 @@ func _on_Entity_killed():
 
 func _on_animation_finished(anim):
 	emit_signal("animation_finished", anim)
-

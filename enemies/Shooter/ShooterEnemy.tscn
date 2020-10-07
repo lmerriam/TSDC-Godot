@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/mobs/ElementalOrbA.png" type="Texture" id=2]
+[ext_resource path="res://enemies/Shooter/ShooterEnemyStateMachine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemies/Shooter/ShooterWindupAnimation.tres" type="Animation" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 2 ), SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="ShooterEnemy" instance=ExtResource( 1 )]
+move_speed = 0.5
+attack_radius = 96
+
+[node name="StateLabel" parent="." index="1"]
+visible = true
+
+[node name="AnimatedSprite" parent="." index="3"]
+frames = SubResource( 4 )
+frame = 0
+
+[node name="AnimationPlayer" parent="." index="6"]
+anims/windup = ExtResource( 4 )
+
+[node name="StateMachine" parent="." index="7" instance=ExtResource( 3 )]
+
+[node name="Attack" parent="StateMachine" index="2"]
+debugging = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="8"]
+emitting = false
+amount = 24
+lifetime = 0.5
+spread = 174.09
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.4
+
+[editable path="StateMachine"]
