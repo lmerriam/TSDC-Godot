@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://levels/Arena.tscn" type="PackedScene" id=2]
 [ext_resource path="res://WorldMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemies/Shooter/ShooterEnemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemies/Jumper/JumperEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/analog/analog.tscn" type="PackedScene" id=8]
 [ext_resource path="res://GUI.gd" type="Script" id=22]
@@ -49,7 +50,10 @@ script = ExtResource( 1 )
 position = Vector2( 349.04, 210.477 )
 
 [node name="ShooterEnemy" parent="LevelContainer/Level" instance=ExtResource( 4 )]
-position = Vector2( 242.5, 232 )
+position = Vector2( 155.509, 228.071 )
+
+[node name="JumperEnemy" parent="LevelContainer/Level" instance=ExtResource( 5 )]
+position = Vector2( 165.002, 127.399 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource( 22 )

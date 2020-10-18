@@ -3,8 +3,6 @@ extends StateMachine
 func _ready():
 	owner = get_parent()
 	assign_owner_to_children(self)
-#	for node in get_children():
-#		node.owner = owner
 
 func _change_state(state_name):
 	._change_state(state_name)

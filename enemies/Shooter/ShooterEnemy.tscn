@@ -26,15 +26,17 @@ animations = [ {
 } ]
 
 [node name="ShooterEnemy" instance=ExtResource( 1 )]
-move_speed = 0.5
-attack_radius = 96
+move_speed = 0.6
+attack_radius = 150
+chase_radius = 300
+aggro_radius = 200
 
 [node name="StateLabel" parent="." index="1"]
 visible = true
 
 [node name="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 4 )
-frame = 0
+frame = 2
 
 [node name="AnimationPlayer" parent="." index="6"]
 anims/windup = ExtResource( 4 )
@@ -45,7 +47,6 @@ anims/windup = ExtResource( 4 )
 debugging = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="8"]
-emitting = false
 amount = 24
 lifetime = 0.5
 spread = 174.09

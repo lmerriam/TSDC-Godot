@@ -9,4 +9,4 @@ func update(delta):
 	owner.attack_timer = 1
 	owner.stun_timer = .5
 	
-	emit_signal("finished", "Stunned")
+	get_parent().emit_signal("finished", "Stunned")

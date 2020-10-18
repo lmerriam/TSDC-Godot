@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -32,6 +32,10 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.01086, 2.04037 )
 
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.53777
+height = 8.38708
+
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
@@ -46,6 +50,7 @@ offset = Vector2( -1, -11 )
 shape = SubResource( 2 )
 
 [node name="Entity" parent="." instance=ExtResource( 9 )]
+faction = "player"
 
 [node name="Armor" type="Node2D" parent="Entity/Equipment" index="0"]
 script = ExtResource( 10 )
@@ -87,10 +92,17 @@ script = ExtResource( 12 )
 script = ExtResource( 12 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 15 )]
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -0.440735, -11.5693 )
+shape = SubResource( 3 )
 [connection signal="attack_ended" from="." to="." method="_on_Player_attack_ended"]
 [connection signal="attack_started" from="." to="." method="_on_Player_attack_started"]
 [connection signal="item_equipped" from="Entity" to="." method="_on_Entity_item_equipped"]
 [connection signal="item_unequipped" from="Entity" to="." method="_on_Entity_item_unequipped"]
 [connection signal="tree_entered" from="Entity" to="." method="_on_entity_tree_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 
 [editable path="Entity"]
