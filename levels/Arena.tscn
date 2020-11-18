@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://EnemySpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://EnemySpawnerMob.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://tiles/tsdc-tileset-16-walls.tres" type="TileSet" id=5]
 [ext_resource path="res://tiles/tsdc-tileset-16.tres" type="TileSet" id=6]
 [ext_resource path="res://enemies/EnemyBat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://enemies/Jumper/JumperEnemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://enemies/Shooter/ShooterEnemy.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 59.4717, 58.351 )
@@ -86,7 +88,7 @@ count = 2
 
 [node name="EnemySpawnerMob4" type="Node" parent="Waves/Wave2"]
 script = ExtResource( 2 )
-enemy = ExtResource( 7 )
+enemy = ExtResource( 8 )
 count = 2
 
 [node name="Wave3" type="Node" parent="Waves"]
@@ -98,12 +100,12 @@ count = 2
 
 [node name="EnemySpawnerMob6" type="Node" parent="Waves/Wave3"]
 script = ExtResource( 2 )
-enemy = ExtResource( 7 )
+enemy = ExtResource( 8 )
 count = 2
 
 [node name="EnemySpawnerMob7" type="Node" parent="Waves/Wave3"]
 script = ExtResource( 2 )
-enemy = ExtResource( 7 )
+enemy = ExtResource( 9 )
 count = 2
 
 [node name="Wave4" type="Node" parent="Waves"]
@@ -120,12 +122,12 @@ count = 2
 
 [node name="EnemySpawnerMob7" type="Node" parent="Waves/Wave4"]
 script = ExtResource( 2 )
-enemy = ExtResource( 7 )
+enemy = ExtResource( 9 )
 count = 2
 
 [node name="EnemySpawnerMob8" type="Node" parent="Waves/Wave4"]
 script = ExtResource( 2 )
-enemy = ExtResource( 7 )
+enemy = ExtResource( 8 )
 count = 2
 
 [node name="WaveStartButton" type="Node2D" parent="."]

@@ -6,9 +6,10 @@
 [ext_resource path="res://enemies/EnemyStateMachine.gd" type="Script" id=4]
 [ext_resource path="res://enemies/ChaseState.gd" type="Script" id=5]
 [ext_resource path="res://State.gd" type="Script" id=6]
-[ext_resource path="res://enemies/WindupState.gd" type="Script" id=7]
+[ext_resource path="res://enemies/AnimateState.gd" type="Script" id=7]
 [ext_resource path="res://enemies/Shooter/ShooterShootState.gd" type="Script" id=8]
 [ext_resource path="res://enemies/Cooldown.gd" type="Script" id=9]
+
 
 [node name="StateMachine" type="Node"]
 script = ExtResource( 4 )

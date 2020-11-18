@@ -10,6 +10,7 @@ func update(delta):
 	projectile.set_attack_properties(atk)
 	projectile.global_position = owner.global_position
 	projectile.set_angle(projectile.global_position.direction_to(owner.target.global_position))
+	projectile.speed = 6
 	
 	owner.attack_timer = 1
 	

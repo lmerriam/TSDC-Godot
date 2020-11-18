@@ -36,17 +36,14 @@ visible = true
 
 [node name="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 4 )
-frame = 2
 
 [node name="AnimationPlayer" parent="." index="6"]
 anims/windup = ExtResource( 4 )
 
 [node name="StateMachine" parent="." index="7" instance=ExtResource( 3 )]
 
-[node name="Attack" parent="StateMachine" index="2"]
-debugging = true
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="8"]
+emitting = false
 amount = 24
 lifetime = 0.5
 spread = 174.09

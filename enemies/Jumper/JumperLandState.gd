@@ -1,8 +1,5 @@
-extends State
+extends "res://enemies/AnimateState.gd"
 
-export var anim_name := "JumperLandAnimation"
-
-func enter():
-	owner.play_animation(anim_name)
-
-func
+func exit():
+	owner.find_node("CollisionShape2D").set_deferred("disabled", false)
+	.exit()
