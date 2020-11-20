@@ -10,7 +10,8 @@ func update(delta):
 	pass
 
 func exit():
-	owner.disconnect("animation_finished", self, "_on_animation_finished")
+	if owner.is_connected("animation_finished", self, "_on_animation_finished"):
+		owner.disconnect("animation_finished", self, "_on_animation_finished")
 
 func _on_animation_finished(anim):
 	if anim == anim_name:
