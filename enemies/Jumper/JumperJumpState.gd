@@ -7,7 +7,7 @@ func enter():
 	target_pos = owner.target.global_position
 
 func update(delta):
-	owner.velocity = (target_pos - owner.global_position).normalized() * 3
+	owner.velocity = (target_pos - owner.global_position).normalized() * 5
 	if owner.global_position.distance_to(target_pos) <= 8:
 		emit_signal("finished",next_state)
 

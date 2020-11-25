@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/mobs/SlimeSquareJ.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ProjectileEmitter.gd" type="Script" id=6]
 [ext_resource path="res://StateMachine.gd" type="Script" id=7]
 [ext_resource path="res://enemies/CheckInRangeState.gd" type="Script" id=8]
+[ext_resource path="res://attacks/Impact64.tscn" type="PackedScene" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -155,8 +156,6 @@ visible = true
 
 [node name="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 11 )
-animation = "jump"
-frame = 3
 
 [node name="AnimationPlayer" parent="." index="6"]
 anims/JumperCrouchAnimation = SubResource( 12 )
@@ -178,7 +177,9 @@ script = ExtResource( 5 )
 script = ExtResource( 8 )
 
 [node name="ProjectileEmitter" type="Node2D" parent="." index="8"]
+position = Vector2( 0, 4 )
 script = ExtResource( 6 )
+projectile = ExtResource( 9 )
 entity_path = NodePath("../Entity")
 
 [editable path="StateMachine"]
