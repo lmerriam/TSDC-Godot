@@ -36,6 +36,10 @@ func _ready():
 	$Entity.set_stat_base("speed", move_speed)
 	$Entity.set_stat_base("damage", 1)
 	$Entity.set_stat_base("knockback", 100)
+	
+	$Healthbar.max_value = $Entity.health
+	$Healthbar.value = $Entity.health
+	
 
 func _physics_process(delta):
 	
@@ -144,3 +148,11 @@ func _on_Entity_killed():
 
 func _on_animation_finished(anim):
 	emit_signal("animation_finished", anim)
+
+
+func _on_Entity_health_changed(health, old_health):
+	print("Health changed")
+	if health < $Entity.max_health:
+		$Healthbar.visible = true
+		$Healthbar.value = health
+		print("Health < max health")

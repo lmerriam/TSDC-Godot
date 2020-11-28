@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/d0f6ac96-cecb-4005-8efc-6ff440ecd312.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://PlayerDefaultState.gd" type="Script" id=13]
 [ext_resource path="res://PlayerLungeState.gd" type="Script" id=14]
 [ext_resource path="res://GameCamera.tscn" type="PackedScene" id=15]
+[ext_resource path="res://items/weapon/Bow.tscn" type="PackedScene" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -67,6 +68,8 @@ type = "amulet"
 [node name="Weapon" type="Node2D" parent="Entity/Equipment" index="3"]
 script = ExtResource( 10 )
 type = "weapon"
+
+[node name="Bow" parent="Entity/Equipment/Weapon" instance=ExtResource( 16 )]
 
 [node name="Skill1" type="Node2D" parent="Entity/Equipment" index="4"]
 script = ExtResource( 10 )
