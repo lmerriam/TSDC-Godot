@@ -6,6 +6,7 @@ class_name Entity
 export var level := 1
 var stats_base := {}
 var stats := {}
+var stat_points := {}
 var stat_modifiers := {}
 export var stat_increments := {}
 signal stats_updated
@@ -41,7 +42,6 @@ var status_current := []
 # Health
 #export var has_health := true
 export var health := 10.0
-var max_health = health
 signal health_changed
 signal killed(id)
 
@@ -52,6 +52,7 @@ signal attack_received(atk)
 
 func _init():
 	connect("stats_updated", self, "_on_stats_updated")
+	stats_base["health"] = health
 
 #func _exit_tree():
 #	for item in equipment:
@@ -101,6 +102,10 @@ func update_stats():
 	for s in stat_increments:
 		if stats.has(s):
 			stats[s] = stats[s] + stats[s] * stat_increments[s] * level
+	# Factor in stat points
+	for s in stat_points:
+		if stat_points.has(s):
+			stats[s] = stats[s] + stat_points[s]
 	# Equipment
 	if has_equipment:
 		update_equipment_stats()
@@ -128,6 +133,10 @@ func update_stats():
 #	emit_signal("stats_updated")
 #	return stats
 
+func _on_stats_updated():
+#	if has_health and stats.max_health
+	pass
+
 func add_modifier(stat,id,value):
 	if !stat_modifiers.has(stat):
 		stat_modifiers[stat] = {}
@@ -146,9 +155,10 @@ func remove_modifier(stat, id):
 	stat_modifiers[stat].erase(id)
 	emit_signal("modifiers_updated")
 
-func _on_stats_updated():
-#	if has_health and stats.max_health
-	pass
+func add_stat_point(stat,value):
+	if !stat_points.has(stat):
+		stat_points[stat] = 0
+	stat_points[stat] += value
 
 func set_health(_health):
 	var _old_health = health

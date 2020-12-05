@@ -10,7 +10,7 @@ func _ready():
 	Global.add_announcement("Test2", "Test Two")
 
 func _on_player_health_changed(_health, _old_health):
-	$HealthBar.value = (Global.player_entity.health / Global.player_entity.max_health) * 100
+	$HealthBar.value = (Global.player_entity.health / Global.player_entity.stats["health"]) * 100
 
 func add_announcement(primary, secondary):
 	var an = announcement.instance()
