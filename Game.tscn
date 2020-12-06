@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://levels/Arena.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://enemies/Shooter/ShooterEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://enemies/Jumper/JumperEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://gui/UpgradeStatRow.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/analog/analog.tscn" type="PackedScene" id=8]
 [ext_resource path="res://GUI.gd" type="Script" id=22]
 [ext_resource path="res://HUD.gd" type="Script" id=23]
@@ -258,6 +259,75 @@ text = "CLOSE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ChooseUpgrade" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="GUI/ChooseUpgrade"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -106.0
+margin_right = 125.0
+margin_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/vseparation = 12
+custom_constants/hseparation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
+margin_right = 250.0
+
+[node name="Control2" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
+margin_top = 62.0
+margin_right = 250.0
+margin_bottom = 112.0
+stat = "damage"
+
+[node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control2" index="0"]
+margin_right = 0.0
+text = "Damage"
+
+[node name="StatValue" parent="GUI/ChooseUpgrade/GridContainer/Control2" index="1"]
+margin_left = -88.0
+
+[node name="Control3" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
+margin_top = 124.0
+margin_right = 250.0
+margin_bottom = 174.0
+stat = "speed"
+
+[node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control3" index="0"]
+text = "Speed"
+
+[node name="Control4" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
+margin_top = 186.0
+margin_right = 250.0
+margin_bottom = 236.0
+stat = "cooldown"
+
+[node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control4" index="0"]
+text = "Cooldown"
+
+[node name="Button4" type="Button" parent="GUI/ChooseUpgrade/GridContainer"]
+margin_top = 248.0
+margin_right = 250.0
+margin_bottom = 298.0
+rect_min_size = Vector2( 0, 50 )
+theme = ExtResource( 27 )
+text = "DONE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="stats_updated" from="LevelContainer/Level/Player/Entity" to="GUI/Character" method="_on_player_stats_updated"]
 [connection signal="button_up" from="GUI/HUD/Control/OpenInv" to="GUI" method="_on_OpenInv_button_up"]
 [connection signal="button_up" from="GUI/HUD/Control/OpenChar" to="GUI" method="_on_OpenChar_button_up"]
@@ -271,5 +341,12 @@ __meta__ = {
 [connection signal="button_up" from="GUI/Character/Button2" to="GUI" method="_on_HUD_button_up"]
 [connection signal="level_selected" from="GUI/WorldMap" to="." method="_on_WorldMap_level_selected"]
 [connection signal="button_up" from="GUI/WorldMap/Button3" to="GUI" method="_on_HUD_button_up"]
+[connection signal="button_up" from="GUI/ChooseUpgrade/GridContainer/Button4" to="GUI" method="_on_HUD_button_up"]
 
 [editable path="LevelContainer/Level/Player"]
+
+[editable path="GUI/ChooseUpgrade/GridContainer/Control2"]
+
+[editable path="GUI/ChooseUpgrade/GridContainer/Control3"]
+
+[editable path="GUI/ChooseUpgrade/GridContainer/Control4"]
