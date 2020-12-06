@@ -209,7 +209,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "AsepriteAnimSetter", "Todo_Manager", "equipment_watcher" )
+enabled=PoolStringArray( "Todo_Manager", "equipment_watcher" )
 
 [importer_defaults]
 

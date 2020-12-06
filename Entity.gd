@@ -104,8 +104,10 @@ func update_stats():
 			stats[s] = stats[s] + stats[s] * stat_increments[s] * level
 	# Factor in stat points
 	for s in stat_points:
-		if stat_points.has(s):
+		if stats.has(s):
 			stats[s] = stats[s] + stat_points[s]
+		else:
+			stats[s] = stat_points[s]
 	# Equipment
 	if has_equipment:
 		update_equipment_stats()

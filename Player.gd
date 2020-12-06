@@ -22,6 +22,7 @@ func _init():
 func _ready():
 	sprite.play()
 	$Entity.set_stat_base("damage", 3)
+	$Entity.set_stat_base("speed", 100)
 	for type in ItemLibrary.equipment:
 		for item in ItemLibrary.equipment[type]:
 			$Entity.add_item(ItemLibrary.instance_item(item))
@@ -61,13 +62,13 @@ func _physics_process(delta):
 		velocity.y -= 1
 	
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * $Entity.stats.speed
 		sprite.animation = "run"
 	else:
 		sprite.animation = "idle"
 	
 	if move_force:
-		velocity = move_force * speed
+		velocity = move_force * $Entity.stats.speed
 	
 	move_and_slide(velocity*attack_move_speed)
 

@@ -261,7 +261,6 @@ __meta__ = {
 }
 
 [node name="ChooseUpgrade" type="Control" parent="GUI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -306,6 +305,7 @@ margin_top = 124.0
 margin_right = 250.0
 margin_bottom = 174.0
 stat = "speed"
+increment = 5.0
 
 [node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control3" index="0"]
 text = "Speed"
