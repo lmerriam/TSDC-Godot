@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://levels/Arena.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://gui/UpgradeStatRow.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/analog/analog.tscn" type="PackedScene" id=8]
+[ext_resource path="res://gui/AssignStats.gd" type="Script" id=9]
 [ext_resource path="res://GUI.gd" type="Script" id=22]
 [ext_resource path="res://HUD.gd" type="Script" id=23]
 [ext_resource path="res://PlayerInventory.tscn" type="PackedScene" id=25]
@@ -260,14 +261,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChooseUpgrade" type="Control" parent="GUI"]
+[node name="AssignStats" type="Control" parent="GUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="GUI/ChooseUpgrade"]
+[node name="GridContainer" type="GridContainer" parent="GUI/AssignStats"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -284,45 +286,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
-margin_right = 250.0
+[node name="UnspentStatPoints" type="Label" parent="GUI/AssignStats/GridContainer"]
+margin_right = 270.0
+margin_bottom = 31.0
+theme = ExtResource( 27 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.513726 )
+custom_constants/shadow_offset_y = 3
+text = "1 unspent stat point"
 
-[node name="Control2" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
-margin_top = 62.0
-margin_right = 250.0
-margin_bottom = 112.0
+[node name="Control" parent="GUI/AssignStats/GridContainer" instance=ExtResource( 7 )]
+margin_top = 43.0
+margin_right = 270.0
+margin_bottom = 93.0
+
+[node name="Control2" parent="GUI/AssignStats/GridContainer" instance=ExtResource( 7 )]
+margin_top = 105.0
+margin_right = 270.0
+margin_bottom = 155.0
 stat = "damage"
 
-[node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control2" index="0"]
-margin_right = 0.0
-text = "Damage"
-
-[node name="StatValue" parent="GUI/ChooseUpgrade/GridContainer/Control2" index="1"]
-margin_left = -88.0
-
-[node name="Control3" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
-margin_top = 124.0
-margin_right = 250.0
-margin_bottom = 174.0
+[node name="Control3" parent="GUI/AssignStats/GridContainer" instance=ExtResource( 7 )]
+margin_top = 167.0
+margin_right = 270.0
+margin_bottom = 217.0
 stat = "speed"
-increment = 5.0
 
-[node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control3" index="0"]
-text = "Speed"
-
-[node name="Control4" parent="GUI/ChooseUpgrade/GridContainer" instance=ExtResource( 7 )]
-margin_top = 186.0
-margin_right = 250.0
-margin_bottom = 236.0
+[node name="Control4" parent="GUI/AssignStats/GridContainer" instance=ExtResource( 7 )]
+margin_top = 229.0
+margin_right = 270.0
+margin_bottom = 279.0
 stat = "cooldown"
 
-[node name="StatName" parent="GUI/ChooseUpgrade/GridContainer/Control4" index="0"]
-text = "Cooldown"
-
-[node name="Button4" type="Button" parent="GUI/ChooseUpgrade/GridContainer"]
-margin_top = 248.0
-margin_right = 250.0
-margin_bottom = 298.0
+[node name="Button4" type="Button" parent="GUI/AssignStats/GridContainer"]
+margin_top = 291.0
+margin_right = 270.0
+margin_bottom = 341.0
 rect_min_size = Vector2( 0, 50 )
 theme = ExtResource( 27 )
 text = "DONE"
@@ -342,12 +340,6 @@ __meta__ = {
 [connection signal="button_up" from="GUI/Character/Button2" to="GUI" method="_on_HUD_button_up"]
 [connection signal="level_selected" from="GUI/WorldMap" to="." method="_on_WorldMap_level_selected"]
 [connection signal="button_up" from="GUI/WorldMap/Button3" to="GUI" method="_on_HUD_button_up"]
-[connection signal="button_up" from="GUI/ChooseUpgrade/GridContainer/Button4" to="GUI" method="_on_HUD_button_up"]
+[connection signal="button_up" from="GUI/AssignStats/GridContainer/Button4" to="GUI" method="_on_HUD_button_up"]
 
 [editable path="LevelContainer/Level/Player"]
-
-[editable path="GUI/ChooseUpgrade/GridContainer/Control2"]
-
-[editable path="GUI/ChooseUpgrade/GridContainer/Control3"]
-
-[editable path="GUI/ChooseUpgrade/GridContainer/Control4"]

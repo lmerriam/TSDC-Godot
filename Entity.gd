@@ -7,6 +7,7 @@ export var level := 1
 var stats_base := {}
 var stats := {}
 var stat_points := {}
+var unspent_stat_points = 0
 var stat_modifiers := {}
 export var stat_increments := {}
 signal stats_updated
@@ -157,10 +158,21 @@ func remove_modifier(stat, id):
 	stat_modifiers[stat].erase(id)
 	emit_signal("modifiers_updated")
 
-func add_stat_point(stat,value):
+func assign_stat_points(stat,value):
 	if !stat_points.has(stat):
 		stat_points[stat] = 0
 	stat_points[stat] += value
+
+func give_stat_points(count):
+	unspent_stat_points += count
+
+func spend_stat_points(stat, count):
+	if unspent_stat_points > count:
+		assign_stat_points(stat,count)
+		unspent_stat_points -= 1
+		update_stats()
+	else:
+		return false
 
 func set_health(_health):
 	var _old_health = health

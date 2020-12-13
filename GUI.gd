@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal current_ui_changed(ui_name)
+
 func _input(event):
 	if event.is_action_pressed("ui_inventory"):
 		set_current_ui("Inventory")
@@ -9,12 +11,15 @@ func _input(event):
 		set_current_ui("Character")
 	elif event.is_action_pressed("ui_worldmap"):
 		set_current_ui("WorldMap")
+	elif event.is_action_pressed("ui_stats"):
+		set_current_ui("AssignStats")
 
 
 func set_current_ui(ui_name):
 	for child in get_children():
 		child.visible = false
 	get_node(ui_name).visible = true
+	emit_signal("current_ui_changed", ui_name)
 
 
 func _on_OpenInv_button_up():

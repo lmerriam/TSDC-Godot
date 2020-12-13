@@ -8,6 +8,9 @@ margin_right = 200.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 250, 50 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StatName" type="Label" parent="."]
 anchor_bottom = 1.0
