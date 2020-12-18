@@ -87,6 +87,8 @@ func _on_attack_received(atk):
 		var angle = Global.player.global_position.angle_to_point(global_position)
 		bleed(angle)
 	
+	Global.camera.add_stress(.2)
+	
 	chase_timer = 3
 	
 	$DamageAnimation.play("DamageFlashWhite")

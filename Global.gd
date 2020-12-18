@@ -2,6 +2,7 @@ extends Node
 
 var player
 var player_entity
+var camera
 var inventory
 var entities
 var gamespeed = 1 setget set_gamespeed
