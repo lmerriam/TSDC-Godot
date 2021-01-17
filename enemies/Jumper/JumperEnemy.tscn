@@ -168,7 +168,7 @@ visible = true
 
 [node name="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 11 )
-frame = 0
+frame = 1
 
 [node name="AnimationPlayer" parent="." index="6"]
 anims/Idle = SubResource( 12 )

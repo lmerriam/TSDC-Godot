@@ -1,0 +1,13 @@
+[remap]
+
+importer="LDtk.import"
+type="PackedScene"
+path="res://.import/ldtk-test-import.ldtk-6ba2da3e6cc0ab5c4c9bf82f0adb1ae6.tscn"
+
+[deps]
+
+source_file="res://levels/ldtk-test-import.ldtk"
+dest_files=[ "res://.import/ldtk-test-import.ldtk-6ba2da3e6cc0ab5c4c9bf82f0adb1ae6.tscn" ]
+
+[params]
+

@@ -3,7 +3,7 @@ extends Camera2D
 export var zoom_default = Vector2(.5,.5)
 
 export var max_offset : float = 5.0
-export var max_roll : float = 5.0
+export var max_roll : float = 25.0
 export var shakeReduction : float = 2.5
 
 var stress : float = 0.0
@@ -28,6 +28,8 @@ func _process(delta):
 	shake = stress * stress
 
 	rotation_degrees = angle + (max_roll * shake *  _get_noise(randi(), delta))
+	if rotation_degrees > 0:
+		print(rotation_degrees)
 	
 	var offset = Vector2()
 	offset.x = (max_offset * shake * _get_noise(randi(), delta + 1.0))
