@@ -7,7 +7,7 @@ func _on_WorldMap_level_selected(level_name):
 	var player_parent = Global.player.get_parent()
 	player_parent.remove_child(Global.player)
 	
-	var new_level : Node = load("res://levels/" + level_name + ".ldtk").instance()
+	var new_level : Node = load("res://levels/" + level_name + ".tscn").instance()
 	for n in $LevelContainer.get_children():
 		n.queue_free()
 	

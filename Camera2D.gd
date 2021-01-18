@@ -28,8 +28,8 @@ func _process(delta):
 	shake = stress * stress
 
 	rotation_degrees = angle + (max_roll * shake *  _get_noise(randi(), delta))
-	if rotation_degrees > 0:
-		print(rotation_degrees)
+#	if rotation_degrees > 0:
+#		print(rotation_degrees)
 	
 	var offset = Vector2()
 	offset.x = (max_offset * shake * _get_noise(randi(), delta + 1.0))

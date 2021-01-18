@@ -27,9 +27,6 @@ width = 1.0
 default_color = Color( 1, 1, 1, 1 )
 texture_mode = 5331968
 
-[node name="StateMachine" parent="." index="2"]
-debugging = true
-
 [node name="Cooldown" type="Node" parent="StateMachine/Attacking" index="0"]
 script = ExtResource( 8 )
 idle_sprite = ExtResource( 4 )

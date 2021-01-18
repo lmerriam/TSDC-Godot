@@ -153,8 +153,6 @@ func _on_animation_finished(anim):
 
 
 func _on_Entity_health_changed(health, old_health):
-	print("Health changed")
 	if health < $Entity.stats["health"]:
 		$Healthbar.visible = true
 		$Healthbar.value = health
-		print("Health < max health")
