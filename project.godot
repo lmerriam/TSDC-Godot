@@ -204,6 +204,7 @@ Global="*res://Global.gd"
 Generators="*res://Generators.gd"
 ItemLibrary="*res://ItemLibrary.gd"
 Events="*res://Events.gd"
+Overworld="*res://OverWorld.gd"
 
 [debug]
 

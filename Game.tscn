@@ -89,7 +89,8 @@ __meta__ = {
 }
 
 [node name="OpenInv" type="Button" parent="GUI/HUD/Control"]
-margin_right = 80.0
+margin_left = 88.0
+margin_right = 168.0
 margin_bottom = 48.0
 grow_horizontal = 0
 rect_min_size = Vector2( 80, 0 )
@@ -103,8 +104,8 @@ __meta__ = {
 }
 
 [node name="OpenChar" type="Button" parent="GUI/HUD/Control"]
-margin_left = 88.0
-margin_right = 168.0
+margin_left = 176.0
+margin_right = 256.0
 margin_bottom = 48.0
 grow_horizontal = 0
 rect_min_size = Vector2( 80, 0 )
@@ -117,8 +118,8 @@ __meta__ = {
 }
 
 [node name="OpenWorld" type="Button" parent="GUI/HUD/Control"]
-margin_left = 176.0
-margin_right = 256.0
+margin_left = 264.0
+margin_right = 344.0
 margin_bottom = 48.0
 grow_horizontal = 0
 rect_min_size = Vector2( 80, 0 )
@@ -131,6 +132,7 @@ __meta__ = {
 }
 
 [node name="GenMap" type="Button" parent="GUI/HUD/Control"]
+visible = false
 margin_left = 264.0
 margin_right = 344.0
 margin_bottom = 48.0
