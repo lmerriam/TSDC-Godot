@@ -1,6 +1,7 @@
 extends YSort
 
 var current_wave := 0
+signal level_complete
 
 func start_wave():
 	clear_current_mobs()
@@ -15,8 +16,11 @@ func clear_current_mobs():
 
 func _on_wave_completed():
 	Global.add_announcement("Wave " + String(current_wave) +  " Complete", "")
-	current_wave += 1
 	Global.player_entity.give_stat_points(1)
+	if current_wave >= $Waves.get_child_count():
+		emit_signal("level_complete")
+	else:
+		current_wave += 1
 
 func _on_waveStartButton_selected(viewport, event, shape_idx):
 	if event is InputEventScreenTouch or event is InputEventMouseButton and event.pressed and current_wave < $Waves.get_child_count():

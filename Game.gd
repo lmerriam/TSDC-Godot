@@ -14,3 +14,10 @@ func _on_WorldMap_level_selected(level_name):
 	$LevelContainer.add_child(new_level)
 	new_level.add_child(Global.player)
 	Global.entities = new_level.get_parent()
+	
+	if new_level.has_signal("level_completed"):
+		new_level.connect("level_completed", self, "_on_level_completed")
+
+func _on_level_completed():
+	$GUI.set_current_ui("WorldMap")
+	$GUI/WorldMap

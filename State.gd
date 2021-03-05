@@ -1,5 +1,5 @@
 extends Node
-class_name State
+class_name State, "res://StateIcon.svg"
 
 signal finished(next_state_name)
 

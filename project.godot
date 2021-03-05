@@ -185,7 +185,7 @@ _global_script_class_icons={
 "ProjectileEmitter": "",
 "PubSub": "",
 "Slash": "",
-"State": "",
+"State": "res://StateIcon.svg",
 "StateMachine": "",
 "Status": "",
 "Weapon": "",
