@@ -4,7 +4,7 @@ func _ready():
 	owner = get_parent()
 	assign_owner_to_children(self)
 
-func _change_state(state_name):
+func _change_state(state_name, args={}):
 	._change_state(state_name)
 	$".."/StateLabel.text = state_name
 

@@ -3,21 +3,17 @@ extends Node2D
 func _ready():
 	Global.entities = $LevelContainer/Level
 
-func _on_WorldMap_level_selected(level_name):
+func _on_WorldMap_level_selected(stage_name):
+	change_stage(stage_name)
+
+func change_stage(stage_name):
 	var player_parent = Global.player.get_parent()
 	player_parent.remove_child(Global.player)
 	
-	var new_level : Node = load("res://levels/" + level_name + ".tscn").instance()
+	var new_stage : Node = load("res://levels/" + stage_name + ".tscn").instance()
 	for n in $LevelContainer.get_children():
 		n.queue_free()
 	
-	$LevelContainer.add_child(new_level)
-	new_level.add_child(Global.player)
-	Global.entities = new_level.get_parent()
-	
-	if new_level.has_signal("level_completed"):
-		new_level.connect("level_completed", self, "_on_level_completed")
-
-func _on_level_completed():
-	$GUI.set_current_ui("WorldMap")
-	$GUI/WorldMap
+	$LevelContainer.add_child(new_stage)
+	new_stage.add_child(Global.player)
+	Global.entities = new_stage.get_parent()
