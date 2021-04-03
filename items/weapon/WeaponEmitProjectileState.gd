@@ -12,4 +12,4 @@ func enter():
 	owner.add_child(area)
 	area.global_position = owner.global_position
 	
-	emit_signal("finished", next_state)
+	transition_to( next_state)

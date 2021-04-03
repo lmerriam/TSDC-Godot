@@ -84,7 +84,7 @@ func receive_attack(atk_resource):
 			knockback(kb)
 		
 		if stagger:
-			$Enemy/StateMachine._change_state("stunned")
+			$Enemy/StateMachine.transition_to("stunned")
 			stun_timer = stagger
 		
 		return true

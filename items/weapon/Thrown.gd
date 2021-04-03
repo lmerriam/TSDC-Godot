@@ -3,7 +3,7 @@ extends State
 func update(delta):
 	if owner.owner_is_attacking:
 		if recall():
-			emit_signal("finished",next_state)
+			transition_to(next_state)
 
 func recall():
 	for area in owner.active_attack_areas:

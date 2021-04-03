@@ -2,7 +2,7 @@ extends State
 
 func update(delta):
 	if not entity.owner_is_attacking:
-		emit_signal("finished","Idling")
+		transition_to("Idling")
 		
 	elif not entity.on_cooldown():
 		var atk = entity.item_owner.create_attack()

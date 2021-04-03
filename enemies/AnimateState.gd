@@ -15,4 +15,4 @@ func exit():
 
 func _on_animation_finished(anim):
 	if anim == anim_name:
-		emit_signal("finished",next_state)
+		transition_to(next_state)

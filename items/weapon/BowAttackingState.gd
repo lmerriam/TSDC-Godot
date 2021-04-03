@@ -8,7 +8,7 @@ func enter():
 
 func update(delta):
 	if entity.owner_is_attacking and !entity.on_cooldown():
-		emit_signal("finished","Charging")
+		get_parent()._change_state("Charging")
 	
 	if entity.owner_is_attacking == false:
-		get_parent().emit_signal("finished","Idling")
+		get_parent().get_parent()._change_state("Idling")

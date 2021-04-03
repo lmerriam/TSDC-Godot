@@ -124,7 +124,7 @@ func _on_move_speed_modifier_updated(modifier):
 
 
 func _on_state_change_requested(state_name, props):
-	$StateMachine._change_state(state_name)
+	$StateMachine.transition_to(state_name)
 
 func _on_Hitbox_area_entered(area):
 	if area is AttackArea and $Entity.receive_attack(area.properties):

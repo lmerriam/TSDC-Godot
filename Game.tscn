@@ -50,13 +50,13 @@ script = ExtResource( 1 )
 script = ExtResource( 11 )
 root_machine = true
 
+[node name="Menu" type="Node" parent="GameState"]
+script = ExtResource( 10 )
+
 [node name="Overworld" type="Node" parent="GameState"]
 script = ExtResource( 10 )
 
 [node name="Stage" type="Node" parent="GameState"]
-script = ExtResource( 10 )
-
-[node name="Menu" type="Node" parent="GameState"]
 script = ExtResource( 10 )
 
 [node name="LevelContainer" type="Node2D" parent="."]

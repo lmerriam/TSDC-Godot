@@ -130,7 +130,7 @@ func bleed(angle):
 
 
 func set_state(state_name):
-	$StateMachine._change_state(state_name)
+	$StateMachine.get_parent()._change_state(state_name)
 
 func play_animation(anim_name):
 	$AnimationPlayer.play(anim_name)

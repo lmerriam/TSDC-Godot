@@ -5,6 +5,6 @@ func enter():
 
 func update(delta):
 	if owner.recalling:
-		emit_signal("finished", "Recall")
+		transition_to( "Recall")
 	elif owner.speed <= 1:
-		emit_signal("finished", "Stuck")
+		transition_to( "Stuck")

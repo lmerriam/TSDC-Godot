@@ -5,7 +5,7 @@ func enter():
 
 func update(delta):
 	if entity.is_casting == false:
-		emit_signal("finished","Idling")
+		transition_to("Idling")
 
 func exit():
 	print("End cast")

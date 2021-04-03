@@ -14,4 +14,4 @@ func update(delta):
 	
 	owner.attack_timer = 1
 	
-	emit_signal("finished", "Cooldown")
+	transition_to( "Cooldown")

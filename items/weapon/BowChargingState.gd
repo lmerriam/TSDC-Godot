@@ -23,7 +23,7 @@ func update(delta):
 		atk.damage *= current_charge_level()
 		area.speed *= current_charge_level()
 		line.visible = false
-		emit_signal("finished","Cooldown")
+		transition_to("Cooldown")
 		
 	current_charge += delta
 	var rot = owner.aim_force

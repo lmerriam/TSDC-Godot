@@ -7,7 +7,7 @@ func enter():
 func update(delta):
 	owner.stun_timer -= delta
 	if owner.stun_timer <= 0:
-		emit_signal("finished", "Wander")
+		transition_to( "Wander")
 
 func exit():
 	get_node('../../AnimatedSprite').playing = true

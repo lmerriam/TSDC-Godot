@@ -2,6 +2,6 @@ extends State
 
 func update(delta):
 	if !owner.in_attack_range:
-		get_parent().emit_signal("finished", "Wander")
+		get_parent().transition_to( "Wander")
 	else:
-		emit_signal("finished", next_state)
+		transition_to( next_state)

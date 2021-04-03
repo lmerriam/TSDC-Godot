@@ -2,4 +2,4 @@ extends State
 
 func update(delta):
 	if owner.attack_timer <= 0:
-		emit_signal("finished", next_state)
+		transition_to( next_state)

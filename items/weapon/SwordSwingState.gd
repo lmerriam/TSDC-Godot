@@ -13,9 +13,9 @@ func update(delta):
 	
 	if swing_timer <= 0:
 		if owner.owner_is_attacking:
-			emit_signal("finished","Cooldown")
+			transition_to("Cooldown")
 		else:
-			get_parent().emit_signal("finished", "Idling")
+			get_parent().transition_to( "Idling")
 
 func exit():
 	owner.start_cooldown()

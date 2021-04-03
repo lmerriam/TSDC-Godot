@@ -7,4 +7,4 @@ func enter():
 
 func update(delta):
 	if owner.recalling:
-		emit_signal("finished","Recall")
+		transition_to("Recall")

@@ -10,6 +10,6 @@ func enter():
 func update(delta):
 	time_current -= delta
 	if time_current <= 0:
-		emit_signal("finished",next_state)
+		transition_to(next_state)
 	elif cancelable and !owner.owner_is_attacking:
-		get_parent().emit_signal("finished","Idling")
+		get_parent().transition_to("Idling")

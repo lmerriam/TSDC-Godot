@@ -23,6 +23,6 @@ func update(delta):
 
 func on_attack_complete():
 	if canceled:
-		get_parent().emit_signal("finished","Idling")
+		get_parent().transition_to("Idling")
 	else:
-		emit_signal("finished", next_state)
+		transition_to( next_state)

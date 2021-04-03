@@ -7,7 +7,7 @@ func enter():
 
 func update(delta):
 	if current_charge >= entity.charge_time:
-		emit_signal("finished",next_state)
+		transition_to(next_state)
 	
 	current_charge += delta
 

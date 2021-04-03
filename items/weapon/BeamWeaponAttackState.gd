@@ -12,7 +12,7 @@ func enter():
 
 func update(delta):
 	if not entity.owner_is_attacking:
-		emit_signal("finished","Idling")
+		transition_to("Idling")
 	
 	area.set_angle(owner.aim_force)
 

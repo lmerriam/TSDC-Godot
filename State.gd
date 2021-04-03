@@ -27,3 +27,6 @@ func update(delta):
 
 func _on_animation_finished(anim_name):
 	return
+
+func transition_to(state_name, args={}):
+	get_parent()._change_state(state_name, args)

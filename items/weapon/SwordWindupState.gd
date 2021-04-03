@@ -15,6 +15,6 @@ func update(delta):
 	windup_timer -= delta
 	
 	if windup_timer <= 0:
-		emit_signal("finished", "Swing")
+		transition_to( "Swing")
 	elif not owner.owner_is_attacking and cancelable:
-		get_parent().emit_signal("finished", "Idling")
+		get_parent().transition_to( "Idling")

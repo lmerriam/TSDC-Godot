@@ -9,4 +9,4 @@ func update(delta):
 		owner.add_active_attack(area)
 		area.connect("projectile_destroyed", owner, "remove_active_attack")
 		
-		emit_signal("finished",next_state)
+		transition_to(next_state)
