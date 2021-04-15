@@ -18,7 +18,7 @@ func _on_wave_completed():
 	Global.add_announcement("Wave " + String(current_wave) +  " Complete", "")
 	Global.player_entity.give_stat_points(1)
 	if current_wave >= $Waves.get_child_count():
-		emit_signal("level_complete")
+		Global.emit_signal("stage_completed")
 	else:
 		current_wave += 1
 

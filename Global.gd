@@ -13,6 +13,10 @@ var announcements = []
 signal gamespeed_changed(new_value, old_value)
 signal announcement_added
 
+signal activity_selected
+signal stage_completed
+signal stage_exited
+
 func set_gamespeed(value):
 	if value >= 0 and value <= 1:
 		emit_signal("gamespeed_changed", value, gamespeed)

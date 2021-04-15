@@ -26,7 +26,6 @@ func _input(event):
 	if visible and event is InputEventMouseButton and event.pressed:
 		var pos = event.position
 		var tile_pos = ($Fog.world_to_map(pos) / 2).floor()
-		var activity = world[tile_pos.x][tile_pos.y]
-		match activity.map_icon:
-			"encounter": 
-				emit_signal("level_selected", activity.stage)
+		var activity : Activity = world[tile_pos.x][tile_pos.y]
+		if activity.revealed:
+			Global.emit_signal("activity_selected", activity)
